@@ -1,4 +1,10 @@
 Seedbank::Application.routes.draw do
+  devise_for :users
+
+  root to: "home#index"
+
+  resources :snippets
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
