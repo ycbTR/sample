@@ -1,0 +1,2 @@
+module LotNumbersHelper
+end

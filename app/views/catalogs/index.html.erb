@@ -1,0 +1,29 @@
+<h1>Listing catalogs</h1>
+
+<table>
+  <tr>
+    <th>Lot number</th>
+    <th>Plant</th>
+    <th>Qty in bank</th>
+    <th>Qty on consignment</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @catalogs.each do |catalog| %>
+  <tr>
+    <td><%= catalog.lot_number_id %></td>
+    <td><%= catalog.plant_id %></td>
+    <td><%= catalog.qty_in_bank %></td>
+    <td><%= catalog.qty_on_consignment %></td>
+    <td><%= link_to 'Show', catalog %></td>
+    <td><%= link_to 'Edit', edit_catalog_path(catalog) %></td>
+    <td><%= link_to 'Destroy', catalog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Catalog', new_catalog_path %>

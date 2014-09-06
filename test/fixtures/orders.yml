@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  number: MyString
+  customer_id: 1
+  completed_at: 2014-09-06 11:43:59
+
+two:
+  number: MyString
+  customer_id: 1
+  completed_at: 2014-09-06 11:43:59

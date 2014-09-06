@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Species:</b>
+  <%= @plant.species %>
+</p>
+
+<p>
+  <b>Common name:</b>
+  <%= @plant.common_name %>
+</p>
+
+<p>
+  <b>Price paid:</b>
+  <%= @plant.price_paid %>
+</p>
+
+<p>
+  <b>Price charged:</b>
+  <%= @plant.price_charged %>
+</p>
+
+
+<%= link_to 'Edit', edit_plant_path(@plant) %> |
+<%= link_to 'Back', plants_path %>

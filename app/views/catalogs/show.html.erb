@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Lot number:</b>
+  <%= @catalog.lot_number_id %>
+</p>
+
+<p>
+  <b>Plant:</b>
+  <%= @catalog.plant_id %>
+</p>
+
+<p>
+  <b>Qty in bank:</b>
+  <%= @catalog.qty_in_bank %>
+</p>
+
+<p>
+  <b>Qty on consignment:</b>
+  <%= @catalog.qty_on_consignment %>
+</p>
+
+
+<%= link_to 'Edit', edit_catalog_path(@catalog) %> |
+<%= link_to 'Back', catalogs_path %>

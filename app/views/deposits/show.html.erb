@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Lot number:</b>
+  <%= @deposit.lot_number_id %>
+</p>
+
+<p>
+  <b>Plant:</b>
+  <%= @deposit.plant_id %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @deposit.date %>
+</p>
+
+<p>
+  <b>Qty bank:</b>
+  <%= @deposit.qty_bank %>
+</p>
+
+<p>
+  <b>Qty consigned:</b>
+  <%= @deposit.qty_consigned %>
+</p>
+
+
+<%= link_to 'Edit', edit_deposit_path(@deposit) %> |
+<%= link_to 'Back', deposits_path %>

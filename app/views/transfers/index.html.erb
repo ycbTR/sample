@@ -1,0 +1,31 @@
+<h1>Listing transfers</h1>
+
+<table>
+  <tr>
+    <th>Lot number</th>
+    <th>Plant</th>
+    <th>Qty transferred</th>
+    <th>Date</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @transfers.each do |transfer| %>
+  <tr>
+    <td><%= transfer.lot_number_id %></td>
+    <td><%= transfer.plant_id %></td>
+    <td><%= transfer.qty_transferred %></td>
+    <td><%= transfer.date %></td>
+    <td><%= transfer.user_id %></td>
+    <td><%= link_to 'Show', transfer %></td>
+    <td><%= link_to 'Edit', edit_transfer_path(transfer) %></td>
+    <td><%= link_to 'Destroy', transfer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Transfer', new_transfer_path %>

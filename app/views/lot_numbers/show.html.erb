@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Number:</b>
+  <%= @lot_number.number %>
+</p>
+
+<p>
+  <b>Region:</b>
+  <%= @lot_number.region %>
+</p>
+
+<p>
+  <b>Provenance:</b>
+  <%= @lot_number.provenance %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @lot_number.location %>
+</p>
+
+
+<%= link_to 'Edit', edit_lot_number_path(@lot_number) %> |
+<%= link_to 'Back', lot_numbers_path %>

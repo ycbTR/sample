@@ -1,0 +1,37 @@
+<%= form_for(@transfer) do |f| %>
+  <% if @transfer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transfer.errors.count, "error") %> prohibited this transfer from being saved:</h2>
+
+      <ul>
+      <% @transfer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :lot_number_id %><br />
+    <%= f.number_field :lot_number_id %>
+  </div>
+  <div class="field">
+    <%= f.label :plant_id %><br />
+    <%= f.number_field :plant_id %>
+  </div>
+  <div class="field">
+    <%= f.label :qty_transferred %><br />
+    <%= f.number_field :qty_transferred %>
+  </div>
+  <div class="field">
+    <%= f.label :date %><br />
+    <%= f.date_select :date %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

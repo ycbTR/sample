@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140905175510) do
+ActiveRecord::Schema.define(:version => 20140906084543) do
 
   create_table "assets", :force => true do |t|
     t.string   "attachment_file_name"
@@ -26,6 +26,75 @@ ActiveRecord::Schema.define(:version => 20140905175510) do
     t.datetime "updated_at",              :null => false
   end
 
+  create_table "catalogs", :force => true do |t|
+    t.integer  "lot_number_id"
+    t.integer  "plant_id"
+    t.integer  "qty_in_bank"
+    t.integer  "qty_on_consignment"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  create_table "deposits", :force => true do |t|
+    t.integer  "lot_number_id"
+    t.integer  "plant_id"
+    t.date     "date"
+    t.integer  "qty_bank"
+    t.integer  "qty_consigned"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "line_items", :force => true do |t|
+    t.integer  "order_id"
+    t.integer  "lot_number_id"
+    t.integer  "plant_id"
+    t.string   "seedmix_or_individual"
+    t.integer  "qty"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  create_table "lot_numbers", :force => true do |t|
+    t.string   "number"
+    t.string   "region"
+    t.string   "provenance"
+    t.string   "location"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "orders", :force => true do |t|
+    t.string   "number"
+    t.integer  "customer_id"
+    t.datetime "completed_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "people", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "address_1"
+    t.string   "address_2"
+    t.string   "town"
+    t.string   "postcode"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "type"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "plants", :force => true do |t|
+    t.string   "species"
+    t.string   "common_name"
+    t.decimal  "price_paid"
+    t.decimal  "price_charged"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
   create_table "snippets", :force => true do |t|
     t.string   "label",                     :null => false
     t.string   "slug",                      :null => false
@@ -35,6 +104,28 @@ ActiveRecord::Schema.define(:version => 20140905175510) do
     t.integer  "position",   :default => 0, :null => false
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
+  end
+
+  create_table "transactions", :force => true do |t|
+    t.integer  "deposit_id"
+    t.integer  "line_item_id"
+    t.integer  "transfer_id"
+    t.integer  "qty_deposited"
+    t.integer  "qty_ordered"
+    t.integer  "qty_transferred"
+    t.integer  "user_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "transfers", :force => true do |t|
+    t.integer  "lot_number_id"
+    t.integer  "plant_id"
+    t.integer  "qty_transferred"
+    t.date     "date"
+    t.integer  "user_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "users", :force => true do |t|

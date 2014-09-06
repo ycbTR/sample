@@ -1,4 +1,28 @@
 Seedbank::Application.routes.draw do
+  resources :transactions
+
+
+  resources :orders
+
+
+  resources :catalogs
+
+
+  resources :lot_numbers
+
+
+  resources :plants
+
+
+  resources :people
+
+
+  resources :transfers
+
+
+  resources :deposits
+
+
   devise_for :users
 
   root to: "home#index"

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  species: MyString
+  common_name: MyString
+  price_paid: 9.99
+  price_charged: 9.99
+
+two:
+  species: MyString
+  common_name: MyString
+  price_paid: 9.99
+  price_charged: 9.99

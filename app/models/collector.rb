@@ -1,0 +1,3 @@
+class Collector < Person
+
+end

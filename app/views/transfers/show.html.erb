@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Lot number:</b>
+  <%= @transfer.lot_number_id %>
+</p>
+
+<p>
+  <b>Plant:</b>
+  <%= @transfer.plant_id %>
+</p>
+
+<p>
+  <b>Qty transferred:</b>
+  <%= @transfer.qty_transferred %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @transfer.date %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @transfer.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_transfer_path(@transfer) %> |
+<%= link_to 'Back', transfers_path %>

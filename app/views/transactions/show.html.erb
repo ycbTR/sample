@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Deposit:</b>
+  <%= @transaction.deposit_id %>
+</p>
+
+<p>
+  <b>Line item:</b>
+  <%= @transaction.line_item_id %>
+</p>
+
+<p>
+  <b>Transfer:</b>
+  <%= @transaction.transfer_id %>
+</p>
+
+<p>
+  <b>Qty deposited:</b>
+  <%= @transaction.qty_deposited %>
+</p>
+
+<p>
+  <b>Qty ordered:</b>
+  <%= @transaction.qty_ordered %>
+</p>
+
+<p>
+  <b>Qty transferred:</b>
+  <%= @transaction.qty_transferred %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @transaction.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
+<%= link_to 'Back', transactions_path %>
