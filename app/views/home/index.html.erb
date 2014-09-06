@@ -1,1 +1,28 @@
-Selam
+<ul>
+  <li><b>Snippet Tags</b></li>
+  <li>who_we_are</li>
+  <li>contact</li>
+  <li>facebook</li>
+  <li>twitter</li>
+</ul>
+<hr>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Slug</th>
+    <th>Content</th>
+    <th>Excerpt</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% Snippet.all.each do |snippet| %>
+      <tr>
+        <td><%= snippet.slug %></td>
+        <td><%= snippet.content.to_s.html_safe %></td>
+        <td><%= snippet.excerpt %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
