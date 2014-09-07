@@ -6,7 +6,6 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:label) %></th>
       <th><%= model_class.human_attribute_name(:slug) %></th>
       <th><%= model_class.human_attribute_name(:identifier) %></th>
       <th><%= model_class.human_attribute_name(:excerpt) %></th>
@@ -20,7 +19,6 @@
     <% @snippets.each do |snippet| %>
       <tr>
         <td><%= link_to snippet.id, snippet_path(snippet) %></td>
-        <td><%= snippet.label %></td>
         <td><%= snippet.slug %></td>
         <td><%= snippet.identifier %></td>
         <td><%= snippet.excerpt %></td>

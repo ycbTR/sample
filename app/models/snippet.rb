@@ -4,6 +4,11 @@ class Snippet < ActiveRecord::Base
   before_create :assign_position
   default_scope order("position desc")
 
+
+  def self.for_identifier(identifier)
+    where(identifier: identifier)
+  end
+
   private
 
   def assign_position

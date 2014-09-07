@@ -1,0 +1,92 @@
+<!-- Header
+================================================== -->
+<header id="header">
+
+  <!-- Top Bar -->
+  <div id="top-bar">
+
+    <!-- Container -->
+    <div class="container">
+
+      <!-- Left Nav -->
+      <ul class="links pull-left hidden-xs">
+        <li><a href="#"><i class="fa fa-envelope"></i>support@instakolik.com</a></li>
+        <!--<li><a href="#"><i class="fa fa-user"></i>Phone: +48 880 440 110</a></li>-->
+
+      </ul>
+      <!-- /Left nav -->
+      <% if current_user %>
+          <!-- Right Nav -->
+          <ul class="links pull-right no-float-xs">
+            <li><a href="<%= destroy_user_session_path %>" data-method="delete"><i class="fa fa-sign-out"></i>LogOut</a>
+            </li>
+          </ul>
+      <% end %>
+    </div>
+    <!-- /Container-->
+
+  </div>
+  <!-- /Top Bar -->
+
+  <!-- Main Navigation -->
+  <div id="main-nav" class="navbar navbar-default">
+
+    <!-- Container -->
+    <div class="container">
+
+      <!-- header -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="fa fa-bars fa-lg"></span>
+        </button>
+        <a href="/" class="navbar-brand logo">
+        </a>
+      </div>
+      <!-- /header-->
+
+      <!-- nav-collapse -->
+      <div class="navbar-collapse collapse">
+        <!--&lt;!&ndash; Nav Buttons &ndash;&gt;-->
+        <!--<ul class="nav navbar-nav nav-buttons navbar-right">-->
+        <!--<li>-->
+        <!--<a class="nav-btn" href="mailto:support@seedbank.com"><i class="fa fa-envelope"></i><span class="xs-only">Contact</span></a>-->
+        <!--</li>-->
+        <!--<li>-->
+        <!--<a class="nav-btn bg-2 top-bar-toggle" href="#top-bar" data-custom-toggle="slide" data-class="open" data-target="#top-bar"><span class="symbol"></span></a>-->
+        <!--</li>-->
+        <!--</ul>-->
+        <!--&lt;!&ndash; /Nav Buttons &ndash;&gt;-->
+
+        <ul class="nav navbar-nav nav-buttons navbar-right">
+          <% if current_user %>
+              <li>
+                <a class="nav-btn bg-1" href="<%#= dashboard_path %>"><i class="fa fa-cog"></i><span class="hidden-sm">Yönetim</span></a>
+              </li>
+          <% else %>
+              <li>
+                <a class="nav-btn bg-1" href="<%#= connect_auth_url %>"><i class="fa fa-sign-in"></i><span class="hidden-sm">Giriş</span></a>
+              </li>
+          <% end %>
+        </ul>
+
+
+        <!-- Links -->
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#"><i class=></i>blog</a>
+          </li>
+        </ul>
+        <!-- Links -->
+      </div>
+      <!-- /nav-collapse-->
+
+    </div>
+    <!-- /Container-->
+
+  </div>
+  <!-- /Main Navigation -->
+
+</header>
+<!-- /Header
+================================================== -->
+
