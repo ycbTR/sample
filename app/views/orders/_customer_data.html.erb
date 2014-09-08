@@ -1,0 +1,81 @@
+<fieldset>
+  <legend><%= t(:customer) %></legend>
+
+
+  <div>
+    <label>Use Existing?</label>
+    <br>
+    <label>
+      <%= radio_button_tag 'use_existing', 'yes', true, class: "toggle-radio", "data-target" => "#existing_customer_fields", "data-hide" => "#new_customer_fields" %>
+      Yes
+    </label>
+    <br>
+    <label>
+      <%= radio_button_tag 'use_existing', 'no', false, class: "toggle-radio", "data-target" => "#new_customer_fields", "data-hide" => "#existing_customer_fields" %>
+      No
+    </label>
+  </div>
+  <br>
+
+  <div id="existing_customer_fields" class="field">
+    <%= f.label :customer_id %>
+    <br/>
+    <%= f.select :customer_id, Person::Customer.all.collect { |c| [c.full_name, c.id] } %>
+  </div>
+
+  <div id="new_customer_fields" style="display: none;">
+    <%= f.fields_for :customer, @order.build_customer do |c| %>
+        <strong>New Customer</strong>
+        <br>
+        <br>
+        <div class="field">
+          <%= c.label :first_name %>
+          <br/>
+          <%= c.text_field :first_name %>
+        </div>
+
+        <div class="field">
+          <%= c.label :last_name %>
+          <br/>
+          <%= c.text_field :last_name %>
+        </div>
+
+        <div class="field">
+          <%= c.label :address_1 %>
+          <br/>
+          <%= c.text_field :address_1 %>
+        </div>
+
+        <div class="field">
+          <%= c.label :address_2 %>
+          <br/>
+          <%= c.text_field :address_2 %>
+        </div>
+
+        <div class="field">
+          <%= c.label :town %>
+          <br/>
+          <%= c.text_field :town %>
+        </div>
+
+        <div class="field">
+          <%= c.label :postcode %>
+          <br/>
+          <%= c.text_field :postcode %>
+        </div>
+
+        <div class="field">
+          <%= c.label :phone %>
+          <br/>
+          <%= c.text_field :phone %>
+        </div>
+
+        <div class="field">
+          <%= c.label :email %>
+          <br/>
+          <%= c.text_field :email %>
+        </div>
+
+    <% end %>
+  </div>
+</fieldset>

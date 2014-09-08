@@ -1,37 +1,39 @@
-<%= form_for(@deposit) do |f| %>
-  <% if @deposit.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@deposit.errors.count, "error") %> prohibited this deposit from being saved:</h2>
-
-      <ul>
-      <% @deposit.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for @deposit, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :collector_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :collector_id, Person::Collector.all.collect { |l| [l.full_name, l.id] } %>
     </div>
-  <% end %>
+  </div>
 
-  <div class="field">
-    <%= f.label :lot_number_id %><br />
-    <%= f.number_field :lot_number_id %>
+  <div class="control-group">
+    <%= f.label :lot_number_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :lot_number_id, LotNumber.all.collect { |l| [l.display, l.id] } %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :plant_id %><br />
-    <%= f.number_field :plant_id %>
+  <div class="control-group">
+    <%= f.label :plant_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :plant_id, Plant.all.collect { |l| [l.common_name, l.id] } %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :date %><br />
-    <%= f.date_select :date %>
+  <div class="control-group">
+    <%= f.label :date, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.date_select :date, :class => 'date_select' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :qty_bank %><br />
-    <%= f.number_field :qty_bank %>
+  <div class="control-group">
+    <%= f.label :qty_bank, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :qty_bank, :class => 'number_field' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :qty_consigned %><br />
-    <%= f.number_field :qty_consigned %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                deposits_path, :class => 'btn' %>
   </div>
 <% end %>

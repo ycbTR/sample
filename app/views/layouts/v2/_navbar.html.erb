@@ -60,7 +60,7 @@
         <ul class="nav navbar-nav navbar-right">
 
           <li><%= link_to "Snippets", snippets_path %></li>
-          <% if false && Rails.env.development? %>
+          <% if  Rails.env.development? %>
               <li><%= link_to "Plants", plants_path %></li>
               <li><%= link_to "Lot Numbers", lot_numbers_path %></li>
               <li><%= link_to "Orders", orders_path %></li>

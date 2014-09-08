@@ -75,8 +75,6 @@ gem "ransack" # Last officially released gem (Rails 3 and 4)
 
 gem 'kaminari'
 
-gem "nested_form"
-
 gem 'acts-as-taggable-on'
 
 gem 'annotate', ">=2.5.0"
@@ -89,9 +87,6 @@ gem 'newrelic_rpm'
 
 gem 'airbrake'
 
-#rails generate delayed_job:active_record
-#rake db:migrate
+gem "nested_form"
 
-gem 'delayed_job_active_record'
 
-gem "daemons"

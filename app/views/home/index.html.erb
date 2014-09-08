@@ -1,53 +1,27 @@
 <%= content_for :content_block do %>
-
-<!-- Content Block
-================================================== -->
-<section class="intro-block page-bg pic-bg-5">
-
-  <!-- Overlay -->
-  <div class="overlay">
-
-    <!-- Container -->
-    <div class="container">
-
-      <!-- Text Slider -->
-      <div class="text-slider no-js">
-        <%= Snippet.for_identifier("who_we_are").first.try(:content).to_s.html_safe %>
+    <!-- Content Block
+    ================================================== -->
+    <section class="intro-block page-bg pic-bg-5">
+      <!-- Overlay -->
+      <div class="overlay">
+        <!-- Container -->
+        <div class="container">
+          <!-- Text Slider -->
+          <div class="text-slider no-js">
+            <%= Snippet.for_identifier("who_we_are").first.try(:content).to_s.html_safe %>
+          </div>
+          <!-- /Text Slider -->
+        </div>
+        <!-- /Container -->
       </div>
-      <!-- /Text Slider -->
-
-    </div>
-    <!-- /Container -->
-
-  </div>
-  <!-- /Overlay -->
-
-</section>
-<!-- /Content Block -->
+      <!-- /Overlay -->
+    </section>
+    <!-- /Content Block -->
 <% end %>
 <!-- Row -->
 <div class="row">
 
 </div>
 <!-- /Row-->
-
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th>Slug</th>
-    <th>Content</th>
-    <th>Excerpt</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% Snippet.all.each do |snippet| %>
-      <tr>
-        <td><%= snippet.slug %></td>
-        <td><%= snippet.content.to_s.html_safe %></td>
-        <td><%= snippet.excerpt %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+<h2>Catalogue</h2>
 

@@ -1,33 +1,32 @@
-<%= form_for(@catalog) do |f| %>
-  <% if @catalog.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@catalog.errors.count, "error") %> prohibited this catalog from being saved:</h2>
-
-      <ul>
-      <% @catalog.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for @catalog, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :lot_number_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :lot_number_id, :class => 'number_field' %>
     </div>
-  <% end %>
+  </div>
+  <div class="control-group">
+    <%= f.label :plant_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :plant_id, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :qty_in_bank, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :qty_in_bank, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :qty_on_consignment, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :qty_on_consignment, :class => 'number_field' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :lot_number_id %><br />
-    <%= f.number_field :lot_number_id %>
-  </div>
-  <div class="field">
-    <%= f.label :plant_id %><br />
-    <%= f.number_field :plant_id %>
-  </div>
-  <div class="field">
-    <%= f.label :qty_in_bank %><br />
-    <%= f.number_field :qty_in_bank %>
-  </div>
-  <div class="field">
-    <%= f.label :qty_on_consignment %><br />
-    <%= f.number_field :qty_on_consignment %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                catalogs_path, :class => 'btn' %>
   </div>
 <% end %>
