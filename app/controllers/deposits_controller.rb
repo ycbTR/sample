@@ -1,4 +1,6 @@
 class DepositsController < ApplicationController
+  before_filter :check_requirements, only: [:new, :edit]
+
   # GET /deposits
   # GET /deposits.json
   def index
@@ -80,4 +82,13 @@ class DepositsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+  def check_requirements
+    collector_required!
+    lot_number_required!
+    plant_required!
+  end
+
 end

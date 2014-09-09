@@ -1,6 +1,5 @@
-<h1>Editing plant</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @plant %> |
-<%= link_to 'Back', plants_path %>
+<%- model_class = Plant -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
+</div>
+<%= render :partial => 'form' %>
