@@ -64,4 +64,27 @@ Seedbank::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+  
+  config.assets.precompile += ['vendor/assets/**/*']
+
+  config.assets.precompile = []
+  config.assets.precompile << Proc.new { |path|
+    if !(path =~ /\.(html)\z/) #compile all non-html files
+      full_path = Rails.application.assets.resolve(path).to_path
+      app_assets_path = Rails.root.join('app', 'assets').to_path
+      vendor_assets_path = Rails.root.join('vendor', 'assets').to_path
+      lib_assets_path = Rails.root.join('lib', 'assets').to_path
+
+      if !config.assets.precompile.include?(full_path) && ((full_path.starts_with? app_assets_path) || (full_path.starts_with? vendor_assets_path) || (full_path.starts_with? lib_assets_path)) && (!path.starts_with? '_')
+        puts "\t" + full_path.slice(Rails.root.to_path.size..-1)
+        true
+      else
+        false
+      end
+    else
+      false
+    end
+  }
+
+  
 end
