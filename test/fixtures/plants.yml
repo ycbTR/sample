@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: plants
+#
+#  id            :integer          not null, primary key
+#  species       :string(255)
+#  common_name   :string(255)
+#  price_paid    :decimal(, )
+#  price_charged :decimal(, )
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:

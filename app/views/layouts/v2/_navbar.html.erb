@@ -10,8 +10,8 @@
 
       <!--&lt;!&ndash; Left Nav &ndash;&gt;-->
       <!--<ul class="links pull-left hidden-xs">-->
-        <!--<li><a href="#"><i class="fa fa-envelope"></i>support@instakolik.com</a></li>-->
-        <!--&lt;!&ndash;<li><a href="#"><i class="fa fa-user"></i>Phone: +48 880 440 110</a></li>&ndash;&gt;-->
+      <!--<li><a href="#"><i class="fa fa-envelope"></i>support@instakolik.com</a></li>-->
+      <!--&lt;!&ndash;<li><a href="#"><i class="fa fa-user"></i>Phone: +48 880 440 110</a></li>&ndash;&gt;-->
 
       <!--</ul>-->
       <!--&lt;!&ndash; /Left nav &ndash;&gt;-->
@@ -48,29 +48,29 @@
 
         <!--&lt;!&ndash; Nav Buttons &ndash;&gt;-->
         <!--<ul class="nav navbar-nav nav-buttons navbar-right">-->
-          <!--<li>-->
-            <!--<a class="nav-btn" href="mailto:support@seed.com"><i class="fa fa-envelope"></i><span class="xs-only">Contact</span></a>-->
-          <!--</li>-->
-          <!--<li>-->
-            <!--<a class="nav-btn bg-2 top-bar-toggle" href="#top-bar" data-custom-toggle="slide" data-class="open" data-target="#top-bar"><span class="symbol"></span></a>-->
-          <!--</li>-->
+        <!--<li>-->
+        <!--<a class="nav-btn" href="mailto:support@seed.com"><i class="fa fa-envelope"></i><span class="xs-only">Contact</span></a>-->
+        <!--</li>-->
+        <!--<li>-->
+        <!--<a class="nav-btn bg-2 top-bar-toggle" href="#top-bar" data-custom-toggle="slide" data-class="open" data-target="#top-bar"><span class="symbol"></span></a>-->
+        <!--</li>-->
         <!--</ul>-->
         <!-- /Nav Buttons -->
         <!-- Links -->
         <ul class="nav navbar-nav navbar-right">
 
           <li><%= link_to "Snippets", snippets_path %></li>
-          <% if  Rails.env.development? %>
-              <li><%= link_to "Plants", plants_path %></li>
-              <li><%= link_to "Lot Numbers", lot_numbers_path %></li>
-              <li><%= link_to "Orders", orders_path %></li>
-              <li><%= link_to "People", people_path %></li>
-              <li><%= link_to "Transfers", transfers_path %></li>
-              <li><%= link_to "Deposits", deposits_path %></li>
-              <li><%= link_to "Transactions", transactions_path %></li>
-              <li><%= link_to "Catalogs", catalogs_path %></li>
-          <% end %>
-          <li class="hidden-lg hidden-md"><a href="<%= destroy_user_session_path %>" data-method="delete"><i class="icon fa fa-sign-out"></i>Çıkış</a>
+          <li><%= link_to "Plants", plants_path %></li>
+          <li><%= link_to "Lot Numbers", lot_numbers_path %></li>
+          <li><%= link_to "Orders", orders_path %></li>
+          <li><%= link_to "People", people_path %></li>
+          <!--<li><%= link_to "Transfers", transfers_path %></li>-->
+          <li><%= link_to "Deposits", deposits_path %></li>
+          <!--<li><%= link_to "Transactions", transactions_path %></li>-->
+
+          <li class="hidden-lg hidden-md">
+            <a href="<%= destroy_user_session_path %>" data-method="delete"><i class="icon fa fa-sign-out"></i>Çıkış</a>
+          </li>
         </ul>
         <!-- Links -->
 

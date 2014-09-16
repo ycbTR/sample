@@ -25,7 +25,7 @@
         <td><%=l plant.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_plant_path(plant), :class => 'btn btn-mini' %>
+                      edit_plant_path(plant), :class => 'btn btn-mini btn-primary' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       plant_path(plant),
                       :method => :delete,

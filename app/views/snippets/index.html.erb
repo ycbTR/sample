@@ -27,7 +27,7 @@
         <td><%=l snippet.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_snippet_path(snippet), :class => 'btn btn-mini' %>
+                      edit_snippet_path(snippet), :class => 'btn btn-mini btn-primary' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       snippet_path(snippet),
                       :method => :delete,

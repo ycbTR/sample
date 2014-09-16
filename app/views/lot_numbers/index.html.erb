@@ -25,7 +25,7 @@
         <td><%=l lot_number.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_lot_number_path(lot_number), :class => 'btn btn-mini' %>
+                      edit_lot_number_path(lot_number), :class => 'btn btn-mini btn-primary' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       lot_number_path(lot_number),
                       :method => :delete,

@@ -1,5 +1,8 @@
 class DepositsController < ApplicationController
-  before_filter :check_requirements, only: [:new, :edit]
+  before_filter :collector_required!, only: [:new, :edit]
+  before_filter :lot_number_required!, only: [:new, :edit]
+  before_filter :plant_required!, only: [:new, :edit]
+
 
   # GET /deposits
   # GET /deposits.json
@@ -84,11 +87,5 @@ class DepositsController < ApplicationController
   end
 
   private
-
-  def check_requirements
-    collector_required!
-    lot_number_required!
-    plant_required!
-  end
 
 end

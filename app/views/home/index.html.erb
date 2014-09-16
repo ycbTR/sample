@@ -23,5 +23,44 @@
 
 </div>
 <!-- /Row-->
-<h2>Catalogue</h2>
+
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th colspan="2">SEED CATALOGUE</th>
+    <th>SPA - Seed Production Area</th>
+    <th></th>
+    <th class="align-right">g</th>
+    <th>1-49g</th>
+    <th>50-499g</th>
+    <th> >500</th>
+  </tr>
+
+  <tr>
+    <th>Lot No</th>
+    <th>Botanical Name</th>
+    <th>Common Name</th>
+    <th>Provenance</th>
+    <th>Qty</th>
+    <th>$/kg</th>
+    <th>$/kg</th>
+    <th>$/kg</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% Deposit.all.each do |deposit| %>
+      <tr>
+        <td><%= deposit.display %></td>
+        <td><%= deposit.plant.species %></td>
+        <td><%= deposit.plant.common_name %></td>
+        <td><%= deposit.lot_number.provenance %></td>
+        <td><%= deposit.qty_bank %></td>
+        <td><%= number_to_currency deposit.plant.level_1_price %></td>
+        <td><%= number_to_currency deposit.plant.level_2_price %></td>
+        <td><%= number_to_currency deposit.plant.level_3_price %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
 

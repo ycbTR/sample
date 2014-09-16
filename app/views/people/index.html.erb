@@ -35,7 +35,7 @@
         <td><%=l person.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_person_path(person), :class => 'btn btn-mini' %>
+                      edit_person_path(person), :class => 'btn btn-mini btn-primary' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       person_path(person),
                       :method => :delete,
