@@ -1,4 +1,4 @@
-class TransfersController < ApplicationController
+class TransfersController < DashboardController
   # GET /transfers
   # GET /transfers.json
   def index

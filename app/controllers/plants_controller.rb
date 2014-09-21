@@ -1,8 +1,8 @@
-class PlantsController < ApplicationController
+class PlantsController < DashboardController
   # GET /plants
   # GET /plants.json
   def index
-    @plants = Plant.all
+    @plants = Plant.page(params[:page]).per(20)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,7 +44,7 @@ class PlantsController < ApplicationController
 
     respond_to do |format|
       if @plant.save
-        format.html { redirect_to @plant, notice: 'Plant was successfully created.' }
+        format.html { redirect_to plants_url, notice: 'Plant was successfully created.' }
         format.json { render json: @plant, status: :created, location: @plant }
       else
         format.html { render action: "new" }
@@ -60,7 +60,7 @@ class PlantsController < ApplicationController
 
     respond_to do |format|
       if @plant.update_attributes(params[:plant])
-        format.html { redirect_to @plant, notice: 'Plant was successfully updated.' }
+        format.html { redirect_to plants_url, notice: 'Plant was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

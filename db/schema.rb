@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140906084543) do
+ActiveRecord::Schema.define(:version => 20140921121820) do
 
   create_table "assets", :force => true do |t|
     t.string   "attachment_file_name"
@@ -43,16 +43,16 @@ ActiveRecord::Schema.define(:version => 20140906084543) do
     t.integer  "qty_consigned"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "collector_id"
   end
 
   create_table "line_items", :force => true do |t|
     t.integer  "order_id"
-    t.integer  "lot_number_id"
-    t.integer  "plant_id"
     t.string   "seedmix_or_individual"
     t.integer  "qty"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+    t.integer  "deposit_id"
   end
 
   create_table "lot_numbers", :force => true do |t|
@@ -96,7 +96,6 @@ ActiveRecord::Schema.define(:version => 20140906084543) do
   end
 
   create_table "snippets", :force => true do |t|
-    t.string   "label",                     :null => false
     t.string   "slug",                      :null => false
     t.string   "identifier",                :null => false
     t.text     "excerpt"

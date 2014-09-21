@@ -1,4 +1,4 @@
-class DepositsController < ApplicationController
+class DepositsController < DashboardController
   before_filter :collector_required!, only: [:new, :edit]
   before_filter :lot_number_required!, only: [:new, :edit]
   before_filter :plant_required!, only: [:new, :edit]
@@ -7,7 +7,7 @@ class DepositsController < ApplicationController
   # GET /deposits
   # GET /deposits.json
   def index
-    @deposits = Deposit.all
+    @deposits = Deposit.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -49,7 +49,7 @@ class DepositsController < ApplicationController
 
     respond_to do |format|
       if @deposit.save
-        format.html { redirect_to @deposit, notice: 'Deposit was successfully created.' }
+        format.html { redirect_to deposits_path, notice: 'Deposit was successfully created.' }
         format.json { render json: @deposit, status: :created, location: @deposit }
       else
         format.html { render action: "new" }
@@ -65,7 +65,7 @@ class DepositsController < ApplicationController
 
     respond_to do |format|
       if @deposit.update_attributes(params[:deposit])
-        format.html { redirect_to @deposit, notice: 'Deposit was successfully updated.' }
+        format.html { redirect_to deposits_path, notice: 'Deposit was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -26,7 +26,7 @@ Seedbank::Application.routes.draw do
   devise_for :users
 
   root to: "home#index"
-
+  get "catalogue", to: "home#catalogue", as: "catalogue"
   resources :snippets
 
   # The priority is based upon order of creation:

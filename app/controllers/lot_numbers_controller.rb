@@ -1,8 +1,8 @@
-class LotNumbersController < ApplicationController
+class LotNumbersController < DashboardController
   # GET /lot_numbers
   # GET /lot_numbers.json
   def index
-    @lot_numbers = LotNumber.all
+    @lot_numbers = LotNumber.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,7 +44,7 @@ class LotNumbersController < ApplicationController
 
     respond_to do |format|
       if @lot_number.save
-        format.html { redirect_to @lot_number, notice: 'Lot number was successfully created.' }
+        format.html { redirect_to lot_numbers_path, notice: 'Lot number was successfully created.' }
         format.json { render json: @lot_number, status: :created, location: @lot_number }
       else
         format.html { render action: "new" }
@@ -60,7 +60,7 @@ class LotNumbersController < ApplicationController
 
     respond_to do |format|
       if @lot_number.update_attributes(params[:lot_number])
-        format.html { redirect_to @lot_number, notice: 'Lot number was successfully updated.' }
+        format.html { redirect_to lot_numbers_path, notice: 'Lot number was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
