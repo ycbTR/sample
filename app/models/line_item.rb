@@ -12,7 +12,8 @@
 #
 
 class LineItem < ActiveRecord::Base
-  attr_accessible :order_id, :qty, :seedmix_or_individual, :deposit_id
+  attr_accessible :order_id, :qty, :seedmix_or_individual,
+                  :deposit_id, :price
 
   belongs_to :order
   belongs_to :deposit
@@ -22,6 +23,8 @@ class LineItem < ActiveRecord::Base
 
   after_save :set_deposit_consignment
   after_save :set_transfers
+  after_save :update_order
+
 
   private
 
@@ -39,9 +42,14 @@ class LineItem < ActiveRecord::Base
     end
     true
   end
+
   # Why we need this?
   def set_transfers
 
+  end
+
+  def update_order
+    order.update!
   end
 
 end

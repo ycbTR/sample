@@ -20,7 +20,7 @@
   <div id="existing_customer_fields" class="field">
     <%= f.label :customer_id %>
     <br/>
-    <%= f.select :customer_id, Person::Customer.all.collect { |c| [c.full_name, c.id] } %>
+    <%= f.select :customer_id, Person::Customer.all.collect { |c| [c.full_name, c.id] }, prompt: t(:please_select) %>
   </div>
 
   <div id="new_customer_fields" style="display: none;">
@@ -28,6 +28,7 @@
         <strong>New Customer</strong>
         <br>
         <br>
+
         <div class="field">
           <%= c.label :first_name %>
           <br/>

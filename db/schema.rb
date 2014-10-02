@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141002210808) do
+ActiveRecord::Schema.define(:version => 20141002212641) do
 
   create_table "assets", :force => true do |t|
     t.string   "attachment_file_name"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20141002210808) do
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
     t.integer  "deposit_id"
+    t.decimal  "price"
   end
 
   create_table "lot_numbers", :force => true do |t|
@@ -69,6 +70,8 @@ ActiveRecord::Schema.define(:version => 20141002210808) do
     t.integer  "plant_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.float    "grams"
+    t.integer  "deposit_id"
   end
 
   create_table "order_forms", :force => true do |t|
@@ -102,6 +105,8 @@ ActiveRecord::Schema.define(:version => 20141002210808) do
     t.datetime "completed_at"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.decimal  "total"
+    t.string   "state"
   end
 
   create_table "people", :force => true do |t|

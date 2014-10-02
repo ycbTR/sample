@@ -20,5 +20,35 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :line_items, allow_destroy: true
   accepts_nested_attributes_for :customer, allow_destroy: true
 
+  state_machine :initial => :pending do
+
+    event :process do
+      transition :to => 'processed'
+    end
+
+    event :complete do
+      transition :to => 'completed'
+    end
+
+
+    after_transition :to => 'processed', :do => :notify_processed
+
+  end
+
+  # Updates total
+  def update!
+    self.update_column(:total, self.line_items.sum(:price))
+  end
+
+  private
+
+  def notify_processed
+    if self.customer.present?
+      begin
+        OrderMailer.notify_processed(order)
+      rescue
+      end
+    end
+  end
 
 end
