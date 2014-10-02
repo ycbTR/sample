@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  type: 
+  officer_name: MyString
+  officer_number: MyString
+  officer_address: MyText
+  landholder_name: MyString
+  landholder_number: MyString
+  landholder_address: MyText
+  property_address: MyText
+  hectare: MyString
+  kilometer: MyString
+  grams_per_km: MyString
+  sb_no: MyString
+  pon: MyString
+  business_name: MyString
+  abn: MyString
+  payer: MyString
+  email: MyString
+  mobile: MyString
+  comments: MyText
+
+two:
+  type: 
+  officer_name: MyString
+  officer_number: MyString
+  officer_address: MyText
+  landholder_name: MyString
+  landholder_number: MyString
+  landholder_address: MyText
+  property_address: MyText
+  hectare: MyString
+  kilometer: MyString
+  grams_per_km: MyString
+  sb_no: MyString
+  pon: MyString
+  business_name: MyString
+  abn: MyString
+  payer: MyString
+  email: MyString
+  mobile: MyString
+  comments: MyText

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140921121820) do
+ActiveRecord::Schema.define(:version => 20141002210808) do
 
   create_table "assets", :force => true do |t|
     t.string   "attachment_file_name"
@@ -62,6 +62,38 @@ ActiveRecord::Schema.define(:version => 20140921121820) do
     t.string   "location"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "order_form_items", :force => true do |t|
+    t.integer  "order_form_id"
+    t.integer  "plant_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "order_forms", :force => true do |t|
+    t.string   "type"
+    t.string   "officer_name"
+    t.string   "officer_number"
+    t.text     "officer_address"
+    t.string   "landholder_name"
+    t.string   "landholder_number"
+    t.text     "landholder_address"
+    t.text     "property_address"
+    t.string   "hectare"
+    t.string   "kilometer"
+    t.string   "grams_per_km"
+    t.string   "sb_no"
+    t.string   "pon"
+    t.string   "business_name"
+    t.string   "abn"
+    t.string   "payer"
+    t.string   "email"
+    t.string   "mobile"
+    t.text     "comments"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "order_id"
   end
 
   create_table "orders", :force => true do |t|

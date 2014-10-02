@@ -15,6 +15,18 @@ class Plant < ActiveRecord::Base
   attr_accessible :common_name, :price_charged, :price_paid, :species
   validates :common_name, :species, :price_paid, presence: true
 
+
+  # plan.price_for(300)
+  def price_for(grams = 0)
+    if grams < 50
+      level_1_price
+    elsif grams < 500
+      level_2_price
+    else
+      level_3_price
+    end
+  end
+
   #1-49g
   def level_1_price
     price_paid
