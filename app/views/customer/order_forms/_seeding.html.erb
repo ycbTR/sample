@@ -1,0 +1,101 @@
+<%= content_for :page_title, "Direct Seeding Order Form" %>
+
+<div class="form-group">
+  <%= f.label :officer_name, class: "col-sm-2" %>
+  <div class="col-sm-3">
+    <%= f.text_field :officer_name, class: "form-control" %>
+  </div>
+
+  <%= f.label :contact_no, class: "col-sm-2" %>
+  <div class="col-sm-3">
+    <%= f.text_field :officer_number, class: "form-control" %>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :officer_address, class: "col-sm-2" %>
+  <div class="col-sm-8">
+    <%= f.text_area :officer_address, class: "form-control", rows: 3 %>
+  </div>
+</div>
+
+
+<div class="form-group">
+  <%= f.label :landholder_name, class: "col-sm-2" %>
+  <div class="col-sm-3">
+    <%= f.text_field :landholder_name, class: "form-control" %>
+  </div>
+
+  <%= f.label :contact_no, class: "col-sm-2" %>
+  <div class="col-sm-3">
+    <%= f.text_field :landholder_number, class: "form-control" %>
+  </div>
+</div>
+
+
+<div class="form-group">
+  <%= f.label :postal_address, class: "col-sm-2" %>
+  <div class="col-sm-8">
+    <%= f.text_area :landholder_address, class: "form-control", rows: 3 %>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :property_address, class: "col-sm-2" %>
+  <div class="col-sm-8">
+    <%= f.text_area :property_address, class: "form-control", rows: 3 %>
+  </div>
+</div>
+
+
+<div class="form-group">
+  <%= f.label :hectare, class: "col-sm-2" %>
+  <div class="col-sm-2">
+    <%= f.text_field :hectare, class: "form-control" %>
+  </div>
+
+  <%= f.label :kilometer, class: "col-sm-1" %>
+  <div class="col-sm-2">
+    <%= f.text_field :kilometer, class: "form-control" %>
+  </div>
+
+  <%= f.label :grams_per_km, class: "col-sm-1" %>
+  <div class="col-sm-2">
+    <%= f.text_field :grams_per_km, class: "form-control" %>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :sb_no, class: "col-sm-2" %>
+  <div class="col-sm-3">
+    <%= f.text_field :sb_no, class: "form-control" %>
+  </div>
+
+  <%= f.label :pon, class: "col-sm-2" %>
+  <div class="col-sm-3">
+    <%= f.text_field :pon, class: "form-control" %>
+  </div>
+</div>
+
+<div class="form-group">
+  <%= f.label :comments, class: "col-sm-2" %>
+  <div class="col-sm-8">
+    <%= f.text_area :comments, class: "form-control", rows: 3 %>
+  </div>
+</div>
+
+
+<hr>
+<div class="col-sm-10">
+  <%= render partial: "items", locals: {grams: false} %>
+</div>
+
+
+<div class="form-group">
+  <div class="col-sm-10">
+    <%= f.submit "Place Order", class: "btn btn-success pull-right" %>
+  </div>
+</div>
+
+
+

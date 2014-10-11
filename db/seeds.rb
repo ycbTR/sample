@@ -15,3 +15,5 @@ Snippet.delete_all
   s.excerpt = identifier + " Excerpt text"
   s.save
 end
+
+User.create({:email => "admin@admin.com", password: "123123123", password: "123123123", role: "Admin"}, without_protection: true)

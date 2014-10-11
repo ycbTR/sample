@@ -24,10 +24,28 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :role
   # attr_accessible :title, :body
+  before_create :set_role
+
+  has_one :customer, :class_name => "Person::Customer"
+  alias_method :person, :customer
 
   has_many :transfers
   has_many :transactions
+
+  def admin?
+    self.role == "Admin"
+  end
+
+  def customer?
+    self.role == "Customer"
+  end
+
+  private
+
+  def set_role
+    self.role ||= "Customer"
+  end
 
 end

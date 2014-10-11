@@ -12,10 +12,15 @@
 
 class Order < ActiveRecord::Base
   attr_accessible :completed_at, :customer_id, :number, :line_items_attributes, :customer_attributes
+  before_create :generate_number
+
+  def generate_number
+    self.number = "O#{rand.to_s[2..8]}"
+  end
 
   has_many :line_items
   belongs_to :customer, class_name: "Person::Customer"
-  belongs_to :order_id
+  belongs_to :order_form
 
   accepts_nested_attributes_for :line_items, allow_destroy: true
   accepts_nested_attributes_for :customer, allow_destroy: true
@@ -23,15 +28,15 @@ class Order < ActiveRecord::Base
   state_machine :initial => :pending do
 
     event :process do
-      transition :to => 'processed'
+      transition :to => :processed
     end
 
     event :complete do
-      transition :to => 'completed'
+      transition :to => :completed
     end
 
 
-    after_transition :to => 'processed', :do => :notify_processed
+    after_transition :to => :processed, :do => :notify_processed
 
   end
 

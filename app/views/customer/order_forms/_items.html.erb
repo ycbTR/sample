@@ -1,0 +1,52 @@
+<table class="table table-bordered">
+  <thead>
+
+  <tr>
+    <th>Lot No</th>
+    <th>Botanical Name</th>
+    <th>Provenance</th>
+    <th>Select?</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% Deposit.all.each do |deposit| %>
+      <tr>
+        <td><%= deposit.display %></td>
+        <td><%= deposit.plant.species %></td>
+        <td><%= deposit.lot_number.provenance %></td>
+        <td class="col-sm-5">
+          <div class="col-sm-2">
+            <%= check_box_tag "select", "", false, class: "order_item_check" %>
+          </div>
+          <div class="col-sm-10" style="display: none;">
+            <%= hidden_field_tag "order_form[order_form_items_attributes][#{deposit.id}][deposit_id]", deposit.id %>
+            <% if grams %>
+                <%= label_tag "Grams", "Grams", class: "col-sm-4" %>
+                <div class="col-sm-8">
+                  <%= text_field_tag "order_form[order_form_items_attributes][#{deposit.id}][grams]", 0, class: "form-control" %>
+                </div>
+            <% end %>
+
+          </div>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<script>
+    $(function () {
+        $(".order_item_check").on('click', function () {
+            var next_div = $(this).parent('div').next('div');
+            if ($(this).is(":checked")) {
+                next_div.show();
+                next_div.find('input').attr("disabled", false)
+            } else {
+                next_div.hide();
+                next_div.find('input').attr("disabled", true)
+            }
+        });
+    });
+</script>
+

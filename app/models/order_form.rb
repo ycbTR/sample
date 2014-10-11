@@ -30,10 +30,35 @@
 class OrderForm < ActiveRecord::Base
   attr_accessible :abn, :business_name, :comments, :email, :grams_per_km, :hectare, :kilometer,
                   :landholder_address, :landholder_name, :landholder_number, :mobile, :officer_address,
-                  :officer_name, :officer_number, :payer, :pon, :property_address, :sb_no, :type
+                  :officer_name, :officer_number, :payer, :pon, :property_address, :sb_no, :type, :telephone,
+                  :order_form_items_attributes
 
   has_one :order
+  belongs_to :user
   has_many :order_form_items
+  alias_method :items, :order_form_items
   has_many :plants, :through => :order_form_items
+
+
+  accepts_nested_attributes_for :order_form_items
+
+  state_machine :initial => :empty do
+    event :complete do
+      transition :to => :completed
+    end
+    after_transition :to => :completed, :do => :create_order
+  end
+
+
+  def create_order
+    _order = build_order
+    _order.customer = self.user.customer
+    self.items.each do |item|
+      li = _order.line_items.build
+      li.deposit_id = item.deposit_id
+      li.qty = item.grams
+    end
+    _order.save
+  end
 
 end

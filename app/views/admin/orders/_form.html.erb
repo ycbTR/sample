@@ -1,0 +1,19 @@
+<%= nested_form_for([:admin, @order]) do |f| %>
+
+    <div class="field">
+      <%= f.label :number %>
+      <br/>
+      <%= f.text_field :number %>
+    </div>
+
+
+
+
+    <%= render partial: "customer_data", locals: {f: f} %>
+    <br>
+    <%= render partial: "line_items", locals: {f: f} %>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

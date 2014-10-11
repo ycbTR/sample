@@ -1,33 +1,34 @@
 Seedbank::Application.routes.draw do
-  resources :transactions
 
 
-  resources :orders
+  namespace :admin do
+    resources :transactions
+    resources :lot_numbers
+    resources :plants
+    resources :people
+    resources :transfers
+    resources :deposits
+    resources :orders
+    resources :snippets
+    resources :users
+  end
 
-
+  namespace :customer do
+    resources :order_forms, only: :new do
+      collection do
+        put :complete
+      end
+    end
+    get "profile", to: "order_forms#profile", :as => :profile
+    put "profile", :to => "order_forms#profile", :as => :save_profile
+  end
   resources :catalogs
-
-
-  resources :lot_numbers
-
-
-  resources :plants
-
-
-  resources :people
-
-
-  resources :transfers
-
-
-  resources :deposits
 
 
   devise_for :users
 
   root to: "home#index"
   get "catalogue", to: "home#catalogue", as: "catalogue"
-  resources :snippets
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

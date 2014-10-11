@@ -1,0 +1,15 @@
+<%- model_class = LotNumber -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:number) %>:</strong></dt>
+  <dd><%= @lot_number.number %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:region) %>:</strong></dt>
+  <dd><%= @lot_number.region %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:provenance) %>:</strong></dt>
+  <dd><%= @lot_number.provenance %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:location) %>:</strong></dt>
+  <dd><%= @lot_number.location %></dd>
+</dl>

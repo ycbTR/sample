@@ -88,5 +88,6 @@ gem 'newrelic_rpm'
 gem 'airbrake'
 
 gem "nested_form"
+gem "client_side_validations"
 
 

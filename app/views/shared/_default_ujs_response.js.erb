@@ -1,0 +1,38 @@
+if ($('.modal.fade.in').length > 0) {
+    <% if @error_presence_for_response %>
+    $('#dynamic-content').html('<%= escape_javascript(render :template => "#{target}", :formats => [:html], :handlers => [:erb]) %>');
+    <% else %>
+    $("#pad-wrapper").html('<%= escape_javascript(render :template => "#{target}", :formats => [:html], :handlers => [:erb]) %>');
+    $('.modal').modal('hide');
+    $(".modal-backdrop.fade.in").remove();
+    <% end %>
+}
+else {
+    $("#pad-wrapper").html('<%= escape_javascript(render :template => "#{target}", :formats => [:html], :handlers => [:erb]) %>');
+    $('.modal').modal('hide');
+}
+
+<%= yield :default_response_javascripts %>
+
+<%= render :partial =>'shared/flashes' %>
+
+try {
+    default_initializers();
+}
+catch (err) {
+}
+
+try {
+    setTimeout("$('form[data-validate]').enableClientSideValidations()", 500);
+} catch (err) {
+}
+
+try {
+//    Dont use timeout.
+    run_controller_initializers();
+}
+catch (err) {
+}
+<% if(flash.any? rescue false) %>
+$("html, body").animate({scrollTop: 0}, 700);
+<% end %>

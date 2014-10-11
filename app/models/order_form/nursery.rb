@@ -28,15 +28,6 @@
 #
 
 class OrderForm::Nursery < OrderForm
-  after_create :create_order
-
-  private
-
-
-  def create_order
-    _order = build_order
-
-  end
 
 
 end

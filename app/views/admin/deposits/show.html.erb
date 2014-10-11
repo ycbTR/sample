@@ -1,0 +1,18 @@
+<%- model_class = Deposit -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:lot_number_id) %>:</strong></dt>
+  <dd><%= @deposit.lot_number_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:plant_id) %>:</strong></dt>
+  <dd><%= @deposit.plant_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:date) %>:</strong></dt>
+  <dd><%= @deposit.date %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:qty_bank) %>:</strong></dt>
+  <dd><%= @deposit.qty_bank %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:qty_consigned) %>:</strong></dt>
+  <dd><%= @deposit.qty_consigned %></dd>
+</dl>
+

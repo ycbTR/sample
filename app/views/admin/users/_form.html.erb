@@ -1,0 +1,37 @@
+<%= form_for([:admin, @object]) do |f| %>
+
+    <div class="modal-body">
+      <div class="row form-wrapper">
+        <div class="col-md-12 column">
+          <%= render partial: "shared/errors", locals: {target: @object} %>
+          <div class="field">
+            <%= f.label :email %>
+            <br/>
+            <%= f.text_field :email %>
+          </div>
+          <div class="field">
+            <%= f.label :password %>
+            <br/>
+            <%= f.password_field :password %>
+          </div>
+          <div class="field">
+            <%= f.label :password_confirmation %>
+            <br/>
+            <%= f.password_field :password_confirmation %>
+          </div>
+          <div class="field">
+            <%= f.label :role %>
+            <br/>
+            <%= f.select :role, ["Customer", "Admin"] %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <%= link_to "Cancel", "javascript:;", :class => "pull-left", :data => {:dismiss => 'modal'} %>
+      <%= f.submit "Save", class: "btn btn-primary" %>
+      <!--TODO modal_submit_button f, t(:save)-->
+    </div>
+<% end %>
+

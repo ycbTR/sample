@@ -1,0 +1,20 @@
+<%- model_class = Snippet -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:label) %>:</strong></dt>
+  <dd><%= @snippet.label %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:slug) %>:</strong></dt>
+  <dd><%= @snippet.slug %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:identifier) %>:</strong></dt>
+  <dd><%= @snippet.identifier %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:excerpt) %>:</strong></dt>
+  <dd><%= @snippet.excerpt %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:content) %>:</strong></dt>
+  <dd><%= @snippet.content %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:position) %>:</strong></dt>
+  <dd><%= @snippet.position %></dd>
+</dl>
+
