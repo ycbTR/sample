@@ -1,0 +1,75 @@
+<table class="table table-bordered">
+  <tr>
+    <th colspan="4">Details</th>
+  </tr>
+
+  <tr>
+    <th colspan="2">Date</th>
+    <td colspan="2"><%= format_date_with_time order_form.created_at %></td>
+  </tr>
+
+  <tr>
+    <th colspan="2">Business Name</th>
+    <td colspan="2"><%= order_form.business_name %></td>
+  </tr>
+
+  <tr>
+    <th colspan="2">Postal Address</th>
+    <td colspan="2"><%= order_form.property_address %></td>
+  </tr>
+
+  <tr>
+    <th colspan="2">Contact Person</th>
+    <td colspan="2"><%= order_form.officer_name %></td>
+  </tr>
+
+  <tr>
+    <th>Telephone</th>
+    <td><%= order_form.telephone %></td>
+    <th>Mobile</th>
+    <td><%= order_form.mobile %></td>
+  </tr>
+
+  <tr>
+    <th>SB No</th>
+    <td><%= order_form.sb_no %></td>
+    <th>PON</th>
+    <td><%= order_form.pon %></td>
+  </tr>
+
+  <tr>
+    <th colspan="2">Comments</th>
+    <td colspan="2"><%= order_form.comments %></td>
+  </tr>
+
+
+</table>
+
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th colspan="4">Item(s)</th>
+  </tr>
+  <tr>
+    <th>Lot No</th>
+    <th>Botanical Name</th>
+    <th>Provenance</th>
+    <th>Grams</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% order_form.items.each do |item| %>
+      <% deposit = item.deposit %>
+      <tr>
+        <td><%= deposit.display %></td>
+        <td><%= deposit.plant.species %></td>
+        <td><%= deposit.lot_number.provenance %></td>
+        <td><%= item.grams || "-" %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+
+
