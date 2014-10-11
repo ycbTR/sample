@@ -1,5 +1,9 @@
-<%- model_class = Order -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
-</div>
+<%= content_for :page_title, "Order ##{@order.number}" %>
+<% if @order.order_form.present? %>
+    <%= render partial: "shared/order_form_modal", locals: {order_form: @order.order_form} %>
+    <%= content_for :page_link do %>
+        <%= link_to "Show Form", "#selectModal", "data-toggle" => "modal", class: "btn btn-primary" %>
+    <% end %>
+<% end %>
+
 <%= render :partial => 'form' %>

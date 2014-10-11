@@ -1,0 +1,29 @@
+<%= content_for :page_title, "Orders" %>
+<%= content_for :page_link do %>
+    <%= link_to "New Order", "#selectModal", "data-toggle" => "modal", class: "btn btn-success" %>
+<% end %>
+<%= render partial: "selection_modal" %>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Status</th>
+    <th>Number</th>
+    <th>Created At</th>
+    <th><%= t '.actions', :select => t("helpers.actions") %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.state %></td>
+        <td><%= order.number %></td>
+        <td><%= format_date_with_time order.created_at %></td>
+        <td>
+          <%= link_to "Details", customer_order_path(order.number) %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+

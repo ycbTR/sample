@@ -1,0 +1,39 @@
+<%= content_for :page_title, "Order ##{@order.number}" %>
+<% if @order.order_form.present? %>
+    <%= render partial: "shared/order_form_modal", locals: {order_form: @order.order_form} %>
+    <%= content_for :page_link do %>
+        <%= link_to "Show Form", "#selectModal", "data-toggle" => "modal", class: "btn btn-primary" %>
+    <% end %>
+<% end %>
+
+<table id="line_items" class="table">
+  <thead>
+  <tr>
+    <th>Lot No</th>
+    <th>Botanical Name</th>
+    <th>Provenance</th>
+    <th>Qty</th>
+    <th>Price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @order.line_items.each do |item| %>
+      <% deposit = item.deposit %>
+      <tr>
+        <td><%= deposit.display %></td>
+        <td><%= deposit.plant.species %></td>
+        <td><%= deposit.lot_number.provenance %></td>
+        <td><%= item.qty || "Pending" %></td>
+        <td><%= (number_to_currency item.price) || "Pending" %></td>
+      </tr>
+  <% end %>
+  <tr style="font-weight: bold;">
+    <td colspan="2"></td>
+    <td>Total:</td>
+    <td><%= @order.line_items.sum(:qty) %></td>
+    <td><%= number_to_currency @order.line_items.sum(:price) %></td>
+  </tr>
+  </tbody>
+
+</table>
+

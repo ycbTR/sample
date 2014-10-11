@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
 
   has_many :transfers
   has_many :transactions
+  has_many :order_forms
 
   def admin?
     self.role == "Admin"

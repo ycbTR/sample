@@ -13,7 +13,8 @@ class Customer::BaseController < ApplicationController
 
   def person_required
     if @current_user.person.blank?
-      # redirect to person path
+      flash[:warning] = "Please complete your profile details to place a new order"
+      redirect_to customer_profile_path and return
     end
   end
 

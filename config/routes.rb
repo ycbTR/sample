@@ -19,6 +19,9 @@ Seedbank::Application.routes.draw do
         put :complete
       end
     end
+
+    resources :orders, only: [:index, :show]
+
     get "profile", to: "order_forms#profile", :as => :profile
     put "profile", :to => "order_forms#profile", :as => :save_profile
   end
