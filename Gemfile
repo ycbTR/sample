@@ -81,8 +81,6 @@ gem 'acts-as-taggable-on'
 
 gem 'annotate', ">=2.5.0"
 
-gem "rails_admin"
-
 gem 'money-rails'
 
 gem 'newrelic_rpm'
