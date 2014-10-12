@@ -5,7 +5,6 @@
 //= require rails.validations
 
 
-
 $(function () {
     $('.bxslider').bxSlider();
 
@@ -22,10 +21,14 @@ $(function () {
             to_show.find('input, select').attr('disabled', false);
             to_show.show();
         });
+
+        $('li.dropdown').on('click', function () {
+            $(this).addClass('open')
+        });
     });
 
 
-    $(document).on("hover",".image",function() {
+    $(document).on("hover", ".image", function () {
         $(this).toggleClass("hover");
     });
 
