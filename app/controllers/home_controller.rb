@@ -5,7 +5,12 @@ class HomeController < ApplicationController
 
   end
 
-  def catalogue
+  def catalogue_spa
 
   end
+
+  def catalogue_general
+
+  end
+
 end

@@ -1,4 +1,5 @@
 class Customer::BaseController < ApplicationController
+  before_filter :authenticate_user!
   before_filter :authorize_customer
   before_filter :person_required
 

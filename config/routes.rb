@@ -25,13 +25,13 @@ Seedbank::Application.routes.draw do
     get "profile", to: "order_forms#profile", :as => :profile
     put "profile", :to => "order_forms#profile", :as => :save_profile
   end
-  resources :catalogs
 
 
   devise_for :users
 
   root to: "home#index"
-  get "catalogue", to: "home#catalogue", as: "catalogue"
+  get "catalogue/spa", to: "home#catalogue_spa", as: "catalogue_spa"
+  get "catalogue/general", to: "home#catalogue_general", as: "catalogue_general"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
