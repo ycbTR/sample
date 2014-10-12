@@ -11,7 +11,7 @@
 #
 
 class Order < ActiveRecord::Base
-  attr_accessible :completed_at, :customer_id, :number, :line_items_attributes, :customer_attributes
+  attr_accessible :completed_at, :customer_id, :number, :line_items_attributes, :customer_attributes, :state_event
   before_create :generate_number
 
   def generate_number
@@ -27,6 +27,10 @@ class Order < ActiveRecord::Base
 
   state_machine :initial => :pending do
 
+    event :pend do
+      transition :to => :pending
+    end
+
     event :process do
       transition :to => :processed
     end
@@ -36,7 +40,7 @@ class Order < ActiveRecord::Base
     end
 
 
-    after_transition :to => :processed, :do => :notify_processed
+    after_transition :from => :pending, :to => :processed, :do => :notify_processed
 
   end
 
@@ -50,7 +54,7 @@ class Order < ActiveRecord::Base
   def notify_processed
     if self.customer.present?
       begin
-        OrderMailer.notify_processed(order)
+        OrderMailer.notify_processed(self)
       rescue
       end
     end

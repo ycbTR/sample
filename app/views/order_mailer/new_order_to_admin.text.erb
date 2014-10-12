@@ -1,0 +1,15 @@
+New order with number <%= @order.number %> is received by <%= @order.customer.full_name %>
+
+Type: <%= @order_form.display %>
+<%= link_to("Details", admin_order_url(@order)) %>
+================================================================
+
+DETAILS
+
+<% @order.line_items.each do |li| %>
+    ================================================================
+    Plant: <%= "#{li.plan.common_name} #{li.plant.species}" %>
+    Quantity: <%= li.qty %>grams
+    Price: <%= number_to_currency li.price, precision: 2 %>
+    ================================================================
+<% end %>

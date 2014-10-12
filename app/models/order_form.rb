@@ -46,7 +46,28 @@ class OrderForm < ActiveRecord::Base
     event :complete do
       transition :to => :completed
     end
-    after_transition :to => :completed, :do => :create_order
+    after_transition :to => :completed, :do => :after_complete
+  end
+
+
+  def display
+    "#{self.type.demodulize} Order Form"
+  end
+
+  private
+
+  def after_complete
+    create_order
+    notify_admin
+    notify_customer
+  end
+
+  def notify_admin
+    OrderMailer.new_order_to_customer(self).deliver rescue ""
+  end
+
+  def notify_customer
+    OrderMailer.new_order_to_admin(self).deliver rescue ""
   end
 
 

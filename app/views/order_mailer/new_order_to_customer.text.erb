@@ -1,0 +1,20 @@
+Hello <%= @customer.full_name %>,
+
+Your order with number <%= @order.number %> is received.
+
+You will receive another email as soon as SeedBank staff processes your order.
+
+Type: <%= @order_form.display %>
+<%= link_to("Details", customer_order_url(@order.number)) %>
+
+================================================================
+
+DETAILS
+
+<% @order.line_items.each do |li| %>
+    ================================================================
+    Plant: <%= "#{li.plan.common_name} #{li.plant.species}" %>
+    Quantity: <%= li.qty %>grams
+    Price: <%= number_to_currency li.price, precision: 2 %>
+    ================================================================
+<% end %>

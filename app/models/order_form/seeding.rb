@@ -29,5 +29,8 @@
 
 class OrderForm::Seeding < OrderForm
 
+  def display
+    "Direct Seeding Order Form"
+  end
 
 end
