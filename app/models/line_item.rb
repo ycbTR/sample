@@ -9,6 +9,7 @@
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  deposit_id            :integer
+#  price                 :decimal(, )
 #
 
 class LineItem < ActiveRecord::Base

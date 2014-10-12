@@ -29,17 +29,17 @@ class Plant < ActiveRecord::Base
 
   #1-49g
   def level_1_price
-    price_paid
+    price_paid * 1.92
   end
 
   #50-499g
   def level_2_price
-    price_paid * 3/4
+    price_paid * 1.44
   end
 
   #>500
   def level_3_price
-    price_paid * 5/8
+    price_paid * 1.2
   end
 
 end

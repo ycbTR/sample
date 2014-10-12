@@ -25,6 +25,9 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  order_id           :integer
+#  user_id            :integer
+#  state              :string(255)
+#  telephone          :string(255)
 #
 
 class OrderForm::Seeding < OrderForm
