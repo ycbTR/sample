@@ -39,7 +39,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+#gem 'jquery-rails'
+#gem 'jquery-ui-rails'
+gem 'jquery-rails', '< 3.0.0'
 
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
@@ -89,5 +91,7 @@ gem 'airbrake'
 
 gem "nested_form"
 gem "client_side_validations"
+
+gem 'comfortable_mexican_sofa', '~> 1.8.0'
 
 
