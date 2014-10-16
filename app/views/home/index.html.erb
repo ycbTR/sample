@@ -8,7 +8,7 @@
         <div class="container">
           <!-- Text Slider -->
           <div class="text-slider no-js">
-            <%= Snippet.for_identifier("who_we_are").first.try(:content).to_s.html_safe %>
+            <%= Cms::Snippet.for_category(:who_we_are).first.content.to_s.html_safe %>
           </div>
           <!-- /Text Slider -->
         </div>
