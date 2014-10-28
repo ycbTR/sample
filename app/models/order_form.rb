@@ -42,8 +42,9 @@ class OrderForm < ActiveRecord::Base
   alias_method :items, :order_form_items
   has_many :plants, :through => :order_form_items
 
-
   accepts_nested_attributes_for :order_form_items
+  validates :order_form_items, presence: true
+
 
   state_machine :initial => :empty do
     event :complete do

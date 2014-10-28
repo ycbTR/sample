@@ -72,16 +72,11 @@ gem 'state_machine'
 
 gem "paperclip", "3.4.2"
 
-
 gem "ransack" # Last officially released gem (Rails 3 and 4)
 
 gem 'kaminari'
 
-gem 'acts-as-taggable-on'
-
 gem 'annotate', ">=2.5.0"
-
-gem 'money-rails'
 
 gem 'newrelic_rpm'
 

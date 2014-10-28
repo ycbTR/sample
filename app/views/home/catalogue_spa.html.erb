@@ -22,6 +22,7 @@
 
   <tr class="bold-black">
     <th>Lot No</th>
+    <th>Heritage Lot No</th>
     <th>Botanical Name</th>
     <th>Common Name</th>
     <th>Provenance</th>
@@ -33,9 +34,10 @@
   </thead>
 
   <tbody>
-  <% Deposit.all.each do |deposit| %>
+  <% @deposits.each do |deposit| %>
       <tr>
         <td><%= deposit.display %></td>
+        <td><%= deposit.lot_number.heritage_lot_numbers %></td>
         <td><%= deposit.plant.species %></td>
         <td><%= deposit.plant.common_name %></td>
         <td><%= deposit.lot_number.provenance %></td>

@@ -12,11 +12,34 @@
 #
 
 class LotNumber < ActiveRecord::Base
-  attr_accessible :location, :number, :provenance, :region
+  attr_accessible :location, :number, :provenance, :region, :heritage_ids
   has_many :line_items
+  has_many :lot_heritages, class_name: "LotHeritage"
+  has_many :heritages, through: :lot_heritages, class_name: "LotNumber"
+  validates :number, presence: true
+
+  def self.origin
+    where("#{self.table_name}.id NOT IN(?)", LotHeritage.pluck(:lot_number_id).uniq)
+  end
+
+  def self.originated
+    where(id: LotHeritage.pluck(:lot_number_id).uniq)
+  end
 
 
   def display
-    "#{self.number}"
+    if heritages.count > 0
+      "#{heritages.pluck(:number).join('/')} > #{self.number}"
+    else
+      "#{self.number}"
+    end
   end
+
+  def heritage_lot_numbers
+    lns = heritages.pluck(:number).join(',')
+    lns = "NA" if lns.blank?
+    lns
+  end
+
+
 end

@@ -32,7 +32,7 @@
   </thead>
 
   <tbody>
-  <% Deposit.all.each do |deposit| %>
+  <% @deposits.all.each do |deposit| %>
       <tr>
         <td><%= deposit.display %></td>
         <td><%= deposit.plant.species %></td>

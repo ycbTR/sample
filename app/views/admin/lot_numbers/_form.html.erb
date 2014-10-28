@@ -1,4 +1,4 @@
-<%= form_for [:admin, @lot_number], :html => {:class => 'form-horizontal'} do |f| %>
+<%= form_for [:admin, @lot_number], validate: true, :html => {:class => 'form-horizontal'} do |f| %>
     <div class="control-group">
       <%= f.label :number, :class => 'control-label' %>
       <div class="controls">
@@ -24,9 +24,64 @@
       </div>
     </div>
 
+
+    <div class="control-group">
+      <%= f.label :heritage_ids, "Heritage Lot Numbers", :class => 'control-label' %>
+
+      <div class="field">
+        <div class="multiselect">
+          <label class="check_header"><%= check_box_tag :select_all, 1, (f.object.heritage_ids.count == LotNumber.where("id != ?", (@lot_number.id || -1)).count), class: "all_check_toggle" %>
+            Select All</label>
+          <% LotNumber.where("id != ?", (@lot_number.id || -1)).all.each do |l| %>
+              <label>
+                <%= f.check_box :heritage_ids, {multiple: true, :checked => f.object.heritage_ids.include?(l.id)}, l.id, nil %> <%= l.display %>
+              </label>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <br>
+
     <div class="form-actions">
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                   admin_lot_numbers_path, :class => 'btn' %>
     </div>
 <% end %>
+
+<script>
+    $('.all_check_toggle').on('click', function () {
+        if ($(this).is(":checked")) {
+            $(this).parent().parent().find('input:checkbox').attr('checked', true);
+        } else {
+            $(this).parent().parent().find('input:checkbox').attr('checked', false);
+        }
+    });
+
+</script>
+
+<style type="text/css">
+
+    .multiselect {
+        height: 15em;
+        border: solid 1px #c0c0c0;
+        overflow: auto;
+        padding: 3px;
+        width: 281px;
+    }
+
+    .multiselect label {
+        display: block;
+    }
+
+    .multiselect-on {
+        color: #ffffff;
+        background-color: #000099;
+    }
+
+    .multiselect label.check_header {
+        margin-top: 5px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #ccc;
+    }
+</style>

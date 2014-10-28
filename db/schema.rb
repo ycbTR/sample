@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141012122021) do
+ActiveRecord::Schema.define(:version => 20141028170908) do
 
   create_table "assets", :force => true do |t|
     t.string   "attachment_file_name"
@@ -161,6 +161,7 @@ ActiveRecord::Schema.define(:version => 20141012122021) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.integer  "collector_id"
+    t.integer  "heritage_id"
   end
 
   create_table "line_items", :force => true do |t|
@@ -171,6 +172,13 @@ ActiveRecord::Schema.define(:version => 20141012122021) do
     t.datetime "updated_at",            :null => false
     t.integer  "deposit_id"
     t.decimal  "price"
+  end
+
+  create_table "lot_heritages", :force => true do |t|
+    t.integer  "lot_number_id"
+    t.integer  "heritage_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "lot_numbers", :force => true do |t|

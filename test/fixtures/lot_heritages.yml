@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  lot_number_id: 1
+  heritage_id: 1
+
+two:
+  lot_number_id: 1
+  heritage_id: 1

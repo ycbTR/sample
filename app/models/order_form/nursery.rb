@@ -31,6 +31,6 @@
 #
 
 class OrderForm::Nursery < OrderForm
-
+  validates :business_name, :abn, :property_address, :officer_name, :telephone, presence: true
 
 end

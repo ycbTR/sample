@@ -11,6 +11,7 @@ class Customer::OrderFormsController < Customer::BaseController
     if @current_order.update_attributes(params[:order_form]) && @current_order.reload.complete
       session.delete :order_id
       flash[:success] = "Successfully placed an order."
+      redirect_to customer_orders_path
     else
       render 'new'
     end
@@ -32,7 +33,7 @@ class Customer::OrderFormsController < Customer::BaseController
   private
 
   def build_order
-    @current_order = params[:order_form][:type].constantize.new rescue OrderForm.new
+    @current_order = (params[:order_form][:type]).constantize.new rescue ("OrderForm::#{(params[:type] || 'seeding').titleize}").constantize.new rescue OrderForm.new
     @current_order.user = @current_user
   end
 
