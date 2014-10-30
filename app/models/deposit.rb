@@ -19,6 +19,7 @@ class Deposit < ActiveRecord::Base
   belongs_to :plant
   belongs_to :collector, class_name: "Person::Collector"
   belongs_to :lot_number
+  has_many :line_items
 
   def display
     "#{lot_number.number}/#{date.to_date.month}"

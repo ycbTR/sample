@@ -155,22 +155,21 @@ ActiveRecord::Schema.define(:version => 20141028170908) do
   create_table "deposits", :force => true do |t|
     t.integer  "lot_number_id"
     t.integer  "plant_id"
+    t.integer  "collector_id"
     t.date     "date"
     t.integer  "qty_bank"
     t.integer  "qty_consigned"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.integer  "collector_id"
-    t.integer  "heritage_id"
   end
 
   create_table "line_items", :force => true do |t|
     t.integer  "order_id"
+    t.integer  "deposit_id"
     t.string   "seedmix_or_individual"
     t.integer  "qty"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
-    t.integer  "deposit_id"
     t.decimal  "price"
   end
 
@@ -192,11 +191,11 @@ ActiveRecord::Schema.define(:version => 20141028170908) do
 
   create_table "order_form_items", :force => true do |t|
     t.integer  "order_form_id"
+    t.integer  "deposit_id"
     t.integer  "plant_id"
+    t.float    "grams"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.float    "grams"
-    t.integer  "deposit_id"
   end
 
   create_table "order_forms", :force => true do |t|
@@ -221,7 +220,6 @@ ActiveRecord::Schema.define(:version => 20141028170908) do
     t.text     "comments"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
-    t.integer  "order_id"
     t.integer  "user_id"
     t.string   "state"
     t.string   "telephone"
@@ -233,9 +231,9 @@ ActiveRecord::Schema.define(:version => 20141028170908) do
     t.datetime "completed_at"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "order_form_id"
     t.decimal  "total"
     t.string   "state"
-    t.integer  "order_form_id"
   end
 
   create_table "people", :force => true do |t|
