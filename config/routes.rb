@@ -9,7 +9,6 @@ Seedbank::Application.routes.draw do
     resources :transfers
     resources :deposits
     resources :orders
-    resources :snippets
     resources :users
   end
 

@@ -5,12 +5,14 @@
               new_admin_plant_path,
               :class => 'btn btn-primary pull-right' %>
   <div class="clearfix"></div>
+
+  <%= render partial: "shared/advanced_search" %>
+
 </div>
 
 <table class="table table-striped">
   <thead>
   <tr>
-    <th><%= model_class.human_attribute_name(:id) %></th>
     <th><%= model_class.human_attribute_name(:species) %></th>
     <th><%= model_class.human_attribute_name(:common_name) %></th>
     <th><%= model_class.human_attribute_name(:price_paid) %></th>
@@ -21,7 +23,6 @@
   <tbody>
   <% @plants.each do |plant| %>
       <tr>
-        <td><%= link_to plant.id, admin_plant_path(plant) %></td>
         <td><%= plant.species %></td>
         <td><%= plant.common_name %></td>
         <td><%= plant.price_paid %></td>

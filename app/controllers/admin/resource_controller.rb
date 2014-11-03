@@ -11,14 +11,14 @@ class Admin::ResourceController < Admin::BaseController
     invoke_callbacks(:new_action, :before)
     respond_with(@object) do |format|
       format.html { render :layout => !request.xhr? }
-      format.js   { js_response }
+      format.js { js_response }
     end
   end
 
   def edit
     respond_with(@object) do |format|
       format.html { render :layout => !request.xhr? }
-      format.js   { js_response }
+      format.js { js_response }
     end
   end
 
@@ -29,7 +29,7 @@ class Admin::ResourceController < Admin::BaseController
       flash.notice = flash_message_for(@object, :successfully_updated)
       respond_with(@object) do |format|
         format.html { redirect_to location_after_save }
-        format.js   { js_response }
+        format.js { js_response }
       end
     else
       @error_presence_for_response = true
@@ -45,7 +45,7 @@ class Admin::ResourceController < Admin::BaseController
       flash.notice = flash_message_for(@object, :successfully_created)
       respond_with(@object) do |format|
         format.html { redirect_to location_after_save }
-        format.js   { js_response }
+        format.js { js_response }
       end
     else
       @error_presence_for_response = true
@@ -59,7 +59,7 @@ class Admin::ResourceController < Admin::BaseController
       model_class.where(:id => id).update_all(:position => index)
     end
     respond_to do |format|
-      format.js  { render :text => 'Ok' }
+      format.js { render :text => 'Ok' }
     end
   end
 
@@ -70,7 +70,7 @@ class Admin::ResourceController < Admin::BaseController
       flash.notice = flash_message_for(@object, :successfully_removed)
       respond_with(@object) do |format|
         format.html { redirect_to collection_url }
-        format.js   { render :partial => "shared/destroy" }
+        format.js { render :partial => "shared/destroy" }
       end
     else
       @error_presence_for_response = true
@@ -181,11 +181,9 @@ class Admin::ResourceController < Admin::BaseController
 
   def collection
     return parent.send(controller_name) if parent_data.present?
-    if model_class.respond_to?(:accessible_by) && !current_ability.has_block?(params[:action], model_class)
-      model_class.accessible_by(current_ability)
-    else
-      model_class.scoped.page(params[:page])
-    end
+    params[:q] ||= {}
+    @search = model_class.scoped.ransack(params[:q])
+    @search.result(distinct: true).page(params[:page])
   end
 
   def location_after_save
@@ -196,9 +194,12 @@ class Admin::ResourceController < Admin::BaseController
     callbacks = self.class.callbacks || {}
     return if callbacks[action].nil?
     case callback_type.to_sym
-      when :before then callbacks[action].before_methods.each {|method| send method }
-      when :after  then callbacks[action].after_methods.each  {|method| send method }
-      when :fails  then callbacks[action].fails_methods.each  {|method| send method }
+      when :before then
+        callbacks[action].before_methods.each { |method| send method }
+      when :after then
+        callbacks[action].after_methods.each { |method| send method }
+      when :fails then
+        callbacks[action].fails_methods.each { |method| send method }
     end
   end
 
