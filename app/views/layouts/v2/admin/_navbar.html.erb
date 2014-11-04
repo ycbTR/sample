@@ -5,7 +5,8 @@
     <li><%= link_to "Plants", admin_plants_path %></li>
     <li><%= link_to "Lot Numbers", admin_lot_numbers_path %></li>
     <li><%= link_to "Orders", admin_orders_path %></li>
-    <li><%= link_to "People", admin_people_path %></li>
+    <li><%= link_to "Collectors", admin_people_path(q: {:type_cont => "Collector"}) %></li>
+    <li><%= link_to "Customer Profiles", admin_people_path(q: {:type_cont => "Customer"}) %></li>
     <li><%= link_to "Users", admin_users_path %></li>
     <!--<li><%= link_to "Transfers", admin_transfers_path %></li>-->
     <li><%= link_to "Field Data Sheets", admin_deposits_path %></li>

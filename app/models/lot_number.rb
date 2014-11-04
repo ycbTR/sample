@@ -12,7 +12,7 @@
 #
 
 class LotNumber < ActiveRecord::Base
-  attr_accessible :location, :number, :provenance, :region, :heritage_ids
+  attr_accessible :location, :number, :provenance, :region, :heritage_ids, :spa_name
   has_many :line_items
   has_many :deposits
   has_many :lot_heritages, class_name: "LotHeritage"
@@ -30,7 +30,7 @@ class LotNumber < ActiveRecord::Base
 
   def display
     if heritages.count > 0
-      "#{heritages.pluck(:number).join('/')} > #{self.number}"
+      "#{spa_name} - #{heritages.pluck(:number).join('/')} > #{self.number}"
     else
       "#{self.number}"
     end

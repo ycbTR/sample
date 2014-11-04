@@ -14,12 +14,14 @@
 #
 
 class Order < ActiveRecord::Base
+  attr_accessor :number_prefix
   attr_accessible :completed_at, :customer_id, :number, :line_items_attributes, :customer_attributes, :state_event
   before_create :generate_number
 
   def generate_number
-    self.number = "O#{rand.to_s[2..8]}"
+    self.number = "#{number_prefix}#{(Order.pluck(:id).last.to_i + 1).to_s.rjust(4, "0")}"
   end
+
 
   has_many :line_items
   belongs_to :customer, class_name: "Person::Customer"

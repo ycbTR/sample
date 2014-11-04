@@ -11,22 +11,26 @@
 
 <table class="table table-striped">
   <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:collector) %></th>
-      <th><%= model_class.human_attribute_name(:lot_number_id) %></th>
-      <th><%= model_class.human_attribute_name(:plant_id) %></th>
-      <th><%= model_class.human_attribute_name(:date) %></th>
-      <th><%= model_class.human_attribute_name(:qty_bank) %></th>
-      <th><%= model_class.human_attribute_name(:qty_consigned) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
+  <tr>
+    <th><%= model_class.human_attribute_name(:collector) %></th>
+    <th><%= "Lot Number" %></th>
+    <th><%= "Species" %></th>
+    <th><%= model_class.human_attribute_name(:date) %></th>
+    <th><%= model_class.human_attribute_name(:qty_bank) %></th>
+    <th><%= model_class.human_attribute_name(:qty_consigned) %></th>
+    <th><%= t '.actions', :default => t("helpers.actions") %></th>
+  </tr>
   </thead>
   <tbody>
-    <% @deposits.each do |deposit| %>
+  <% @deposits.each do |deposit| %>
       <tr>
         <td><%= deposit.collector.full_name %></td>
-        <td><%= deposit.lot_number_id %></td>
-        <td><%= deposit.plant_id %></td>
+        <td><%= deposit.lot_number.number %>
+          <br>
+          <%= deposit.lot_number.region %>, <%= deposit.lot_number.provenance %>, <%= deposit.lot_number.location %>
+          <% [deposit.lot_number.region, deposit.lot_number.provenance, deposit.lot_number.location, deposit.lot_number.spa_name].delete_if(&:blank?).join(', ') %>
+        </td>
+        <td><%= deposit.plant.species %></td>
         <td><%= format_date deposit.date %></td>
         <td><%= deposit.qty_bank %></td>
         <td><%= deposit.qty_consigned %></td>
@@ -36,11 +40,11 @@
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       admin_deposit_path(deposit),
                       :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
                       :class => 'btn btn-mini btn-danger' %>
         </td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 

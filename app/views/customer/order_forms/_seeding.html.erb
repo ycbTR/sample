@@ -50,25 +50,20 @@
 
 <div class="form-group">
   <%= f.label :hectare, class: "col-sm-2" %>
-  <div class="col-sm-2">
+  <div class="col-sm-3">
     <%= f.text_field :hectare, class: "form-control" %>
   </div>
 
-  <%= f.label :kilometer, class: "col-sm-1" %>
-  <div class="col-sm-2">
+  <%= f.label :kilometer, class: "col-sm-2" %>
+  <div class="col-sm-3">
     <%= f.text_field :kilometer, class: "form-control" %>
-  </div>
-
-  <%= f.label :grams_per_km, class: "col-sm-1" %>
-  <div class="col-sm-2">
-    <%= f.text_field :grams_per_km, class: "form-control" %>
   </div>
 </div>
 
 <div class="form-group">
-  <%= f.label :sb_no, class: "col-sm-2" %>
+  <%= f.label :grams_per_km, class: "col-sm-2" %>
   <div class="col-sm-3">
-    <%= f.text_field :sb_no, class: "form-control" %>
+    <%= f.text_field :grams_per_km, class: "form-control" %>
   </div>
 
   <%= f.label :pon, class: "col-sm-2" %>
@@ -76,6 +71,7 @@
     <%= f.text_field :pon, class: "form-control" %>
   </div>
 </div>
+
 
 <div class="form-group">
   <%= f.label :comments, class: "col-sm-2" %>

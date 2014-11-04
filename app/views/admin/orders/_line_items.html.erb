@@ -4,15 +4,16 @@
   <table id="line_items" class="table">
     <thead>
     <tr>
-      <th>Deposit Details</th>
+      <th>Detail</th>
+      <th>Price</th>
       <th>Quantity</th>
       <th></th>
     </tr>
     </thead>
     <%= f.fields_for :line_items, f.object.line_items.blank? ? f.object.line_items.new : f.object.reload.line_items, wrapper: false do |li_form| %>
         <tr class="fields">
-          <td><%= li_form.select :deposit_id, Deposit.all.collect { |l| [l.display, l.id] } %></td>
-          <td><%= li_form.number_field :price, min: 0 %></td>
+          <td><%= li_form.select :deposit_id, Deposit.all.collect { |l| ["#{l.display} - #{l.plant.species}", l.id] } %></td>
+          <td><%= li_form.text_field :price, min: 0 %></td>
           <td><%= li_form.number_field :qty, min: 0 %></td>
           <td><%= li_form.link_to_remove "x Remove" %></td>
         </tr>

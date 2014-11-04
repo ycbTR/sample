@@ -3,6 +3,9 @@
 
 en:
   hello: "Hello world"
+  successfully_updated: "Successfully Updated"
+  successfully_created: "Successfully Created"
+  successfully_removed: "Successfully Removed"
   date:
     formats:
       default: "%d/%m/%Y"

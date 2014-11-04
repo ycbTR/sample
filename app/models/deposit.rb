@@ -22,7 +22,7 @@ class Deposit < ActiveRecord::Base
   has_many :line_items
 
   def display
-    "#{lot_number.number}/#{date.to_date.month}"
+    "#{lot_number.display}/#{date.to_date.month}"
   end
 
 

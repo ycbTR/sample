@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141028170908) do
+ActiveRecord::Schema.define(:version => 20141104173724) do
 
   create_table "assets", :force => true do |t|
     t.string   "attachment_file_name"
@@ -187,6 +187,7 @@ ActiveRecord::Schema.define(:version => 20141028170908) do
     t.string   "location"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "spa_name"
   end
 
   create_table "order_form_items", :force => true do |t|

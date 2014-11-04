@@ -45,14 +45,12 @@ class OrderForm < ActiveRecord::Base
   accepts_nested_attributes_for :order_form_items
   validates :order_form_items, presence: true
 
-
   state_machine :initial => :empty do
     event :complete do
       transition :to => :completed
     end
     after_transition :to => :completed, :do => :after_complete
   end
-
 
   def display
     "#{self.type.demodulize} Order Form"
@@ -74,9 +72,9 @@ class OrderForm < ActiveRecord::Base
     OrderMailer.new_order_to_admin(self).deliver rescue ""
   end
 
-
   def create_order
     _order = build_order
+    _order.number_prefix = self.prefix
     _order.customer = self.user.customer
     self.items.each do |item|
       li = _order.line_items.build

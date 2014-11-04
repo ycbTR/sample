@@ -13,7 +13,8 @@ class HomeController < ApplicationController
 
   # Only origins
   def catalogue_general
-    @deposits = Deposit.where(:lot_number_id => LotNumber.origin.pluck(:id))
+    #@deposits = Deposit.where(:lot_number_id => LotNumber.origin.pluck(:id))
+    @deposits = Deposit.where("")
   end
 
 end

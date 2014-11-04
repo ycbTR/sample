@@ -11,8 +11,7 @@
   <thead>
   <tr class="bold-black">
     <th colspan="2">SEED CATALOGUE</th>
-    <th>SPA - Seed Production Area</th>
-    <th></th>
+    <th colspan="4">SPA - Seed Production Area</th>
     <th class="align-right">g</th>
     <th>1-49g</th>
     <th>50-499g</th>
@@ -20,7 +19,8 @@
   </tr>
 
   <tr class="bold-black">
-    <th>Lot No</th>
+    <th colspan="2">Lot No</th>
+    <th>Spa Name</th>
     <th>Botanical Name</th>
     <th>Common Name</th>
     <th>Provenance</th>
@@ -34,7 +34,8 @@
   <tbody>
   <% @deposits.all.each do |deposit| %>
       <tr>
-        <td><%= deposit.display %></td>
+        <td colspan="2"><%= deposit.display %></td>
+        <td><%= (deposit.lot_number.spa_name.blank? ? "NA" : deposit.lot_number.spa_name) %></td>
         <td><%= deposit.plant.species %></td>
         <td><%= deposit.plant.common_name %></td>
         <td><%= deposit.lot_number.provenance %></td>

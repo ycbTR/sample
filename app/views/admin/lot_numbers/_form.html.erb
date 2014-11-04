@@ -27,7 +27,6 @@
 
     <div class="control-group">
       <%= f.label :heritage_ids, "Heritage Lot Numbers", :class => 'control-label' %>
-
       <div class="field">
         <div class="multiselect">
           <label class="check_header"><%= check_box_tag :select_all, 1, (f.object.heritage_ids.count == LotNumber.where("id != ?", (@lot_number.id || -1)).count), class: "all_check_toggle" %>
@@ -40,6 +39,14 @@
         </div>
       </div>
     </div>
+
+    <div class="control-group">
+      <%= f.label :spa_name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :spa_name, :class => 'text_field' %>
+      </div>
+    </div>
+
     <br>
 
     <div class="form-actions">

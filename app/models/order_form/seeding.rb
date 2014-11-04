@@ -36,4 +36,11 @@ class OrderForm::Seeding < OrderForm
     "Direct Seeding Order Form"
   end
 
+  def prefix
+    "S"
+  end
+
+#  heroku config:add TZ="Australia/Sydney"
+
+
 end
