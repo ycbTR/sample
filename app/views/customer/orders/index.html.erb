@@ -18,7 +18,7 @@
       <tr>
         <td><%= order.state %></td>
         <td><%= order.number %></td>
-        <td><%= format_date_with_time order.created_at %></td>
+        <td><%= format_date order.created_at %></td>
         <td>
           <%= link_to "Details", customer_order_path(order.number) %>
         </td>

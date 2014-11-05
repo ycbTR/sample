@@ -1,6 +1,7 @@
 require 'seed_bank/action_callbacks'
 class Admin::ResourceController < Admin::BaseController
   helper_method :new_object_url, :edit_object_url, :object_url, :collection_url
+  before_filter :set_q
   before_filter :load_resource
   rescue_from ActiveRecord::RecordNotFound, :with => :resource_not_found
 
@@ -181,7 +182,6 @@ class Admin::ResourceController < Admin::BaseController
 
   def collection
     return parent.send(controller_name) if parent_data.present?
-    params[:q] ||= {}
     @search = model_class.scoped.ransack(params[:q])
     @search.result(distinct: true).page(params[:page])
   end
@@ -252,6 +252,10 @@ class Admin::ResourceController < Admin::BaseController
 
   def js_response
     render :layout => false
+  end
+
+  def set_q
+    params[:q] ||= {}
   end
 
 

@@ -1,7 +1,5 @@
-<%= search_form_for [:admin,@search] do |f| %>
-    <%= f.condition_fields do |c| %>
-        <%= render "condition_fields", f: c %>
-    <% end %>
-    <p><%= link_to_add_fields "Add Conditions", f, :condition %></p>
-    <%= f.submit "Search", class: "btn" %>
+<%= search_form_for [:admin, @search] do |f| %>
+    <%= f.text_field "#{name}", html_options %>
+    <%= (f.hidden_field :type_cont) rescue "" %>
+    <%= f.submit "Search", class: "btn btn-small" %>
 <% end %>

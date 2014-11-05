@@ -52,6 +52,10 @@ class OrderForm < ActiveRecord::Base
     after_transition :to => :completed, :do => :after_complete
   end
 
+  def self.of_type(t)
+    where(type: t)
+  end
+
   def display
     "#{self.type.demodulize} Order Form"
   end

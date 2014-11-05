@@ -5,18 +5,16 @@
               new_admin_plant_path,
               :class => 'btn btn-primary pull-right' %>
   <div class="clearfix"></div>
-
-  <%= render partial: "shared/advanced_search" %>
-
+  <%= render partial: "shared/advanced_search", locals: {name: "species_or_common_name_cont", html_options: {placeholder: "Species or Common Name Conts"}} %>
 </div>
 
 <table class="table table-striped">
   <thead>
   <tr>
-    <th><%= model_class.human_attribute_name(:species) %></th>
-    <th><%= model_class.human_attribute_name(:common_name) %></th>
-    <th><%= model_class.human_attribute_name(:price_paid) %></th>
-    <th><%= model_class.human_attribute_name(:price_charged) %></th>
+    <th><%= sort_link @search, :species %></th>
+    <th><%= sort_link @search, :common_name %></th>
+    <th><%= sort_link @search, :price_paid %></th>
+    <th><%= sort_link @search, :price_charged %></th>
     <th><%= t '.actions', :default => t("helpers.actions") %></th>
   </tr>
   </thead>

@@ -6,7 +6,8 @@
               new_admin_deposit_path,
               :class => 'btn btn-primary pull-right' %>
   <div class="clearfix"></div>
-  <%= render partial: "shared/advanced_search" %>
+
+  <%= render partial: "shared/advanced_search", locals: {name: "collector_first_name_or_collector_last_name_or_lot_number_number_cont", html_options: {placeholder: "Search..."}} %>
 </div>
 
 <table class="table table-striped">

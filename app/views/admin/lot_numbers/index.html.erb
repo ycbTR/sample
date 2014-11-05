@@ -5,15 +5,15 @@
               new_admin_lot_number_path,
               :class => 'btn btn-primary pull-right' %>
   <div class="clearfix"></div>
-  <%= render partial: "shared/advanced_search" %>
+  <%= render partial: "shared/advanced_search", locals: {name: "region_or_spa_name_or_location_or_provenance_or_number_cont", html_options: {placeholder: "Search..."}} %>
 </div>
 <table class="table table-striped">
   <thead>
   <tr>
-    <th><%= "Lot Number" %></th>
+    <th><%= sort_link @search, :number %></th>
     <th><%= "SPA Name" %></th>
     <th><%= model_class.human_attribute_name(:region) %></th>
-    <th><%= model_class.human_attribute_name(:spa_name) %></th>
+    <th><%= "Heritage Lot Numbers" %></th>
     <th><%= model_class.human_attribute_name(:provenance) %></th>
     <th><%= model_class.human_attribute_name(:location) %></th>
     <th><%= t '.actions', :default => t("helpers.actions") %></th>

@@ -1,11 +1,11 @@
 <%- model_class = Person -%>
 <div class="page-header">
-  <h1><%= t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1><%= params[:q][:type_cont] + "s" rescue "People" %></h1>
 
   <%= link_to t('.new', :default => t("helpers.links.new")),
               new_admin_person_path,
-              :class => 'btn btn-primary' %>
-  <%= render partial: "shared/advanced_search" %>
+              :class => 'btn btn-primary pull-right' %>
+  <%= render partial: "shared/advanced_search", locals: {name: "first_name_or_last_name_cont", html_options: {placeholder: "Search..."}} %>
 </div>
 <table class="table table-striped">
   <thead>

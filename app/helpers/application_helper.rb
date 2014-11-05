@@ -1,12 +1,12 @@
 module ApplicationHelper
 
   def format_date(date = nil)
-    return "" if date.nil?
+    return "-" if date.nil?
     date.strftime("%d/%m/%Y")
   end
 
   def format_date_with_time(date = nil)
-    return "" if date.nil?
+    return "-" if date.nil?
     date.strftime("%d/%m/%Y %H:%M")
   end
 
