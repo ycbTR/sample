@@ -1,4 +1,13 @@
-<h1>Listing users</h1>
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+              new_object_url,
+              :class => 'btn btn-primary pull-right' %>
+  <%= render partial: "shared/advanced_search", locals: {name: "email_cont", html_options: {placeholder: "Search..."}} %>
+</div>
+
 
 <table class="table">
   <tr>
@@ -17,7 +26,3 @@
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New User', new_object_url, remote: true %>
