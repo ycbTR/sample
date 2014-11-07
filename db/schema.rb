@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141104173724) do
+ActiveRecord::Schema.define(:version => 20141107185107) do
 
   create_table "assets", :force => true do |t|
     t.string   "attachment_file_name"
@@ -155,21 +155,22 @@ ActiveRecord::Schema.define(:version => 20141104173724) do
   create_table "deposits", :force => true do |t|
     t.integer  "lot_number_id"
     t.integer  "plant_id"
-    t.integer  "collector_id"
     t.date     "date"
     t.integer  "qty_bank"
     t.integer  "qty_consigned"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "collector_id"
+    t.integer  "heritage_id"
   end
 
   create_table "line_items", :force => true do |t|
     t.integer  "order_id"
-    t.integer  "deposit_id"
     t.string   "seedmix_or_individual"
     t.integer  "qty"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+    t.integer  "deposit_id"
     t.decimal  "price"
   end
 
@@ -181,22 +182,22 @@ ActiveRecord::Schema.define(:version => 20141104173724) do
   end
 
   create_table "lot_numbers", :force => true do |t|
-    t.string   "number"
+    t.integer  "number",     :limit => 255
     t.string   "region"
     t.string   "provenance"
     t.string   "location"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.string   "spa_name"
   end
 
   create_table "order_form_items", :force => true do |t|
     t.integer  "order_form_id"
-    t.integer  "deposit_id"
     t.integer  "plant_id"
-    t.float    "grams"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.float    "grams"
+    t.integer  "deposit_id"
   end
 
   create_table "order_forms", :force => true do |t|
@@ -221,6 +222,7 @@ ActiveRecord::Schema.define(:version => 20141104173724) do
     t.text     "comments"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.integer  "order_id"
     t.integer  "user_id"
     t.string   "state"
     t.string   "telephone"
@@ -232,9 +234,9 @@ ActiveRecord::Schema.define(:version => 20141104173724) do
     t.datetime "completed_at"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.integer  "order_form_id"
     t.decimal  "total"
     t.string   "state"
+    t.integer  "order_form_id"
   end
 
   create_table "people", :force => true do |t|

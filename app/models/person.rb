@@ -22,6 +22,12 @@ class Person < ActiveRecord::Base
                   :first_name, :last_name, :phone, :postcode, :town, :type, :user_id
   belongs_to :user
 
+  ransacker :full_name, :formatter => proc {|v| UnicodeUtils.downcase(v) } do |parent|
+    Arel::Nodes::NamedFunction.new('LOWER',
+                                   [Arel::Nodes::NamedFunction.new('concat_ws', [' ', parent.table[:first_name], parent.table[:last_name]])]
+    )
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end

@@ -5,7 +5,7 @@
   <%= link_to t('.new', :default => t("helpers.links.new")),
               new_admin_person_path,
               :class => 'btn btn-primary pull-right' %>
-  <%= render partial: "shared/advanced_search", locals: {name: "first_name_or_last_name_cont", html_options: {placeholder: "Search..."}} %>
+  <%= render partial: "shared/advanced_search", locals: {name: "full_name_cont", html_options: {placeholder: "Search..."}} %>
 </div>
 <table class="table table-striped">
   <thead>
