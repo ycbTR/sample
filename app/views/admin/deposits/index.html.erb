@@ -5,7 +5,14 @@
   <%= link_to t('.new', :default => t("helpers.links.new")),
               new_admin_deposit_path,
               :class => 'btn btn-primary pull-right' %>
-  <%= render partial: "shared/advanced_search", locals: {name: "collector_full_name_or_lot_number_number_cont", html_options: {placeholder: "Search..."}} %>
+
+  <%= search_form_for [:admin, @search] do |f| %>
+      <%= f.text_field "lot_number_number_eq", placeholder: "Lot Number" %> and
+      <%= f.text_field "plant_species_or_plant_common_name_or_collector_full_name_cont", placeholder: "Plant, collector etc." %>
+      <%= (f.hidden_field :type_cont) rescue "" %>
+      <%= f.submit "Search", class: "btn btn-small" %>
+  <% end %>
+
 </div>
 
 <table class="table table-striped">
