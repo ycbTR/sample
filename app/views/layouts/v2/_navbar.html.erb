@@ -1,38 +1,47 @@
 <!-- Header
 ================================================== -->
 <header id="header">
+  <% if current_user %>
+      <script>
+          var started = false;
+          var remaining = 20000;
+          var interval = false;
 
-  <!-- Top Bar -->
-  <div id="top-bar">
+          function startCounter(from) {
+              $("#counter").text((from) / 1000);
+              interval = setInterval(function () {
+                  from = from - 1000;
+                  if (from <= 0) {
+                      window.location.href = '/timeout';
+                  } else {
+                      $("#counter").text((from) / 1000);
+                  }
+              }, 1000);
+          }
 
-    <!-- Container -->
-    <div class="container">
 
-      <!--&lt;!&ndash; Left Nav &ndash;&gt;-->
-      <!--<ul class="links pull-left hidden-xs">-->
-      <!--<li><a href="#"><i class="fa fa-envelope"></i>support@instakolik.com</a></li>-->
-      <!--&lt;!&ndash;<li><a href="#"><i class="fa fa-user"></i>Phone: +48 880 440 110</a></li>&ndash;&gt;-->
-
-      <!--</ul>-->
-      <!--&lt;!&ndash; /Left nav &ndash;&gt;-->
-
-      <!-- Right Nav -->
-      <ul class="links pull-right no-float-xs">
-        <li><a href="<%= destroy_user_session_path %>" data-method="delete"><i class="fa fa-sign-out"></i>LogOut</a>
-        </li>
-      </ul>
-    </div>
-    <!-- /Container-->
-
-  </div>
-  <!-- /Top Bar -->
+          setInterval(function () {
+              $.get('/active', function (remoteData, success) {
+                  if (remoteData.remaining <= 20000 && !started) {
+                      started = true;
+                      $("#counterModal").modal('show');
+                      if (interval) {
+                          clearInterval(interval)
+                      }
+                      startCounter(remoteData.remaining);
+                  }
+                  if (success == 'success' && !remoteData.active)
+                      window.location.href = '/timeout';
+              });
+          }, 20000);
+      </script>
+  <% end %>
 
   <!-- Main Navigation -->
   <div id="main-nav" class="navbar navbar-default">
 
     <!-- Container -->
     <div class="container">
-
       <!-- header -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -40,33 +49,28 @@
         </button>
         <a href="/" class="navbar-brand logo">
         </a>
+        <!-- nav-collapse -->
       </div>
       <!-- /header-->
 
       <!-- nav-collapse -->
       <div class="navbar-collapse collapse">
-
-        <!--&lt;!&ndash; Nav Buttons &ndash;&gt;-->
-        <!--<ul class="nav navbar-nav nav-buttons navbar-right">-->
-        <!--<li>-->
-        <!--<a class="nav-btn" href="mailto:support@seed.com"><i class="fa fa-envelope"></i><span class="xs-only">Contact</span></a>-->
-        <!--</li>-->
-        <!--<li>-->
-        <!--<a class="nav-btn bg-2 top-bar-toggle" href="#top-bar" data-custom-toggle="slide" data-class="open" data-target="#top-bar"><span class="symbol"></span></a>-->
-        <!--</li>-->
-        <!--</ul>-->
-        <!-- /Nav Buttons -->
-        <!-- Links -->
+        <% if @current_user %>
+            <ul class="nav navbar-nav navbar-left">
+              <li><span class="email">Logged in as <span><%= @current_user.email %></span> </span></li>
+            </ul>
+        <% end %>
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "Catalogue", catalogue_general_path %></li>
-
+          <% unless (@current_user.role.downcase == "admin" rescue false) %>
+              <li><%= link_to "Catalogue", catalogue_general_path %></li>
+          <% end %>
           <!--<li class="dropdown">-->
-            <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">Catalogues-->
-              <!--<i class="fa fa-angle-down parent-symbol"></i></a>-->
-            <!--<ul class="dropdown-menu">-->
-              <!--<li><%= link_to "General", catalogue_general_path %></li>-->
-              <!--<li><%= link_to "SPA", catalogue_spa_path %></li>-->
-            <!--</ul>-->
+          <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">Catalogues-->
+          <!--<i class="fa fa-angle-down parent-symbol"></i></a>-->
+          <!--<ul class="dropdown-menu">-->
+          <!--<li><%= link_to "General", catalogue_general_path %></li>-->
+          <!--<li><%= link_to "SPA", catalogue_spa_path %></li>-->
+          <!--</ul>-->
           <!--</li>-->
           <% Cms::Site.first.pages.root.children.published.each do |page| %>
               <% if page.children.present? %>

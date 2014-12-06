@@ -4,7 +4,7 @@ class Customer::OrderFormsController < Customer::BaseController
   def new
     build_order
     OrderForm.accessible_attributes
-    @current_order.assign_attributes(((@current_user.order_forms.of_type(@current_order.type).last.attributes.except('pon', 'id', 'type', 'hectare', 'kilometer', 'grams_per_km','comments')) rescue {}), without_protection: true)
+    @current_order.assign_attributes(((@current_user.order_forms.of_type(@current_order.type).last.attributes.except('pon', 'id', 'type', 'hectare', 'kilometer', 'grams_per_km', 'comments')) rescue {}), without_protection: true)
   end
 
 
@@ -27,7 +27,7 @@ class Customer::OrderFormsController < Customer::BaseController
       params[:person_customer][:type] = "Person::Customer"
       @person.update_attributes(params[:person_customer])
       flash[:success] = "Profile Saved Successfully"
-      redirect_to customer_profile_path
+      redirect_to (params[:return_to] || customer_profile_path)
     end
   end
 
@@ -37,6 +37,12 @@ class Customer::OrderFormsController < Customer::BaseController
   def build_order
     @current_order = (params[:order_form][:type]).constantize.new rescue ("OrderForm::#{(params[:type] || 'seeding').titleize}").constantize.new rescue OrderForm.new
     @current_order.user = @current_user
+    @deposits = Deposit.joins(:plant, :lot_number).where("#{LotNumber.table_name}.spa_specific = ?", false)
+    unless @current_order.type == "OrderForm::Seeding"
+      # Filters direct seedable
+      @deposits = @deposits.where("#{Plant.table_name}.direct_seedable = ?", false)
+    end
+    @deposits = @deposits.order("plants.species asc")
   end
 
 end

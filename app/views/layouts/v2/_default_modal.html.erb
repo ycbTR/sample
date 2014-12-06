@@ -16,3 +16,31 @@
     </div>
   </div>
 </div>
+
+
+<div class="modal fade" id="counterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="counter-modal-header">Your session will expire in</h4>
+      </div>
+      <div id="dynamic-content">
+        <div id="counter-modal-body" class="modal-body">
+       <span id="counter"></span> seconds.<br /><br />Click on <b>OK</b> to continue your session.
+        </div>
+        <div id="counter-modal-footer" class="modal-footer">
+          <%= link_to "Ok", "/", "data-dismiss" => "modal", :class => "btn btn-primary", "aria-hidden" => true, remote: true %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #counterModal .modal-dialog {
+      width: 300px;
+  }
+  #counter {
+      font-size: 100px;
+  }
+</style>

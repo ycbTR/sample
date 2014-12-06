@@ -89,3 +89,4 @@ gem 'comfortable_mexican_sofa', '~> 1.8.0'
 
 gem "unicode_utils"
 
+gem 'auto-session-timeout'

@@ -11,7 +11,7 @@
   </thead>
 
   <tbody>
-  <% Deposit.joins(:plant).order("plants.species asc").each do |deposit| %>
+  <% @deposits.each do |deposit| %>
       <tr>
         <td><%= deposit.display %></td>
         <td><%= deposit.lot_number.heritage_lot_numbers %></td>

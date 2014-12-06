@@ -44,6 +44,10 @@ class User < ActiveRecord::Base
     self.role == "Customer"
   end
 
+  def auto_timeout
+    admin? ? 20.minutes : 10.minutes
+  end
+
   private
 
   def set_role

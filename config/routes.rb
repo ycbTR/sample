@@ -1,5 +1,6 @@
 Seedbank::Application.routes.draw do
-
+  match 'active'  => 'sessions#active',  via: :get
+  match 'timeout' => 'sessions#timeout', via: :get
 
   namespace :admin do
     resources :transactions

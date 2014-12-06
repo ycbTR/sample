@@ -1,8 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  #class_attribute(:auto_session_timeout_by_role)
+  #auto_session_timeout_by_role
+
+  auto_session_timeout
 
   before_filter :set_current_user
   before_filter :remove_role_param
+
 
   def set_current_user
     @current_user = current_user
@@ -53,6 +58,5 @@ class ApplicationController < ActionController::Base
       params[:user].delete :role
     end
   end
-
 
 end
