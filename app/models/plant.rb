@@ -12,7 +12,9 @@
 #
 
 class Plant < ActiveRecord::Base
-  attr_accessible :common_name, :price_charged, :price_paid, :species
+  attr_accessible :common_name, :price_charged, :price_paid, :species,
+                  :direct_seedable
+
   validates :common_name, :species, :price_paid, presence: true
 
 

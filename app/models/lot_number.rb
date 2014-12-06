@@ -12,7 +12,8 @@
 #
 
 class LotNumber < ActiveRecord::Base
-  attr_accessible :location, :number, :provenance, :region, :heritage_ids, :spa_name
+  attr_accessible :location, :number, :provenance, :region, :heritage_ids,
+                  :spa_name, :spa_specific
   has_many :line_items
   has_many :deposits
   has_many :lot_heritages, class_name: "LotHeritage"

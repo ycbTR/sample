@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141107185107) do
+ActiveRecord::Schema.define(:version => 20141206113612) do
 
   create_table "assets", :force => true do |t|
     t.string   "attachment_file_name"
@@ -182,13 +182,14 @@ ActiveRecord::Schema.define(:version => 20141107185107) do
   end
 
   create_table "lot_numbers", :force => true do |t|
-    t.integer  "number",     :limit => 255
+    t.integer  "number",       :limit => 255
     t.string   "region"
     t.string   "provenance"
     t.string   "location"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.string   "spa_name"
+    t.boolean  "spa_specific"
   end
 
   create_table "order_form_items", :force => true do |t|
@@ -259,8 +260,9 @@ ActiveRecord::Schema.define(:version => 20141107185107) do
     t.string   "common_name"
     t.decimal  "price_paid"
     t.decimal  "price_charged"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.boolean  "direct_seedable"
   end
 
   create_table "snippets", :force => true do |t|
