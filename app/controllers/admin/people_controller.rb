@@ -1,13 +1,11 @@
 class Admin::PeopleController < Admin::ResourceController
-  skip_before_filter :load_resource
   before_filter :type_cont
-  before_filter :load_resource
 
   private
 
 
   def type_cont
-    @type = (params[:q][:type_cont] ||= "Collector")
+    @type = (params[:q][:type_cont] ||= (params[:type] || "Collector"))
   end
 
   def find_resource
@@ -30,6 +28,19 @@ class Admin::PeopleController < Admin::ResourceController
   def collection_url(options = {})
     polymorphic_url([:admin, model_class], {q: {type_cont: type_cont}})
   end
+
+
+  def load_resource
+    type_cont
+    if member_action?
+      @object ||= load_resource_instance
+      instance_variable_set("@#{object_name}", @object)
+    else
+      @collection ||= collection
+      instance_variable_set("@#{controller_name}", @collection)
+    end
+  end
+
 
 
 end

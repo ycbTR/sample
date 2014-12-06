@@ -891,7 +891,7 @@ ul.icon-list > li > i {
 /* PAGES SETUP
 -------------------------------------------------- */
 html {
-  background: url("/assets/home-bg.jpg") no-repeat center 0 fixed;
+  /*background: url("/assets/home-bg.jpg") no-repeat center 0 fixed;*/
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

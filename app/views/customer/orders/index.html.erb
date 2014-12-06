@@ -20,7 +20,7 @@
         <td><%= order.number %></td>
         <td><%= format_date order.created_at %></td>
         <td>
-          <%= link_to "Details", customer_order_path(order.number) %>
+          <%= link_to "Details", customer_order_path(order.number), class: "btn btn-mini btn-primary" %>
         </td>
       </tr>
   <% end %>
