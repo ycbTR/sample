@@ -15,7 +15,7 @@ class Customer::BaseController < ApplicationController
   def person_required
     if @current_user.person.blank?
       flash[:warning] = "Please complete your profile details to place a new order"
-      redirect_to customer_profile_path(:return_to => request.path) and return
+      redirect_to customer_profile_path(:return_to => request.fullpath) and return
     end
   end
 

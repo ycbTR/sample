@@ -22,7 +22,6 @@ class Customer::OrderFormsController < Customer::BaseController
   def profile
     @person = @current_user.customer
     @person ||= @current_user.build_customer
-
     unless request.get?
       params[:person_customer][:type] = "Person::Customer"
       @person.update_attributes(params[:person_customer])
@@ -37,17 +36,11 @@ class Customer::OrderFormsController < Customer::BaseController
   def build_order
     @current_order = (params[:order_form][:type]).constantize.new rescue ("OrderForm::#{(params[:type] || 'seeding').titleize}").constantize.new rescue OrderForm.new
     @current_order.user = @current_user
-
-
-
     unless @current_order.type == "OrderForm::Seeding"
-      # Filters direct seedable
-      #@deposits = @deposits.where("#{Plant.table_name}.direct_seedable = ?", false)
-      @deposits = Deposit.joins(:plant, :lot_number).where("#{LotNumber.table_name}.spa_specific = ?", false)
+      @deposits = Deposit.joins(:plant, :lot_number).where("#{LotNumber.table_name}.spa_specific = ?", false).where("#{Plant.table_name}.direct_seedable = ?", false)
     else
-      @deposits = Deposit.joins(:plant, :lot_number).where("#{LotNumber.table_name}.spa_specific = ?", true).where("#{Plant.table_name}.direct_seedable = ?", false)
+      @deposits = Deposit.joins(:plant, :lot_number).where("#{LotNumber.table_name}.spa_specific = ?", true)
     end
-
     @deposits = @deposits.order("plants.species asc")
   end
 
