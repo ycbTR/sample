@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
   def admin?
     self.role == "Admin"
   end
+  alias_method :staff?, :admin?
 
   def customer?
     self.role == "Customer"

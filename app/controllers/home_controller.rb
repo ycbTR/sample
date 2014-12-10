@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-
+     before_filter :only_staff!, only: [:catalogue_spa]
 
   def index
 
@@ -19,6 +19,12 @@ class HomeController < ApplicationController
 
   def catalogue_general
     @deposits = Deposit.joins(:plant).order("plants.species asc")
+  end
+
+  def only_staff!
+    unless current_user && current_user.staff?
+      redirect_to catalogue_general_path and return
+    end
   end
 
 end

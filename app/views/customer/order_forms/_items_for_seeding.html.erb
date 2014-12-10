@@ -2,10 +2,8 @@
   <thead>
 
   <tr>
-    <th>Lot No</th>
-    <th>Heritage Lot No</th>
     <th>Botanical Name</th>
-    <th>Provenance</th>
+    <th>Common Name</th>
     <th>Region</th>
     <th>Select</th>
   </tr>
@@ -14,10 +12,8 @@
   <tbody>
   <% @deposits.each do |deposit| %>
       <tr>
-        <td><%= deposit.display %></td>
-        <td><%= deposit.lot_number.heritage_lot_numbers %></td>
         <td><%= deposit.plant.species %></td>
-        <td><%= deposit.lot_number.provenance %></td>
+        <td><%= deposit.plant.common_name %></td>
         <td><%= deposit.lot_number.region %></td>
         <td class="col-sm-5">
           <div class="col-sm-2">
