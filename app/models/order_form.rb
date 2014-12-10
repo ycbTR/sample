@@ -76,6 +76,10 @@ class OrderForm < ActiveRecord::Base
     OrderMailer.new_order_to_admin(self).deliver rescue ""
   end
 
+  def nursery?
+    false
+  end
+
   def create_order
     _order = build_order
     _order.number_prefix = self.prefix
@@ -84,6 +88,7 @@ class OrderForm < ActiveRecord::Base
       li = _order.line_items.build
       li.deposit_id = item.deposit_id
       li.qty = item.grams
+      (li.price = item.plant.price_for(item.grams)) if self.nursery?
     end
     _order.save
   end

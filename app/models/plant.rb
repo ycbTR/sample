@@ -18,7 +18,7 @@ class Plant < ActiveRecord::Base
   validates :common_name, :species, :price_paid, presence: true
 
 
-  # plan.price_for(300)
+  # plant.price_for(300)
   def price_for(grams = 0)
     if grams < 50
       level_1_price

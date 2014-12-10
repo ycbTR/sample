@@ -36,4 +36,9 @@ class OrderForm::Nursery < OrderForm
   def prefix
     "N"
   end
+
+  def nursery?
+    true
+  end
+
 end
