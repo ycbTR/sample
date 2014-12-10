@@ -1,5 +1,5 @@
 Seedbank::Application.routes.draw do
-  match 'active'  => 'sessions#active',  via: :get
+  match 'active' => 'sessions#active', via: :get
   match 'timeout' => 'sessions#timeout', via: :get
 
   namespace :admin do
@@ -32,6 +32,8 @@ Seedbank::Application.routes.draw do
   root to: "home#index"
   get "catalogue/spa", to: "home#catalogue_spa", as: "catalogue_spa"
   get "catalogue/general", to: "home#catalogue_general", as: "catalogue_general"
+  get "catalogue/nursery", to: "home#catalogue_nursery", as: "catalogue_nursery"
+  get "catalogue/seeding", to: "home#catalogue_seeding", as: "catalogue_seeding"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
