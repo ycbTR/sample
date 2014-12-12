@@ -89,7 +89,7 @@ class OrderForm < ActiveRecord::Base
       li = _order.line_items.build
       li.deposit_id = item.deposit_id
       li.qty = item.grams
-      (li.price = item.plant.price_for(item.grams)) if self.nursery?
+      (li.price = (item.grams.to_f * item.plant.price_for(item.grams))) if self.nursery?
     end
     _order.save
   end
