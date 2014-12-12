@@ -60,6 +60,11 @@ class OrderForm < ActiveRecord::Base
     "#{self.type.demodulize} Order Form"
   end
 
+  def nursery?
+    false
+  end
+
+
   private
 
   def after_complete
@@ -74,10 +79,6 @@ class OrderForm < ActiveRecord::Base
 
   def notify_customer
     OrderMailer.new_order_to_admin(self).deliver rescue ""
-  end
-
-  def nursery?
-    false
   end
 
   def create_order
