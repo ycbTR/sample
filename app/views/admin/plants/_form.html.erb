@@ -14,15 +14,31 @@
     <div class="control-group">
       <%= f.label :price_paid, :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :price_paid, :class => 'text_field' %>
+        <%= f.text_field :price_paid, :class => 'text_field change_level_prices' %>
       </div>
     </div>
+
     <div class="control-group">
-      <%= f.label :price_charged, :class => 'control-label' %>
+      <%= f.label :level_1_price, "1-49g", :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :price_charged, :class => 'text_field' %>
+        <%= f.text_field :level_1_price, :class => 'text_field level_1_price level_prices', data: {multiplier: 1.92} %>
       </div>
     </div>
+
+    <div class="control-group">
+      <%= f.label :level_2_price, "50-499g", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :level_2_price, :class => 'text_field level_2_price level_prices', data: {multiplier: 1.44} %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :level_3_price, ">500g", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :level_3_price, :class => 'text_field level_3_price level_prices', data: {multiplier: 1.2} %>
+      </div>
+    </div>
+
 
     <div class="control-group">
       <%= f.label :direct_seedable, :class => 'control-label' %>
@@ -44,3 +60,19 @@
                   admin_plants_path, :class => 'btn' %>
     </div>
 <% end %>
+
+<script>
+    changeLevelPrices = function () {
+        $.each($('.level_prices'), function (i, el) {
+            $(el).val((parseFloat($('.change_level_prices').val()) * parseFloat($(el).data('multiplier'))).toFixed(2));
+        });
+    };
+    $(function () {
+        $('.change_level_prices').on('change', function () {
+            changeLevelPrices()
+        });
+        $('.change_level_prices').on('keyup', function () {
+            changeLevelPrices()
+        });
+    });
+</script>

@@ -12,8 +12,8 @@
 #
 
 class Plant < ActiveRecord::Base
-  attr_accessible :common_name, :price_charged, :price_paid, :species,
-                  :direct_seedable
+  attr_accessible :common_name, :price_paid, :species,
+                  :direct_seedable, :level_1_price, :level_2_price, :level_3_price
 
   validates :common_name, :species, :price_paid, presence: true
 
@@ -29,19 +29,19 @@ class Plant < ActiveRecord::Base
     end
   end
 
-  #1-49g
-  def level_1_price
-    price_paid * 1.92
-  end
-
-  #50-499g
-  def level_2_price
-    price_paid * 1.44
-  end
-
-  #>500
-  def level_3_price
-    price_paid * 1.2
-  end
+  ##1-49g
+  #def level_1_price
+  #  price_paid * 1.92
+  #end
+  #
+  ##50-499g
+  #def level_2_price
+  #  price_paid * 1.44
+  #end
+  #
+  ##>500
+  #def level_3_price
+  #  price_paid * 1.2
+  #end
 
 end

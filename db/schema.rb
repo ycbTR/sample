@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141206113612) do
+ActiveRecord::Schema.define(:version => 20141212185737) do
 
   create_table "assets", :force => true do |t|
     t.string   "attachment_file_name"
@@ -259,10 +259,12 @@ ActiveRecord::Schema.define(:version => 20141206113612) do
     t.string   "species"
     t.string   "common_name"
     t.decimal  "price_paid"
-    t.decimal  "price_charged"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.boolean  "direct_seedable"
+    t.decimal  "level_1_price"
+    t.decimal  "level_2_price"
+    t.decimal  "level_3_price"
   end
 
   create_table "snippets", :force => true do |t|

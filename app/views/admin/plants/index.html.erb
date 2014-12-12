@@ -14,7 +14,9 @@
     <th><%= sort_link @search, :species %></th>
     <th><%= sort_link @search, :common_name %></th>
     <th><%= sort_link @search, :price_paid %></th>
-    <th><%= sort_link @search, :price_charged %></th>
+    <th><%= sort_link @search, :level_1_price, "1-49g" %></th>
+    <th><%= sort_link @search, :level_2_price, "50-499g	" %></th>
+    <th><%= sort_link @search, :level_3_price, ">500g" %></th>
     <th><%= t '.actions', :default => t("helpers.actions") %></th>
   </tr>
   </thead>
@@ -23,8 +25,10 @@
       <tr>
         <td><%= plant.species %></td>
         <td><%= plant.common_name %></td>
-        <td><%= plant.price_paid %></td>
-        <td><%= plant.price_charged %></td>
+        <td><%= number_to_currency plant.price_paid.to_f %></td>
+        <td><%= number_to_currency plant.level_1_price.to_f %></td>
+        <td><%= number_to_currency plant.level_2_price.to_f %></td>
+        <td><%= number_to_currency plant.level_3_price.to_f %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_admin_plant_path(plant), :class => 'btn btn-mini btn-primary' %>
