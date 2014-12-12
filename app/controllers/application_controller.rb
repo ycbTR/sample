@@ -54,4 +54,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
+  def after_sign_in_path_for(resource)
+    specific_path(resource)
+    super
+  end
+
+  def specific_path(resource)
+    if resource.customer?
+      session['user_return_to'] ||= customer_orders_path
+    else
+      session['user_return_to'] ||= admin_orders_path
+    end
+  end
+
+
 end

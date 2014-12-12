@@ -27,6 +27,8 @@ Seedbank::Application.routes.draw do
   end
 
 
+  #devise_for :users, controllers: { registrations: 'users/registrations', passwords: 'users/passwords' }
+
   devise_for :users
 
   root to: "home#index"
