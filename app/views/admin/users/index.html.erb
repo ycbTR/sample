@@ -1,6 +1,6 @@
 <%- model_class = User -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1><%= t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 
   <%= link_to t('.new', :default => t("helpers.links.new")),
               new_object_url,
@@ -8,21 +8,24 @@
   <%= render partial: "shared/advanced_search", locals: {name: "email_cont", html_options: {placeholder: "Search..."}} %>
 </div>
 
-
-<table class="table">
+<table class="table table-striped" id="table-1">
+  <thead>
   <tr>
     <th>Email</th>
     <th>Role</th>
-    <th></th>
-    <th></th>
+    <th>Actions</th>
   </tr>
-
-<% @users.each do |user| %>
-  <tr>
-    <td><%= user.email %></td>
-    <td><%= user.role %></td>
-    <td><%= link_to 'Edit', edit_object_url(user), remote: true %></td>
-    <td><%= link_to 'Destroy', object_url(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.role %></td>
+        <td><%= link_to 'Edit', edit_object_url(user), remote: true, class: "btn btn-mini btn-primary" %>
+          <%= link_to 'Destroy', object_url(user), method: :delete, class: "btn btn-mini btn-danger", data: {confirm: 'Are you sure?'} %></td>
+      </tr>
+  <% end %>
+  </tbody>
 </table>
+<table class="table table-striped col-md-12" id="header-fixed"></table>
+<%= paginate @users %>
