@@ -1,7 +1,7 @@
 New order with number <%= @order.number %> is placed by <%= @order.customer.full_name %>
 
 Type: <%= @order_form.display %>
-Details: <%= admin_order_url(@order.number) %>
+Details: <%= edit_admin_order_url(@order) %>
 ================================================================
 
 DETAILS
