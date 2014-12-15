@@ -5,8 +5,7 @@ Your order with number <%= @order.number %> is received.
 You will receive another email as soon as SeedBank staff processes your order.
 
 Type: <%= @order_form.display %>
-<%= link_to("Details", customer_order_url(@order.number)) %>
-
+Details: <%= customer_order_url(@order.number) %>
 ================================================================
 
 DETAILS
