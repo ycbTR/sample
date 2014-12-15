@@ -74,11 +74,11 @@ class OrderForm < ActiveRecord::Base
   end
 
   def notify_admin
-    OrderMailer.new_order_to_customer(self).deliver rescue ""
+    OrderMailer.new_order_to_admin(self).deliver rescue ""
   end
 
   def notify_customer
-    OrderMailer.new_order_to_admin(self).deliver rescue ""
+    OrderMailer.new_order_to_customer(self).deliver rescue ""
   end
 
   def create_order
