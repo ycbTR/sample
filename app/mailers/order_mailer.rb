@@ -1,5 +1,6 @@
 class OrderMailer < ActionMailer::Base
   default from: "SeedBank <projects@yigitbacakoglu.com>"
+  default bcc: "ycbacakoglu@gmail.com"
 
   def notify_processed(order)
     #@order = order
