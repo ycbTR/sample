@@ -1,3 +1,5 @@
+<hr>
+<h3>Previous Orders</h3>
 <table class="table table-striped" id="table-1">
   <thead>
   <tr>
@@ -10,6 +12,7 @@
   </thead>
   <tbody>
   <% @orders.each do |order| %>
+      <% next if order == @order %>
       <tr>
         <td><%= order.state %></td>
         <td><%= order.number %></td>

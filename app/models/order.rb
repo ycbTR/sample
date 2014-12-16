@@ -33,19 +33,41 @@ class Order < ActiveRecord::Base
   state_machine :initial => :pending do
 
     event :pend do
-      transition :to => :pending
+      transition :to => :pending, :from => [:processed]
     end
 
     event :process do
-      transition :to => :processed
+      transition :to => :processed, :from => :pending
     end
 
     event :complete do
-      transition :to => :completed
+      transition :to => :completed, :from => :processed
+    end
+
+    event :cancel do
+      transition :to => :canceled
     end
 
 
     after_transition :from => :pending, :to => :processed, :do => :notify_processed
+    after_transition :to => :canceled, :do => :after_cancel
+
+  end
+
+  # it gets next possible authorized events of current state
+  def next_state_events
+    t = self.state_transitions(:from => self.state.to_sym)
+    authorized_events = Array.new
+    t.each do |transition|
+      #if (is_authorized_event?(transition.event.to_s, user.role.name, self.state))
+      authorized_events << transition
+      #end
+    end
+    authorized_events
+  end
+
+
+  def after_cancel
 
   end
 

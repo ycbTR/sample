@@ -4,9 +4,12 @@
     <%= render partial: "line_items", locals: {f: f} %>
     <br>
     <div>
-      <label><%= f.radio_button :state_event, "pend", checked: (f.object.state == "pending") %> Pending</label>
-      <label><%= f.radio_button :state_event, "process", checked: (f.object.state == "processed") %> Processed</label>
-      <label><%= f.radio_button :state_event, "complete", checked: (f.object.state == "completed") %> Completed</label>
+      <b><%= "Current State: #{@order.state.to_s.titleize}" %></b><br>
+      <br>
+      <b>Change State:</b> <br>
+      <% @order.next_state_events.each do |e| %>
+          <label><%= f.radio_button :state_event, e.event, checked: (f.object.state == e.to) %> <%= e.to.to_s.titleize %></label>
+      <% end %>
     </div>
     <br>
     <div class="actions">
