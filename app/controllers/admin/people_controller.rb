@@ -1,5 +1,7 @@
 class Admin::PeopleController < Admin::ResourceController
   before_filter :type_cont
+  rescue_from Person::DestroyWithOrdersError, :with => :user_destroy_with_orders_error
+  rescue_from Person::DestroyWithDepositsError, :with => :user_destroy_with_deposits_error
 
   private
 
@@ -41,6 +43,15 @@ class Admin::PeopleController < Admin::ResourceController
     end
   end
 
+  def user_destroy_with_orders_error
+    flash[:error] = "Cannot delete a customer if he/she has some orders"
+    redirect_to admin_people_path(q: {type_cont: type_cont}) and return
+  end
+
+  def user_destroy_with_deposits_error
+    flash[:error] = "Cannot delete a collector if he/she has some deposits"
+    redirect_to admin_people_path(q: {type_cont: type_cont}) and return
+  end
 
 
 end

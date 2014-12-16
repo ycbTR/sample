@@ -21,6 +21,14 @@ class Person < ActiveRecord::Base
   attr_accessible :address_1, :address_2, :email,
                   :first_name, :last_name, :phone, :postcode, :town, :type, :user_id
   belongs_to :user
+  has_many :orders, foreign_key: "customer_id"
+  has_many :deposits, foreign_key: "collector_id"
+  before_destroy :check_destroy_validations
+
+  class DestroyWithOrdersError < StandardError;
+  end
+  class DestroyWithDepositsError < StandardError;
+  end
 
   ransacker :full_name do |parent|
     Arel::Nodes::InfixOperation.new('||',
@@ -33,5 +41,20 @@ class Person < ActiveRecord::Base
   end
 
   alias_method :fullname, :full_name
+
+  def check_completed_orders
+    raise DestroyWithOrdersError if self.orders.present?
+  end
+  def check_deposits
+    raise DestroyWithDepositsError if self.deposits.present?
+  end
+
+  def check_destroy_validations
+    check_completed_orders
+    check_deposits
+  end
+
+
+
 
 end

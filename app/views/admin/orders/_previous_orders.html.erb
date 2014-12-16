@@ -1,0 +1,27 @@
+<table class="table table-striped" id="table-1">
+  <thead>
+  <tr>
+    <th><%= "State" %></th>
+    <th><%= "Number" %></th>
+    <th><%= "Completed At" %></th>
+    <th><%= "Created At" %></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.state %></td>
+        <td><%= order.number %></td>
+        <td><%= format_date(order.completed_at) || "-" %></td>
+        <td><%= format_date order.created_at %></td>
+        <td>
+          <%= link_to((order.pending? ? "Edit" : "Details"),
+                      edit_admin_order_path(order), :class => 'btn btn-mini btn-primary') %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<table class="table table-striped col-md-12" id="header-fixed"></table>
+

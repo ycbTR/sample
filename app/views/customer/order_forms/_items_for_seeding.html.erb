@@ -4,7 +4,6 @@
   <tr>
     <th>Botanical Name</th>
     <th>Common Name</th>
-    <th>Region</th>
     <th>Select</th>
   </tr>
   </thead>
@@ -14,7 +13,6 @@
       <tr>
         <td><%= deposit.plant.species %></td>
         <td><%= deposit.plant.common_name %></td>
-        <td><%= deposit.lot_number.region %></td>
         <td class="col-sm-5">
           <div class="col-sm-2">
             <%= check_box_tag "select", "", false, class: "order_item_check" %>

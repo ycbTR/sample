@@ -1,4 +1,5 @@
 class Admin::OrdersController < Admin::ResourceController
+  before_filter :load_previous_orders, only: :edit
 
   private
 
@@ -9,6 +10,10 @@ class Admin::OrdersController < Admin::ResourceController
 
   def location_after_save
     edit_admin_order_path(@order)
+  end
+
+  def load_previous_orders
+    @orders = @order.customer.orders
   end
 
 end
