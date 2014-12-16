@@ -6,22 +6,38 @@
     <label>Use Existing?</label>
     <br>
     <label>
-      <%= radio_button_tag 'use_existing', 'yes', true, class: "toggle-radio", "data-target" => "#existing_customer_fields", "data-hide" => "#new_customer_fields" %>
+      <%= radio_button_tag 'use_existing', 'yes', true, class: "toggle-radio", "data-target" => "#existing_customer_fields", "data-hide" => "#new_customer_fields", disabled: !@order.pending? %>
       Yes
     </label>
     <br>
     <label>
-      <%= radio_button_tag 'use_existing', 'no', false, class: "toggle-radio", "data-target" => "#new_customer_fields", "data-hide" => "#existing_customer_fields" %>
+      <%= radio_button_tag 'use_existing', 'no', false, class: "toggle-radio", "data-target" => "#new_customer_fields", "data-hide" => "#existing_customer_fields", disabled: !@order.pending? %>
       No
     </label>
   </div>
   <br>
 
-  <div id="existing_customer_fields" class="field">
-    <%= f.label :customer_id %>
-    <br/>
-    <%= f.select :customer_id, Person::Customer.all.collect { |c| [c.full_name, c.id] }, prompt: t(:please_select) %>
+  <div class="col-lg-5">
+    <div id="existing_customer_fields" class="field">
+      <%= f.label :customer_id %>
+      <br/>
+      <%= f.select :customer_id, Person::Customer.all.collect { |c| [c.full_name, c.id] }, {prompt: t(:please_select)}, disabled: !@order.pending? %>
+      <br>
+      <small>Save to see customer detail changes</small>
+    </div>
   </div>
+  <div class="col-lg-5">
+    <% if (customer = @order.customer).present? %>
+        <dl>
+          <dd><%= customer.full_name %></dd>
+          <dd><%= customer.address_1 %></dd>
+          <dd><%= customer.address_2 %></dd>
+          <dd><%= [customer.town, customer.postcode].delete_if(&:blank?).join(', ') %></dd>
+          <dd><%= [customer.phone, customer.email].delete_if(&:blank?).join(', ') %></dd>
+        </dl>
+    <% end %>
+  </div>
+
 
   <div id="new_customer_fields" style="display: none;">
     <%= f.fields_for :customer, @order.build_customer do |c| %>
@@ -32,49 +48,49 @@
         <div class="field">
           <%= c.label :first_name %>
           <br/>
-          <%= c.text_field :first_name %>
+          <%= c.text_field :first_name, disabled: !@order.pending? %>
         </div>
 
         <div class="field">
           <%= c.label :last_name %>
           <br/>
-          <%= c.text_field :last_name %>
+          <%= c.text_field :last_name, disabled: !@order.pending? %>
         </div>
 
         <div class="field">
           <%= c.label :address_1 %>
           <br/>
-          <%= c.text_field :address_1 %>
+          <%= c.text_field :address_1, disabled: !@order.pending? %>
         </div>
 
         <div class="field">
           <%= c.label :address_2 %>
           <br/>
-          <%= c.text_field :address_2 %>
+          <%= c.text_field :address_2, disabled: !@order.pending? %>
         </div>
 
         <div class="field">
           <%= c.label :town %>
           <br/>
-          <%= c.text_field :town %>
+          <%= c.text_field :town, disabled: !@order.pending? %>
         </div>
 
         <div class="field">
           <%= c.label :postcode %>
           <br/>
-          <%= c.text_field :postcode %>
+          <%= c.text_field :postcode, disabled: !@order.pending? %>
         </div>
 
         <div class="field">
           <%= c.label :phone %>
           <br/>
-          <%= c.text_field :phone %>
+          <%= c.text_field :phone, disabled: !@order.pending? %>
         </div>
 
         <div class="field">
           <%= c.label :email %>
           <br/>
-          <%= c.text_field :email, placeholder: "can be empty" %>
+          <%= c.text_field :email, placeholder: "can be empty", disabled: !@order.pending? %>
         </div>
 
     <% end %>

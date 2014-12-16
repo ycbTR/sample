@@ -11,6 +11,9 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  collector_id  :integer
+#  heritage_id   :integer
+#  qty_onhold    :integer
+#  comments      :text
 #
 
 require 'test_helper'

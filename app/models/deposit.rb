@@ -11,10 +11,14 @@
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  collector_id  :integer
+#  heritage_id   :integer
+#  qty_onhold    :integer
+#  comments      :text
 #
 
 class Deposit < ActiveRecord::Base
-  attr_accessible :date, :lot_number_id, :plant_id, :qty_bank, :qty_consigned, :collector_id
+  attr_accessible :date, :lot_number_id, :plant_id, :qty_bank,
+                  :qty_consigned, :qty_onhold, :collector_id, :comments
 
   belongs_to :plant
   belongs_to :collector, class_name: "Person::Collector"
@@ -23,6 +27,11 @@ class Deposit < ActiveRecord::Base
 
   def display
     "#{lot_number.display}/#{date.to_date.month}"
+  end
+
+  #To show on catalogues
+  def total_quantity
+    qty_bank.to_i + qty_consigned.to_i
   end
 
 

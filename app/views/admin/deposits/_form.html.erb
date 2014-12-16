@@ -9,7 +9,7 @@
     <div class="control-group">
       <%= f.label :lot_number_id, :class => 'control-label' %>
       <div class="controls">
-        <%= f.select :lot_number_id, LotNumber.order("number asc").collect { |l| [l.display, l.id, {"data-content" => [l.region, l.provenance, l.location, l.spa_name].delete_if {|c| c.blank?}.join(', '),
+        <%= f.select :lot_number_id, LotNumber.order("number asc").collect { |l| [l.display, l.id, {"data-content" => [l.region, l.provenance, l.location, l.spa_name].delete_if { |c| c.blank? }.join(', '),
                                                                                                     "data-provenance" => l.provenance,
                                                                                                     "data-location" => l.location,
                                                                                                     "data-spa-name" => l.spa_name}] }, {}, class: "content_select", "data-target" => "#lot_number_details" %>
@@ -19,7 +19,7 @@
     <div class="control-group">
       <%= f.label :plant_id, :class => 'control-label' %>
       <div class="controls">
-        <%= f.select :plant_id, Plant.order("species asc").collect { |p| [p.species, p.id, {'data-content' => p.common_name}] }, {}, class: "content_select","data-target" => "#plant_details" %>
+        <%= f.select :plant_id, Plant.order("species asc").collect { |p| [p.species, p.id, {'data-content' => p.common_name}] }, {}, class: "content_select", "data-target" => "#plant_details" %>
         <div id="plant_details"></div>
       </div>
     </div>
@@ -32,7 +32,27 @@
     <div class="control-group">
       <%= f.label :qty_bank, :class => 'control-label' %>
       <div class="controls">
-        <%= f.number_field :qty_bank, :class => 'number_field' %>
+        <%= f.text_field :qty_bank %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :qty_consigned, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :qty_consigned %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :qty_onhold, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :qty_onhold %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :comments, "Comment", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :comments, rows: 4, cols:30 %>
       </div>
     </div>
     <br>

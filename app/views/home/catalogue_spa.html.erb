@@ -41,7 +41,7 @@
         <td><%= deposit.plant.common_name %></td>
         <td><%= deposit.lot_number.provenance %></td>
         <td><%= deposit.lot_number.region %></td>
-        <td><%= [deposit.qty_bank.to_i, 0].max %></td>
+        <td><%= [deposit.total_quantity, 0].max %></td>
         <td><%= number_to_currency deposit.plant.level_1_price %></td>
         <td><%= number_to_currency deposit.plant.level_2_price %></td>
         <td><%= number_to_currency deposit.plant.level_3_price %></td>

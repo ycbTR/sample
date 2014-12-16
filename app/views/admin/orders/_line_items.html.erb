@@ -12,13 +12,13 @@
     </thead>
     <%= f.fields_for :line_items, f.object.line_items.blank? ? f.object.line_items.new : f.object.reload.line_items, wrapper: false do |li_form| %>
         <tr class="fields">
-          <td><%= li_form.select :deposit_id, Deposit.all.collect { |l| ["#{l.display} - #{l.plant.species}", l.id] } %></td>
-          <td><%= li_form.text_field :price, min: 0 %></td>
-          <td><%= li_form.number_field :qty, min: 0 %></td>
-          <td><%= li_form.link_to_remove "x Remove" %></td>
+          <td><%= li_form.select :deposit_id, Deposit.all.collect { |l| ["#{l.display} - #{l.plant.species}", l.id] }, {}, disabled: !@order.pending? %></td>
+          <td><%= li_form.text_field :price, min: 0, disabled: !@order.pending? %></td>
+          <td><%= li_form.number_field :qty, min: 0, disabled: !@order.pending? %></td>
+          <td><%= li_form.link_to_remove("x Remove") if @order.pending? %></td>
         </tr>
     <% end %>
   </table>
-  <p><%= f.link_to_add "Add a item", :line_items, :data => {:target => "#line_items"}, class: "button button-success button-small" %></p>
+  <p><%= f.link_to_add("Add a item", :line_items, :data => {:target => "#line_items"}, class: "button button-success button-small") if @order.pending? %></p>
 </fieldset>
 

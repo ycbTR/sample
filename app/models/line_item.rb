@@ -29,6 +29,7 @@ class LineItem < ActiveRecord::Base
 
   private
 
+  # TODO Ask for adjustment calculations
   def set_deposit_consignment
     if self.qty_changed?
       # 3 > 2
