@@ -18,36 +18,22 @@ class LineItem < ActiveRecord::Base
 
   belongs_to :order
   belongs_to :deposit
+  has_many :deposit_adjustments
 
   delegate :plant, to: :deposit
   delegate :lot_number, to: :deposit
 
-  after_save :set_deposit_consignment
-  after_save :set_transfers
+  after_save :set_deposit_stock_adjustments
   after_save :update_order
-
 
   private
 
-  # TODO Ask for adjustment calculations
-  def set_deposit_consignment
+  def set_deposit_stock_adjustments
     if self.qty_changed?
-      # 3 > 2
-      if self.qty_was.to_i > self.qty.to_i #Decreased quantity
-        self.deposit.qty_bank = self.deposit.qty_bank.to_i + (self.qty_was.to_i - self.qty.to_i)
-        self.deposit.qty_consigned = self.deposit.qty_consigned.to_i - (self.qty_was.to_i - self.qty.to_i)
-      else
-        self.deposit.qty_bank = self.deposit.qty_bank.to_i - (self.qty.to_i - self.qty_was.to_i)
-        self.deposit.qty_consigned = self.deposit.qty_consigned.to_i + (self.qty.to_i - self.qty_was.to_i)
-      end
-      self.deposit.save!
+      decreased_amount = (self.qty_was.to_f - self.qty.to_f)
+      self.deposit.deposit_adjustments.create({:qty_bank => decreased_amount, :qty_allocated => (decreased_amount * -1), line_item_id: self.id, user_id: User.current.try(:id)}, without_protection: true)
     end
     true
-  end
-
-  # Why we need this?
-  def set_transfers
-
   end
 
   def update_order

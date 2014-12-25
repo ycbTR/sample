@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  deposit_id: 1
+  initial: false
+  qty_onhold: 9.99
+  qty_allocated: 9.99
+  qty_bank: 9.99
+  qty_consigned: 9.99
+
+two:
+  deposit_id: 1
+  initial: false
+  qty_onhold: 9.99
+  qty_allocated: 9.99
+  qty_bank: 9.99
+  qty_consigned: 9.99

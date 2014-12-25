@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
   def admin?
     self.role == "Admin"
   end
+
   alias_method :staff?, :admin?
 
   def customer?
@@ -47,6 +48,14 @@ class User < ActiveRecord::Base
 
   def auto_timeout
     admin? ? 20.minutes : 10.minutes
+  end
+
+  def self.current
+    Thread.current[:s_user]
+  end
+
+  def self.current=(u)
+    Thread.current[:s_user] = u
   end
 
   private

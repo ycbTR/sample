@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   def set_current_user
     @current_user = current_user
+    User.current = @current_user
   end
 
   def render_default_modal_form(title = nil, target = nil, options = {})

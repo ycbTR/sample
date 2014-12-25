@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141216181855) do
+ActiveRecord::Schema.define(:version => 20141225190258) do
 
   create_table "assets", :force => true do |t|
     t.string   "attachment_file_name"
@@ -152,18 +152,31 @@ ActiveRecord::Schema.define(:version => 20141216181855) do
   add_index "cms_snippets", ["site_id", "identifier"], :name => "index_cms_snippets_on_site_id_and_identifier", :unique => true
   add_index "cms_snippets", ["site_id", "position"], :name => "index_cms_snippets_on_site_id_and_position"
 
+  create_table "deposit_adjustments", :force => true do |t|
+    t.integer  "deposit_id"
+    t.boolean  "initial",                                     :default => false
+    t.decimal  "qty_onhold",    :precision => 8, :scale => 2
+    t.decimal  "decimal",       :precision => 8, :scale => 2
+    t.decimal  "qty_allocated", :precision => 8, :scale => 2
+    t.decimal  "qty_bank",      :precision => 8, :scale => 2
+    t.decimal  "qty_consigned", :precision => 8, :scale => 2
+    t.datetime "created_at",                                                     :null => false
+    t.datetime "updated_at",                                                     :null => false
+  end
+
   create_table "deposits", :force => true do |t|
     t.integer  "lot_number_id"
     t.integer  "plant_id"
     t.date     "date"
-    t.integer  "qty_bank"
-    t.integer  "qty_consigned"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.decimal  "qty_bank",      :precision => 8, :scale => 2
+    t.decimal  "qty_consigned", :precision => 8, :scale => 2
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.integer  "collector_id"
     t.integer  "heritage_id"
-    t.integer  "qty_onhold"
+    t.decimal  "qty_onhold",    :precision => 8, :scale => 2
     t.text     "comments"
+    t.decimal  "qty_allocated", :precision => 8, :scale => 2
   end
 
   create_table "line_items", :force => true do |t|

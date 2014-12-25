@@ -1,0 +1,74 @@
+<div class="page-header">
+  <% deposit = (Deposit.find(params[:q][:deposit_id_eq]) rescue nil)  %>
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+              new_admin_deposit_adjustment_path(q: {:deposit_id_eq => (params[:q][:deposit_id_eq] rescue nil)}),
+              :class => 'btn btn-primary pull-right' %>
+
+  <%= search_form_for [:admin, @search] do |f| %>
+      <%= f.select "deposit_id_eq", Deposit.all.collect { |d| [d.display, d.id] } %> and
+      <%= f.submit "Search", class: "btn btn-small" %>
+  <% end %>
+
+  <div class="clearfix"></div>
+</div>
+<% if deposit %>
+    <h3>Current Stock</h3>
+    <table class="table table-striped" id="table-2">
+      <thead>
+      <tr>
+        <th>Qty Bank</th>
+        <th>Qty Consigned</th>
+        <th>Qty OnHold</th>
+        <th>Qty Allocated</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><%= deposit.qty_bank_with_adjustments.to_f %></td>
+        <td><%= deposit.qty_consigned_with_adjustments.to_f %></td>
+        <td><%= deposit.qty_onhold_with_adjustments.to_f %></td>
+        <td><%= deposit.qty_allocated_with_adjustments.to_f %></td>
+      </tr>
+      </tbody>
+    </table>
+    <table class="table table-striped col-md-12" id="header-fixed"></table>
+<% end %>
+<h3>Adjustments</h3>
+<table class="table table-striped" id="table-1">
+  <thead>
+  <tr>
+    <th>FDA</th>
+    <th>Qty Bank</th>
+    <th>Qty Consigned</th>
+    <th>Qty OnHold</th>
+    <th>Qty Allocated</th>
+    <th><%= t '.actions', :default => t("helpers.actions") %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @deposit_adjustments.each do |deposit_adjustment| %>
+      <tr>
+        <td><%= deposit_adjustment.deposit.display %></td>
+        <td><%= deposit_adjustment.qty_bank.to_f %></td>
+        <td><%= deposit_adjustment.qty_consigned.to_f %></td>
+        <td><%= deposit_adjustment.qty_onhold.to_f %></td>
+        <td><%= deposit_adjustment.qty_allocated.to_f %></td>
+        <td>
+          <%= link_to "Details",
+                      admin_deposit_adjustment_path(deposit_adjustment, q: {:deposit_id_eq => (params[:q][:deposit_id_eq] rescue nil)}),
+                      :class => 'btn btn-xs btn-info' %>
+
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      admin_deposit_adjustment_path(deposit_adjustment),
+                      :method => :delete,
+                      :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<table class="table table-striped col-md-12" id="header-fixed"></table>
+
+
+<%= paginate @deposit_adjustments %>
