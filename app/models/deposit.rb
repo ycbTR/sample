@@ -38,7 +38,7 @@ class Deposit < ActiveRecord::Base
 
   [:qty_bank, :qty_consigned, :qty_onhold, :qty_allocated].each do |q|
     define_method("#{q}_with_adjustments".to_sym) do
-      self.send(q).to_f + self.deposit_adjustments.sum(q).to_f
+      self.deposit_adjustments.sum(q).to_f
     end
   end
 
