@@ -67,6 +67,12 @@ class Order < ActiveRecord::Base
   end
 
 
+  def form_type
+    if self.order_form.present?
+      self.order_form.type.demodulize
+    end
+  end
+
   def after_cancel
 
   end

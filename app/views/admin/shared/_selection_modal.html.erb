@@ -1,0 +1,23 @@
+<%= content_for :modal do %>
+    <div class="modal fade" id="selectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 id="select-modal-header">SELECT ORDER TYPE</h4>
+          </div>
+          <div id="dynamic-content">
+            <div id="select-modal-body" class="modal-body">
+              <p class='loading'><%= link_to "Direct Seeding", new_admin_order_path(:type => "seeding"), class: "btn btn-primary" %>
+
+              <p class='loading'><%= link_to "Nursery", new_admin_order_path(:type => "nursery"), class: "btn btn-primary" %>
+              </p>
+            </div>
+            <div id="select-modal-footer" class="modal-footer">
+              <%= link_to t(:close), "#", "data-dismiss" => "modal", :class => "btn", "aria-hidden" => true %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>

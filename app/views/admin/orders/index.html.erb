@@ -1,26 +1,30 @@
 <%- model_class = Order -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 
-  <%= link_to t('.new', :default => t("helpers.links.new")),
-              new_admin_order_path,
-              :class => 'btn btn-primary pull-right' %>
-  <%= render partial: "shared/advanced_search", locals: {name: "state_or_number_or_customer_full_name_cont", html_options: {placeholder: "Search..."}} %>
-</div>
+<%= content_for :page_link do %>
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+                "#selectModal", "data-toggle" => "modal",
+                :class => 'btn btn-primary pull-right' %>
+<% end %>
+
+<%= content_for :page_title, "Orders" %>
+
+<%= render partial: "admin/shared/selection_modal" %>
+
+<%= render partial: "shared/advanced_search", locals: {name: "state_or_number_or_customer_full_name_cont", html_options: {placeholder: "Search..."}} %>
 
 <table class="table table-striped" id="table-1">
   <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:state) %></th>
-      <th><%= model_class.human_attribute_name(:number) %></th>
-      <th><%= model_class.human_attribute_name(:customer_id) %></th>
-      <th><%= model_class.human_attribute_name(:completed_at) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
+  <tr>
+    <th><%= model_class.human_attribute_name(:state) %></th>
+    <th><%= model_class.human_attribute_name(:number) %></th>
+    <th><%= model_class.human_attribute_name(:customer_id) %></th>
+    <th><%= model_class.human_attribute_name(:completed_at) %></th>
+    <th><%= model_class.human_attribute_name(:created_at) %></th>
+    <th><%= t '.actions', :default => t("helpers.actions") %></th>
+  </tr>
   </thead>
   <tbody>
-    <% @orders.each do |order| %>
+  <% @orders.each do |order| %>
       <tr>
         <td><%= order.state %></td>
         <td><%= order.number %></td>
@@ -33,11 +37,11 @@
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       admin_order_path(order),
                       :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
                       :class => 'btn btn-mini btn-danger' %>
         </td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 <table class="table table-striped col-md-12" id="header-fixed"></table>

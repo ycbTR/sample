@@ -1,5 +1,5 @@
-<%= search_form_for [:admin, @search] do |f| %>
+<%= search_form_for [:admin, @search], html: {class: "marB20"} do |f| %>
     <%= f.text_field "#{name}", html_options %>
     <%= (f.hidden_field :type_cont) rescue "" %>
-    <%= f.submit "Search", class: "btn btn-small" %>
+    <%= f.submit "Search", class: "btn btn-sm" %>
 <% end %>
