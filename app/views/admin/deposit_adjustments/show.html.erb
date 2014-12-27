@@ -1,16 +1,20 @@
-<h3>Adjustment Details</h3>
-<p><strong>Deposit: </strong> <%= @object.deposit.display rescue "N/A" %></p>
-<p><strong>User: </strong> <%= @object.deposit.full_name rescue "N/A" %></p>
-<p><strong>Order #: </strong> <%= @object.line_item.order.number rescue "N/A" %></p>
-<p><strong>Qty Bank: </strong><%= @object.qty_bank.to_f %></p>
-<p><strong>Qty Consigned: </strong><%= @object.qty_consigned.to_f %></p>
-<p><strong>Qty On Hold: </strong><%= @object.qty_onhold.to_f %></p>
-<p><strong>Qty Allocated: </strong><%= @object.qty_allocated.to_f %></p>
+<div class="modal-body">
+  <p><strong>Deposit: </strong> <%= @object.deposit.display rescue "N/A" %></p>
 
+  <p><strong>User: </strong> <%= @object.deposit.full_name rescue "N/A" %></p>
 
-<%= link_to "Back",
-            admin_deposit_adjustments_path(q: {:deposit_id_eq => (params[:q][:deposit_id_eq] rescue nil)}),
-            :class => 'btn btn-mini btn-info' %>
+  <p><strong>Order #: </strong> <%= @object.line_item.order.number rescue "N/A" %></p>
 
+  <p><strong>Qty Bank: </strong><%= @object.qty_bank.to_f %></p>
 
+  <p><strong>Qty Consigned: </strong><%= @object.qty_consigned.to_f %></p>
+
+  <p><strong>Qty On Hold: </strong><%= @object.qty_onhold.to_f %></p>
+
+  <p><strong>Qty Allocated: </strong><%= @object.qty_allocated.to_f %></p>
+</div>
+
+<div class="modal-footer">
+  <%= link_to "Cancel", "javascript:;", :class => "pull-left", :data => {:dismiss => 'modal'} %>
+</div>
 

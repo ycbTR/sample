@@ -5,6 +5,7 @@ class Admin::DepositAdjustmentsController < Admin::ResourceController
   create.before :set_defaults
   update.before :set_defaults
 
+
   private
 
 
@@ -25,6 +26,22 @@ class Admin::DepositAdjustmentsController < Admin::ResourceController
 
   def set_defaults
     @object.user = User.current
+  end
+
+  def js_response
+    if params[:action].in?("new", "edit", "show")
+      render_default_modal_form(modal_title || "#{params[:action].titleize} #{object_name}")
+    else
+      super
+    end
+  end
+
+  def modal_title
+    if params[:action].in?("new", "edit")
+      "#{params[:action].titleize} Adjustment"
+    else
+      "Details"
+    end
   end
 
 end

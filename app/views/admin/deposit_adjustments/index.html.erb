@@ -1,16 +1,19 @@
-<div class="page-header">
-  <% deposit = (Deposit.find(params[:q][:deposit_id_eq]) rescue nil)  %>
-  <%= link_to t('.new', :default => t("helpers.links.new")),
-              new_admin_deposit_adjustment_path(q: {:deposit_id_eq => (params[:q][:deposit_id_eq] rescue nil)}),
-              :class => 'btn btn-primary pull-right' %>
+<%- model_class = Deposit -%>
+<%= content_for :page_link do %>
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+                new_admin_deposit_adjustment_path(q: {:deposit_id_eq => (params[:q][:deposit_id_eq] rescue nil)}),
+                remote: true, :class => 'btn btn-primary pull-right' %>
+<% end %>
+<%= content_for :page_title, "Audit Trail" %>
 
-  <%= search_form_for [:admin, @search] do |f| %>
-      <%= f.select "deposit_id_eq", Deposit.all.collect { |d| [d.display, d.id] } %> and
-      <%= f.submit "Search", class: "btn btn-small" %>
-  <% end %>
+<% deposit = (Deposit.find(params[:q][:deposit_id_eq]) rescue nil) %>
 
-  <div class="clearfix"></div>
-</div>
+<%= search_form_for [:admin, @search] do |f| %>
+    <%= f.select "deposit_id_eq", Deposit.all.collect { |d| [d.display, d.id] } %> and
+    <%= f.submit "Search", class: "btn btn-sm" %>
+<% end %>
+
+<div class="clarfix marT30"></div>
 <% if deposit %>
     <h3>Current Stock</h3>
     <table class="table table-striped" id="table-2">
@@ -55,7 +58,7 @@
         <td><%= deposit_adjustment.qty_allocated.to_f %></td>
         <td>
           <%= link_to "Details",
-                      admin_deposit_adjustment_path(deposit_adjustment, q: {:deposit_id_eq => (params[:q][:deposit_id_eq] rescue nil)}),
+                      admin_deposit_adjustment_path(deposit_adjustment, q: {:deposit_id_eq => (params[:q][:deposit_id_eq] rescue nil)}), remote: true,
                       :class => 'btn btn-xs btn-info' %>
 
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
