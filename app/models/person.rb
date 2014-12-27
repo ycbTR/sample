@@ -24,7 +24,7 @@ class Person < ActiveRecord::Base
   has_many :orders, foreign_key: "customer_id"
   has_many :deposits, foreign_key: "collector_id"
   before_destroy :check_destroy_validations
-
+  validates :first_name, :last_name, presence: true
   class DestroyWithOrdersError < StandardError;
   end
   class DestroyWithDepositsError < StandardError;
@@ -45,6 +45,7 @@ class Person < ActiveRecord::Base
   def check_completed_orders
     raise DestroyWithOrdersError if self.orders.present?
   end
+
   def check_deposits
     raise DestroyWithDepositsError if self.deposits.present?
   end
@@ -53,8 +54,6 @@ class Person < ActiveRecord::Base
     check_completed_orders
     check_deposits
   end
-
-
 
 
 end
