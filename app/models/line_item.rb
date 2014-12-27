@@ -26,6 +26,13 @@ class LineItem < ActiveRecord::Base
   after_save :set_deposit_stock_adjustments
   after_save :update_order
 
+  def after_cancel
+    self.deposit.deposit_adjustments.create({:qty_bank => self.qty,
+                                             :qty_allocated => (self.qty * -1),
+                                             line_item_id: self.id,
+                                             user_id: User.current.try(:id), comment: "After Cancel"}, without_protection: true)
+  end
+
   private
 
   def set_deposit_stock_adjustments

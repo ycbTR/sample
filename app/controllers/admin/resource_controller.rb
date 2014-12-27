@@ -250,9 +250,18 @@ class Admin::ResourceController < Admin::BaseController
     [:new, :create]
   end
 
-  def js_response
-    render :layout => false
+  def modal_title
+    nil
   end
+
+  def js_response
+    if params[:action].in?("new", "edit")
+      render_default_modal_form(modal_title || "#{params[:action].titleize} #{object_name}")
+    else
+      render :layout => false
+    end
+  end
+
 
   def set_q
     params[:q] ||= {}

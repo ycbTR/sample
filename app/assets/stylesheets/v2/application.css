@@ -302,3 +302,27 @@ span.expand {
     background-color: white;
 }
 
+
+
+.multiselect {
+    height: 15em;
+    border: solid 1px #c0c0c0;
+    overflow: auto;
+    padding: 3px;
+    width: 281px;
+}
+
+.multiselect label {
+    display: block;
+}
+
+.multiselect-on {
+    color: #ffffff;
+    background-color: #000099;
+}
+
+.multiselect label.check_header {
+    margin-top: 5px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ccc;
+}

@@ -53,5 +53,9 @@ class Admin::PeopleController < Admin::ResourceController
     redirect_to admin_people_path(q: {type_cont: type_cont}) and return
   end
 
+  def modal_title
+    "#{params[:action].titleize} #{@type}"
+  end
+
 
 end

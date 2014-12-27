@@ -74,7 +74,7 @@ class Order < ActiveRecord::Base
   end
 
   def after_cancel
-
+    self.line_items.each(&:after_cancel)
   end
 
   # Updates total

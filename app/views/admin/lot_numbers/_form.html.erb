@@ -1,72 +1,71 @@
 <%= form_for [:admin, @lot_number], validate: true, :html => {:class => 'form-horizontal'} do |f| %>
-    <div class="control-group">
-      <%= f.label :number, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :number, :class => 'text_field' %>
+    <div class="modal-body">
+      <div class="control-group">
+        <%= f.label :number, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :number, :class => 'text_field' %>
+        </div>
       </div>
-    </div>
-    <div class="control-group">
-      <%= f.label :region, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :region, :class => 'text_field' %>
+      <div class="control-group">
+        <%= f.label :region, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :region, :class => 'text_field' %>
+        </div>
       </div>
-    </div>
-    <div class="control-group">
-      <%= f.label :provenance, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :provenance, :class => 'text_field' %>
+      <div class="control-group">
+        <%= f.label :provenance, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :provenance, :class => 'text_field' %>
+        </div>
       </div>
-    </div>
-    <div class="control-group">
-      <%= f.label :location, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :location, :class => 'text_field' %>
+      <div class="control-group">
+        <%= f.label :location, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :location, :class => 'text_field' %>
+        </div>
       </div>
-    </div>
 
 
-    <div class="control-group">
-      <%= f.label :heritage_ids, "Heritage Lot Numbers", :class => 'control-label' %>
-      <div class="field">
-        <div class="multiselect">
-          <label class="check_header"><%= check_box_tag :select_all, 1, (f.object.heritage_ids.count == LotNumber.where("id != ?", (@lot_number.id || -1)).count), class: "all_check_toggle" %>
-            Select All</label>
-          <% LotNumber.where("id != ?", (@lot_number.id || -1)).all.each do |l| %>
-              <label>
-                <%= f.check_box :heritage_ids, {multiple: true, :checked => f.object.heritage_ids.include?(l.id)}, l.id, nil %> <%= l.display %>
-              </label>
-          <% end %>
+      <div class="control-group">
+        <%= f.label :heritage_ids, "Heritage Lot Numbers", :class => 'control-label' %>
+        <div class="field">
+          <div class="multiselect">
+            <label class="check_header"><%= check_box_tag :select_all, 1, (f.object.heritage_ids.count == LotNumber.where("id != ?", (@lot_number.id || -1)).count), class: "all_check_toggle" %>
+              Select All</label>
+            <% LotNumber.where("id != ?", (@lot_number.id || -1)).all.each do |l| %>
+                <label>
+                  <%= f.check_box :heritage_ids, {multiple: true, :checked => f.object.heritage_ids.include?(l.id)}, l.id, nil %> <%= l.display %>
+                </label>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :spa_name, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :spa_name, :class => 'text_field' %>
+        </div>
+      </div>
+
+
+      <div class="control-group">
+        <%= f.label :spa_specific, :class => 'control-label' %>
+        <div class="controls">
+          <label>
+            <%= f.radio_button :spa_specific, true %>  Yes
+          </label>
+
+          <label>
+            <%= f.radio_button :spa_specific, false %> No
+          </label>
         </div>
       </div>
     </div>
 
-    <div class="control-group">
-      <%= f.label :spa_name, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :spa_name, :class => 'text_field' %>
-      </div>
-    </div>
-
-
-    <div class="control-group">
-      <%= f.label :spa_specific, :class => 'control-label' %>
-      <div class="controls">
-        <label>
-          <%= f.radio_button :spa_specific, true %>  Yes
-        </label>
-
-        <label>
-          <%= f.radio_button :spa_specific, false %> No
-        </label>
-      </div>
-    </div>
-
-    <br>
-
-    <div class="form-actions">
+    <div class="modal-footer">
+      <%= link_to "Cancel", "javascript:;", :class => "pull-left", :data => {:dismiss => 'modal'} %>
       <%= f.submit nil, :class => 'btn btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                  admin_lot_numbers_path, :class => 'btn' %>
     </div>
 <% end %>
 

@@ -1,12 +1,10 @@
-<%- model_class = User -%>
-<div class="page-header">
-  <h1><%= t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+<%= content_for :page_link do %>
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+                new_object_url,
+                :class => 'btn btn-primary pull-right', remote: true %>
+<% end %>
+<%= content_for :page_title, "Users" %>
 
-  <%= link_to t('.new', :default => t("helpers.links.new")),
-              new_object_url,
-              :class => 'btn btn-primary pull-right' %>
-  <%= render partial: "shared/advanced_search", locals: {name: "email_cont", html_options: {placeholder: "Search..."}} %>
-</div>
 
 <table class="table table-striped" id="table-1">
   <thead>
@@ -21,8 +19,8 @@
       <tr>
         <td><%= user.email %></td>
         <td><%= user.role %></td>
-        <td><%= link_to 'Edit', edit_object_url(user), remote: true, class: "btn btn-mini btn-primary" %>
-          <%= link_to 'Destroy', object_url(user), method: :delete, class: "btn btn-mini btn-danger", data: {confirm: 'Are you sure?'} %></td>
+        <td><%= link_to 'Edit', edit_object_url(user), remote: true, class: "btn btn-xs btn-primary" %>
+          <%= link_to 'Destroy', object_url(user), method: :delete, class: "btn btn-xs btn-danger", data: {confirm: 'Are you sure?'} %></td>
       </tr>
   <% end %>
   </tbody>

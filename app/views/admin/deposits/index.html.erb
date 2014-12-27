@@ -1,21 +1,20 @@
 <%- model_class = Deposit -%>
-<div class="page-header">
-  <h1>Field Data Sheets</h1>
+<%= content_for :page_link do %>
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+                new_admin_deposit_path, remote: true,
+                :class => 'btn btn-primary pull-right' %>
+<% end %>
+<%= content_for :page_title, "Field Data Sheets" %>
 
-  <%= link_to t('.new', :default => t("helpers.links.new")),
-              new_admin_deposit_path,
-              :class => 'btn btn-primary pull-right' %>
 
-  <%= search_form_for [:admin, @search] do |f| %>
-      <%= f.text_field "lot_number_number_eq", placeholder: "Lot Number" %> and
-      <%= f.text_field "plant_species_or_plant_common_name_or_collector_full_name_cont", placeholder: "Plant, collector etc." %>
-      <%= (f.hidden_field :type_cont) rescue "" %>
-      <%= f.submit "Search", class: "btn btn-small" %>
-  <% end %>
+<%= search_form_for [:admin, @search] do |f| %>
+    <%= f.text_field "lot_number_number_eq", placeholder: "Lot Number" %> and
+    <%= f.text_field "plant_species_or_plant_common_name_or_collector_full_name_cont", placeholder: "Plant, collector etc." %>
+    <%= (f.hidden_field :type_cont) rescue "" %>
+    <%= f.submit "Search", class: "btn btn-sm" %>
+<% end %>
 
-</div>
-
-<table class="table table-striped" id="table-1">
+<table class="table table-striped marT30" id="table-1">
   <thead>
   <tr>
     <th><%= model_class.human_attribute_name(:collector) %></th>
@@ -44,7 +43,7 @@
           <%= link_to "Adjustments",
                       admin_deposit_adjustments_path(q: {deposit_id_eq: deposit.id}), :class => 'btn btn-xs btn-info' %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_admin_deposit_path(deposit), :class => 'btn btn-xs btn-primary' %>
+                      edit_admin_deposit_path(deposit), remote: true, :class => 'btn btn-xs btn-primary' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       admin_deposit_path(deposit),
                       :method => :delete,
