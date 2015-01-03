@@ -30,20 +30,23 @@ class Deposit < ActiveRecord::Base
   scope :deleted, where("#{Deposit.table_name}.deleted_at is not null")
 
 
+  def self.with_eager_load
+    joins(:plant, :lot_number).includes(:plant, :lot_number)
+  end
   def self.seeding
-    joins(:plant, :lot_number).where("#{Plant.table_name}.direct_seedable = ?", true)
+    with_eager_load.where("#{Plant.table_name}.direct_seedable = ?", true)
   end
 
   def self.nursery
-    joins(:plant, :lot_number).where("#{LotNumber.table_name}.spa_specific = ?", false)
+    with_eager_load.where("#{LotNumber.table_name}.spa_specific = ?", false)
   end
 
   def self.spa
-    eager_load(:lot_number).where("#{LotNumber.table_name}.spa_specific = ?", true)
+    with_eager_load.where("#{LotNumber.table_name}.spa_specific = ?", true)
   end
 
   def self.general
-    joins(:plant).order("plants.species asc")
+    with_eager_load.order("plants.species asc")
   end
 
   def display
@@ -56,7 +59,7 @@ class Deposit < ActiveRecord::Base
 
   #To show on catalogues
   def total_quantity
-    qty_bank_with_adjustments.to_f + qty_consigned_with_adjustments.to_f
+    cached_qty_bank.to_f + cached_qty_consigned.to_f
   end
 
   [:qty_bank, :qty_consigned, :qty_onhold, :qty_allocated].each do |q|

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150102221131) do
+ActiveRecord::Schema.define(:version => 20150103111019) do
 
   create_table "assets", :force => true do |t|
     t.string   "attachment_file_name"
@@ -172,15 +172,20 @@ ActiveRecord::Schema.define(:version => 20150102221131) do
     t.integer  "lot_number_id"
     t.integer  "plant_id"
     t.date     "date"
-    t.decimal  "qty_bank",      :precision => 8, :scale => 2
-    t.decimal  "qty_consigned", :precision => 8, :scale => 2
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
+    t.decimal  "qty_bank",             :precision => 8, :scale => 2
+    t.decimal  "qty_consigned",        :precision => 8, :scale => 2
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
     t.integer  "collector_id"
     t.integer  "heritage_id"
-    t.decimal  "qty_onhold",    :precision => 8, :scale => 2
+    t.decimal  "qty_onhold",           :precision => 8, :scale => 2
     t.text     "comments"
-    t.decimal  "qty_allocated", :precision => 8, :scale => 2
+    t.decimal  "qty_allocated",        :precision => 8, :scale => 2
+    t.datetime "deleted_at"
+    t.float    "cached_qty_bank"
+    t.float    "cached_qty_allocated"
+    t.float    "cached_qty_consigned"
+    t.float    "cached_qty_onhold"
   end
 
   create_table "line_items", :force => true do |t|
