@@ -5,6 +5,7 @@
 <% end %>
 <%= content_for :page_title, "Plants" %>
 
+<%= render partial: "shared/advanced_search", locals: {name: "species_or_common_name_cont", html_options: {placeholder: "Species or Common Name Conts"}} %>
 
 
 <table class="table table-striped" id="table-1">
@@ -12,6 +13,7 @@
   <tr>
     <th><%= sort_link @search, :species %></th>
     <th><%= sort_link @search, :common_name %></th>
+    <th><%= sort_link @search, :direct_seedable %></th>
     <th><%= sort_link @search, :price_paid %></th>
     <th><%= sort_link @search, :level_1_price, "1-49g" %></th>
     <th><%= sort_link @search, :level_2_price, "50-499g	" %></th>
@@ -24,6 +26,7 @@
       <tr>
         <td><%= plant.species %></td>
         <td><%= plant.common_name %></td>
+        <td><%= human_boolean plant.direct_seedable %></td>
         <td><%= number_to_currency plant.price_paid.to_f %></td>
         <td><%= number_to_currency plant.level_1_price.to_f %></td>
         <td><%= number_to_currency plant.level_2_price.to_f %></td>

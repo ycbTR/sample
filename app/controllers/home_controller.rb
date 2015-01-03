@@ -1,24 +1,25 @@
 class HomeController < ApplicationController
-     before_filter :only_staff!, only: [:catalogue_spa]
+  before_filter :only_staff!, only: [:catalogue_spa]
 
   def index
 
   end
 
   def catalogue_nursery
-    @deposits = Deposit.joins(:plant, :lot_number).where("#{LotNumber.table_name}.spa_specific = ?", false)
+    @deposits = Deposit.nursery.active
   end
+
   #direct seeding
   def catalogue_seeding
-    @deposits = Deposit.joins(:plant, :lot_number).where("#{LotNumber.table_name}.spa_specific = ?", false).where("#{Plant.table_name}.direct_seedable = ?", true)
+    @deposits = Deposit.seeding.active
   end
 
   def catalogue_spa
-    @deposits = Deposit.eager_load(:lot_number).where("#{LotNumber.table_name}.spa_specific = ?", true)
+    @deposits = Deposit.spa.active
   end
 
   def catalogue_general
-    @deposits = Deposit.joins(:plant).order("plants.species asc")
+    @deposits = Deposit.general.active
   end
 
   def only_staff!

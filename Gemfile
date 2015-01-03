@@ -92,3 +92,4 @@ gem "unicode_utils"
 gem 'auto-session-timeout'
 
 gem 'quiet_assets', group: :development
+gem 'roo'

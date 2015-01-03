@@ -12,7 +12,11 @@
   <p><strong>Qty On Hold: </strong><%= @object.qty_onhold.to_f %></p>
 
   <p><strong>Qty Allocated: </strong><%= @object.qty_allocated.to_f %></p>
-  <p><strong>Comment: </strong><%= @object.comment %></p>
+
+  <p><strong>Comment: </strong><%= (@object.comment || "N/A") rescue "N/A"  %>
+  </p>
+
+  <p><strong>Created at: </strong><%= @object.created_at.to_s(:long) %></p>
 </div>
 
 <div class="modal-footer">

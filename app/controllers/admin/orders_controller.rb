@@ -20,10 +20,10 @@ class Admin::OrdersController < Admin::ResourceController
   def load_deposits
     if seeding?
       @type = "seeding"
-      @deposits = Deposit.joins(:plant, :lot_number).where("#{LotNumber.table_name}.spa_specific = ?", false).where("#{Plant.table_name}.direct_seedable = ?", true)
+      @deposits = Deposit.seeding
     else
       @type = "nursery"
-      @deposits = Deposit.joins(:plant, :lot_number).where("#{LotNumber.table_name}.spa_specific = ?", false)
+      @deposits = Deposit.nursery
     end
 
   end

@@ -9,5 +9,10 @@ class Admin::DepositsController < Admin::ResourceController
     "#{params[:action].titleize} field data sheet"
   end
 
+  def set_q
+    params[:q] ||= {}
+    params[:q][:deleted_at_null] = true
+  end
+
 
 end

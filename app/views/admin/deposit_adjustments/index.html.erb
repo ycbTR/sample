@@ -36,15 +36,16 @@
     </table>
     <table class="table table-striped col-md-12" id="header-fixed"></table>
 <% end %>
-<h3>Adjustments</h3>
+<h3>Transactions</h3>
 <table class="table table-striped" id="table-1">
   <thead>
   <tr>
-    <th>FDA</th>
+    <th>Lot Number</th>
     <th>Qty Bank</th>
     <th>Qty Consigned</th>
     <th>Qty OnHold</th>
     <th>Qty Allocated</th>
+    <th><%= sort_link @search, :created_at %></th>
     <th><%= t '.actions', :default => t("helpers.actions") %></th>
   </tr>
   </thead>
@@ -56,16 +57,17 @@
         <td><%= deposit_adjustment.qty_consigned.to_f %></td>
         <td><%= deposit_adjustment.qty_onhold.to_f %></td>
         <td><%= deposit_adjustment.qty_allocated.to_f %></td>
+        <td><%= deposit_adjustment.created_at.to_s(:long) %></td>
         <td>
           <%= link_to "Details",
                       admin_deposit_adjustment_path(deposit_adjustment, q: {:deposit_id_eq => (params[:q][:deposit_id_eq] rescue nil)}), remote: true,
                       :class => 'btn btn-xs btn-info' %>
 
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          <%= link_to(t('.destroy', :default => t("helpers.links.destroy")),
                       admin_deposit_adjustment_path(deposit_adjustment),
                       :method => :delete,
                       :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
-                      :class => 'btn btn-xs btn-danger' %>
+                      :class => 'btn btn-xs btn-danger') unless deposit_adjustment.deleted_at.present? %>
         </td>
       </tr>
   <% end %>

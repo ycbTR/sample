@@ -26,9 +26,32 @@ class Deposit < ActiveRecord::Base
   has_many :line_items
   has_many :deposit_adjustments, dependent: :destroy
   after_create :set_initial_deposit_adjustment
+  scope :active, where(:deleted_at => nil)
+  scope :deleted, where("#{Deposit.table_name}.deleted_at is not null")
+
+
+  def self.seeding
+    joins(:plant, :lot_number).where("#{Plant.table_name}.direct_seedable = ?", true)
+  end
+
+  def self.nursery
+    joins(:plant, :lot_number).where("#{LotNumber.table_name}.spa_specific = ?", false)
+  end
+
+  def self.spa
+    eager_load(:lot_number).where("#{LotNumber.table_name}.spa_specific = ?", true)
+  end
+
+  def self.general
+    joins(:plant).order("plants.species asc")
+  end
 
   def display
-    "#{lot_number.display}/#{date.to_date.month}"
+    "#{lot_number.display}/#{date.to_date.year.to_s[2..4]}"
+  end
+
+  def destroy
+    self.touch(:deleted_at)
   end
 
   #To show on catalogues

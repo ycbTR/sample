@@ -6,6 +6,22 @@ class Admin::DepositAdjustmentsController < Admin::ResourceController
   update.before :set_defaults
 
 
+  def destroy
+    if @object.reverse!
+      flash[:success] = "Successfully reversed"
+      respond_with(@object) do |format|
+        format.html { redirect_to collection_url }
+        format.js { render :partial => "shared/destroy" }
+      end
+    else
+      @error_presence_for_response = true
+      respond_with(@object) do |format|
+        format.html { redirect_to collection_url }
+      end
+    end
+  end
+
+
   private
 
 
