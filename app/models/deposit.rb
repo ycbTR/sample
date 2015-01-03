@@ -34,7 +34,7 @@ class Deposit < ActiveRecord::Base
     joins(:plant, :lot_number).includes(:plant, :lot_number)
   end
   def self.seeding
-    with_eager_load.where("#{Plant.table_name}.direct_seedable = ?", true)
+    with_eager_load.where("#{Plant.table_name}.direct_seedable = ?", true).where("#{LotNumber.table_name}.spa_specific = ?", false)
   end
 
   def self.nursery

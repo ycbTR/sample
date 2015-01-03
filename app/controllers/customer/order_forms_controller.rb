@@ -37,9 +37,9 @@ class Customer::OrderFormsController < Customer::BaseController
     @current_order = (params[:order_form][:type]).constantize.new rescue ("OrderForm::#{(params[:type] || 'seeding').titleize}").constantize.new rescue OrderForm.new
     @current_order.user = @current_user
     if @current_order.type == "OrderForm::Seeding"
-      @deposits = Deposit.joins(:plant, :lot_number).where("#{LotNumber.table_name}.spa_specific = ?", false).where("#{Plant.table_name}.direct_seedable = ?", true)
+      @deposits = Deposit.seeding
     else
-      @deposits = Deposit.joins(:plant, :lot_number).where("#{LotNumber.table_name}.spa_specific = ?", false)
+      @deposits = Deposit.nursery
     end
     @deposits = @deposits.order("plants.species asc")
   end
