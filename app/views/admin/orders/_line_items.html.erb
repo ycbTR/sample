@@ -11,7 +11,7 @@
     </thead>
     <%= f.fields_for :line_items, f.object.line_items.blank? ? f.object.line_items.new : f.object.reload.line_items, wrapper: false do |li_form| %>
         <tr class="item_fields fields">
-          <td><%= li_form.select :deposit_id, @deposits.collect { |l| ["#{l.display} - #{l.plant.species}", l.id, {total_quantity: l.total_quantity, level_1_price: l.plant.level_1_price, level_2_price: l.plant.level_2_price, level_3_price: l.plant.level_3_price}] }, {}, class: "deposit_select", disabled: !@order.pending? %></td>
+          <td><%= li_form.select :deposit_id, @deposits.collect { |l| ["#{l.display} - #{l.plant.species} - #{l.plant.common_name}", l.id, {total_quantity: l.total_quantity, level_1_price: l.plant.level_1_price, level_2_price: l.plant.level_2_price, level_3_price: l.plant.level_3_price}] }, {}, class: "deposit_select", disabled: !@order.pending? %></td>
           <td>
             <%= li_form.number_field :qty, min: 0, class: "grams", disabled: !@order.pending? %>
             <br>
