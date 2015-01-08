@@ -22,7 +22,7 @@ class LotNumber < ActiveRecord::Base
   has_many :lot_heritages, class_name: "LotHeritage", dependent: :destroy
   has_many :heritages, through: :lot_heritages, class_name: "LotNumber", dependent: :destroy
 
-  validates :number, presence: true
+  validates :number, presence: true, :uniqueness => true
 
   def self.origin
     where("#{self.table_name}.id NOT IN(?)", LotHeritage.pluck(:lot_number_id).uniq)

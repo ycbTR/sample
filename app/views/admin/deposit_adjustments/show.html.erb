@@ -1,5 +1,7 @@
 <div class="modal-body">
-  <p><strong>Deposit: </strong> <%= @object.deposit.display rescue "N/A" %></p>
+  <p><strong>Lot Number: </strong> <%= @object.deposit.display rescue "N/A" %></p>
+
+  <p><strong>Botanical Name: </strong> <%= @object.deposit.plant.botanical_name rescue "N/A" %></p>
 
   <p><strong>User: </strong> <%= @object.user.email rescue "N/A" %></p>
 

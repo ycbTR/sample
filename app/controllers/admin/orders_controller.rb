@@ -20,10 +20,10 @@ class Admin::OrdersController < Admin::ResourceController
   def load_deposits
     if seeding?
       @type = "seeding"
-      @deposits = Deposit.seeding
+      @deposits = Deposit.seeding.active
     else
       @type = "nursery"
-      @deposits = Deposit.nursery
+      @deposits = Deposit.nursery.active
     end
 
   end

@@ -6,7 +6,7 @@
 <% end %>
 <%= content_for :page_title, "Audit Trail" %>
 
-<% deposit = (Deposit.find(params[:q][:deposit_id_eq]) rescue nil) %>
+<% deposit = (Deposit.eager_load(:plant, :lot_number).find(params[:q][:deposit_id_eq]) rescue nil) %>
 
 <%= search_form_for [:admin, @search] do |f| %>
     <%= f.select "deposit_id_eq", Deposit.all.collect { |d| [d.display, d.id] } %> and
@@ -41,6 +41,7 @@
   <thead>
   <tr>
     <th>Lot Number</th>
+    <th>Botanical Name</th>
     <th>Qty Bank</th>
     <th>Qty Consigned</th>
     <th>Qty OnHold</th>
@@ -53,6 +54,7 @@
   <% @deposit_adjustments.each do |deposit_adjustment| %>
       <tr>
         <td><%= deposit_adjustment.deposit.display %></td>
+        <td><%= deposit_adjustment.deposit.plant.botanical_name %></td>
         <td><%= deposit_adjustment.qty_bank.to_f %></td>
         <td><%= deposit_adjustment.qty_consigned.to_f %></td>
         <td><%= deposit_adjustment.qty_onhold.to_f %></td>

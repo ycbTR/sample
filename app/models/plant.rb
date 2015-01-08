@@ -32,6 +32,11 @@ class Plant < ActiveRecord::Base
     end
   end
 
+
+  def botanical_name
+    self.species
+  end
+
   ##1-49g
   #def level_1_price
   #  price_paid * 1.92
