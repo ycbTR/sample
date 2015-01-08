@@ -21,7 +21,7 @@
         <td><%= deposit.lot_number.provenance %></td>
         <td><%= deposit.lot_number.region %></td>
         <td><%= [deposit.total_quantity, 0].max %></td>
-        <td>
+        <td style="height: 100px;">
           <div>
             <%= check_box_tag "select", "", false, class: "order_item_check", "data-validate" => false %>
           </div>
@@ -32,7 +32,6 @@
                   <%= label_tag "Grams", "Grams" %>
                   <%= text_field_tag "order_form[order_form_items_attributes][#{deposit.id}][grams]", 0, class: "", "data-validate" => false, disabled: true %>
             <% end %>
-
           </div>
         </td>
       </tr>
@@ -48,8 +47,8 @@
             if ($(this).is(":checked")) {
                 next_div.show();
                 $('html, body').animate({
-                    scrollTop: next_div.offset().top
-                }, 2000);
+                    scrollTop: next_div.offset().top - 300
+                }, 750);
                 next_div.find('input').attr("disabled", false)
             } else {
                 next_div.hide();
