@@ -273,6 +273,7 @@ class Admin::ResourceController < Admin::BaseController
 
   def set_q
     params[:q] ||= {}
+    params[:q][:s] ||= "updated_at desc"
   end
 
 

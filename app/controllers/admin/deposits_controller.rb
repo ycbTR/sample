@@ -11,6 +11,7 @@ class Admin::DepositsController < Admin::ResourceController
 
   def set_q
     params[:q] ||= {}
+    params[:q][:s] ||= "updated_at desc"
     params[:q][:deleted_at_null] = true
   end
 

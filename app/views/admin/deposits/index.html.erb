@@ -17,6 +17,7 @@
 <table class="table table-striped marT30" id="table-1">
   <thead>
   <tr>
+    <th><%= sort_link @search, :id %></th>
     <th><%= model_class.human_attribute_name(:collector) %></th>
     <th><%= "Lot Number" %></th>
     <th><%= "Species" %></th>
@@ -29,6 +30,7 @@
   <tbody>
   <% @deposits.each do |deposit| %>
       <tr>
+        <td><%= deposit.id %></td>
         <td><%= deposit.collector.full_name %></td>
         <td><%= deposit.lot_number.number %>
           <br>
