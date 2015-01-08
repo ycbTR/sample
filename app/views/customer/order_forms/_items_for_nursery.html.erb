@@ -47,6 +47,9 @@
             var next_div = $(this).parent('div').next('div');
             if ($(this).is(":checked")) {
                 next_div.show();
+                $('html, body').animate({
+                    scrollTop: next_div.offset().top
+                }, 2000);
                 next_div.find('input').attr("disabled", false)
             } else {
                 next_div.hide();
