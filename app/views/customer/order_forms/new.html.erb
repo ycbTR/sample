@@ -1,3 +1,8 @@
+<%= content_for :page_link do %>
+
+    <%= submit_tag "Place Order", onclick: "$('#action_button').click(); return false;", class: "btn btn-success pull-right", id: "fixed_action" %>
+
+<% end %>
 <div class="col-lg-12">
   <%= render partial: "shared/errors", locals: {target: @current_order} %>
   <%= form_for @current_order, url: complete_customer_order_forms_path, :as => :order_form, method: :put, validate: false, html: {class: "form-horizontal"} do |f| %>
@@ -6,3 +11,20 @@
       <%= render partial: (params[:type] || 'seeding'), locals: {f: f} %>
   <% end %>
 </div>
+
+<script type="text/javascript">
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            $('#fixed_action').css('position', 'fixed');
+            $('#fixed_action').css('top', '100px;');
+            $('#fixed_action').css('z-index', '999');
+            $('#fixed_action').css('right', '20px');
+        } else {
+            $('#fixed_action').css('position', 'static');
+            $('#fixed_action').css('top', 'auto;');
+            $('#fixed_action').css('z-index', 'auto;');
+            $('#fixed_action').css('right', 'auto');
+
+        }
+    });
+</script>

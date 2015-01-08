@@ -64,3 +64,26 @@ jQuery(function () {
         return event.preventDefault();
     });
 });
+
+$(document).ready(function () {
+    // hide #back_to_top first
+    $("#back_to_top").hide();
+
+    // fade in #back_to_top
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            $('#back_to_top').fadeIn();
+        } else {
+            $('#back_to_top').fadeOut();
+        }
+    });
+
+    // scroll body to 0px on click
+    $('#back_to_top').click(function () {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 800);
+        return false;
+    });
+
+});

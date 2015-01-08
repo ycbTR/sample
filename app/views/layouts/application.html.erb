@@ -46,6 +46,11 @@
 
   <%= yield :bottom_sections %>
 
+  <a id="back_to_top" href="#" class="on">
+			<span class="fa-stack">
+				<i class="fa fa-arrow-up" style=""></i>
+			</span>
+  </a>
 
   <%= render partial: "layouts/v2/footer" %>
 
@@ -55,6 +60,11 @@
 <!-- /Page Wrapper
 ================================================== -->
 
+<style type="text/css">
+    #page-wrapper, .wide, .container {
+        min-width: 1024px !important;
+    }
+</style>
 
 <%= render partial: "layouts/v2/default_modal" %>
 <%= yield :modal %>
