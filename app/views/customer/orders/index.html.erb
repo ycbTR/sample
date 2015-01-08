@@ -1,9 +1,16 @@
 <%= content_for :page_title, "Orders" %>
 <%= content_for :page_link do %>
-    <%= link_to "New Order", "#selectModal", "data-toggle" => "modal", class: "btn btn-success" %>
+    <%= link_to "New Order", "#selectModal", "data-toggle" => "modal", class: "btn btn-success", id: "new_order" %>
 <% end %>
 <%= render partial: "shared/selection_modal" %>
 
+<% if params[:n] %>
+    <script type="text/javascript">
+        $(function () {
+            $('#new_order').click();
+        })
+    </script>
+<% end %>
 <table class="table table-striped">
   <thead>
   <tr>

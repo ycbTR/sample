@@ -25,6 +25,7 @@ class LineItem < ActiveRecord::Base
 
   after_save :set_deposit_stock_adjustments
   after_save :update_order
+  after_destroy :set_deposit_stock_adjustments_after_remove
 
   def after_cancel
     self.deposit.deposit_adjustments.create({:qty_bank => self.qty,
@@ -35,12 +36,39 @@ class LineItem < ActiveRecord::Base
 
   private
 
+  # New Create
+  # Deposit changed, qty same
+  # Qty changed, deposit same
+  # Qty and deposit change
+
+
   def set_deposit_stock_adjustments
-    if self.qty_changed?
+    if self.deposit_id_was.blank?
+      #New Record
+      #Decrease stock by self quantity
+      create_adjustment(self.deposit, (-self.qty.to_f))
+    elsif self.deposit_id_changed?
+      d = Deposit.find_by_id(self.deposit_id_was)
+      if d
+        #Restock previous deposit with previous quantity
+        create_adjustment(d, self.qty_was.to_f)
+      end
+      #Decrease stock by self quantity
+      create_adjustment(self.deposit, (-self.qty.to_f))
+    elsif self.qty_changed?
       decreased_amount = (self.qty_was.to_f - self.qty.to_f)
-      self.deposit.deposit_adjustments.create({:qty_bank => decreased_amount, :qty_allocated => (decreased_amount * -1), line_item_id: self.id, user_id: User.current.try(:id)}, without_protection: true)
+      create_adjustment(self.deposit, decreased_amount)
     end
-    true
+  end
+
+  def set_deposit_stock_adjustments_after_remove
+    #Restock self quantity
+    create_adjustment(self.deposit, self.qty.to_f)
+  end
+
+
+  def create_adjustment(d, qty_bank)
+    d.deposit_adjustments.create({:qty_bank => qty_bank, :qty_allocated => (-qty_bank), line_item_id: self.id, user_id: User.current.try(:id)}, without_protection: true)
   end
 
   def update_order

@@ -24,11 +24,11 @@ class Plant < ActiveRecord::Base
   # plant.price_for(300)
   def price_for(grams = 0)
     if grams < 50
-      level_1_price * 0.01
+      level_1_price * 0.001 * grams
     elsif grams < 500
-      level_2_price * 0.01
+      level_2_price * 0.001 * grams
     else
-      level_3_price * 0.01
+      level_3_price * 0.001 * grams
     end
   end
 

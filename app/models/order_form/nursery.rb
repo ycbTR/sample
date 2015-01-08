@@ -31,7 +31,7 @@
 #
 
 class OrderForm::Nursery < OrderForm
-  validates :business_name, :abn, :property_address, :officer_name, :telephone, presence: true
+  validates :business_name, :property_address, presence: true
 
   def prefix
     "N"

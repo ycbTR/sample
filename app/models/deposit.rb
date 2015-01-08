@@ -34,11 +34,11 @@ class Deposit < ActiveRecord::Base
     joins(:plant, :lot_number).includes(:plant, :lot_number)
   end
   def self.seeding
-    with_eager_load.where("#{Plant.table_name}.direct_seedable = ?", true).where("#{LotNumber.table_name}.spa_specific = ?", false)
+    with_eager_load.where("#{Plant.table_name}.direct_seedable = ?", true).where("(#{LotNumber.table_name}.spa_specific = ? OR #{LotNumber.table_name}.spa_specific IS NULL)", false)
   end
 
   def self.nursery
-    with_eager_load.where("#{LotNumber.table_name}.spa_specific = ?", false)
+    with_eager_load.where("(#{LotNumber.table_name}.spa_specific = ? OR #{LotNumber.table_name}.spa_specific IS NULL)", false)
   end
 
   def self.spa
@@ -46,7 +46,7 @@ class Deposit < ActiveRecord::Base
   end
 
   def self.general
-    with_eager_load.order("plants.species asc")
+    with_eager_load.where("(#{LotNumber.table_name}.spa_specific = ? OR #{LotNumber.table_name}.spa_specific IS NULL)", false).order("plants.species asc")
   end
 
   def display
