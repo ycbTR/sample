@@ -2,7 +2,7 @@
 
     <div class="modal-body">
       <div class="control-group">
-        <%= f.label :deposit, "FDA", :class => 'control-label' %>
+        <%= f.label :deposit, "Lot Number", :class => 'control-label' %>
         <div class="controls">
           <%= f.select :deposit_id, Deposit.with_eager_load.all.collect { |d| ["#{d.display} - #{d.plant.botanical_name}", d.id] } %>
         </div>

@@ -1,6 +1,5 @@
-<%- model_class = Deposit -%>
 <%= content_for :page_link do %>
-    <%= link_to t('.new', :default => t("helpers.links.new")),
+    <%= link_to "New Adjustment",
                 new_admin_deposit_adjustment_path(q: {:deposit_id_eq => (params[:q][:deposit_id_eq] rescue nil)}),
                 remote: true, :class => 'btn btn-primary pull-right' %>
 <% end %>
@@ -46,6 +45,7 @@
     <th>Qty Consigned</th>
     <th>Qty OnHold</th>
     <th>Qty Allocated</th>
+    <th>User</th>
     <th><%= sort_link @search, :created_at %></th>
     <th><%= t '.actions', :default => t("helpers.actions") %></th>
   </tr>
@@ -59,6 +59,7 @@
         <td><%= deposit_adjustment.qty_consigned.to_f %></td>
         <td><%= deposit_adjustment.qty_onhold.to_f %></td>
         <td><%= deposit_adjustment.qty_allocated.to_f %></td>
+        <td><%= deposit_adjustment.user.email rescue "N/A" %></td>
         <td><%= deposit_adjustment.created_at.to_s(:long) %></td>
         <td>
           <%= link_to "Details",

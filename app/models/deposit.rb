@@ -76,6 +76,7 @@ class Deposit < ActiveRecord::Base
     adj.qty_consigned = self.qty_consigned
     adj.qty_onhold = self.qty_onhold
     adj.qty_allocated = self.qty_allocated
+    adj.comment = self.comments
     adj.save!
   end
 
