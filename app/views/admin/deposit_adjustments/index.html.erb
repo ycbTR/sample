@@ -39,6 +39,7 @@
 <table class="table table-striped" id="table-1">
   <thead>
   <tr>
+    <th><%= sort_link @search, :id %></th>
     <th>Lot Number</th>
     <th>Botanical Name</th>
     <th>Qty Bank</th>
@@ -53,6 +54,7 @@
   <tbody>
   <% @deposit_adjustments.each do |deposit_adjustment| %>
       <tr>
+        <td><%= deposit_adjustment.id %></td>
         <td><%= deposit_adjustment.deposit.display %></td>
         <td><%= deposit_adjustment.deposit.plant.botanical_name %></td>
         <td><%= deposit_adjustment.qty_bank.to_f %></td>

@@ -11,6 +11,7 @@
 <table class="table table-striped" id="table-1">
   <thead>
   <tr>
+    <th><%= sort_link @search, :id %></th>
     <th><%= sort_link @search, :species %></th>
     <th><%= sort_link @search, :common_name %></th>
     <th><%= sort_link @search, :direct_seedable %></th>
@@ -24,6 +25,7 @@
   <tbody>
   <% @plants.each do |plant| %>
       <tr>
+        <td><%= plant.id %></td>
         <td><%= plant.species %></td>
         <td><%= plant.common_name %></td>
         <td><%= human_boolean plant.direct_seedable %></td>

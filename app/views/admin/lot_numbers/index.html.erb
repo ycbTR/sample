@@ -16,6 +16,7 @@
 <table class="table table-striped marT30" id="table-1">
   <thead>
   <tr>
+    <th><%= sort_link @search, :id %></th>
     <th><%= sort_link @search, :number %></th>
     <th><%= "SPA Name" %></th>
     <th><%= "Heritage Lot Numbers" %></th>
@@ -28,6 +29,7 @@
   <tbody>
   <% @lot_numbers.each do |lot_number| %>
       <tr>
+        <td><%= lot_number.id %></td>
         <td><%= lot_number.number %></td>
         <td><%= (lot_number.spa_name.blank? ? "NA" : lot_number.spa_name) %></td>
         <td><%= lot_number.heritage_lot_numbers %></td>
