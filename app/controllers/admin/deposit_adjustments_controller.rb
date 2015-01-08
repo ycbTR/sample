@@ -36,6 +36,12 @@ class Admin::DepositAdjustmentsController < Admin::ResourceController
     admin_deposit_adjustments_path(q: {deposit_id_eq: @object.deposit_id})
   end
 
+  def collection
+    @search = DepositAdjustment.eager_load(:user, :deposit => [:lot_number, :plant]).ransack(params[:q])
+    @search.result(distinct: true).page(params[:page]).per(15)
+  end
+
+
   def collection_url
     admin_deposit_adjustments_path(q: {deposit_id_eq: @object.try(:deposit_id)})
   end

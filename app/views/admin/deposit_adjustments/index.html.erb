@@ -8,7 +8,7 @@
 <% deposit = (Deposit.eager_load(:plant, :lot_number).find(params[:q][:deposit_id_eq]) rescue nil) %>
 
 <%= search_form_for [:admin, @search] do |f| %>
-    <%= f.select "deposit_id_eq", Deposit.all.collect { |d| [d.display, d.id] } %> and
+    <%= f.select "deposit_id_eq", Deposit.with_eager_load.active.collect { |d| [d.display, d.id] } %> and
     <%= f.submit "Search", class: "btn btn-sm" %>
 <% end %>
 
