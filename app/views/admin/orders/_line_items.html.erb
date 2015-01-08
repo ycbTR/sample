@@ -33,6 +33,11 @@
 
 <script type="text/javascript">
     $(function () {
+
+        function toFixed( num, precision ) {
+            return (+(Math.round(+(num + 'e' + precision)) + 'e' + -precision)).toFixed(precision);
+        }
+
         calculate_prices = function () {
             var total = 0;
             $.each($('.item_fields:visible'), function (i, el) {
@@ -58,9 +63,9 @@
                         total += price
                     }
                 }
-                price_field.val(price.toFixed(2));
+                price_field.val(toFixed(price,2));
             });
-            $('.total').text("$ " + total.toFixed(2));
+            $('.total').text("$ " + toFixed(total,2));
             total = 0;
         };
         $(document).on('keyup', '.grams', calculate_prices);
