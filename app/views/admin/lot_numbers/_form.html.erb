@@ -1,4 +1,4 @@
-<%= form_for [:admin, @lot_number], validate: true, :html => {:class => 'form-horizontal'} do |f| %>
+<%= form_for [:admin, @lot_number], validate: false, :html => {:class => 'form-horizontal'} do |f| %>
     <div class="modal-body">
       <div class="control-group">
         <%= f.label :number, :class => 'control-label' %>
@@ -30,11 +30,13 @@
         <%= f.label :heritage_ids, "Heritage Lot Numbers", :class => 'control-label' %>
         <div class="field">
           <div class="multiselect">
-            <label class="check_header"><%= check_box_tag :select_all, 1, (f.object.heritage_ids.count == LotNumber.where("id != ?", (@lot_number.id || -1)).count), class: "all_check_toggle" %>
+            <% @lot_numbers = LotNumber.where("id != ?", (@lot_number.id || -1)) %>
+            <% heritage_ids = f.object.heritage_ids %>
+            <label class="check_header"><%= check_box_tag :select_all, 1, (heritage_ids.count == @lot_numbers.count), class: "all_check_toggle" %>
               Select All</label>
-            <% LotNumber.where("id != ?", (@lot_number.id || -1)).all.each do |l| %>
+            <% @lot_numbers.each do |l| %>
                 <label>
-                  <%= f.check_box :heritage_ids, {multiple: true, :checked => f.object.heritage_ids.include?(l.id)}, l.id, nil %> <%= l.display %>
+                  <%= f.check_box :heritage_ids, {multiple: true, :checked => heritage_ids.include?(l.id)}, l.id, nil %> <%= l.display %>
                 </label>
             <% end %>
           </div>
@@ -64,7 +66,7 @@
     </div>
 
     <div class="modal-footer">
-      <%= link_to "Cancel", "javascript:;", :class => "pull-left", :data => {:dismiss => 'modal'} %>
+      <%= link_to "Cancel", admin_lot_numbers_path, :class => "pull-left", :data => {:dismiss => 'modal'} %>
       <%= f.submit nil, :class => 'btn btn-primary' %>
     </div>
 <% end %>
