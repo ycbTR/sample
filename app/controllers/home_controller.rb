@@ -11,7 +11,7 @@ class HomeController < ApplicationController
 
   #direct seeding
   def catalogue_seeding
-    @deposits = Deposit.seeding.active
+    @deposits = Deposit.seeding.active.group(:plant_id, "plants.id","deposits.id", "lot_numbers.id").uniq
   end
 
   def catalogue_spa

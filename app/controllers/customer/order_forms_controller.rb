@@ -37,7 +37,7 @@ class Customer::OrderFormsController < Customer::BaseController
     @current_order = (params[:order_form][:type]).constantize.new rescue ("OrderForm::#{(params[:type] || 'seeding').titleize}").constantize.new rescue OrderForm.new
     @current_order.user = @current_user
     if @current_order.type == "OrderForm::Seeding"
-      @deposits = Deposit.seeding.active.group(:plant_id).uniq
+      @deposits = Deposit.seeding.active.group(:plant_id, "plants.id","deposits.id", "lot_numbers.id").uniq
     else
       @deposits = Deposit.nursery.active
     end
