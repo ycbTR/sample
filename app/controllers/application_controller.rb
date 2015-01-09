@@ -21,30 +21,30 @@ class ApplicationController < ActionController::Base
 
 
   def collector_required!
-    if Person::Collector.where("")..blank?
+    if Person::Collector.where("").blank?
       flash[:warning] = "Collector is required to continue."
-      redirect_to new_person_path and return
+      redirect_to new_admin_person_path and return
     end
   end
 
   def plant_required!
-    if Plant.where("")..blank?
+    if Plant.where("").blank?
       flash[:warning] = "Plant is required to continue."
-      redirect_to new_plant_path and return
+      redirect_to new_admin_plant_path and return
     end
   end
 
   def deposits_required!
-    if Deposit.where("")..blank?
+    if Deposit.where("").blank?
       flash[:warning] = "Deposit is required to continue."
-      redirect_to new_deposit_path and return
+      redirect_to new_admin_deposit_path and return
     end
   end
 
   def lot_number_required!
     if LotNumber.where("").blank?
       flash[:warning] = "Lot Number is required to continue."
-      redirect_to new_lot_number_path and return
+      redirect_to new_admin_lot_number_path and return
     end
 
   end
