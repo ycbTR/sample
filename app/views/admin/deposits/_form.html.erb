@@ -3,7 +3,7 @@
       <div class="control-group">
         <%= f.label :collector_id, :class => 'control-label' %>
         <div class="controls">
-          <%= f.select :collector_id, Person::Collector.all.collect { |l| [l.full_name, l.id] } %>
+          <%= f.select :collector_id, Person::Collector.all.collect { |l| [l.full_name, l.id] }, {}, class: "select2" %>
         </div>
       </div>
 
@@ -13,14 +13,14 @@
           <%= f.select :lot_number_id, LotNumber.order("number asc").collect { |l| [l.display, l.id, {"data-content" => [l.region, l.provenance, l.location, l.spa_name].delete_if { |c| c.blank? }.join(', '),
                                                                                                       "data-provenance" => l.provenance,
                                                                                                       "data-location" => l.location,
-                                                                                                      "data-spa-name" => l.spa_name}] }, {}, class: "content_select", "data-target" => "#lot_number_details" %>
+                                                                                                      "data-spa-name" => l.spa_name}] }, {}, class: "content_select select2", "data-target" => "#lot_number_details" %>
           <div id="lot_number_details"></div>
         </div>
       </div>
       <div class="control-group">
         <%= f.label :plant_id, :class => 'control-label' %>
         <div class="controls">
-          <%= f.select :plant_id, Plant.order("species asc").collect { |p| [p.species, p.id, {'data-content' => p.common_name}] }, {}, class: "content_select", "data-target" => "#plant_details" %>
+          <%= f.select :plant_id, Plant.order("species asc").collect { |p| [p.species, p.id, {'data-content' => p.common_name}] }, {}, class: "content_select select2", "data-target" => "#plant_details" %>
           <div id="plant_details"></div>
         </div>
       </div>

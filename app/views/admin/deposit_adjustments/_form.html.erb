@@ -4,7 +4,7 @@
       <div class="control-group">
         <%= f.label :deposit, "Lot Number", :class => 'control-label' %>
         <div class="controls">
-          <%= f.select :deposit_id, Deposit.with_eager_load.all.collect { |d| ["#{d.display} - #{d.plant.botanical_name}", d.id] } %>
+          <%= f.select :deposit_id, Deposit.with_eager_load.all.collect { |d| ["#{d.display} - #{d.plant.botanical_name}", d.id] }, {}, class: "select2" %>
         </div>
       </div>
 

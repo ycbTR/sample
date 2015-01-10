@@ -13,6 +13,7 @@
 ================================================== -->
 <%= stylesheet_link_tag "/assets/v2/bootstrap.min" %>
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<%= stylesheet_link_tag "/assets/v2/select2" %>
 <%= stylesheet_link_tag "/assets/v2/application" %>
 
 <!-- Custom styles for this template
@@ -33,6 +34,8 @@
 ================================================== -->
 
 <%= javascript_include_tag "v2/main" %>
+
+
 <%= javascript_include_tag "/assets/v2/bootstrap.min" %>
 <%= javascript_include_tag "/assets/v2/jquery.bxslider-rahisified" %>
 <%= javascript_include_tag "/assets/v2/jquery.prettyPhoto" %>
@@ -40,9 +43,14 @@
 
 <%= javascript_include_tag "/assets/v2/jquery.timeago" %>
 <%= javascript_include_tag "/assets/v2/template" %>
+<%= javascript_include_tag "/assets/v2/select2" %>
+
+
 
 <!-- /JavaScript
 ================================================== -->
+
+
 
 
 <%= yield :head %>

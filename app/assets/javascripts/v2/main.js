@@ -86,4 +86,28 @@ $(document).ready(function () {
         return false;
     });
 
+    do_select2();
 });
+
+run_controller_initializers = function () {
+    do_select2();
+};
+
+do_select2 = function () {
+    $('.select2-container').remove();
+    try {
+        $.each($('.select2'), function () {
+            try {
+                $(this).select2();
+            } catch (err2) {
+            }
+        });
+//        $('.select2-search').addClass('hide').attr('name', '_');
+    } catch (err) {
+    }
+    try {
+        calculate_all();
+    } catch (err) {
+    }
+
+}

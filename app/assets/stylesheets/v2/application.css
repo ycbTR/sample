@@ -363,3 +363,6 @@ span.expand {
     line-height: 52px;
 }
 
+.select2-container {
+    min-width: 100px;
+}

@@ -40,8 +40,8 @@ group :assets do
 end
 
 #gem 'jquery-rails'
-#gem 'jquery-ui-rails'
 gem 'jquery-rails', '< 3.0.0'
+gem 'jquery-ui-rails'
 
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
