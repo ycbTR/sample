@@ -37,7 +37,14 @@ class Customer::OrderFormsController < Customer::BaseController
     @current_order = (params[:order_form][:type]).constantize.new rescue ("OrderForm::#{(params[:type] || 'seeding').titleize}").constantize.new rescue OrderForm.new
     @current_order.user = @current_user
     if @current_order.type == "OrderForm::Seeding"
-      @deposits = Deposit.seeding.active.group(:plant_id, "plants.id","deposits.id", "lot_numbers.id").uniq
+
+      if Rails.env.production?
+        @deposits = Deposit.joins(:plant, :lot_number).select("DISTINCT ON(plant_id) *").where("#{Plant.table_name}.direct_seedable = ?", true).where("(#{LotNumber.table_name}.spa_specific = ? OR #{LotNumber.table_name}.spa_specific IS NULL)", false).uniq
+      else
+        @deposits = Deposit.seeding.active.group(:plant_id).uniq
+      end
+
+
     else
       @deposits = Deposit.nursery.active
     end

@@ -11,7 +11,11 @@ class HomeController < ApplicationController
 
   #direct seeding
   def catalogue_seeding
-    @deposits = Deposit.seeding.active.group(:plant_id, "plants.id","deposits.id", "lot_numbers.id").uniq
+    if Rails.env.production?
+      @deposits = Deposit.joins(:plant, :lot_number).select("DISTINCT ON(plant_id) *").where("#{Plant.table_name}.direct_seedable = ?", true).where("(#{LotNumber.table_name}.spa_specific = ? OR #{LotNumber.table_name}.spa_specific IS NULL)", false).uniq
+    else
+      @deposits = Deposit.seeding.active.group(:plant_id).uniq
+    end
   end
 
   def catalogue_spa
