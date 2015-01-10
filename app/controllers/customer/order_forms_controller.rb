@@ -39,7 +39,7 @@ class Customer::OrderFormsController < Customer::BaseController
     if @current_order.type == "OrderForm::Seeding"
 
       if Rails.env.production?
-        @deposits = Deposit.joins(:plant, :lot_number).select("DISTINCT ON(plant_id) *").where("#{Plant.table_name}.direct_seedable = ?", true).where("(#{LotNumber.table_name}.spa_specific = ? OR #{LotNumber.table_name}.spa_specific IS NULL)", false).uniq
+        @deposits = Deposit.joins(:plant, :lot_number).select("DISTINCT ON(plant_id) *").where("#{Plant.table_name}.direct_seedable = ?", true).where("(#{LotNumber.table_name}.spa_specific = ? OR #{LotNumber.table_name}.spa_specific IS NULL)", false)
       else
         @deposits = Deposit.seeding.active.group(:plant_id).uniq
       end
