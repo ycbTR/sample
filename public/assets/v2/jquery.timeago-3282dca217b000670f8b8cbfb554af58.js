@@ -1,0 +1,16 @@
+/**
+ * Timeago is a jQuery plugin that makes it easy to support automatically
+ * updating fuzzy timestamps (e.g. "4 minutes ago" or "about 1 day ago").
+ *
+ * @name timeago
+ * @version 1.3.0
+ * @requires jQuery v1.2.3+
+ * @author Ryan McGeary
+ * @license MIT License - http://www.opensource.org/licenses/mit-license.php
+ *
+ * For usage and examples, visit:
+ * http://timeago.yarp.com/
+ *
+ * Copyright (c) 2008-2013, Ryan McGeary (ryan -[at]- mcgeary [*dot*] org)
+ */
+!function(e){"function"==typeof define&&define.amd?define(["jquery"],e):e(jQuery)}(function(e){function t(){var t=n(this),r=s.settings;return isNaN(t.datetime)||(0==r.cutoff||o(t.datetime)<r.cutoff)&&e(this).text(i(t.datetime)),this}function n(t){if(t=e(t),!t.data("timeago")){t.data("timeago",{datetime:s.datetime(t)});var n=e.trim(t.text());s.settings.localeTitle?t.attr("title",t.data("timeago").datetime.toLocaleString()):!(n.length>0)||s.isTime(t)&&t.attr("title")||t.attr("title",n)}return t.data("timeago")}function i(e){return s.inWords(o(e))}function o(e){return(new Date).getTime()-e.getTime()}e.timeago=function(t){return i(t instanceof Date?t:"string"==typeof t?e.timeago.parse(t):"number"==typeof t?new Date(t):e.timeago.datetime(t))};var s=e.timeago;e.extend(e.timeago,{settings:{refreshMillis:6e4,allowFuture:!1,localeTitle:!1,cutoff:0,strings:{prefixAgo:null,prefixFromNow:null,suffixAgo:"ago",suffixFromNow:"from now",seconds:"less than a minute",minute:"about a minute",minutes:"%d minutes",hour:"about an hour",hours:"about %d hours",day:"a day",days:"%d days",month:"about a month",months:"%d months",year:"about a year",years:"%d years",wordSeparator:" ",numbers:[]}},inWords:function(t){function n(n,o){var s=e.isFunction(n)?n(o,t):n,r=i.numbers&&i.numbers[o]||o;return s.replace(/%d/i,r)}var i=this.settings.strings,o=i.prefixAgo,s=i.suffixAgo;this.settings.allowFuture&&0>t&&(o=i.prefixFromNow,s=i.suffixFromNow);var r=Math.abs(t)/1e3,a=r/60,l=a/60,c=l/24,u=c/365,d=45>r&&n(i.seconds,Math.round(r))||90>r&&n(i.minute,1)||45>a&&n(i.minutes,Math.round(a))||90>a&&n(i.hour,1)||24>l&&n(i.hours,Math.round(l))||42>l&&n(i.day,1)||30>c&&n(i.days,Math.round(c))||45>c&&n(i.month,1)||365>c&&n(i.months,Math.round(c/30))||1.5>u&&n(i.year,1)||n(i.years,Math.round(u)),p=i.wordSeparator||"";return void 0===i.wordSeparator&&(p=" "),e.trim([o,d,s].join(p))},parse:function(t){var n=e.trim(t);return n=n.replace(/\.\d+/,""),n=n.replace(/-/,"/").replace(/-/,"/"),n=n.replace(/T/," ").replace(/Z/," UTC"),n=n.replace(/([\+\-]\d\d)\:?(\d\d)/," $1$2"),new Date(n)},datetime:function(t){var n=e(t).attr(s.isTime(t)?"datetime":"title");return s.parse(n)},isTime:function(t){return"time"===e(t).get(0).tagName.toLowerCase()}});var r={init:function(){var n=e.proxy(t,this);n();var i=s.settings;i.refreshMillis>0&&setInterval(n,i.refreshMillis)},update:function(n){e(this).data("timeago",{datetime:s.parse(n)}),t.apply(this)},updateFromDOM:function(){e(this).data("timeago",{datetime:s.parse(e(this).attr(s.isTime(this)?"datetime":"title"))}),t.apply(this)}};e.fn.timeago=function(e,t){var n=e?r[e]:r.init;if(!n)throw new Error("Unknown function name '"+e+"' for timeago");return this.each(function(){n.call(this,t)}),this},document.createElement("abbr"),document.createElement("time")});
