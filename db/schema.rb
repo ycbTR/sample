@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150103111019) do
+ActiveRecord::Schema.define(:version => 20150111124906) do
 
   create_table "assets", :force => true do |t|
     t.string   "attachment_file_name"
@@ -210,10 +210,10 @@ ActiveRecord::Schema.define(:version => 20150103111019) do
     t.string   "region"
     t.string   "provenance"
     t.string   "location"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
     t.string   "spa_name"
-    t.boolean  "spa_specific"
+    t.boolean  "spa_specific",                :default => false
   end
 
   create_table "order_form_items", :force => true do |t|
@@ -290,6 +290,17 @@ ActiveRecord::Schema.define(:version => 20150103111019) do
     t.decimal  "level_2_price"
     t.decimal  "level_3_price"
   end
+
+  create_table "settings", :force => true do |t|
+    t.string   "var",                      :null => false
+    t.text     "value"
+    t.integer  "thing_id"
+    t.string   "thing_type", :limit => 30
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
+  end
+
+  add_index "settings", ["thing_type", "thing_id", "var"], :name => "index_settings_on_thing_type_and_thing_id_and_var", :unique => true
 
   create_table "snippets", :force => true do |t|
     t.string   "slug",                      :null => false

@@ -1,0 +1,20 @@
+<%= form_for [:admin, @setting], validate:true, :html => {:class => 'form-horizontal'} do |f| %>
+    <div class="modal-body">
+      <div class="control-group">
+        <div class="controls">
+        <%= f.object.var.to_s.titleize %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :value, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :value, value: f.object.value, :class => 'text_field' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <%= link_to "Cancel", admin_settings_path, :class => "pull-left", :data => {:dismiss => 'modal'} %>
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+    </div>
+<% end %>

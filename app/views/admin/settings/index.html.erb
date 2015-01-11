@@ -1,0 +1,26 @@
+<%= content_for :page_title, "Settings" %>
+
+<table class="table table-striped" id="table-1">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Value</th>
+    <th><%= t '.actions', :default => t("helpers.actions") %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @settings.each do |setting| %>
+      <tr>
+        <td><%= setting.var.to_s.titleize %></td>
+        <td><%= setting.value %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_admin_setting_path(setting), :class => 'btn btn-xs btn-primary', remote: true %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<table class="table table-striped col-md-12" id="header-fixed"></table>
+
+<%= paginate @settings %>

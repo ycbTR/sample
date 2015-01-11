@@ -12,6 +12,7 @@ Seedbank::Application.routes.draw do
     resources :orders
     resources :users
     resources :deposit_adjustments
+    resources :settings
   end
 
   namespace :customer do
