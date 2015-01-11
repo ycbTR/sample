@@ -22,16 +22,19 @@ class Plant < ActiveRecord::Base
 
 
   # plant.price_for(300)
-  def price_for(grams = 0)
-    if grams < 50
-      level_1_price * 0.001 * grams
-    elsif grams < 500
-      level_2_price * 0.001 * grams
+  def price_for(grams = 0, seeding = false)
+    if seeding
+      Setting.direct_seeding_base_price.to_f * 0.001 * grams
     else
-      level_3_price * 0.001 * grams
+      if grams < 50
+        level_1_price * 0.001 * grams
+      elsif grams < 500
+        level_2_price * 0.001 * grams
+      else
+        level_3_price * 0.001 * grams
+      end
     end
   end
-
 
   def botanical_name
     self.species

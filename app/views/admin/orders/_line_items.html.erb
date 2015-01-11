@@ -9,9 +9,23 @@
       <th></th>
     </tr>
     </thead>
+
+    <%
+
+       deposit_options = @deposits.collect { |l|
+         plant = l.plant
+         if @type.eql?('seeding')
+           level_1_price = level_2_price = level_3_price = Setting.direct_seeding_base_price
+         else
+           level_1_price, level_2_price, level_3_price = plant.level_1_price, plant.level_2_price, plant.level_3_price
+         end
+         ["#{l.display} - #{plant.species} - #{plant.common_name}", l.id, {total_quantity: l.total_quantity, level_1_price: level_1_price, level_2_price: level_2_price, level_3_price: level_3_price}]
+
+       }
+    %>
     <%= f.fields_for :line_items, f.object.line_items.blank? ? f.object.line_items.new : f.object.reload.line_items, wrapper: false do |li_form| %>
         <tr class="item_fields fields">
-          <td><%= li_form.select :deposit_id, @deposits.collect { |l| ["#{l.display} - #{l.plant.species} - #{l.plant.common_name}", l.id, {total_quantity: l.total_quantity, level_1_price: l.plant.level_1_price, level_2_price: l.plant.level_2_price, level_3_price: l.plant.level_3_price}] }, {}, class: "deposit_select select2", disabled: !@order.pending? %></td>
+          <td><%= li_form.select :deposit_id, deposit_options, {}, class: "deposit_select select2", disabled: !@order.pending? %></td>
           <td>
             <%= li_form.number_field :qty, min: 0, class: "grams", disabled: !@order.pending? %>
             <br>
@@ -34,7 +48,7 @@
 <script type="text/javascript">
     $(function () {
 
-        function toFixed( num, precision ) {
+        function toFixed(num, precision) {
             return (+(Math.round(+(num + 'e' + precision)) + 'e' + -precision)).toFixed(precision);
         }
 
@@ -63,9 +77,9 @@
                         total += price
                     }
                 }
-                price_field.val(toFixed(price,2));
+                price_field.val(toFixed(price, 2));
             });
-            $('.total').text("$ " + toFixed(total,2));
+            $('.total').text("$ " + toFixed(total, 2));
             total = 0;
         };
         $(document).on('keyup', '.grams', calculate_prices);
