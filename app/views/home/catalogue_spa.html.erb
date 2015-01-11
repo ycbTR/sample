@@ -1,4 +1,4 @@
-<%= content_for :page_title, "SPA Catalogue" %>
+<%= content_for :page_title, "SPA Catalogue #{export_to_excel_link}".html_safe %>
 <%= content_for :page_link do %>
     <%= link_to "Place an order", "#selectModal", "data-toggle" => "modal", class: "btn btn-success" %>
 <% end %>
@@ -7,47 +7,4 @@
 <!-- /Row-->
 
 <%= render partial: "table_header" %>
-
-<table class="table table-bordered" id="table-1">
-  <thead>
-  <tr class="bold-black">
-    <th colspan="2">SEED CATALOGUE</th>
-    <th colspan="5">SPA - Seed Production Area</th>
-    <th>1-49g</th>
-    <th>50-499g</th>
-    <th> >500</th>
-  </tr>
-
-  <tr class="bold-black">
-    <th>Lot No</th>
-    <th>Heritage Lot No</th>
-    <th>Botanical Name</th>
-    <th>Common Name</th>
-    <th>Provenance</th>
-    <th>Region</th>
-    <th>Qty</th>
-    <th>$/kg</th>
-    <th>$/kg</th>
-    <th>$/kg</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @deposits.each do |deposit| %>
-      <tr>
-        <td><%= deposit.display %></td>
-        <td><%= deposit.lot_number.heritage_lot_numbers %></td>
-        <td><%= deposit.plant.species %></td>
-        <td><%= deposit.plant.common_name %></td>
-        <td><%= deposit.lot_number.provenance %></td>
-        <td><%= deposit.lot_number.region %></td>
-        <td><%= [deposit.total_quantity, 0].max %></td>
-        <td><%= number_to_currency deposit.plant.level_1_price %></td>
-        <td><%= number_to_currency deposit.plant.level_2_price %></td>
-        <td><%= number_to_currency deposit.plant.level_3_price %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
-
-<table class="table table-striped col-md-12" id="header-fixed"></table>
+<%= render partial: "table" %>

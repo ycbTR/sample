@@ -5,6 +5,21 @@ module ApplicationHelper
     date.strftime("%d/%m/%Y")
   end
 
+
+  def export_to_excel_link
+    if @current_user && @current_user.staff?
+      link_to current_url(format: "xls") do
+        "<i class='fa fa-file-excel-o'></i>".html_safe
+      end .html_safe
+    end
+  end
+
+
+  def current_url(new_params = {})
+    url_for params.merge(new_params)
+  end
+
+
   def format_date_with_time(date = nil)
     return "-" if date.nil?
     date.strftime("%d/%m/%Y %H:%M")

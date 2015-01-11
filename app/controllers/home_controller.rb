@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   before_filter :only_staff!, only: [:catalogue_spa]
+  before_filter :set_header
 
   def index
 
@@ -32,5 +33,15 @@ class HomeController < ApplicationController
       redirect_to catalogue_general_path and return
     end
   end
+
+  def set_header
+    if request.format == "application/xls"
+      filename = params[:action].to_s.titleize
+      filename += "-#{Time.now.to_s.parameterize}"
+      filename += ".xls"
+      headers["Content-Disposition"] = "attachment\; filename=\"#{filename }\""
+    end
+  end
+
 
 end
