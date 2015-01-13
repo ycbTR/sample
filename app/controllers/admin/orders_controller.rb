@@ -29,6 +29,7 @@ class Admin::OrdersController < Admin::ResourceController
   end
 
   def seeding?
+    return false if @order.form_type.eql?("Nursery")
     @order.form_type.eql?('seeding') || params[:type].blank? || params[:type].eql?('seeding')
   end
 
