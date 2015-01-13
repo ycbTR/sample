@@ -19,7 +19,7 @@ class Order < ActiveRecord::Base
   before_create :generate_number
 
   def generate_number
-    self.number = "#{number_prefix}#{(Order.pluck(:id).last.to_i + 1).to_s.rjust(4, "0")}"
+    self.number = "#{number_prefix}#{(Order.order("id").last.try(:id).to_i + 1).to_s.rjust(4, "0")}"
   end
 
 
