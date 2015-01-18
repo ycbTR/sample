@@ -55,8 +55,8 @@
   <% @deposit_adjustments.each do |deposit_adjustment| %>
       <tr>
         <td><%= deposit_adjustment.id %></td>
-        <td><%= deposit_adjustment.deposit.display %></td>
-        <td><%= deposit_adjustment.deposit.plant.botanical_name %></td>
+        <td><%= deposit_adjustment.deposit.try(:display) %></td>
+        <td><%= deposit_adjustment.deposit.plant.try(:botanical_name) %></td>
         <td><%= deposit_adjustment.qty_bank.to_f %></td>
         <td><%= deposit_adjustment.qty_consigned.to_f %></td>
         <td><%= deposit_adjustment.qty_onhold.to_f %></td>

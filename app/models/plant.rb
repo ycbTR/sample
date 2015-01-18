@@ -19,6 +19,7 @@ class Plant < ActiveRecord::Base
                   :direct_seedable, :level_1_price, :level_2_price, :level_3_price
 
   validates :common_name, :species, :price_paid, presence: true
+  has_many :deposits, dependent: :destroy
 
 
   # plant.price_for(300)
