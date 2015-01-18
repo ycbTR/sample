@@ -3,14 +3,14 @@
   <tr>
     <th colspan="2" class="bold-black">Goulburn Broken Indigenous Seedbank</th>
     <th></th>
-    <th class="bold-black">SUMMER</th>
+    <th class="bold-black"></th>
     <th></th>
     <th></th>
     <th class="bold-black" colspan="3">Servicing the regions of</th>
   </tr>
 
   <tr>
-    <th colspan="2">The University of Melbourne, Victoria, 3647</th>
+    <th colspan="2"><%= Setting.address %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -23,7 +23,7 @@
   </tr>
 
   <tr>
-    <th colspan="2">Email: seedbank@gvce.com.au</th>
+    <th colspan="2">Email: <%= Setting.email %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -33,7 +33,7 @@
   </tr>
 
   <tr>
-    <th colspan="2">Ph: (03) 5833 9279 Fax: (03) 5833 9201</th>
+    <th colspan="2">Ph: <%= Setting.telephone %> Fax: <%= Setting.fax %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -44,7 +44,8 @@
 
   <tr>
     <th colspan="4">Go
-      to <%= link_to "www.gbcma.vic.gov.au/revegetation", "http://www.gbcma.vic.gov.au/revegetation", target: "_blank" %> for
+      to <%= link_to "#{Setting.region_maps_url}", "#{Setting.region_maps_url}", target: "_blank" %>
+      for
       region maps
     </th>
     <th></th>
@@ -53,30 +54,8 @@
     <th></th>
   </tr>
 
-
   <tr>
-    <th class="bold-black" colspan="2">To place an order:</th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-  <tr>
-    <th colspan="3">Start with <b class="bold-black">Lot No's</b> then <b class="bold-black">Qty (g)</b> Required of
-      each Lot
-    </th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-  <tr>
-    <th colspan="2">Simply fax or email</th>
+    <th colspan="2"></th>
     <th></th>
     <th></th>
     <th></th>
@@ -89,15 +68,39 @@
   </tr>
 
   <tr>
-    <th class="bold-black" colspan="2">Prices include G S T - Direct Seeding $715 / Kg</th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th style="font-size: 10px;"><b class="bold-black">GG</b> - Ghin Ghin <b class="bold-black">M</b> - Mansfield
-      <b class="bold-black">P</b> - Pyalong <b class="bold-black">Y</b> - Yea
+    <th class="bold-black" colspan="2">
+      All Prices include GST
     </th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <tr>
+    <th class="bold-black" colspan="2">
+      Nursery Prices as listed
+    </th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <tr>
+    <th class="bold-black" colspan="2">
+      Direct Seeding $<%= Setting.direct_seeding_base_price %> /Kg
+    </th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
 
 
@@ -133,7 +136,7 @@
   </tr>
 
   <tr>
-    <th class="bold-black" colspan="2">Minimum $25 fee applies to all orders</th>
+    <th class="bold-black" colspan="2">Minimum $<%= Setting.minimum_order_fee %> fee applies to all orders</th>
     <th></th>
     <th></th>
     <th></th>

@@ -1,5 +1,9 @@
 <%- model_class = LotNumber -%>
 <%= content_for :page_link do %>
+    <%= link_to "Bulk Operation",
+                bulk_import_admin_lot_numbers_path,
+                :class => 'btn pull-right', remote: true %>
+
     <%= link_to t('.new', :default => t("helpers.links.new")),
                 new_admin_lot_number_path,
                 :class => 'btn btn-primary pull-right', remote: true %>

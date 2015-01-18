@@ -456,9 +456,6 @@ pre, code, .container .jumbotron {
   box-shadow: 0 20px 0 -10px rgba(0, 0, 0, 0.1);
 }
 
-.modal-header {
-  border: none;
-}
 
 .modal-header .modal-title {
   background: #e74c3c;

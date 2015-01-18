@@ -19,7 +19,7 @@
          else
            level_1_price, level_2_price, level_3_price = plant.level_1_price, plant.level_2_price, plant.level_3_price
          end
-         ["#{l.display} - #{plant.species} - #{plant.common_name}", l.id, {total_quantity: l.total_quantity, level_1_price: level_1_price, level_2_price: level_2_price, level_3_price: level_3_price}]
+         ["#{l.display} - #{plant.species} - #{plant.common_name} - #{l.lot_number.provenance}", l.id, {total_quantity: l.total_quantity, level_1_price: level_1_price, level_2_price: level_2_price, level_3_price: level_3_price}]
 
        }
     %>
