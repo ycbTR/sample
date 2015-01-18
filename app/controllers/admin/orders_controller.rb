@@ -20,7 +20,9 @@ class Admin::OrdersController < Admin::ResourceController
   def load_deposits
     if seeding?
       @type = "seeding"
-      @deposits = Deposit.seeding.active
+      #@deposits = Deposit.seeding.active
+      # As requested, I've removed Seedable control
+      @deposits = Deposit.nursery.active
     else
       @type = "nursery"
       @deposits = Deposit.nursery.active
