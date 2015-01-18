@@ -69,5 +69,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def js_redirect_to(target)
+    render :text => "window.location.href='#{target}'"
+  end
 
 end

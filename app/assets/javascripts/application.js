@@ -15,5 +15,7 @@
 //= require twitter/bootstrap
 //= require rails.validations
 //= require_tree .
+$.ajaxSettings.dataType = 'script';
+
 
 

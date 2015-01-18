@@ -3,6 +3,8 @@
 //= require jquery_nested_form
 //= require rails.validations
 
+$.ajaxSettings.dataType = 'script';
+
 
 $(function () {
     $('.bxslider').bxSlider();
