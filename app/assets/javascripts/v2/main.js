@@ -88,6 +88,19 @@ $(document).ready(function () {
         return false;
     });
 
+
+
+    $(document).on('click','.all_check_toggle', function () {
+        if ($(this).is(":checked")) {
+            $(this).parent().parent().find('input:checkbox').prop('checked', true);
+        } else {
+            $(this).parent().parent().find('input:checkbox').prop('checked', false);
+        }
+
+    });
+
+
+
     do_select2();
 });
 
