@@ -1,0 +1,56 @@
+$font-family: 'Open Sans', sans-serif;
+
+// Variables
+$white: #fff;
+$black: #000;
+$focus-color: #1ac8c1;
+
+$black-99: lighten($black, 99%);
+$black-97: lighten($black, 97%);
+$black-94: lighten($black, 94%);
+$black-90: lighten($black, 90%);
+$black-85: lighten($black, 85%);
+$black-80: lighten($black, 80%);
+$black-82: lighten($black, 82%);
+$black-78: lighten($black, 78%);
+$black-68: lighten($black, 68%);
+$black-50: lighten($black, 50%);
+$black-33: lighten($black, 33%);
+$black-20: lighten($black, 20%);
+
+// Mixins
+@mixin sprite ($left_pos: 0, $top_pos: 0, $file: overlay-sprite, $type: png, $width: 600, $height: 50, $repeat: no-repeat) {
+  background-image: url('../img/' + $file + '.' + $type);
+  background-repeat: $repeat;
+  background-position: $left_pos $top_pos;
+
+  @media (-webkit-min-device-pixel-ratio: 2), (-moz-min-device-pixel-ratio: 2) {
+    & {
+      background-image: url('../img/' + $file + '@2x.' + $type);
+      background-size: $width $height;
+    }
+  }
+}
+
+@mixin animate ($speed: .2s) {
+  -webkit-transition: all $speed ease;
+  -moz-transition: all $speed ease;
+  -o-transition: all $speed ease;
+  transition: all $speed ease;
+}
+
+@mixin text ( $color: $black, $size: 14px, $height: 20px, $weight: 300, $family: $font-family, $style: normal) {
+  font-family : $family;
+  font-size : $size;
+  line-height : $height;
+  font-weight : $weight;
+  font-style: $style;
+  color : $color;
+}
+
+@mixin border-radius ($radius: 4px) {
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -o-border-radius: $radius;
+}

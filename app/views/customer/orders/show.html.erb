@@ -1,4 +1,14 @@
-<%= content_for :page_title, "Order ##{@order.number}" %>
+<%= content_for :page_title do %>
+    Order #<%= @order.number %>
+    <small>(<%=
+        link_to print_customer_order_path(@order.number), target: "blank" do
+          "<i class='fa fa-print'></i>".html_safe
+        end
+    %>)
+    </small>
+<% end %>
+
+
 <% if @order.order_form.present? %>
     <%= render partial: "shared/order_form_modal", locals: {order_form: @order.order_form} %>
     <%= content_for :page_link do %>

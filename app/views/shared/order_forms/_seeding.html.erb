@@ -58,32 +58,32 @@
   </tr>
 
 </table>
-
-<table class="table table-bordered">
-  <thead>
-  <tr>
-    <th colspan="4">Item(s)</th>
-  </tr>
-  <tr>
-    <th>Lot No</th>
-    <th>Botanical Name</th>
-    <th>Provenance</th>
-    <th>Grams</th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% order_form.items.each do |item| %>
-      <% deposit = item.deposit %>
+<% unless (hide_items rescue false) %>
+    <table class="table table-bordered">
+      <thead>
       <tr>
-        <td><%= deposit.display %></td>
-        <td><%= deposit.plant.species %></td>
-        <td><%= deposit.lot_number.provenance %></td>
-        <td><%= item.grams || "-" %></td>
+        <th colspan="4">Item(s)</th>
       </tr>
-  <% end %>
-  </tbody>
-</table>
+      <tr>
+        <th>Lot No</th>
+        <th>Botanical Name</th>
+        <th>Provenance</th>
+        <th>Grams</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% order_form.items.each do |item| %>
+          <% deposit = item.deposit %>
+          <tr>
+            <td><%= deposit.display %></td>
+            <td><%= deposit.plant.species %></td>
+            <td><%= deposit.lot_number.provenance %></td>
+            <td><%= item.grams || "-" %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% end %>
 
 
 

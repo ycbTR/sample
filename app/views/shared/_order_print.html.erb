@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Order <%= @order.number %></title>
+  <%= stylesheet_link_tag "order/order", :media => "all" %>
+  <%= javascript_include_tag "jquery" %>
+  <%= javascript_include_tag "jquery_ujs" %>
+</head>
+<body>
+
+
+<section id="reservetion-wrap">
+  <button id="printer" value="Print" class="printer" onclick="window.print();"></button>
+  <h1>Order #<%= @order.number %></h1>
+  <%
+     customer = @order.customer
+     order_form = @order.order_form
+  %>
+  <!-- reservation detail -->
+  <h3>Customer Details </h3>
+
+  <section class="detail">
+    <section class="box">
+      <p><label>Name:</label><span><%= customer.full_name %></span></p>
+
+      <p><label>Phone:</label><span><%= customer.phone %> </span></p>
+
+      <p><label>E-mail:</label><span><%= customer.email %></span></p>
+    </section>
+    <section class="box">
+      <p><label>Street address:</label><span><%= customer.address_1 %> <%= customer.address_2 %></span></p>
+
+      <p><label>Town &
+        Postcode:</label><span><%= [customer.town, customer.postcode].delete_if(&:blank?).join(', ') %></span></p>
+    </section>
+    <section class="clearfix"></section>
+  </section>
+
+
+  <h3>Order Form Details</h3>
+  <section class="detail">
+    <%= render(partial: "shared/order_forms/#{order_form.type.demodulize.downcase}", locals: {order_form: order_form, hide_items: true}) rescue "" %>
+    <section class="clearfix"></section>
+  </section>
+
+  <h3>Items</h3>
+  <section class="detail">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Lot No</th>
+        <th>Botanical Name</th>
+        <th>Provenance</th>
+        <th>Grams</th>
+        <th>Price</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @order.line_items.each do |item| %>
+          <% deposit = item.deposit %>
+          <tr>
+            <td><%= deposit.display %></td>
+            <td><%= deposit.plant.species %></td>
+            <td><%= deposit.lot_number.provenance %></td>
+            <td><%= item.qty || "-" %></td>
+            <td><%= number_to_currency(item.price) || "-" %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <section class="clearfix"></section>
+  </section>
+  <!-- reservation detail end -->
+  <section class="pushFooter"></section>
+</section>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        window.print();
+    });
+</script>
+</body>
+</html>

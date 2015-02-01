@@ -2,6 +2,13 @@ class Admin::OrdersController < Admin::ResourceController
   before_filter :load_previous_orders, only: :edit
   before_filter :load_deposits, only: [:new, :edit]
 
+
+  def print
+    respond_to do |format|
+      format.html { render :print, layout: false }
+    end
+  end
+
   private
 
   def set_q

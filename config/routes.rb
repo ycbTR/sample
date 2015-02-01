@@ -14,10 +14,15 @@ Seedbank::Application.routes.draw do
     resources :people
     resources :transfers
     resources :deposits
-    resources :orders
+    resources :orders do
+      member do
+        get :print
+      end
+    end
     resources :users
     resources :deposit_adjustments
     resources :settings
+    resources :order_forms
   end
 
   namespace :customer do
@@ -27,7 +32,11 @@ Seedbank::Application.routes.draw do
       end
     end
 
-    resources :orders, only: [:index, :show]
+    resources :orders, only: [:index, :show] do
+      member do
+        get :print
+      end
+    end
 
     get "profile", to: "order_forms#profile", :as => :profile
     put "profile", :to => "order_forms#profile", :as => :save_profile
