@@ -6,7 +6,7 @@ class Setting < RailsSettings::CachedSettings
   Setting.email ||= "seedbank@gvce.com.au"
   Setting.telephone ||= "(03) 5833 9279"
   Setting.fax ||= "(03) 5833 9201"
-  Setting.region_maps_url ||= "www.gbcma.vic.gov.au/revegetation"
+  Setting.region_maps_url ||= "http://www.gbcma.vic.gov.au/revegetation"
   #Setting.service_regions ||= "www.gbcma.vic.gov.au/revegetation"
   Setting.minimum_order_fee ||= 25
   Setting.default_mail_to ||= "w.paton@gmail.com"

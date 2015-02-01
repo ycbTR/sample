@@ -85,6 +85,7 @@ class Admin::ResourceController < Admin::BaseController
       @error_presence_for_response = true
       invoke_callbacks(:destroy, :fails)
       respond_with(@object) do |format|
+        flash[:error] = @object.errors.full_messages.join(', ')
         format.html { redirect_to collection_url }
       end
     end

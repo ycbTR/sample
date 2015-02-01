@@ -16,13 +16,23 @@
 class LotNumber < ActiveRecord::Base
   attr_accessible :location, :number, :provenance, :region, :heritage_ids,
                   :spa_name, :spa_specific
-  has_many :line_items
 
   has_many :deposits, dependent: :destroy
   has_many :lot_heritages, class_name: "LotHeritage", dependent: :destroy
   has_many :heritages, through: :lot_heritages, class_name: "LotNumber", dependent: :destroy
 
   validates :number, presence: true, :uniqueness => true
+
+
+  before_destroy :check_deposit
+
+  def check_deposit
+    if Deposit.where(lot_number_id: self.id).any? { |d| d.line_items.present? || d.order_form_items.present? }
+      self.errors.add(:base, "You cannot delete this lot number since it has some orders.")
+      return false
+    end
+  end
+
 
   def self.origin
     where("#{self.table_name}.id NOT IN(?)", LotHeritage.pluck(:lot_number_id).uniq)

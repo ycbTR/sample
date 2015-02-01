@@ -6,7 +6,7 @@
 <%= content_for :page_title, "Plants" %>
 
 <%= render partial: "shared/advanced_search", locals: {name: "species_or_common_name_cont", html_options: {placeholder: "Species or Common Name Conts"}} %>
-
+<%= render partial: "shared/errors", locals: {target: @object} %>
 
 <table class="table table-striped" id="table-1">
   <thead>

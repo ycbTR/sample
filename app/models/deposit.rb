@@ -24,6 +24,7 @@ class Deposit < ActiveRecord::Base
   belongs_to :collector, class_name: "Person::Collector"
   belongs_to :lot_number
   has_many :line_items
+  has_many :order_form_items
   has_many :deposit_adjustments, dependent: :destroy
   after_create :set_initial_deposit_adjustment
   scope :active, where(:deleted_at => nil)

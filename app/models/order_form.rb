@@ -38,7 +38,7 @@ class OrderForm < ActiveRecord::Base
 
   has_one :order
   belongs_to :user
-  has_many :order_form_items
+  has_many :order_form_items, dependent: :destroy
   alias_method :items, :order_form_items
   has_many :plants, :through => :order_form_items
 

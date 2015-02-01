@@ -20,7 +20,15 @@ class Plant < ActiveRecord::Base
 
   validates :common_name, :species, :price_paid, presence: true
   has_many :deposits, dependent: :destroy
+  has_many :order_form_items, dependent: :destroy
+  before_destroy :check_deposit
 
+  def check_deposit
+    if Deposit.where(plant_id: self.id).any? { |d| d.line_items.present? || d.order_form_items.present? }
+      self.errors.add(:base, "You cannot delete this plant since it has some orders.")
+      return false
+    end
+  end
 
   # plant.price_for(300)
   def price_for(grams = 0, seeding = false)
