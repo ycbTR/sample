@@ -36,19 +36,27 @@ class Deposit < ActiveRecord::Base
   end
 
   def self.seeding
-    with_eager_load.where("#{Plant.table_name}.direct_seedable = ?", true).where("(#{LotNumber.table_name}.spa_specific = ? OR #{LotNumber.table_name}.spa_specific IS NULL)", false)
+    with_eager_load.available.where("#{Plant.table_name}.direct_seedable = ?", true).where("(#{LotNumber.table_name}.spa_specific = ? OR #{LotNumber.table_name}.spa_specific IS NULL)", false)
   end
 
   def self.nursery
-    with_eager_load.where("(#{LotNumber.table_name}.spa_specific = ? OR #{LotNumber.table_name}.spa_specific IS NULL)", false)
+    with_eager_load.available.where("(#{LotNumber.table_name}.spa_specific = ? OR #{LotNumber.table_name}.spa_specific IS NULL)", false)
   end
 
   def self.spa
-    with_eager_load.where("#{LotNumber.table_name}.spa_specific = ?", true)
+    with_eager_load.available.where("#{LotNumber.table_name}.spa_specific = ?", true)
   end
 
   def self.general
-    with_eager_load.where("(#{LotNumber.table_name}.spa_specific = ? OR #{LotNumber.table_name}.spa_specific IS NULL)", false).order("plants.species asc")
+    with_eager_load.available.where("(#{LotNumber.table_name}.spa_specific = ? OR #{LotNumber.table_name}.spa_specific IS NULL)", false).order("plants.species asc")
+  end
+
+  def self.available
+    if User.current && User.current.admin?
+      where("")
+    else
+      where("(cached_qty_bank + cached_qty_consigned) > 0")
+    end
   end
 
   def display
