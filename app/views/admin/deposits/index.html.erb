@@ -24,6 +24,7 @@
     <th><%= model_class.human_attribute_name(:date) %></th>
     <th><%= model_class.human_attribute_name(:qty_bank) %></th>
     <th><%= model_class.human_attribute_name(:qty_consigned) %></th>
+    <th><%= "Comment" %></th>
     <th><%= t '.actions', :default => t("helpers.actions") %></th>
   </tr>
   </thead>
@@ -41,6 +42,7 @@
         <td><%= format_date deposit.date %></td>
         <td><%= deposit.qty_bank %></td>
         <td><%= deposit.qty_consigned %></td>
+        <td><%= deposit.comments %></td>
         <td>
           <%= link_to "Adjustments",
                       admin_deposit_adjustments_path(q: {deposit_id_eq: deposit.id}), :class => 'btn btn-xs btn-info' %>
