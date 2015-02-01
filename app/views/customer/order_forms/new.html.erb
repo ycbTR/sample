@@ -1,7 +1,5 @@
 <%= content_for :page_link do %>
-
-    <%= submit_tag "Place Order", onclick: "$('#action_button').click(); return false;", class: "btn btn-success pull-right", id: "fixed_action" %>
-
+    <%= submit_tag "Place Order", onclick: "$('#action_button').click(); return false;", class: "btn btn-success pull-right", id: "fixed_action", disable_with: "Processing..." %>
 <% end %>
 <div class="col-lg-12">
   <%= render partial: "shared/errors", locals: {target: @current_order} %>
