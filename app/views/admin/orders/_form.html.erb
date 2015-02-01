@@ -3,17 +3,19 @@
     <br>
     <%= render partial: "line_items", locals: {f: f} %>
     <br>
-    <div>
-      <b><%= "Current State: #{@order.state.to_s.titleize}" %></b><br>
-      <br>
-      <b>Change State:</b> <br>
-      <% @order.next_state_events.each do |e| %>
-          <label><%= f.radio_button :state_event, e.event, checked: (f.object.state == e.to) %> <%= e.to.to_s.titleize %></label>
-      <% end %>
-    </div>
+    <fieldset>
+      <legend><%= "Current State: #{@order.state.to_s.titleize}" %></legend>
+      <div>
+        <b>Change State:</b> <br>
+        <% @order.next_state_events.each do |e| %>
+            <label><%= f.radio_button :state_event, e.event, checked: (f.object.state == e.to) %> <%= e.to.to_s.titleize %></label>
+        <% end %>
+      </div>
+    </fieldset>
+
     <br>
     <div class="actions">
-      <%= f.submit %>  or
+      <%= f.submit "Save", class: "btn btn-primary" %>  or
       <%= link_to "Back", admin_orders_path %>
     </div>
 <% end %>

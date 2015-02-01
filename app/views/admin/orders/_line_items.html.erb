@@ -36,10 +36,10 @@
         </tr>
     <% end %>
   </table>
-  <table>
+  <table class="table">
     <tr>
-      <td colspan="2" style="text-align: right;">Total:</td>
-      <td colspan="1" class="total"></td>
+      <td colspan="2" style="text-align: right; width:50%;">Total:</td>
+      <td colspan="2" class="total" style="width:50%;"></td>
     </tr>
   </table>
   <p><%= f.link_to_add("Add a item", :line_items, :data => {:target => "#line_items"}, class: "btn btn-sm btn-info") if @order.pending? %></p>

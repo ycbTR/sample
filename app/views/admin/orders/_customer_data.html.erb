@@ -1,7 +1,5 @@
 <fieldset>
-  <legend><%= t(:customer) %></legend>
-
-
+  <legend><%= "Customer Details" %></legend>
   <div>
     <label>Use Existing?</label>
     <br>
@@ -17,17 +15,79 @@
   </div>
   <br>
 
-  <div class="col-lg-5">
+  <div class="col-lg-5 pad0">
     <div id="existing_customer_fields" class="field">
-      <%= f.label :customer_id %>
+      <%= f.label :customer_id, "Select Customer" %>
       <br/>
       <%= f.select :customer_id, Person::Customer.all.collect { |c| [c.full_name, c.id] }, {prompt: t(:please_select)}, class: "select2", disabled: !@order.pending? %>
       <br>
       <small>Save to see customer detail changes</small>
     </div>
+
+    <% customer = @order.customer %>
+
+    <div id="new_customer_fields" style="display: none;">
+      <%= f.fields_for :customer, @order.build_customer do |c| %>
+          <strong>New Customer</strong>
+          <br>
+          <br>
+
+          <div class="field">
+            <%= c.label :first_name %>
+            <br/>
+            <%= c.text_field :first_name, disabled: !@order.pending? %>
+          </div>
+
+          <div class="field">
+            <%= c.label :last_name %>
+            <br/>
+            <%= c.text_field :last_name, disabled: !@order.pending? %>
+          </div>
+
+          <div class="field">
+            <%= c.label :address_1 %>
+            <br/>
+            <%= c.text_field :address_1, disabled: !@order.pending? %>
+          </div>
+
+          <div class="field">
+            <%= c.label :address_2 %>
+            <br/>
+            <%= c.text_field :address_2, disabled: !@order.pending? %>
+          </div>
+
+          <div class="field">
+            <%= c.label :town %>
+            <br/>
+            <%= c.text_field :town, disabled: !@order.pending? %>
+          </div>
+
+          <div class="field">
+            <%= c.label :postcode %>
+            <br/>
+            <%= c.text_field :postcode, disabled: !@order.pending? %>
+          </div>
+
+          <div class="field">
+            <%= c.label :phone %>
+            <br/>
+            <%= c.text_field :phone, disabled: !@order.pending? %>
+          </div>
+
+          <div class="field">
+            <%= c.label :email %>
+            <br/>
+            <%= c.text_field :email, placeholder: "can be empty", disabled: !@order.pending? %>
+          </div>
+
+      <% end %>
+    </div>
+
   </div>
   <div class="col-lg-5">
-    <% if (customer = @order.customer).present? %>
+    <% if (customer).present? %>
+        <label> Customer Info </label>
+        <br/>
         <dl>
           <dd><%= customer.full_name %></dd>
           <dd><%= customer.address_1 %></dd>
@@ -37,66 +97,7 @@
         </dl>
     <% end %>
   </div>
-
-
-  <div id="new_customer_fields" style="display: none;">
-    <%= f.fields_for :customer, @order.build_customer do |c| %>
-        <strong>New Customer</strong>
-        <br>
-        <br>
-
-        <div class="field">
-          <%= c.label :first_name %>
-          <br/>
-          <%= c.text_field :first_name, disabled: !@order.pending? %>
-        </div>
-
-        <div class="field">
-          <%= c.label :last_name %>
-          <br/>
-          <%= c.text_field :last_name, disabled: !@order.pending? %>
-        </div>
-
-        <div class="field">
-          <%= c.label :address_1 %>
-          <br/>
-          <%= c.text_field :address_1, disabled: !@order.pending? %>
-        </div>
-
-        <div class="field">
-          <%= c.label :address_2 %>
-          <br/>
-          <%= c.text_field :address_2, disabled: !@order.pending? %>
-        </div>
-
-        <div class="field">
-          <%= c.label :town %>
-          <br/>
-          <%= c.text_field :town, disabled: !@order.pending? %>
-        </div>
-
-        <div class="field">
-          <%= c.label :postcode %>
-          <br/>
-          <%= c.text_field :postcode, disabled: !@order.pending? %>
-        </div>
-
-        <div class="field">
-          <%= c.label :phone %>
-          <br/>
-          <%= c.text_field :phone, disabled: !@order.pending? %>
-        </div>
-
-        <div class="field">
-          <%= c.label :email %>
-          <br/>
-          <%= c.text_field :email, placeholder: "can be empty", disabled: !@order.pending? %>
-        </div>
-
-    <% end %>
-  </div>
 </fieldset>
-
 <script>
     $("#new_customer_fields").find('input,select').attr('disabled', true);
 </script>
