@@ -6,7 +6,7 @@
                 :class => 'btn btn-primary pull-right' %>
 <% end %>
 <%= content_for :page_title, "Orders" %>
-<%= render partial: "admin/shared/selection_modal" %>
+<%= render partial: "shared/selection_modal" %>
 <%= render partial: "shared/advanced_search", locals: {name: "state_or_number_or_customer_full_name_cont", html_options: {placeholder: "Search..."}} %>
 
 <table class="table table-striped" id="table-1">
