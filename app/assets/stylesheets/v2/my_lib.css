@@ -129,3 +129,8 @@
 .no-border {
     border: none !important;
 }
+
+
+legend {
+    padding-bottom: 10px !important;
+}

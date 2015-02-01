@@ -672,7 +672,7 @@ pre, code, .container .jumbotron {
 }
 
 .breadcrumb li a {
-  color: #333;
+  color: #888888;
 }
 
 .breadcrumb li.active {
@@ -698,7 +698,7 @@ pre, code, .container .jumbotron {
 -------------------------------------------------- */
 body {
   font: 13px "Open Sans", Arial, sans-serif;
-  color: #333;
+  color: #888888;
   line-height: 1;
 }
 
@@ -2700,7 +2700,7 @@ ul.tweetList .fa {
 .testimonial .quote-box .author {
   margin: 15px 0 0 0;
   font: normal 14px "Roboto Condensed Light";
-  color: #333;
+  color: #888888;
 }
 .testimonial .quote-box .author strong {
   margin-right: 5px;
@@ -2741,13 +2741,13 @@ ul.tweetList .fa {
 }
 .testimonial.right .quote-box .author, .slider-mode li:nth-child(2n) .testimonial .quote-box .author {
   text-align: right;
-  color: #333;
+  color: #888888;
 }
 .testimonial.right .avatar, .slider-mode li:nth-child(2n) .testimonial .avatar {
   float: right;
 }
 .testimonial.right .quote, .slider-mode li:nth-child(2n) .testimonial .quote {
-  color: #333;
+  color: #888888;
   background: #f2f2f2;
 }
 .testimonial.right .quote .arrow, .slider-mode li:nth-child(2n) .testimonial .quote .arrow {
