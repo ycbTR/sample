@@ -32,7 +32,6 @@ class LotNumber < ActiveRecord::Base
     where(id: LotHeritage.pluck(:lot_number_id).uniq)
   end
 
-
   def display
     #if heritages.count > 0
     #  "#{spa_name} - #{heritages.pluck(:number).join('/')} > #{self.number}"
