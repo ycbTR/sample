@@ -8,7 +8,10 @@
     <th>Provenance</th>
     <th>Region</th>
     <th>Qty (g)</th>
-    <th>Select</th>
+    <th style="
+    width: 220px;
+    ">Select
+    </th>
   </tr>
   </thead>
 
@@ -29,8 +32,8 @@
             <%= hidden_field_tag "order_form[order_form_items_attributes][#{deposit.id}][deposit_id]", deposit.id, "data-validate" => false, disabled: true %>
             <%= hidden_field_tag "order_form[order_form_items_attributes][#{deposit.id}][plant_id]", deposit.plant_id, "data-validate" => false, disabled: true %>
             <% if grams %>
-                  <%= label_tag "Grams", "Grams" %>
-                  <%= text_field_tag "order_form[order_form_items_attributes][#{deposit.id}][grams]", 0, class: "", "data-validate" => false, disabled: true %>
+                <%= label_tag "Grams", "Grams" %>
+                <%= text_field_tag "order_form[order_form_items_attributes][#{deposit.id}][grams]", 0, class: "", "data-validate" => false, disabled: true %>
             <% end %>
           </div>
         </td>

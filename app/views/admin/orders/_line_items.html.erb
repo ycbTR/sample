@@ -42,7 +42,7 @@
       <td colspan="1" class="total"></td>
     </tr>
   </table>
-  <p><%= f.link_to_add("Add a item", :line_items, :data => {:target => "#line_items"}, class: "button button-success button-small") if @order.pending? %></p>
+  <p><%= f.link_to_add("Add a item", :line_items, :data => {:target => "#line_items"}, class: "btn btn-sm btn-info") if @order.pending? %></p>
 </fieldset>
 
 <script type="text/javascript">
