@@ -51,7 +51,12 @@ class Order < ActiveRecord::Base
 
     after_transition :from => :pending, :to => :processed, :do => :notify_processed
     after_transition :to => :canceled, :do => :after_cancel
+    after_transition :to => :complete, :do => :set_completed_at
 
+  end
+
+  def set_completed_at
+    self.touch(:completed_at)
   end
 
   # it gets next possible authorized events of current state
