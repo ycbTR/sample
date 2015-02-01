@@ -13,7 +13,11 @@ class Customer::OrderFormsController < Customer::BaseController
     if @current_order.update_attributes(params[:order_form]) && @current_order.reload.complete
       session.delete :order_id
       flash[:success] = "Successfully placed an order."
-      redirect_to customer_orders_path
+      if @current_user.admin?
+        redirect_to edit_admin_order_path(@current_order.order)
+      else
+        redirect_to customer_orders_path
+      end
     else
       render 'new'
     end

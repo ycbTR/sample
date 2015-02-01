@@ -1,6 +1,6 @@
 class OrderMailer < ActionMailer::Base
   default from: "SeedBank <projects@yigitbacakoglu.com>"
-  default bcc: "ycbacakoglu@gmail.com"
+  default bcc: Setting.default_mail_bcc
 
   def notify_processed(order)
     #@order = order
@@ -18,7 +18,7 @@ class OrderMailer < ActionMailer::Base
   def new_order_to_admin(order_form)
     @order_form, @order = order_form, order_form.order
     subject = "New Order ##{@order.number}"
-    mail(:to => Rails.env.development? ? "ycbacakoglu@gmail.com" : "w.paton@gmail.com", :subject => subject)
+    mail(:to => Setting.default_mail_to, :subject => subject)
   end
 
 end
