@@ -9,33 +9,10 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require ./my_lib
  *= require ./bootstrap-tagsinput
  */
 
-.marT5 {
-    margin-top: 5px !important;
-}
-
-.marT10 {
-    margin-top: 10px !important;
-}
-
-.marT20 {
-    margin-top: 20px !important;
-}
-
-.marT30 {
-    margin-top: 30px !important;
-}
-
-.marB20 {
-    margin-bottom: 20px !important;
-}
-
-.marB30 {
-    margin-bottom: 30px !important;
-
-}
 
 .media-thumb {
     -webkit-border-bottom-left-radius: 4px;
@@ -103,7 +80,7 @@ ul.menu.account-pages>li.active>a {
 
 .menu.account-pages .dropdown-menu li a {
     background: #fff;
-    color: #888;
+    color: #333;
     border: 1px solid #ddd;
     border-top: none;
     padding: 12px 20px;
