@@ -16,6 +16,10 @@ DETAILS
     <% if li.qty.present? %>
     Quantity: <%= li.qty %>grams
     <% end %>
+    <% if li.price.present? %>
     Price: <%= number_to_currency li.price, precision: 2 %>
+    <% end %>
     ================================================================
 <% end %>
+
+
