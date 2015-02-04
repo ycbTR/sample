@@ -17,7 +17,7 @@ class Admin::DepositsController < Admin::ResourceController
   end
 
   def save_before
-    @lot_numbers = LotNumber.where("id NOT IN(?)", Deposit.pluck(:lot_number_id) +[-1]).order("number asc")
+    @lot_numbers = LotNumber.where("id NOT IN(?)", Deposit.active.pluck(:lot_number_id) +[-1]).order("number asc")
     if @lot_numbers.blank?
       flash[:warning] = "Lot Number is required to continue."
       if request.xhr?

@@ -30,7 +30,7 @@ class Deposit < ActiveRecord::Base
   scope :active, where(:deleted_at => nil)
   scope :deleted, where("#{Deposit.table_name}.deleted_at is not null")
 
-  validates :lot_number_id, presence: true, uniqueness: true
+  validates :lot_number_id, presence: true
 
   def self.with_eager_load
     joins(:plant, :lot_number).includes(:plant, :lot_number)
