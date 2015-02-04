@@ -1,4 +1,4 @@
-<%= form_for [:admin, @deposit],validate: true, :html => {:class => 'form-horizontal'} do |f| %>
+<%= form_for [:admin, @deposit], validate: true, :html => {:class => 'form-horizontal'} do |f| %>
     <div class="modal-body">
       <div class="control-group">
         <%= f.label :collector_id, :class => 'control-label' %>
@@ -11,9 +11,9 @@
         <%= f.label :lot_number_id, :class => 'control-label' %>
         <div class="controls">
           <%= f.select :lot_number_id, @lot_numbers.collect { |l| [l.display, l.id, {"data-content" => [l.region, l.provenance, l.location, l.spa_name].delete_if { |c| c.blank? }.join(', '),
-                                                                                                      "data-provenance" => l.provenance,
-                                                                                                      "data-location" => l.location,
-                                                                                                      "data-spa-name" => l.spa_name}] }, {}, class: "content_select select2", "data-target" => "#lot_number_details" %>
+                                                                                     "data-provenance" => l.provenance,
+                                                                                     "data-location" => l.location,
+                                                                                     "data-spa-name" => l.spa_name}] }, {}, class: "content_select select2", "data-target" => "#lot_number_details" %>
           <div id="lot_number_details"></div>
         </div>
       </div>
@@ -27,7 +27,7 @@
       <div class="control-group">
         <%= f.label :date, :class => 'control-label' %>
         <div class="controls">
-          <%= f.date_select :date, :class => 'date_select', :order => [:day, :month, :year], :start_year => 1995 %>
+          <%= f.date_select :date, :class => 'date_select', :order => [:day, :month, :year], :start_year => 1995, end_year: Date.current.year %>
         </div>
       </div>
       <div class="control-group">
@@ -63,7 +63,7 @@
     </div>
 <% end %>
 <script>
-    $(".content_select").on('change',function () {
+    $(".content_select").on('change', function () {
         $($(this).data('target')).html($(this).find("option:selected").data("content"))
     }).trigger('change');
 </script>
