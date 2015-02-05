@@ -274,7 +274,7 @@ span.expand {
 
 #header-fixed {
     position: fixed;
-    top: 87px;
+    top: 0px;
     display: none;
     background-color: white;
 }
