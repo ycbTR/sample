@@ -10,10 +10,10 @@
       <div class="control-group">
         <%= f.label :lot_number_id, :class => 'control-label' %>
         <div class="controls">
-          <%= f.select :lot_number_id, @lot_numbers.collect { |l| [l.display, l.id, {"data-content" => [l.region, l.provenance, l.location, l.spa_name].delete_if { |c| c.blank? }.join(', '),
+          <%= f.select :lot_number_id, (@lot_numbers.collect { |l| [l.display, l.id, {"data-content" => [l.region, l.provenance, l.location, l.spa_name].delete_if { |c| c.blank? }.join(', '),
                                                                                      "data-provenance" => l.provenance,
                                                                                      "data-location" => l.location,
-                                                                                     "data-spa-name" => l.spa_name}] }, {}, class: "content_select select2", "data-target" => "#lot_number_details" %>
+                                                                                     "data-spa-name" => l.spa_name}]}), {}, class: "content_select select2", "data-target" => "#lot_number_details" %>
           <div id="lot_number_details"></div>
         </div>
       </div>
