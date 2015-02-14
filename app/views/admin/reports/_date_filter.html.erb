@@ -1,0 +1,5 @@
+<%= form_tag current_url, method: :get do %>
+    <%= text_field_tag :start_date, params[:start_date], class: "datepicker", placeholder: "Start date" %>  to
+    <%= text_field_tag :end_date, params[:end_date], class: "datepicker", placeholder: "End date" %>
+    <%= submit_tag "Search", class: "btn" %>
+<% end %>

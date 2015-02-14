@@ -18,7 +18,7 @@ class Admin::ReportsController < Admin::BaseController
     @end_date = params[:end_date]
     if @start_date.present? && @end_date.present?
       set_dates
-      @deposits = Deposit.joins(:lot_number, :plant, :collector).includes(:lot_number, :plant, :collector).where(date: start_date..end_date).order(:collector_id, "lot_numbers.region")
+      @deposits = Deposit.active.joins(:lot_number, :plant, :collector).includes(:lot_number, :plant, :collector).where(date: start_date..end_date).order(:collector_id, "lot_numbers.region")
       unless params[:format] == "xls"
         @deposits = @deposits.page(params[:page])
       end
@@ -35,6 +35,21 @@ class Admin::ReportsController < Admin::BaseController
   def direct_seed_sales
     @type = "OrderForm::Seeding"
     prepare_data
+  end
+
+  def seed_containment
+    @deposits = Deposit.active.joins(:lot_number, :plant, :collector).includes(:lot_number, :plant, :collector).
+        where("( deposits.cached_qty_bank + deposits.cached_qty_consigned ) > 0").
+        order('lot_numbers.region', "plants.species")
+    unless params[:format] == "xls"
+      @deposits = @deposits.page(params[:page])
+    end
+  end
+
+
+  #To show on catalogues
+  def total_quantity
+    cached_qty_bank.to_f + cached_qty_consigned.to_f
   end
 
   private

@@ -1,16 +1,13 @@
 <%= content_for :page_title, "Seed Deposits  #{export_to_excel_link}".html_safe %>
 
-<%= form_tag current_url, method: :get do %>
-    <%= text_field_tag :start_date, params[:start_date], class: "datepicker" %>  to
-    <%= text_field_tag :end_date, params[:end_date], class: "datepicker" %>
-    <%= submit_tag "Search" %>
-<% end %>
+<%= render "date_filter" %>
+
 <% unless @invalid_date %>
     <div>
       <table class="table table-striped marT30" id="table-1">
         <thead>
         <tr>
-          <th>Lot No</th>
+          <th>Lot Number</th>
           <th>Species</th>
           <th>Common Name</th>
           <th>Region</th>

@@ -10,6 +10,7 @@ Seedbank::Application.routes.draw do
         get :seed_deposits
         get :nursery_seed_sales
         get :direct_seed_sales
+        get :seed_containment
       end
     end
 
