@@ -20,7 +20,7 @@ class Setting < RailsSettings::CachedSettings
   Setting.smtp_password ||= "secret"
 
   after_save :set_email_settings
-
+  set_email_settings
 
   def self.set_email_settings
     ActionMailer::Base.smtp_settings = {
