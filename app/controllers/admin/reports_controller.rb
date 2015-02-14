@@ -18,7 +18,7 @@ class Admin::ReportsController < Admin::BaseController
     @end_date = params[:end_date]
     if @start_date.present? && @end_date.present?
       set_dates
-      @deposits = Deposit.active.joins(:lot_number, :plant, :collector).includes(:lot_number, :plant, :collector).where(date: start_date..end_date).order(:collector_id, "lot_numbers.region")
+      @deposits = Deposit.active.joins(:lot_number, :plant, :collector).includes(:lot_number, :plant, :collector).where(date: (@start_date)..(@end_date)).order(:collector_id, "lot_numbers.region")
       unless params[:format] == "xls"
         @deposits = @deposits.page(params[:page])
       end
