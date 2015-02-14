@@ -1,0 +1,52 @@
+<%= content_for :page_title, "Seeds on consignment #{export_to_excel_link}".html_safe %>
+
+
+<div>
+  <table class="table table-striped marT30" id="table-1">
+    <thead>
+    <tr>
+      <th>Collector</th>
+      <th>Date</th>
+      <th>Lot Number</th>
+      <th>Species</th>
+      <th>Qty Bank (g)</th>
+      <th>Qty Consignment (g)</th>
+      <th>Qty Onhold (g)</th>
+      <th>Comments</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <% @deposits.each do |deposit| %>
+
+        <tr>
+          <td><%= deposit.collector.full_name %></td>
+          <td><%= format_date deposit.date %></td>
+          <td><%= deposit.display %></td>
+          <td><%= deposit.plant.species %></td>
+          <td></td>
+          <td><%= deposit.qty_consigned %></td>
+          <td><%= %></td>
+          <td><%= deposit.comments %></td>
+        </tr>
+        <% deposit.deposit_adjustments.each do |adj| %>
+            <tr>
+              <td></td>
+              <td><%= format_date adj.created_at %></td>
+              <td></td>
+              <td></td>
+              <td><%= adj.qty_bank %></td>
+              <td><%= adj.qty_consigned %></td>
+              <td><%= adj.qty_onhold %></td>
+              <td><%= adj.comment %></td>
+            </tr>
+        <% end %>
+
+    <% end %>
+
+    </tbody>
+  </table>
+  <table class="table table-striped col-md-12" id="header-fixed"></table>
+  <%= paginate @deposits %>
+</div>
+

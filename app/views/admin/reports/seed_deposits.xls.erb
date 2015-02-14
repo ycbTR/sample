@@ -48,8 +48,8 @@
             <Cell><Data ss:Type="String"><%= deposit.lot_number.location %></Data></Cell>
             <Cell><Data ss:Type="String"><%= deposit.collector.full_name %></Data></Cell>
             <Cell><Data ss:Type="String"><%= format_date deposit.date %></Data></Cell>
-            <Cell><Data ss:Type="String"><%= deposit.cached_qty_bank.to_f %></Data></Cell>
-            <Cell><Data ss:Type="String"><%= deposit.cached_qty_consigned.to_f %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= deposit.cached_qty_bank.to_f %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= deposit.cached_qty_consigned.to_f %></Data></Cell>
           </Row>
       <% end %>
     </Table>
