@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+          <Cell><Data ss:Type="String">Direct Seeding Sales</Data></Cell>
+          <Cell><Data ss:Type="String">For Period</Data></Cell>
+          <Cell><Data ss:Type="String"><%= format_date params[:start_date].to_date %></Data></Cell>
+          <Cell><Data ss:Type="String">to</Data></Cell>
+          <Cell><Data ss:Type="String"><%= format_date params[:end_date].to_date %></Data></Cell>
+      </Row>
+      <Row>
+      </Row>
+
+      <Row>
+        <Cell><Data ss:Type="String">Date</Data></Cell>
+        <Cell><Data ss:Type="String">SB No</Data></Cell>
+        <Cell><Data ss:Type="String">PON</Data></Cell>
+        <Cell><Data ss:Type="String">Landholder Name</Data></Cell>
+        <Cell><Data ss:Type="String">Business Name</Data></Cell>
+        <Cell><Data ss:Type="String">ABN</Data></Cell>
+        <Cell><Data ss:Type="String">Postal Address</Data></Cell>
+        <Cell><Data ss:Type="String">Total Quantity (kg)</Data></Cell>
+        <Cell><Data ss:Type="String">Total ($)</Data></Cell>
+      </Row>
+
+      <% @order_forms.each do |order_form| %>
+          <% if @current_collector && @current_collector != order_form.business_name %>
+              <Row>
+                <Cell><Data ss:Type="String"></Data></Cell>
+                </Row>
+          <% end %>
+          <% @current_collector = order_form.business_name %>
+          <% order = order_form.order %>
+          <Row>
+            <Cell><Data ss:Type="String"><%= format_date order.completed_at %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= order.number %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= order_form.pon %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= order_form.landholder_name %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= order_form.business_name %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= order_form.abn %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= order_form.property_address %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= order.line_items.sum(:qty).to_f / 1000 %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= order.total %></Data></Cell>
+            </Row>
+      <% end %>
+    </Table>
+
+  </Worksheet>
+</Workbook>

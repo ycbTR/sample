@@ -28,13 +28,25 @@ class Admin::ReportsController < Admin::BaseController
   end
 
   def nursery_seed_sales
+    @type = "OrderForm::Nursery"
+    prepare_data
+  end
+
+  def direct_seed_sales
+    @type = "OrderForm::Seeding"
+    prepare_data
+  end
+
+  private
+
+  def prepare_data
     @start_date = params[:start_date]
     @end_date = params[:end_date]
 
     if @start_date.present? && @end_date.present?
       set_dates
       @order_forms = OrderForm.joins(:order).includes(:order => :line_items).
-          where("order_forms.type" => "OrderForm::Nursery").
+          where("order_forms.type" => @type).
           where("orders.completed_at" => (@start_date)..(@end_date)).
           where("orders.state = ?", 'completed').order(:business_name, "orders.completed_at")
 
@@ -45,7 +57,6 @@ class Admin::ReportsController < Admin::BaseController
     else
       @invalid_date = true
     end
-
   end
 
 
