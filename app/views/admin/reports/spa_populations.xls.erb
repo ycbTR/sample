@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+          <Cell><Data ss:Type="String">SPA Populations</Data></Cell>
+      </Row>
+      <Row>
+      </Row>
+
+      <Row>
+          <Cell><Data ss:Type="String">SPA Name</Data></Cell>
+          <Cell><Data ss:Type="String">Lot Number</Data></Cell>
+          <Cell><Data ss:Type="String">Species</Data></Cell>
+          <Cell><Data ss:Type="String">Heritage</Data></Cell>
+          <Cell><Data ss:Type="String">Region</Data></Cell>
+          <Cell><Data ss:Type="String">Provenance</Data></Cell>
+          <Cell><Data ss:Type="String">Location</Data></Cell>
+      </Row>
+      <% @lot_numbers.each_with_index do |lot_number, index| %>
+          <Row>
+            <Cell><Data ss:Type="String"><%= lot_number.spa_name %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.number %></Data></Cell>
+          </Row>
+          <%= add_heritages_xls(lot_number) %>
+      <% end %>
+    </Table>
+
+  </Worksheet>
+</Workbook>

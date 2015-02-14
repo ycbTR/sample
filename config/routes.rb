@@ -4,6 +4,12 @@ Seedbank::Application.routes.draw do
 
   namespace :admin do
     resources :transactions
+    resources :reports do
+      collection do
+        get :spa_populations
+      end
+    end
+
     resources :lot_numbers do
       collection do
         get :bulk_import

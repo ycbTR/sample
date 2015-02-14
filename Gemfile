@@ -93,3 +93,8 @@ gem 'auto-session-timeout'
 
 gem 'quiet_assets', group: :development
 gem 'roo'
+
+gem 'rubyzip',  "~> 0.9.9"
+
+
+gem 'axlsx'

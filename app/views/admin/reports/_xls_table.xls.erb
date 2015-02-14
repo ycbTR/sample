@@ -1,0 +1,28 @@
+<Table>
+  <Row>
+    <Cell><Data ss:Type="String">Lot No</Data></Cell>
+    <Cell><Data ss:Type="String">Spa Name</Data></Cell>
+    <Cell><Data ss:Type="String">Botanical Name</Data></Cell>
+    <Cell><Data ss:Type="String">Common Name</Data></Cell>
+    <Cell><Data ss:Type="String">Provenance</Data></Cell>
+    <Cell><Data ss:Type="String">Region</Data></Cell>
+    <Cell><Data ss:Type="String">Qty</Data></Cell>
+    <Cell><Data ss:Type="String">$/kg</Data></Cell>
+    <Cell><Data ss:Type="String">$/kg</Data></Cell>
+    <Cell><Data ss:Type="String">$/kg</Data></Cell>
+  </Row>
+  <% @deposits.all.each do |deposit| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= deposit.display %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= (deposit.lot_number.spa_name.blank? ? "NA" : deposit.lot_number.spa_name) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= deposit.plant.species %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= deposit.plant.common_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= deposit.lot_number.provenance %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= deposit.lot_number.region %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= [deposit.total_quantity, 0].max %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= number_to_currency deposit.plant.level_1_price %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= number_to_currency deposit.plant.level_2_price %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= number_to_currency deposit.plant.level_3_price %></Data></Cell>
+      </Row>
+  <% end %>
+</Table>

@@ -25,21 +25,12 @@
         </div>
       </div>
 
+      <% @lot_numbers = LotNumber.where("id != ?", (@lot_number.id || -1)) %>
 
       <div class="control-group">
-        <%= f.label :heritage_ids, "Heritage Lot Numbers", :class => 'control-label' %>
-        <div class="field">
-          <div class="multiselect">
-            <% @lot_numbers = LotNumber.where("id != ?", (@lot_number.id || -1)) %>
-            <% heritage_ids = f.object.heritage_ids %>
-            <label class="check_header"><%= check_box_tag :select_all, 1, (heritage_ids.count == @lot_numbers.count), class: "all_check_toggle" %>
-              Select All</label>
-            <% @lot_numbers.each do |l| %>
-                <label>
-                  <%= f.check_box :heritage_ids, {multiple: true, :checked => heritage_ids.include?(l.id)}, l.id, nil %> <%= l.display %>
-                </label>
-            <% end %>
-          </div>
+        <%= f.label :heritage_ids, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.select :heritage_ids, options_for_select(@lot_numbers.collect { |l| [l.display, l.id] }, selected: f.object.heritage_ids), {}, :multiple => true, :class => 'select2' %>
         </div>
       </div>
 

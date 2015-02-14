@@ -265,7 +265,7 @@ class Admin::ResourceController < Admin::BaseController
 
   def js_response
     if params[:action].in?("new", "edit")
-      render_default_modal_form(modal_title || "#{params[:action].titleize} #{object_name}")
+      render_default_modal_form(modal_title || "#{params[:action].titleize} #{object_name.to_s.titleize}")
     else
       render :layout => false
     end

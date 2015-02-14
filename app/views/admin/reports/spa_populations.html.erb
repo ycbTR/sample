@@ -1,0 +1,26 @@
+<%= content_for :page_title, "SPA Populations  #{export_to_excel_link}".html_safe %>
+
+<div>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>SPA Name</th>
+      <th>Lot Number</th>
+      <th>Species</th>
+      <th>Heritage</th>
+      <th>Region</th>
+      <th>Provenance</th>
+      <th>Location</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @lot_numbers.each_with_index do |lot_number, index| %>
+        <tr class="top-border <%= 'first' if index == 0 %>">
+          <td><%= lot_number.spa_name %></td>
+          <td colspan="6"><%= lot_number.number %></td>
+        </tr>
+        <%= add_heritages(lot_number) %>
+    <% end %>
+    </tbody>
+  </table>
+</div>

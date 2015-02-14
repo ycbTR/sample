@@ -13,7 +13,6 @@
  *= require ./bootstrap-tagsinput
  */
 
-
 .media-thumb {
     -webkit-border-bottom-left-radius: 4px;
     -moz-border-bottom-left-radius: 4px;
@@ -58,7 +57,7 @@
     color: white;
 }
 
-ul.menu.account-pages>li.active>a {
+ul.menu.account-pages > li.active > a {
     color: #e74c3c;
 }
 
@@ -101,7 +100,7 @@ ul.menu.account-pages>li.active>a {
     position: relative
 }
 
-.has-ribbon>div {
+.has-ribbon > div {
     position: relative;
     z-index: 0
 }
@@ -159,7 +158,7 @@ ul.menu.account-pages>li.active>a {
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-.about .social a>em {
+.about .social a > em {
     display: inline-block;
     width: 20px;
     height: 20px;
@@ -279,8 +278,6 @@ span.expand {
     background-color: white;
 }
 
-
-
 .multiselect {
     height: 15em;
     border: solid 1px #c0c0c0;
@@ -310,6 +307,7 @@ span.expand {
     visibility: visible;
     right: 25px;
 }
+
 #back_to_top {
     bottom: 350px !important;
 }
@@ -331,6 +329,7 @@ span.expand {
     visibility: hidden;
     -webkit-backface-visibility: hidden;
 }
+
 #back_to_top span i {
     font-size: 22px;
     -webkit-transition: color .2s ease 0s;
@@ -343,6 +342,15 @@ span.expand {
 .select2-container {
     min-width: 100px;
 }
+
 .field_with_errors {
     color: red;
+}
+
+.dropdown-menu {
+    width: 175px;
+}
+
+.top-border:not(.first) {
+    border-top: 5px solid rgb(221, 221, 221);
 }
