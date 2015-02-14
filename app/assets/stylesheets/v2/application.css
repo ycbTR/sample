@@ -356,3 +356,7 @@ span.expand {
 .top-border:not(.first) {
     border-top: 5px solid rgb(221, 221, 221);
 }
+
+.datepicker.datepicker-dropdown {
+    min-width: 210px !important;
+}

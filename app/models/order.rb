@@ -51,7 +51,7 @@ class Order < ActiveRecord::Base
 
     after_transition :from => :pending, :to => :processed, :do => :notify_processed
     after_transition :to => :canceled, :do => :after_cancel
-    after_transition :to => :complete, :do => :set_completed_at
+    after_transition :to => :completed, :do => :set_completed_at
 
   end
 

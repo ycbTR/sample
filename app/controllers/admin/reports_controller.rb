@@ -14,9 +14,10 @@ class Admin::ReportsController < Admin::BaseController
   end
 
   def seed_deposits
-    start_date = params[:start_date]
-    end_date = params[:end_date]
-    if start_date.present? && end_date.present?
+    @start_date = params[:start_date]
+    @end_date = params[:end_date]
+    if @start_date.present? && @end_date.present?
+      set_dates
       @deposits = Deposit.joins(:lot_number, :plant, :collector).includes(:lot_number, :plant, :collector).where(date: start_date..end_date).order(:collector_id, "lot_numbers.region")
       unless params[:format] == "xls"
         @deposits = @deposits.page(params[:page])
@@ -25,5 +26,33 @@ class Admin::ReportsController < Admin::BaseController
       @invalid_date = true
     end
   end
+
+  def nursery_seed_sales
+    @start_date = params[:start_date]
+    @end_date = params[:end_date]
+
+    if @start_date.present? && @end_date.present?
+      set_dates
+      @order_forms = OrderForm.joins(:order).includes(:order => :line_items).
+          where("order_forms.type" => "OrderForm::Nursery").
+          where("orders.completed_at" => (@start_date)..(@end_date)).
+          where("orders.state = ?", 'completed').order(:business_name, "orders.completed_at")
+
+      unless params[:format] == "xls"
+        @order_forms = @order_forms.page(params[:page])
+      end
+
+    else
+      @invalid_date = true
+    end
+
+  end
+
+
+  def set_dates
+    @start_date = ActiveSupport::TimeZone.new("Australia/Sydney").local_to_utc(@start_date.to_time.beginning_of_day)
+    @end_date = ActiveSupport::TimeZone.new("Australia/Sydney").local_to_utc(@end_date.to_time.end_of_day)
+  end
+
 
 end
