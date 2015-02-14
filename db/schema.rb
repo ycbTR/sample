@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150111124906) do
+ActiveRecord::Schema.define(:version => 20150214132208) do
 
   create_table "assets", :force => true do |t|
     t.string   "attachment_file_name"
@@ -188,6 +188,8 @@ ActiveRecord::Schema.define(:version => 20150111124906) do
     t.float    "cached_qty_onhold"
   end
 
+  add_index "deposits", ["date", "collector_id"], :name => "d1"
+
   create_table "line_items", :force => true do |t|
     t.integer  "order_id"
     t.string   "seedmix_or_individual"
@@ -215,6 +217,9 @@ ActiveRecord::Schema.define(:version => 20150111124906) do
     t.string   "spa_name"
     t.boolean  "spa_specific",                :default => false
   end
+
+  add_index "lot_numbers", ["spa_specific", "spa_name"], :name => "l2"
+  add_index "lot_numbers", ["spa_specific"], :name => "l1"
 
   create_table "order_form_items", :force => true do |t|
     t.integer  "order_form_id"
@@ -278,6 +283,8 @@ ActiveRecord::Schema.define(:version => 20150111124906) do
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
   end
+
+  add_index "people", ["id", "type"], :name => "p1"
 
   create_table "plants", :force => true do |t|
     t.string   "species"

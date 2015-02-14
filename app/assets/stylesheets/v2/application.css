@@ -11,6 +11,8 @@
  *= require_self
  *= require ./my_lib
  *= require ./bootstrap-tagsinput
+ *= require bootstrap-datepicker3
+
  */
 
 .media-thumb {

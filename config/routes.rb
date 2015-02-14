@@ -7,6 +7,7 @@ Seedbank::Application.routes.draw do
     resources :reports do
       collection do
         get :spa_populations
+        get :seed_deposits
       end
     end
 

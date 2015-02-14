@@ -1,0 +1,57 @@
+<%= content_for :page_title, "Seed Deposits  #{export_to_excel_link}".html_safe %>
+
+<%= form_tag current_url, method: :get do %>
+    <%= text_field_tag :start_date, params[:start_date], class: "datepicker" %>  to
+    <%= text_field_tag :end_date, params[:end_date], class: "datepicker" %>
+    <%= submit_tag "Search" %>
+<% end %>
+<% unless @invalid_date %>
+    <div>
+      <table class="table table-striped marT30" id="table-1">
+        <thead>
+        <tr>
+          <th>Lot No</th>
+          <th>Species</th>
+          <th>Common Name</th>
+          <th>Region</th>
+          <th>Provenance</th>
+          <th>SPA</th>
+          <th>Location</th>
+          <th>Collector</th>
+          <th>Collection Date</th>
+          <th>Qty(g)</th>
+          <th>Qty Consigned(g)</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <% @deposits.each do |deposit| %>
+            <% if @current_collector && @current_collector != deposit.collector_id %>
+                <tr>
+                  <td colspan="11"></td>
+                </tr>
+            <% end %>
+            <% @current_collector = deposit.collector_id %>
+
+              <tr>
+                <td><%= deposit.display %></td>
+                <td><%= deposit.plant.species %></td>
+                <td><%= deposit.plant.common_name %></td>
+                <td><%= deposit.lot_number.region %></td>
+                <td><%= deposit.lot_number.provenance %></td>
+                <td><%= deposit.lot_number.spa_name %></td>
+                <td><%= deposit.lot_number.location %></td>
+                <td><%= deposit.collector.full_name %></td>
+                <td><%= format_date deposit.date %></td>
+                <td><%= deposit.cached_qty_bank.to_f %></td>
+                <td><%= deposit.cached_qty_consigned.to_f %></td>
+              </tr>
+        <% end %>
+
+        </tbody>
+      </table>
+      <table class="table table-striped col-md-12" id="header-fixed"></table>
+      <%= paginate @deposits %>
+    </div>
+<% end %>
+

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+          <Cell><Data ss:Type="String">Seed Deposits</Data></Cell>
+          <Cell><Data ss:Type="String">For Period</Data></Cell>
+          <Cell><Data ss:Type="String"><%= format_date params[:start_date].to_date %></Data></Cell>
+          <Cell><Data ss:Type="String">to</Data></Cell>
+          <Cell><Data ss:Type="String"><%= format_date params[:end_date].to_date %></Data></Cell>
+      </Row>
+      <Row>
+      </Row>
+      <Row>
+       <Cell><Data ss:Type="String">Lot No</Data></Cell>
+       <Cell><Data ss:Type="String">Species</Data></Cell>
+       <Cell><Data ss:Type="String">Common Name</Data></Cell>
+       <Cell><Data ss:Type="String">Region</Data></Cell>
+       <Cell><Data ss:Type="String">Provenance</Data></Cell>
+       <Cell><Data ss:Type="String">SPA</Data></Cell>
+       <Cell><Data ss:Type="String">Location</Data></Cell>
+       <Cell><Data ss:Type="String">Collector</Data></Cell>
+       <Cell><Data ss:Type="String">Collection Date</Data></Cell>
+       <Cell><Data ss:Type="String">Qty(g)</Data></Cell>
+       <Cell><Data ss:Type="String">Qty Consigned(g)</Data></Cell>
+
+
+      </Row>
+
+      <% @deposits.each do |deposit| %>
+          <% if @current_collector && @current_collector != deposit.collector_id %>
+             <Row>
+              </Row>
+          <% end %>
+          <% @current_collector = deposit.collector_id %>
+
+          <Row>
+            <Cell><Data ss:Type="String"><%= deposit.display %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= deposit.plant.species %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= deposit.plant.common_name %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= deposit.lot_number.region %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= deposit.lot_number.provenance %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= deposit.lot_number.spa_name %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= deposit.lot_number.location %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= deposit.collector.full_name %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= format_date deposit.date %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= deposit.cached_qty_bank.to_f %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= deposit.cached_qty_consigned.to_f %></Data></Cell>
+          </Row>
+      <% end %>
+    </Table>
+
+  </Worksheet>
+</Workbook>

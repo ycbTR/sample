@@ -2,12 +2,17 @@
 //= require jquery_ujs
 //= require jquery_nested_form
 //= require rails.validations
+//= require bootstrap-datepicker
+
 
 $.ajaxSettings.dataType = 'script';
 
 
 $(function () {
     $('.bxslider').bxSlider();
+
+
+    $('.datepicker').datepicker({"format": "yyyy-mm-dd", "autoclose": true});
 
 
     $(".toggle-radio").on('click', function () {
@@ -89,8 +94,7 @@ $(document).ready(function () {
     });
 
 
-
-    $(document).on('click','.all_check_toggle', function () {
+    $(document).on('click', '.all_check_toggle', function () {
         if ($(this).is(":checked")) {
             $(this).parent().parent().find('input:checkbox').prop('checked', true);
         } else {
@@ -98,7 +102,6 @@ $(document).ready(function () {
         }
 
     });
-
 
 
     do_select2();
