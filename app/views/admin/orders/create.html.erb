@@ -1,0 +1,10 @@
+<div id="select-modal-body" class="modal-body">
+
+  <p class='loading'><%= link_to "Direct Seeding", new_customer_order_form_path(:type => "seeding", cid: @order.customer_id), class: "btn btn-primary" %>
+
+  <p class='loading'><%= link_to "Nursery", new_customer_order_form_path(:type => "nursery", cid: @order.customer_id), class: "btn btn-primary" %>
+  </p>
+</div>
+<div id="select-modal-footer" class="modal-footer">
+  <%= link_to t(:close), "#", "data-dismiss" => "modal", :class => "btn", "aria-hidden" => true %>
+</div>

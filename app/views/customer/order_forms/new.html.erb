@@ -6,6 +6,8 @@
   <%= form_for @current_order, url: complete_customer_order_forms_path, :as => :order_form, method: :put, validate: false, html: {class: "form-horizontal"} do |f| %>
       <%= f.hidden_field :type, value: "OrderForm::#{(params[:type] || 'seeding').titleize}" %>
       <%= hidden_field_tag :type, params[:type] %>
+      <%= hidden_field_tag :cid, params[:cid] %>
+      <%= f.hidden_field :customer_id, value: (f.object.customer_id || params[:cid]) %>
       <%= render partial: (params[:type] || 'seeding'), locals: {f: f} %>
   <% end %>
 </div>

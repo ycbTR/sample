@@ -4,7 +4,7 @@ class Customer::OrderFormsController < Customer::BaseController
   def new
     build_order
     OrderForm.accessible_attributes
-    @current_order.assign_attributes(((@current_user.order_forms.of_type(@current_order.type).last.attributes.except('pon', 'id', 'type', 'hectare', 'kilometer', 'grams_per_km', 'comments')) rescue {}), without_protection: true)
+    @current_order.assign_attributes((((@current_order.customer || @current_user).order_forms.of_type(@current_order.type).last.attributes.except('pon', 'id', 'type', 'hectare', 'kilometer', 'grams_per_km', 'comments')) rescue {}), without_protection: true)
   end
 
 
@@ -39,7 +39,8 @@ class Customer::OrderFormsController < Customer::BaseController
 
   def build_order
     @current_order = (params[:order_form][:type]).constantize.new rescue ("OrderForm::#{(params[:type] || 'seeding').titleize}").constantize.new rescue OrderForm.new
-    @current_order.user = @current_user
+    @current_order.customer_id = params[:cid] || @current_user.customer.id
+
     if @current_order.type == "OrderForm::Seeding"
       if Rails.env.production?
         ids = Deposit.select("DISTINCT ON(plant_id) *").pluck(:id)

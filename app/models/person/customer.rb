@@ -18,5 +18,6 @@
 #
 
 class Person::Customer < Person
+  has_many :order_forms, :foreign_key => :customer_id
 
 end

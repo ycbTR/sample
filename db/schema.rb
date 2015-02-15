@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150214132208) do
+ActiveRecord::Schema.define(:version => 20150215141826) do
 
   create_table "assets", :force => true do |t|
     t.string   "attachment_file_name"
@@ -189,6 +189,8 @@ ActiveRecord::Schema.define(:version => 20150214132208) do
   end
 
   add_index "deposits", ["date", "collector_id"], :name => "d1"
+  add_index "deposits", ["deleted_at", "lot_number_id", "plant_id"], :name => "d2"
+  add_index "deposits", ["deleted_at"], :name => "d3"
 
   create_table "line_items", :force => true do |t|
     t.integer  "order_id"
@@ -218,6 +220,7 @@ ActiveRecord::Schema.define(:version => 20150214132208) do
     t.boolean  "spa_specific",                :default => false
   end
 
+  add_index "lot_numbers", ["id", "spa_specific"], :name => "id_spa_spec"
   add_index "lot_numbers", ["spa_specific", "spa_name"], :name => "l2"
   add_index "lot_numbers", ["spa_specific"], :name => "l1"
 
@@ -256,6 +259,7 @@ ActiveRecord::Schema.define(:version => 20150214132208) do
     t.integer  "user_id"
     t.string   "state"
     t.string   "telephone"
+    t.integer  "customer_id"
   end
 
   create_table "orders", :force => true do |t|
@@ -297,6 +301,8 @@ ActiveRecord::Schema.define(:version => 20150214132208) do
     t.decimal  "level_2_price"
     t.decimal  "level_3_price"
   end
+
+  add_index "plants", ["id", "species"], :name => "pid_spec"
 
   create_table "settings", :force => true do |t|
     t.string   "var",                      :null => false

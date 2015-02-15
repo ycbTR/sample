@@ -2,11 +2,11 @@
 
 <%= content_for :page_link do %>
     <%= link_to t('.new', :default => t("helpers.links.new")),
-                "#selectModal", "data-toggle" => "modal",
+                new_admin_order_path, remote: true,
                 :class => 'btn btn-primary pull-right' %>
 <% end %>
 <%= content_for :page_title, "Orders" %>
-<%= render partial: "shared/selection_modal" %>
+<%= render partial: "admin/shared/selection_modal" %>
 <%= render partial: "shared/advanced_search", locals: {name: "state_or_number_or_customer_full_name_cont", html_options: {placeholder: "Search..."}} %>
 
 <table class="table table-striped" id="table-1">

@@ -15,7 +15,7 @@ $(function () {
     $('.datepicker').datepicker({"format": "yyyy-mm-dd", "autoclose": true});
 
 
-    $(".toggle-radio").on('click', function () {
+    $(document).on("click", ".toggle-radio", function () {
         var el = $(this);
         var to_hide = $(el.data('hide'));
         var to_show = $(el.data('target'));
@@ -26,7 +26,6 @@ $(function () {
         to_show.find('input, select').attr('disabled', false);
         to_show.show();
     });
-
 
     $(document).on("hover", ".image", function () {
         $(this).toggleClass("hover");

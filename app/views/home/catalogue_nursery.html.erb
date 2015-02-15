@@ -1,11 +1,5 @@
 <%= content_for :page_title, "Nursery Catalogue #{export_to_excel_link}".html_safe %>
 
-<%= content_for :page_link do %>
-    <%= link_to "Place an order", "#selectModal", "data-toggle" => "modal", class: "btn btn-success" %>
-<% end %>
-<%= render partial: "shared/selection_modal" %>
-<!-- /Row-->
-
 <%= render partial: "table_header" %>
 <%= render partial: "table" %>
 

@@ -15,8 +15,10 @@ class ApplicationController < ActionController::Base
     render :partial => "/shared/default_modal_form", :locals => {:target => target, :options => options}
   end
 
-  def js_redirect_to(path)
-    render text: "window.location.href='#{path}'"
+
+  def render_default_ujs_response(target = nil, options = {})
+    target ||= "#{params[:controller]}/#{@current_action}"
+    render :partial => "/shared/default_ujs_response", :locals => {:target => target}
   end
 
 

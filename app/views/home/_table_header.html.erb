@@ -1,3 +1,14 @@
+<%= content_for :page_link do %>
+    <% if @current_user && @current_user.admin? %>
+        <%= link_to "Place an order",
+                    new_admin_order_path, remote: true,
+                    :class => 'btn btn-primary pull-right' %>
+
+    <% else %>
+        <%= link_to "Place an order", customer_orders_path(n: 1), "data-toggle" => "modal", class: "btn btn-success" %>
+    <% end %>
+<% end %>
+
 <table class="table">
   <thead>
   <tr>

@@ -5,6 +5,9 @@ module ApplicationHelper
     date.strftime("%d/%m/%Y")
   end
 
+  def render_errors(target)
+    render(partial: "shared/errors", locals: {target: target})
+  end
 
   ALERT_TYPES = [:error, :info, :success, :warning, :danger]
 

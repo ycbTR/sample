@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
 
   has_many :transfers
   has_many :transactions
-  has_many :order_forms
+  has_many :order_forms, :through => :customer
 
   def admin?
     self.role == "Admin"

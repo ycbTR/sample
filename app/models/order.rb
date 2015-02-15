@@ -17,6 +17,7 @@ class Order < ActiveRecord::Base
   attr_accessor :number_prefix
   attr_accessible :completed_at, :customer_id, :number, :line_items_attributes, :customer_attributes, :state_event
   before_create :generate_number
+  validates :customer, presence: true
 
   def generate_number
     self.number = "#{number_prefix}#{(Order.order("id").last.try(:id).to_i + 1).to_s.rjust(4, "0")}"
@@ -31,6 +32,10 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :customer, allow_destroy: true
 
   state_machine :initial => :pending do
+
+    event :new do
+      transition :from => :pending, :to => [:new], if: Proc.new { |o| o.line_items.blank? }
+    end
 
     event :pend do
       transition :to => :pending, :from => [:processed]

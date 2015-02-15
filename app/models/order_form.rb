@@ -31,13 +31,17 @@
 #
 
 class OrderForm < ActiveRecord::Base
+
   attr_accessible :abn, :business_name, :comments, :email, :grams_per_km, :hectare, :kilometer,
                   :landholder_address, :landholder_name, :landholder_number, :mobile, :officer_address,
                   :officer_name, :officer_number, :payer, :pon, :property_address, :sb_no, :type, :telephone,
-                  :order_form_items_attributes
+                  :order_form_items_attributes, :customer_id
+
 
   has_one :order
   belongs_to :user
+  belongs_to :customer, class_name: "Person::Customer"
+
   has_many :order_form_items, dependent: :destroy
   alias_method :items, :order_form_items
   has_many :plants, :through => :order_form_items
@@ -84,7 +88,7 @@ class OrderForm < ActiveRecord::Base
   def create_order
     _order = build_order
     _order.number_prefix = self.prefix
-    _order.customer = self.user.customer
+    _order.customer_id = self.customer_id || self.user.customer.id
     self.items.each do |item|
       li = _order.line_items.build
       li.deposit_id = item.deposit_id

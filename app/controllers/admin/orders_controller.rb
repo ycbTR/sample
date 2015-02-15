@@ -3,6 +3,23 @@ class Admin::OrdersController < Admin::ResourceController
   before_filter :load_deposits, only: [:new, :edit]
 
 
+  def create
+    invoke_callbacks(:create, :before)
+    if @object.save
+      @object.new
+      invoke_callbacks(:create, :after)
+      respond_with(@object) do |format|
+        format.js { render_default_modal_form("SELECT ORDER FORM TYPE") }
+      end
+    else
+      @error_presence_for_response = true
+      invoke_callbacks(:create, :fails)
+      respond_with(@object) do |format|
+        format.js { render_default_ujs_response("#{params[:controller]}/new", "SELECT ORDER FORM TYPE") }
+      end
+    end
+  end
+
   def print
     respond_to do |format|
       format.html { render :print, layout: false }
@@ -13,6 +30,7 @@ class Admin::OrdersController < Admin::ResourceController
 
   def set_q
     params[:q] ||= {}
+    params[:q][:state_not_eq] ||= "new"
     params[:q][:s] ||= "created_at desc"
   end
 
