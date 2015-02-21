@@ -8,7 +8,8 @@
                 new_admin_lot_number_path,
                 :class => 'btn btn-primary pull-right', remote: true %>
 <% end %>
-<%= content_for :page_title, "Lot Numbers" %>
+
+<%= content_for :page_title, "Lot Numbers  #{export_to_excel_link}".html_safe %>
 
 <%= search_form_for [:admin, @search] do |f| %>
     <%= f.text_field "number_eq", placeholder: "Number" %> and

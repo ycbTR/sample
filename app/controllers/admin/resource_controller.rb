@@ -192,7 +192,11 @@ class Admin::ResourceController < Admin::BaseController
   def collection
     return parent.send(controller_name) if parent_data.present?
     @search = model_class.scoped.ransack(params[:q])
-    @search.result(distinct: true).page(params[:page]).per(15)
+    unless params[:format] == "xls"
+      @search.result(distinct: true).page(params[:page]).per(15)
+    else
+      @search.result(distinct: true)
+    end
   end
 
   def location_after_save

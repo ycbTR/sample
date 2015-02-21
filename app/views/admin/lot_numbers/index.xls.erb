@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Lot Numbers</Data></Cell>
+      </Row>
+      <Row>
+      </Row>
+
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Number</Data></Cell>
+        <Cell><Data ss:Type="String">SPA Name</Data></Cell>
+        <Cell><Data ss:Type="String">Heritage</Data></Cell>
+        <Cell><Data ss:Type="String">Region</Data></Cell>
+        <Cell><Data ss:Type="String">Provenance</Data></Cell>
+        <Cell><Data ss:Type="String">Location</Data></Cell>
+      </Row>
+      <% @lot_numbers.each_with_index do |lot_number, index| %>
+          <Row>
+           <Cell><Data ss:Type="Number"><%= lot_number.id %></Data></Cell>
+           <Cell><Data ss:Type="Number"><%= lot_number.number %></Data></Cell>
+           <Cell><Data ss:Type="String"><%= (lot_number.spa_name.blank? ? "NA" : lot_number.spa_name) %></Data></Cell>
+           <Cell><Data ss:Type="String"><%= lot_number.heritage_lot_numbers %></Data></Cell>
+           <Cell><Data ss:Type="String"><%= lot_number.region %></Data></Cell>
+           <Cell><Data ss:Type="String"><%= lot_number.provenance %></Data></Cell>
+           <Cell><Data ss:Type="String"><%= lot_number.location %></Data></Cell>
+          </Row>
+      <% end %>
+    </Table>
+
+  </Worksheet>
+</Workbook>
