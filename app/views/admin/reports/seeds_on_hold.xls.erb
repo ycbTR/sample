@@ -7,7 +7,7 @@
   <Worksheet ss:Name="Sheet1">
     <Table>
       <Row>
-        <Cell><Data ss:Type="String">Seeds on Consignment</Data></Cell>
+        <Cell><Data ss:Type="String">Seeds on Hold</Data></Cell>
       </Row>
 
       <Row>
@@ -31,8 +31,8 @@
             <Cell><Data ss:Type="String"><%= deposit.display %></Data></Cell>
             <Cell><Data ss:Type="String"><%= deposit.plant.species %></Data></Cell>
             <Cell><Data ss:Type="Number"></Data></Cell>
-            <Cell><Data ss:Type="Number"><%= deposit.qty_consigned %></Data></Cell>
-            <Cell><Data ss:Type="Number"><%= %></Data></Cell>
+            <Cell><Data ss:Type="Number"></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= deposit.qty_onhold %></Data></Cell>
             <Cell><Data ss:Type="String"><%= deposit.comments %></Data></Cell>
           </Row>
           <% deposit.deposit_adjustments.each do |adj| %>

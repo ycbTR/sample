@@ -1,4 +1,4 @@
-<%= content_for :page_title, "Seeds on Consignment #{export_to_excel_link}".html_safe %>
+<%= content_for :page_title, "Seeds on Hold #{export_to_excel_link}".html_safe %>
 
 
 <div>
@@ -25,8 +25,8 @@
           <td><%= deposit.display %></td>
           <td><%= deposit.plant.species %></td>
           <td></td>
-          <td><%= deposit.qty_consigned %></td>
           <td><%= %></td>
+          <td><%= deposit.qty_onhold %></td>
           <td><%= deposit.comments %></td>
         </tr>
         <% deposit.deposit_adjustments.each do |adj| %>

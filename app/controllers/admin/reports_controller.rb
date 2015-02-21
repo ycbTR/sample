@@ -61,6 +61,15 @@ class Admin::ReportsController < Admin::BaseController
     end
   end
 
+  def seeds_on_hold
+    @deposits = Deposit.active.joins(:lot_number, :plant, :collector).eager_load(:lot_number, :plant, :collector, :deposit_adjustments).
+        where("( deposits.cached_qty_onhold ) > 0").
+        order('lot_numbers.region', "plants.species")
+    unless params[:format] == "xls"
+      @deposits = @deposits.page(params[:page])
+    end
+  end
+
 
   #To show on catalogues
   def total_quantity
