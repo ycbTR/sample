@@ -73,9 +73,23 @@
     </table>
     <section class="clearfix"></section>
   </section>
+
+  <section class="detail">
+    <section class="box">
+      <p><label>Total Quantity:</label><span><%= @order.line_items.sum(:qty) %> g</span></p>
+    </section>
+    <section class="box">
+      <p><label>Total Price:</label><span><%= number_to_currency @order.line_items.sum(:price) %> (includes GST)</span></p>
+    </section>
+    <section class="clearfix"></section>
+  </section>
+
   <!-- reservation detail end -->
   <section class="pushFooter"></section>
+
+
 </section>
+
 
 
 <script type="text/javascript">
