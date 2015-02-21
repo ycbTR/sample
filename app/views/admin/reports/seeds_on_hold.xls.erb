@@ -24,6 +24,12 @@
       </Row>
 
       <% @deposits.each do |deposit| %>
+          <% if @current_collector && @current_collector != deposit.collector_id %>
+              <Row>
+                <Cell><Data ss:Type="String"></Data></Cell>
+              </Row>
+          <% end %>
+          <% @current_collector = deposit.collector_id %>
 
           <Row>
             <Cell><Data ss:Type="String"><%= deposit.collector.full_name %></Data></Cell>

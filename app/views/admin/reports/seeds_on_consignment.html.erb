@@ -19,6 +19,13 @@
 
     <% @deposits.each do |deposit| %>
 
+        <% if @current_collector && @current_collector != deposit.collector_id %>
+            <tr>
+              <td colspan="8"></td>
+            </tr>
+        <% end %>
+        <% @current_collector = deposit.collector_id %>
+
         <tr>
           <td><%= deposit.collector.full_name %></td>
           <td><%= format_date deposit.date %></td>
