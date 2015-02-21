@@ -1,41 +1,41 @@
 <%= content_for :page_title, "Seed Containment  #{export_to_excel_link}".html_safe %>
 
 <div>
-<table class="table table-striped marT30" id="table-1">
-        <thead>
-        <tr>
-          <th>Region</th>
-          <th>Lot number</th>
-          <th>Species</th>
-          <th>Common Name</th>
-          <th>Date Collected</th>
-        </tr>
-        </thead>
-        <tbody>
+  <table class="table table-striped marT30" id="table-1">
+    <thead>
+    <tr>
+      <th>Region</th>
+      <th>Lot number</th>
+      <th>Species</th>
+      <th>Common Name</th>
+      <th>Date Collected</th>
+    </tr>
+    </thead>
+    <tbody>
 
-        <% @deposits.each do |deposit| %>
+    <% @deposits.each do |deposit| %>
 
-            <% if @current_region && @current_region != deposit.lot_number.region %>
-                <tr>
-                  <td colspan="5"></td>
-                </tr>
-            <% end %>
-            <% @current_region = deposit.lot_number.region %>
+        <% if @current_region && @current_region != deposit.lot_number.region %>
             <tr>
-
-              <td><%= deposit.lot_number.region %></td>
-              <td><%= deposit.display %></td>
-              <td><%= deposit.plant.species %></td>
-              <td><%= deposit.plant.common_name %></td>
-              <td><%= format_date deposit.date %></td>
-
+              <td colspan="5"></td>
             </tr>
         <% end %>
+        <% @current_region = deposit.lot_number.region %>
+        <tr>
 
-        </tbody>
-      </table>
-      <table class="table table-striped col-md-12" id="header-fixed"></table>
-      <%= paginate @deposits %>
-    </div>
+          <td><%= deposit.lot_number.region %></td>
+          <td><%= deposit.display %></td>
+          <td><%= deposit.plant.species %></td>
+          <td><%= deposit.plant.common_name %></td>
+          <td><%= format_date deposit.date %></td>
+
+        </tr>
+    <% end %>
+
+    </tbody>
+  </table>
+  <table class="table table-striped col-md-12" id="header-fixed"></table>
+  <%= paginate @deposits %>
+</div>
 
 
