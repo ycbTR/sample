@@ -7,7 +7,9 @@ class Admin::ReportsController < Admin::BaseController
 
 
   def spa_populations
-    @lot_numbers = LotNumber.eager_load(:deposits, :heritages).where("lot_numbers.spa_name IS NOT NULL AND lot_numbers.spa_name != '' ")
+    @lot_numbers = LotNumber.eager_load(:deposits, :heritages).
+        where("lot_numbers.spa_name IS NOT NULL AND lot_numbers.spa_name != '' ").
+        order('lot_numbers.spa_name', 'lot_numbers.region', 'lot_numbers.provenance')
     unless params[:format] == "xls"
       @lot_numbers = @lot_numbers.page(params[:page])
     end
@@ -18,7 +20,11 @@ class Admin::ReportsController < Admin::BaseController
     @end_date = params[:end_date]
     if @start_date.present? && @end_date.present?
       set_dates
-      @deposits = Deposit.active.joins(:lot_number, :plant, :collector).includes(:lot_number, :plant, :collector).where(date: (@start_date)..(@end_date)).order(:collector_id, "lot_numbers.region")
+      @deposits = Deposit.active.
+          joins(:lot_number, :plant, :collector).
+          includes(:lot_number, :plant, :collector).
+          where(date: (@start_date)..(@end_date)).
+          order(:collector_id, "lot_numbers.region")
       unless params[:format] == "xls"
         @deposits = @deposits.page(params[:page])
       end

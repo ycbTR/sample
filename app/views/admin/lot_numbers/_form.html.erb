@@ -54,6 +54,19 @@
           </label>
         </div>
       </div>
+
+      <div class="control-group">
+        <%= f.label :self_heritage, :class => 'control-label' %>
+        <div class="controls">
+          <label>
+            <%= f.radio_button :self_heritage, true %>  Yes
+          </label>
+
+          <label>
+            <%= f.radio_button :self_heritage, false %> No
+          </label>
+        </div>
+      </div>
     </div>
 
     <div class="modal-footer">
