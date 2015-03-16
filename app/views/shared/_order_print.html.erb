@@ -77,6 +77,7 @@
   <section class="detail">
     <section class="box">
       <p><label>Total Quantity:</label><span><%= @order.line_items.sum(:qty) %> g</span></p>
+      <p>This is order confirmation only - Official Invoice will follow in mail/email</p>
     </section>
     <section class="box">
       <p><label>Total Price:</label><span><%= number_to_currency @order.line_items.sum(:price) %> (includes GST)</span></p>
