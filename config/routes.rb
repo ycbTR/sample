@@ -8,6 +8,7 @@ Seedbank::Application.routes.draw do
       collection do
         get :spa_populations
         get :seed_deposits
+        get :seed_deposits_by_date_entered
         get :nursery_seed_sales
         get :direct_seed_sales
         get :seed_containment

@@ -33,6 +33,24 @@ class Admin::ReportsController < Admin::BaseController
     end
   end
 
+  def seed_deposits_by_date_entered
+    @start_date = params[:start_date]
+    @end_date = params[:end_date]
+    if @start_date.present? && @end_date.present?
+      set_dates
+      @deposits = Deposit.active.
+          joins(:lot_number, :plant, :collector).
+          includes(:lot_number, :plant, :collector).
+          where(created_at: (@start_date)..(@end_date)).
+          order(:collector_id, "lot_numbers.region")
+      unless params[:format] == "xls"
+        @deposits = @deposits.page(params[:page])
+      end
+    else
+      @invalid_date = true
+    end
+  end
+
   def nursery_seed_sales
     @type = "OrderForm::Nursery"
     prepare_data
