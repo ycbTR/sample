@@ -14,6 +14,7 @@
           <th>Business Name</th>
           <th>ABN</th>
           <th>Postal Address</th>
+          <th>Email Address</th>
           <th>Total Quantity (kg)</th>
           <th>Total ($)</th>
         </tr>
@@ -36,6 +37,7 @@
               <td><%= order_form.business_name %></td>
               <td><%= order_form.abn %></td>
               <td><%= order_form.property_address %></td>
+              <td><%= order_form.user.try(:email) %></td>
               <td><%= order.line_items.sum(:qty).to_f / 1000 %></td>
               <td><%= order.total %></td>
             </tr>
