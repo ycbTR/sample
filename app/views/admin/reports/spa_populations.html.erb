@@ -17,17 +17,13 @@
     <% @lot_numbers.each_with_index do |lot_number, index| %>
         <tr class="top-border <%= 'first' if index == 0 %>">
           <td><%= lot_number.spa_name %></td>
-          <% if lot_number.self_heritage %>
-              <% deposit = lot_number.deposits.active.last %>
-              <td><%= lot_number.number %></td>
-              <td> <%= deposit.plant.species rescue "" %> </td>
-              <td> <%= deposit.display rescue "" %> </td>
-              <td> <%= lot_number.region rescue "" %> </td>
-              <td> <%= lot_number.provenance rescue "" %> </td>
-              <td> <%= lot_number.location rescue "" %> </td>
-          <% else %>
-              <td colspan="6"><%= lot_number.number %></td>
-          <% end %>
+          <% deposit = lot_number.deposits.active.last %>
+          <td><%= lot_number.number %></td>
+          <td> <%= deposit.plant.species rescue "" %> </td>
+          <td> <%= deposit.display rescue "" %> </td>
+          <td> <%= lot_number.region rescue "" %> </td>
+          <td> <%= lot_number.provenance rescue "" %> </td>
+          <td> <%= lot_number.location rescue "" %> </td>
         </tr>
         <%= add_heritages(lot_number) %>
     <% end %>

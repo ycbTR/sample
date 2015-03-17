@@ -9,7 +9,7 @@ class Admin::ReportsController < Admin::BaseController
   def spa_populations
     @lot_numbers = LotNumber.eager_load(:deposits, :heritages).
         where("lot_numbers.spa_name IS NOT NULL AND lot_numbers.spa_name != '' ").
-        order('lot_numbers.spa_name', 'lot_numbers.region', 'lot_numbers.provenance')
+        order('lot_numbers.spa_name', 'lot_numbers.number', 'lot_numbers.region', 'lot_numbers.provenance')
     unless params[:format] == "xls"
       @lot_numbers = @lot_numbers.page(params[:page])
     end

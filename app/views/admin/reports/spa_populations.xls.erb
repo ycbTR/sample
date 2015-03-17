@@ -24,7 +24,13 @@
       <% @lot_numbers.each_with_index do |lot_number, index| %>
           <Row>
             <Cell><Data ss:Type="String"><%= lot_number.spa_name %></Data></Cell>
+            <% deposit = lot_number.deposits.active.last %>
             <Cell><Data ss:Type="String"><%= lot_number.number %></Data></Cell>
+            <Cell><Data ss:Type="String"> <%= deposit.plant.species rescue "" %> </Data></Cell>
+            <Cell><Data ss:Type="String"> <%= deposit.display rescue "" %> </Data></Cell>
+            <Cell><Data ss:Type="String"> <%= lot_number.region rescue "" %> </Data></Cell>
+            <Cell><Data ss:Type="String"> <%= lot_number.provenance rescue "" %> </Data></Cell>
+            <Cell><Data ss:Type="String"> <%= lot_number.location rescue "" %> </Data></Cell>
           </Row>
           <%= add_heritages_xls(lot_number) %>
       <% end %>
