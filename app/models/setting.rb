@@ -25,7 +25,6 @@ class Setting < RailsSettings::CachedSettings
     ActionMailer::Base.smtp_settings = {
         :address => Setting.smtp_host,
         :port => Setting.smtp_port,
-        :domain => Setting.smtp_domain,
         :user_name => Setting.smtp_username,
         :password => Setting.smtp_password,
         :authentication => :plain,
