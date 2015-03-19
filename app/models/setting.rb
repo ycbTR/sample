@@ -13,7 +13,7 @@ class Setting < RailsSettings::CachedSettings
   Setting.default_mail_bcc ||= "w.paton+archive@gmail.com"
 
 
-  Setting.smtp_host ||= "smtp.gmail.com"
+  Setting.smtp_host ||= "smtp.sendgrid.net"
   Setting.smtp_port ||= 587
   Setting.smtp_domain ||= "gmail.com"
   Setting.smtp_username ||= "dookieseedbank@gmail.com"
@@ -22,6 +22,18 @@ class Setting < RailsSettings::CachedSettings
   after_save :set_email_settings
 
   def self.set_email_settings
+
+    # ActionMailer::Base.smtp_settings = {
+    #     :user_name => 'your_sendgrid_username',
+    #     :password => 'your_sendgrid_password',
+    #     :domain => 'yourdomain.com',
+    #     :address => 'smtp.sendgrid.net',
+    #     :port => 587,
+    #     :authentication => :plain,
+    #     :enable_starttls_auto => true
+    # }
+
+
     ActionMailer::Base.smtp_settings = {
         :address => Setting.smtp_host,
         :port => Setting.smtp_port,
