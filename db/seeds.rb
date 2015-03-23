@@ -6,14 +6,14 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Snippet.delete_all
-%w(who_we_are contact facebook twitter).each do |identifier|
-  s = Snippet.new
-  s.identifier = identifier
-  s.slug = identifier
-  s.content = identifier + " Contant block - rich text"
-  s.excerpt = identifier + " Excerpt text"
-  s.save
-end
+# Snippet.delete_all
+# %w(who_we_are contact facebook twitter).each do |identifier|
+#   s = Snippet.new
+#   s.identifier = identifier
+#   s.slug = identifier
+#   s.content = identifier + " Contant block - rich text"
+#   s.excerpt = identifier + " Excerpt text"
+#   s.save
+# end
 
 User.create({:email => "admin@admin.com", password: "123123123", password: "123123123", role: "Admin"}, without_protection: true)
