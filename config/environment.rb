@@ -4,7 +4,7 @@ require File.expand_path('../application', __FILE__)
 # Initialize the rails application
 Seedbank::Application.initialize!
 
-Setting.set_email_settings
+# Setting.set_email_settings
 
 Seedbank::Application.configure do
   config.action_mailer.delivery_method = :smtp
