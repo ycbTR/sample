@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '1.9.3'
+ruby '1.9.3'  #heroku deployment
 
 gem 'rails', '3.2.17'
 
@@ -13,6 +13,7 @@ end
 
 group :production do
   gem 'pg'
+  gem 'rails_12factor' #heroku deployment
 end
 
 
