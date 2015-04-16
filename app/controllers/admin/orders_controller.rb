@@ -5,8 +5,8 @@ class Admin::OrdersController < Admin::ResourceController
 
   def create
     invoke_callbacks(:create, :before)
-    if @object.save
-      @object.new
+    if @object.customer.save
+      # @object.new
       invoke_callbacks(:create, :after)
       respond_with(@object) do |format|
         format.js { render_default_modal_form("SELECT ORDER FORM TYPE") }
