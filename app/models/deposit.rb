@@ -38,7 +38,7 @@ class Deposit < ActiveRecord::Base
   end
 
   def self.seeding
-    with_eager_load.available.where("#{Plant.table_name}.direct_seedable = ?", true).where("(#{LotNumber.table_name}.spa_specific = ? OR #{LotNumber.table_name}.spa_specific IS NULL)", false)
+    with_eager_load.available.where("#{Plant.table_name}.direct_seedable = ?", true)
   end
 
   def self.nursery
