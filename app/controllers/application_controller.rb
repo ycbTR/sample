@@ -1,6 +1,17 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  auto_session_timeout 20.minutes
+
+  before_filter do |c|
+    if c.session[:auto_session_expires_at] && c.session[:auto_session_expires_at] < Time.now
+      c.send :reset_session
+    else
+      unless c.url_for(c.params).start_with?(c.send(:active_url))
+        offset = (current_user.respond_to?(:auto_timeout) ? current_user.auto_timeout : nil)
+        c.session[:auto_session_expires_at] = Time.now + offset if offset && offset > 0
+      end
+    end
+  end
+
   before_filter :set_current_user
   before_filter :remove_role_param
 
