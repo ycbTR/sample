@@ -65,15 +65,15 @@
                 var price = 0;
                 if (grams > 0) {
                     if (grams < 50) {
-                        price = Number(selected.attr('level_1_price')) * 0.001 * grams
+                        price = Number(selected.attr('level_1_price')) * 0.001 * grams;
                         total += price
                     }
                     else if (grams < 500) {
-                        price = Number(selected.attr('level_2_price')) * 0.001 * grams
+                        price = Number(selected.attr('level_2_price')) * 0.001 * grams;
                         total += price
                     }
                     else {
-                        price = Number(selected.attr('level_3_price')) * 0.001 * grams
+                        price = Number(selected.attr('level_3_price')) * 0.001 * grams;
                         total += price
                     }
                 }
