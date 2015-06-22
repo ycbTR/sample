@@ -38,8 +38,8 @@
   </table>
   <table class="table">
     <tr>
-      <td colspan="2" style="text-align: right; width:50%;">Total:</td>
-      <td colspan="2" class="total" style="width:50%;"></td>
+      <td style="text-align: right; width:50%;">Total Quantity: <span class="total-quantity"></span> g</td>
+      <td style="text-align: left; width:50%;">Total Price: <span class="total"></span></td>
     </tr>
   </table>
   <p><%= f.link_to_add("Add a item", :line_items, :data => {:target => "#line_items"}, class: "btn btn-sm btn-info") if @order.pending? %></p>
@@ -81,11 +81,21 @@
             });
             $('.total').text("$ " + toFixed(total, 2));
             total = 0;
+            calculate_grams();
         };
+
+        calculate_grams = function () {
+            grams = 0;
+            $.each($('.item_fields:visible'), function (i, el) {
+                var el = $(el);
+                grams += Number(el.find('.grams').val());
+            });
+            $('.total-quantity').text(grams);
+        };
+
         $(document).on('keyup', '.grams', calculate_prices);
         $(document).on('change', '.deposit_select', calculate_prices);
         calculate_prices();
-
         $('#order_form').on('nested:fieldAdded', function (event) {
             calculate_prices();
             do_select2();
