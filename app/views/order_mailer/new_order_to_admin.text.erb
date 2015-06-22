@@ -4,16 +4,30 @@ Type: <%= @order_form.display %>
 Details: <%= edit_admin_order_url(@order) %>
 ================================================================
 
+
+Type: <%= @order_form.display %>
+Details: <%= edit_admin_order_url(@order) %>
+================================================================
+
 DETAILS
 
 <% @order.line_items.each do |li| %>
     ================================================================
     Plant: <%= "#{li.plant.common_name} #{li.plant.species}" %>
     <% if li.qty.present? %>
-    Quantity: <%= li.qty %>grams
+        Quantity: <%= li.qty %>grams
     <% end %>
     <% if li.price.present? %>
-    Price: <%= number_to_currency li.price, precision: 2 %>
+        Price: <%= number_to_currency li.price, precision: 2 %>
     <% end %>
     ================================================================
 <% end %>
+
+================================================================
+Landholder:
+
+<%= @order_form.landholder_name %>
+
+<%= @order_form.landholder_number %>
+
+<%= @order_form.landholder_address %>
