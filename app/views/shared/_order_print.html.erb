@@ -53,7 +53,7 @@
       <tr>
         <th>Lot No</th>
         <th>Botanical Name</th>
-        <th>Provenance</th>
+        <th>Region</th>
         <th>Grams</th>
         <th>Price</th>
       </tr>
@@ -64,7 +64,7 @@
           <tr>
             <td><%= deposit.display %></td>
             <td><%= deposit.plant.species %></td>
-            <td><%= deposit.lot_number.provenance %></td>
+            <td><%= deposit.lot_number.region %></td>
             <td><%= item.qty || "-" %></td>
             <td><%= number_to_currency(item.price) || "-" %></td>
           </tr>
