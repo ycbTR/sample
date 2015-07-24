@@ -4,7 +4,9 @@ class Customer::OrderFormsController < Customer::BaseController
   def new
     build_order
     OrderForm.accessible_attributes
-    @current_order.assign_attributes((((@current_order.customer || @current_user).order_forms.of_type(@current_order.type).last.attributes.except('pon', 'id', 'type', 'hectare', 'kilometer', 'grams_per_km', 'comments')) rescue {}), without_protection: true)
+    if @current_order.customer
+      @current_order.assign_attributes((((@current_order.customer).order_forms.of_type(@current_order.type).last.attributes.except('pon', 'id', 'type', 'hectare', 'kilometer', 'grams_per_km', 'comments')) rescue {}), without_protection: true)
+    end
   end
 
 
