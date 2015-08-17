@@ -42,7 +42,7 @@ class Deposit < ActiveRecord::Base
   end
 
   def self.nursery
-    with_eager_load.available.where("(#{LotNumber.table_name}.spa_specific = ? OR #{LotNumber.table_name}.spa_specific IS NULL)", false)
+    with_eager_load.available.where("(#{LotNumber.table_name}.spa_specific = ? OR #{LotNumber.table_name}.spa_specific IS NULL)", false).order("plants.species asc")
   end
 
   def self.spa
