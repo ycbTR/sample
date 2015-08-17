@@ -73,7 +73,7 @@ class Admin::ReportsController < Admin::BaseController
   def seeds_on_consignment
     @deposits = Deposit.active.joins(:lot_number, :plant, :collector).eager_load(:lot_number, :plant, :collector, :deposit_adjustments).
         where("( deposits.cached_qty_consigned ) > 0").
-        order('lot_numbers.region', "plants.species")
+        order('deposits.date')
     unless params[:format] == "xls"
       @deposits = @deposits.page(params[:page])
     end
