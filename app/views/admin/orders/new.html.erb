@@ -1,5 +1,6 @@
 <%= nested_form_for([:admin, @order], remote: true, html: {id: "order_form"}) do |f| %>
     <%= render_errors @order %>
+    <%= render_errors @order.customer %>
     <div class="modal-body">
       <div class="control-group">
         <label>Use Existing?</label>

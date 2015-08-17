@@ -19,5 +19,11 @@
 
 class Person::Customer < Person
   has_many :order_forms, :foreign_key => :customer_id
+  validate :full_name_uniqueness
 
+  def full_name_uniqueness
+    if Person::Customer.where(:first_name => self.first_name, last_name: self.last_name).present?
+      self.errors.add(:base, "Customer's full name must be unique")
+    end
+  end
 end

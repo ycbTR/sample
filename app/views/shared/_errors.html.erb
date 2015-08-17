@@ -7,9 +7,9 @@
           <%= content_tag(:button, raw("&times;"), :class => "close", "data-dismiss" => "alert") %>
           <hr style="margin:0 0 10px;">
           <ul>
-            <% target.errors.full_messages.each do |msg| %>
+            <% target.errors.messages.each do |k,msg| %>
                 <li>
-                  <%= msg %>
+                  <%= msg.join(',') %>
                 </li>
             <% end %>
           </ul>

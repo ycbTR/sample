@@ -18,5 +18,12 @@
 #
 
 class Person::Collector < Person
+  validate :full_name_uniqueness
+
+  def full_name_uniqueness
+    if Person::Collector.where(:first_name => self.first_name, last_name: self.last_name).present?
+      self.errors.add(:base, "Collector's full name must be unique")
+    end
+  end
 
 end

@@ -1,4 +1,5 @@
 <%= nested_form_for([:admin, @order], html: {id: "order_form"}) do |f| %>
+    <%= render_errors @order %>
     <%= render partial: "customer_data", locals: {f: f} %>
     <br>
     <%= render partial: "line_items", locals: {f: f} %>
