@@ -1,7 +1,7 @@
 class Admin::OrdersController < Admin::ResourceController
   before_filter :load_previous_orders, only: :edit
   before_filter :load_deposits, only: [:new, :edit]
-
+  update.fails :failed_update
 
   def create
     invoke_callbacks(:create, :before)
@@ -58,6 +58,11 @@ class Admin::OrdersController < Admin::ResourceController
   def seeding?
     return false if @order.form_type.eql?("Nursery")
     @order.form_type.eql?('seeding') || params[:type].blank? || params[:type].eql?('seeding')
+  end
+
+  def failed_update
+    load_previous_orders
+    load_deposits
   end
 
 end
