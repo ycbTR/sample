@@ -38,7 +38,7 @@ class Deposit < ActiveRecord::Base
   end
 
   def self.seeding
-    with_eager_load.available.where("#{Plant.table_name}.direct_seedable = ?", true)
+    with_eager_load.available.where("#{Plant.table_name}.direct_seedable = ?", true).order("plants.species asc")
   end
 
   def self.nursery
@@ -46,7 +46,7 @@ class Deposit < ActiveRecord::Base
   end
 
   def self.spa
-    with_eager_load.available.where("#{LotNumber.table_name}.spa_specific = ?", true)
+    with_eager_load.available.where("#{LotNumber.table_name}.spa_specific = ?", true).order("plants.species asc")
   end
 
   def self.general
