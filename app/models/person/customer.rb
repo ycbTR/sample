@@ -22,7 +22,7 @@ class Person::Customer < Person
   validate :full_name_uniqueness
 
   def full_name_uniqueness
-    if Person::Customer.where(:first_name => self.first_name, last_name: self.last_name).present?
+    if Person::Customer.where('id != ?', self.id).where(:first_name => self.first_name, last_name: self.last_name).present?
       self.errors.add(:base, "Customer's full name must be unique")
     end
   end
