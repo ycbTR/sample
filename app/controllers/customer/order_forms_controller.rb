@@ -16,7 +16,7 @@ class Customer::OrderFormsController < Customer::BaseController
       session.delete :order_id
       flash[:success] = "Successfully placed an order."
       if @current_user.admin?
-        redirect_to edit_admin_order_path(@current_order.order)
+        redirect_to edit_admin_order_path(@current_order.order_id)
       else
         redirect_to customer_orders_path
       end
