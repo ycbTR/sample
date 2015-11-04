@@ -18,6 +18,7 @@ class Order < ActiveRecord::Base
   attr_accessible :completed_at, :customer_id, :number, :line_items_attributes, :customer_attributes, :state_event
   before_create :generate_number
   validates :customer, presence: true
+  after_save :change_customer
 
   def generate_number
     self.number = "#{number_prefix}#{(Order.order("id").last.try(:id).to_i + 1).to_s.rjust(4, "0")}"
@@ -100,6 +101,12 @@ class Order < ActiveRecord::Base
         OrderMailer.notify_processed(self)
       rescue
       end
+    end
+  end
+
+  def change_customer
+    if self.customer_id_changed? && self.order_form.present?
+      self.order_form.update_column(:customer_id, customer_id)
     end
   end
 
