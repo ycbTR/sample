@@ -41,7 +41,7 @@ class Customer::OrderFormsController < Customer::BaseController
 
   def build_order
     @current_order = (params[:order_form][:type]).constantize.new rescue ("OrderForm::#{(params[:type] || 'seeding').titleize}").constantize.new rescue OrderForm.new
-    @current_order.customer_id = params[:cid] || @current_user.customer.id
+    @current_order.customer_id = params[:cid].present? ? params[:cid] : @current_user.customer.id
 
     if @current_order.type == "OrderForm::Seeding"
       if Rails.env.production?
