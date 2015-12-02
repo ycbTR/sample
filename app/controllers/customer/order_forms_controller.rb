@@ -44,12 +44,12 @@ class Customer::OrderFormsController < Customer::BaseController
     @current_order.customer_id = params[:cid] || @current_user.customer.id
 
     if @current_order.type == "OrderForm::Seeding"
-      if Rails.env.production?
+      # if Rails.env.production?
         ids = Deposit.select("DISTINCT ON(plant_id) *").pluck(:id)
         @deposits = Deposit.seeding.active.where(id: ids).uniq
-      else
-        @deposits = Deposit.seeding.active.group(:plant_id).uniq
-      end
+      # else
+      #   @deposits = Deposit.seeding.active.group(:plant_id).uniq
+      # end
     else
       @deposits = Deposit.nursery.active
     end

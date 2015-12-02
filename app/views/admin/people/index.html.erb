@@ -6,7 +6,7 @@
                 :class => 'btn btn-primary pull-right' %>
 <% end %>
 <%= content_for :page_title, (@type + "s" rescue "People") %>
-
+<%= content_for :page_title, "#{export_to_excel_link}".html_safe %>
 <%= render partial: "shared/advanced_search", locals: {name: "full_name_cont", html_options: {placeholder: "Search..."}} %>
 
 <table class="table table-striped marT30" id="table-1">

@@ -18,3 +18,6 @@
 .idea
 /.idea/**/*
 /.idea/**/*.xml
+
+# Ignore database.yml
+/config/database.yml

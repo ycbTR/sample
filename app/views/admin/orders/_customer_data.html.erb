@@ -19,7 +19,7 @@
     <div id="existing_customer_fields" class="field">
       <%= f.label :customer_id, "Select Customer" %>
       <br/>
-      <%= f.select :customer_id, Person::Customer.all.collect { |c| [c.full_name, c.id] }, {prompt: t(:please_select)}, class: "select2", disabled: !@order.pending? %>
+      <%= f.select :customer_id, Person::Customer.order(:last_name).collect { |c| [c.full_name, c.id] }, {prompt: t(:please_select)}, class: "select2", disabled: !@order.pending? %>
       <br>
       <small>Save to see customer detail changes</small>
     </div>

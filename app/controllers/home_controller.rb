@@ -12,12 +12,12 @@ class HomeController < ApplicationController
 
   #direct seeding
   def catalogue_seeding
-    if Rails.env.production?
+    # if Rails.env.production?
       ids = Deposit.select("DISTINCT ON(plant_id) *").pluck(:id)
       @deposits = Deposit.seeding.active.where(id: ids).uniq
-    else
-      @deposits = Deposit.seeding.active.group(:plant_id).uniq
-    end
+    # else
+    #   @deposits = Deposit.seeding.active.group(:plant_id).uniq
+    # end
   end
 
   def catalogue_spa

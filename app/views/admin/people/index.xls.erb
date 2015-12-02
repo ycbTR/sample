@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">User ID</Data></Cell>
+        <Cell><Data ss:Type="String">First Name</Data></Cell>
+        <Cell><Data ss:Type="String">Last Name</Data></Cell>
+        <Cell><Data ss:Type="String">Address 1</Data></Cell>
+        <Cell><Data ss:Type="String">Address 2</Data></Cell>
+        <Cell><Data ss:Type="String">Town</Data></Cell>
+        <Cell><Data ss:Type="String">Post Code</Data></Cell>
+        <Cell><Data ss:Type="String">Email</Data></Cell>
+        <Cell><Data ss:Type="String">Phone</Data></Cell>
+      </Row>
+    <% Person::Customer.order(:last_name).each do |person| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= person.id %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= person.user_id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= person.first_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= person.last_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= person.address_1 %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= person.address_2 %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= person.town %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= person.postcode %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= person.email %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= person.phone %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

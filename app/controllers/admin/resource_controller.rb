@@ -278,7 +278,7 @@ class Admin::ResourceController < Admin::BaseController
 
   def set_q
     params[:q] ||= {}
-    params[:q][:s] ||= "updated_at desc"
+    params[:q][:s] ||= "last_name ASC"
   end
 
 
