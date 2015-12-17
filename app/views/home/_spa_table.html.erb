@@ -1,0 +1,38 @@
+<table class="table table-bordered" id="table-1">
+  <thead>
+  <tr class="bold-black">
+    <th>SEED CATALOGUE</th>
+    <th colspan="7">SPA - Seed Production Area</th>
+    <th class="align-right">g</th>
+  </tr>
+
+  <tr class="bold-black">
+    <th>Lot No</th>
+    <th>SPA NAME</th>
+    <th>Botanical Name</th>
+    <th>Common Name</th>
+    <th>Provenance</th>
+    <th>Region</th>
+    <th>Reference</th>
+    <th>Plant/Population</th>
+    <th>Qty</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @deposits.all.each do |deposit| %>
+      <tr>
+        <td><%= deposit.display %></td>
+        <td><%= (deposit.lot_number.spa_name.blank? ? "NA" : deposit.lot_number.spa_name) %></td>
+        <td><%= deposit.plant.species %></td>
+        <td><%= deposit.plant.common_name %></td>
+        <td><%= deposit.lot_number.provenance %></td>
+        <td><%= deposit.lot_number.region %></td>
+        <td><%= deposit.lot_number.reference %></td>
+        <td><%= deposit.lot_number.plant_population %></td>
+        <td><%= [deposit.total_quantity, 0].max %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<table class="table table-striped col-md-12" id="header-fixed"></table>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150221140134) do
+ActiveRecord::Schema.define(:version => 20151217131143) do
 
   create_table "assets", :force => true do |t|
     t.string   "attachment_file_name"
@@ -36,11 +36,11 @@ ActiveRecord::Schema.define(:version => 20150221140134) do
   end
 
   create_table "cms_blocks", :force => true do |t|
-    t.integer  "page_id",                        :null => false
-    t.string   "identifier",                     :null => false
-    t.text     "content",    :limit => 16777215
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.integer  "page_id",    :null => false
+    t.string   "identifier", :null => false
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "cms_blocks", ["page_id", "identifier"], :name => "index_cms_blocks_on_page_id_and_identifier"
@@ -80,47 +80,47 @@ ActiveRecord::Schema.define(:version => 20150221140134) do
   add_index "cms_files", ["site_id", "position"], :name => "index_cms_files_on_site_id_and_position"
 
   create_table "cms_layouts", :force => true do |t|
-    t.integer  "site_id",                                           :null => false
+    t.integer  "site_id",                       :null => false
     t.integer  "parent_id"
     t.string   "app_layout"
-    t.string   "label",                                             :null => false
-    t.string   "identifier",                                        :null => false
-    t.text     "content",    :limit => 16777215
-    t.text     "css",        :limit => 16777215
-    t.text     "js",         :limit => 16777215
-    t.integer  "position",                       :default => 0,     :null => false
-    t.boolean  "is_shared",                      :default => false, :null => false
-    t.datetime "created_at",                                        :null => false
-    t.datetime "updated_at",                                        :null => false
+    t.string   "label",                         :null => false
+    t.string   "identifier",                    :null => false
+    t.text     "content"
+    t.text     "css"
+    t.text     "js"
+    t.integer  "position",   :default => 0,     :null => false
+    t.boolean  "is_shared",  :default => false, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   add_index "cms_layouts", ["parent_id", "position"], :name => "index_cms_layouts_on_parent_id_and_position"
   add_index "cms_layouts", ["site_id", "identifier"], :name => "index_cms_layouts_on_site_id_and_identifier", :unique => true
 
   create_table "cms_pages", :force => true do |t|
-    t.integer  "site_id",                                               :null => false
+    t.integer  "site_id",                           :null => false
     t.integer  "layout_id"
     t.integer  "parent_id"
     t.integer  "target_page_id"
-    t.string   "label",                                                 :null => false
+    t.string   "label",                             :null => false
     t.string   "slug"
-    t.string   "full_path",                                             :null => false
-    t.text     "content",        :limit => 16777215
-    t.integer  "position",                           :default => 0,     :null => false
-    t.integer  "children_count",                     :default => 0,     :null => false
-    t.boolean  "is_published",                       :default => true,  :null => false
-    t.boolean  "is_shared",                          :default => false, :null => false
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
+    t.string   "full_path",                         :null => false
+    t.text     "content"
+    t.integer  "position",       :default => 0,     :null => false
+    t.integer  "children_count", :default => 0,     :null => false
+    t.boolean  "is_published",   :default => true,  :null => false
+    t.boolean  "is_shared",      :default => false, :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   add_index "cms_pages", ["parent_id", "position"], :name => "index_cms_pages_on_parent_id_and_position"
   add_index "cms_pages", ["site_id", "full_path"], :name => "index_cms_pages_on_site_id_and_full_path"
 
   create_table "cms_revisions", :force => true do |t|
-    t.string   "record_type",                     :null => false
-    t.integer  "record_id",                       :null => false
-    t.text     "data",        :limit => 16777215
+    t.string   "record_type", :null => false
+    t.integer  "record_id",   :null => false
+    t.text     "data"
     t.datetime "created_at"
   end
 
@@ -139,14 +139,14 @@ ActiveRecord::Schema.define(:version => 20150221140134) do
   add_index "cms_sites", ["is_mirrored"], :name => "index_cms_sites_on_is_mirrored"
 
   create_table "cms_snippets", :force => true do |t|
-    t.integer  "site_id",                                           :null => false
-    t.string   "label",                                             :null => false
-    t.string   "identifier",                                        :null => false
-    t.text     "content",    :limit => 16777215
-    t.integer  "position",                       :default => 0,     :null => false
-    t.boolean  "is_shared",                      :default => false, :null => false
-    t.datetime "created_at",                                        :null => false
-    t.datetime "updated_at",                                        :null => false
+    t.integer  "site_id",                       :null => false
+    t.string   "label",                         :null => false
+    t.string   "identifier",                    :null => false
+    t.text     "content"
+    t.integer  "position",   :default => 0,     :null => false
+    t.boolean  "is_shared",  :default => false, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   add_index "cms_snippets", ["site_id", "identifier"], :name => "index_cms_snippets_on_site_id_and_identifier", :unique => true
@@ -154,6 +154,9 @@ ActiveRecord::Schema.define(:version => 20150221140134) do
 
   create_table "deposit_adjustments", :force => true do |t|
     t.integer  "deposit_id"
+    t.integer  "user_id"
+    t.integer  "line_item_id"
+    t.text     "comment"
     t.boolean  "initial",                                     :default => false
     t.decimal  "qty_onhold",    :precision => 8, :scale => 2
     t.decimal  "decimal",       :precision => 8, :scale => 2
@@ -162,9 +165,6 @@ ActiveRecord::Schema.define(:version => 20150221140134) do
     t.decimal  "qty_consigned", :precision => 8, :scale => 2
     t.datetime "created_at",                                                     :null => false
     t.datetime "updated_at",                                                     :null => false
-    t.integer  "user_id"
-    t.text     "comment"
-    t.integer  "line_item_id"
     t.datetime "deleted_at"
   end
 
@@ -177,7 +177,6 @@ ActiveRecord::Schema.define(:version => 20150221140134) do
     t.datetime "created_at",                                         :null => false
     t.datetime "updated_at",                                         :null => false
     t.integer  "collector_id"
-    t.integer  "heritage_id"
     t.decimal  "qty_onhold",           :precision => 8, :scale => 2
     t.text     "comments"
     t.decimal  "qty_allocated",        :precision => 8, :scale => 2
@@ -188,12 +187,14 @@ ActiveRecord::Schema.define(:version => 20150221140134) do
     t.float    "cached_qty_onhold"
   end
 
-  add_index "deposits", ["date", "collector_id"], :name => "d1"
+  add_index "deposits", ["deleted_at", "date", "collector_id"], :name => "d1"
   add_index "deposits", ["deleted_at", "lot_number_id", "plant_id"], :name => "d2"
   add_index "deposits", ["deleted_at"], :name => "d3"
 
   create_table "line_items", :force => true do |t|
     t.integer  "order_id"
+    t.integer  "lot_number_id"
+    t.integer  "plant_id"
     t.string   "seedmix_or_individual"
     t.integer  "qty"
     t.datetime "created_at",            :null => false
@@ -210,14 +211,17 @@ ActiveRecord::Schema.define(:version => 20150221140134) do
   end
 
   create_table "lot_numbers", :force => true do |t|
-    t.integer  "number",       :limit => 255
+    t.integer  "number"
     t.string   "region"
     t.string   "provenance"
     t.string   "location"
-    t.datetime "created_at",                                     :null => false
-    t.datetime "updated_at",                                     :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "spa_name"
-    t.boolean  "spa_specific",                :default => false
+    t.boolean  "spa_specific",     :default => false
+    t.boolean  "self_heritage",    :default => false
+    t.string   "reference"
+    t.string   "plant_population"
   end
 
   add_index "lot_numbers", ["id", "spa_specific"], :name => "id_spa_spec"
@@ -226,11 +230,11 @@ ActiveRecord::Schema.define(:version => 20150221140134) do
 
   create_table "order_form_items", :force => true do |t|
     t.integer  "order_form_id"
+    t.integer  "deposit_id"
     t.integer  "plant_id"
+    t.float    "grams"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.float    "grams"
-    t.integer  "deposit_id"
   end
 
   create_table "order_forms", :force => true do |t|
@@ -255,7 +259,6 @@ ActiveRecord::Schema.define(:version => 20150221140134) do
     t.text     "comments"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
-    t.integer  "order_id"
     t.integer  "user_id"
     t.string   "state"
     t.string   "telephone"
@@ -268,9 +271,9 @@ ActiveRecord::Schema.define(:version => 20150221140134) do
     t.datetime "completed_at"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "order_form_id"
     t.decimal  "total"
     t.string   "state"
-    t.integer  "order_form_id"
   end
 
   create_table "people", :force => true do |t|
@@ -294,9 +297,9 @@ ActiveRecord::Schema.define(:version => 20150221140134) do
     t.string   "species"
     t.string   "common_name"
     t.decimal  "price_paid"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-    t.boolean  "direct_seedable"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.boolean  "direct_seedable", :default => false
     t.decimal  "level_1_price"
     t.decimal  "level_2_price"
     t.decimal  "level_3_price"
@@ -316,6 +319,7 @@ ActiveRecord::Schema.define(:version => 20150221140134) do
   add_index "settings", ["thing_type", "thing_id", "var"], :name => "index_settings_on_thing_type_and_thing_id_and_var", :unique => true
 
   create_table "snippets", :force => true do |t|
+    t.string   "label",                     :null => false
     t.string   "slug",                      :null => false
     t.string   "identifier",                :null => false
     t.text     "excerpt"

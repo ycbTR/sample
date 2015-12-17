@@ -15,7 +15,7 @@
 
 class LotNumber < ActiveRecord::Base
   attr_accessible :location, :number, :provenance, :region, :heritage_ids,
-                  :spa_name, :spa_specific, :self_heritage
+                  :spa_name, :spa_specific, :self_heritage, :plant_population, :reference
 
   has_many :deposits, dependent: :destroy
   has_many :lot_heritages, class_name: "LotHeritage", dependent: :destroy
