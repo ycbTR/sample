@@ -18,7 +18,7 @@
 
 class Deposit < ActiveRecord::Base
   attr_accessible :date, :lot_number_id, :plant_id, :qty_bank,
-                  :qty_consigned, :qty_onhold, :collector_id, :comments
+                  :qty_consigned, :qty_onhold, :collector_id, :comments, :plant_population, :reference
 
   belongs_to :plant
   belongs_to :collector, class_name: "Person::Collector"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151217131143) do
+ActiveRecord::Schema.define(:version => 20151218000647) do
 
   create_table "assets", :force => true do |t|
     t.string   "attachment_file_name"
@@ -185,6 +185,8 @@ ActiveRecord::Schema.define(:version => 20151217131143) do
     t.float    "cached_qty_allocated"
     t.float    "cached_qty_consigned"
     t.float    "cached_qty_onhold"
+    t.string   "plant_population"
+    t.string   "reference"
   end
 
   add_index "deposits", ["deleted_at", "date", "collector_id"], :name => "d1"
@@ -215,13 +217,11 @@ ActiveRecord::Schema.define(:version => 20151217131143) do
     t.string   "region"
     t.string   "provenance"
     t.string   "location"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.string   "spa_name"
-    t.boolean  "spa_specific",     :default => false
-    t.boolean  "self_heritage",    :default => false
-    t.string   "reference"
-    t.string   "plant_population"
+    t.boolean  "spa_specific",  :default => false
+    t.boolean  "self_heritage", :default => false
   end
 
   add_index "lot_numbers", ["id", "spa_specific"], :name => "id_spa_spec"

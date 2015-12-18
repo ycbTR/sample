@@ -2,7 +2,7 @@
   <thead>
   <tr class="bold-black">
     <th>SEED CATALOGUE</th>
-    <th colspan="7">SPA - Seed Production Area</th>
+    <th colspan="8">SPA - Seed Production Area</th>
     <th class="align-right">g</th>
   </tr>
 
@@ -12,6 +12,7 @@
     <th>Botanical Name</th>
     <th>Common Name</th>
     <th>Provenance</th>
+    <th>Location</th>
     <th>Region</th>
     <th>Reference</th>
     <th>Plant/Population</th>
@@ -27,9 +28,10 @@
         <td><%= deposit.plant.species %></td>
         <td><%= deposit.plant.common_name %></td>
         <td><%= deposit.lot_number.provenance %></td>
+        <td><%= deposit.lot_number.location %></td>
         <td><%= deposit.lot_number.region %></td>
-        <td><%= deposit.lot_number.reference %></td>
-        <td><%= deposit.lot_number.plant_population %></td>
+        <td><%= deposit.reference %></td>
+        <td><%= deposit.plant_population %></td>
         <td><%= [deposit.total_quantity, 0].max %></td>
       </tr>
   <% end %>

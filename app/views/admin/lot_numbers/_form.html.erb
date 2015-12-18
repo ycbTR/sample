@@ -24,18 +24,6 @@
           <%= f.text_field :location, :class => 'text_field' %>
         </div>
       </div>
-      <div class="control-group">
-        <%= f.label :reference, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :reference, :class => 'text_field' %>
-        </div>
-      </div>
-      <div class="control-group">
-        <%= f.label :plant_population, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :plant_population, :class => 'text_field' %>
-        </div>
-      </div>
 
       <% @lot_numbers = LotNumber.where("id != ?", (@lot_number.id || -1)) %>
 
