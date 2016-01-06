@@ -56,6 +56,9 @@ class Admin::ResourceController < Admin::BaseController
         format.html { redirect_to location_after_save }
         format.js { js_response }
       end
+      if @object.type == "Person::Collector" && @object.email != ""
+        User.create(email: @object.email, password: "12345678", password_confirmation: "12345678", role: "Collector")
+      end
     else
       @error_presence_for_response = true
       invoke_callbacks(:create, :fails)
