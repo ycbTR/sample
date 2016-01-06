@@ -57,7 +57,10 @@ class Admin::ResourceController < Admin::BaseController
         format.js { js_response }
       end
       if @object.type == "Person::Collector" && @object.email != ""
-        User.create(email: @object.email, password: "12345678", password_confirmation: "12345678", role: "Collector")
+        u = User.create(email: @object.email, password: "12345678", password_confirmation: "12345678", role: "Collector")
+        u.send_reset_password_instructions
+        @object.user_id = u.id
+        @object.save
       end
     else
       @error_presence_for_response = true

@@ -24,6 +24,7 @@ class Person < ActiveRecord::Base
   has_many :orders, foreign_key: "customer_id"
   has_many :deposits, foreign_key: "collector_id"
   before_destroy :check_destroy_validations
+  before_update :send_email, :if => :email_changed?
   validates :first_name, :last_name, presence: true
   class DestroyWithOrdersError < StandardError;
   end
@@ -55,5 +56,10 @@ class Person < ActiveRecord::Base
     check_deposits
   end
 
-
+  def send_email
+    u = User.find(self.user_id)
+    u.email = self.email
+    u.save
+    u.send_reset_password_instructions
+  end
 end
