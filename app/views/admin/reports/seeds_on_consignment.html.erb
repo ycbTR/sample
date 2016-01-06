@@ -6,9 +6,9 @@
     <thead>
     <tr>
       <th>Collector</th>
-      <th>Date</th>
       <th>Lot Number</th>
       <th>Species</th>
+      <th>Date</th>
       <th>Qty Bank (g)</th>
       <th>Qty Consignment (g)</th>
       <th>Qty Onhold (g)</th>
@@ -16,7 +16,6 @@
     </tr>
     </thead>
     <tbody>
-
     <% @deposits.each do |deposit| %>
 
         <% if @current_collector && @current_collector != deposit.collector_id %>
@@ -28,20 +27,21 @@
 
         <tr>
           <td><%= deposit.collector.full_name %></td>
-          <td><%= format_date deposit.date %></td>
           <td><%= deposit.display %></td>
           <td><%= deposit.plant.species %></td>
+          <td><%= format_date deposit.date %></td>
           <td></td>
           <td><%= deposit.qty_consigned %></td>
           <td><%= %></td>
           <td><%= deposit.comments %></td>
         </tr>
-        <% deposit.deposit_adjustments.each do |adj| %>
+        <% adjustments = deposit.deposit_adjustments.order(:created_at) %>
+        <% adjustments.each do |adj| %>
             <tr>
               <td></td>
+              <td></td>
+              <td></td>
               <td><%= format_date adj.created_at %></td>
-              <td></td>
-              <td></td>
               <td><%= adj.qty_bank %></td>
               <td><%= adj.qty_consigned %></td>
               <td><%= adj.qty_onhold %></td>
