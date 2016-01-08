@@ -18,7 +18,7 @@
 #
 
 class Person::Collector < Person
-  validate :full_name_uniqueness
+  validate :full_name_uniqueness, :on => :create
 
   def full_name_uniqueness
     if Person::Collector.where(:first_name => self.first_name, last_name: self.last_name).present?

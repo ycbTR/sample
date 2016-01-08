@@ -16,6 +16,7 @@
     </tr>
     </thead>
     <tbody>
+    <% @used_full_names = [] %>
     <% @deposits.each do |deposit| %>
 
         <% if @current_collector && @current_collector != deposit.collector_id %>
@@ -26,7 +27,12 @@
         <% @current_collector = deposit.collector_id %>
 
         <tr>
-          <td><%= deposit.collector.full_name %></td>
+          <% if @used_full_names.include?(deposit.collector.full_name) %>
+            <td></td>
+          <% else %>
+            <% @used_full_names << deposit.collector.full_name %>
+            <td><%= deposit.collector.full_name %></td>
+          <% end %>
           <td><%= deposit.display %></td>
           <td><%= deposit.plant.species %></td>
           <td><%= format_date deposit.date %></td>
@@ -48,7 +54,13 @@
               <td><%= adj.comment %></td>
             </tr>
         <% end %>
-
+        <tr>
+          <td colspan="4"></td>
+          <td><%=adjustments.sum(:qty_bank)%></td>
+          <td><%=adjustments.sum(:qty_consigned)%></td>
+          <td><%=adjustments.sum(:qty_onhold)%></td>
+          <td></td>
+        </tr>
     <% end %>
 
     </tbody>
