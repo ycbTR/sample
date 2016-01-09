@@ -12,9 +12,9 @@
 
       <Row>
         <Cell><Data ss:Type="String">Collector</Data></Cell>
-        <Cell><Data ss:Type="String">Date</Data></Cell>
         <Cell><Data ss:Type="String">Lot Number</Data></Cell>
         <Cell><Data ss:Type="String">Species</Data></Cell>
+        <Cell><Data ss:Type="String">Date</Data></Cell>
         <Cell><Data ss:Type="String">Qty Bank (g)</Data></Cell>
         <Cell><Data ss:Type="String">Qty Consignment (g)</Data></Cell>
         <Cell><Data ss:Type="String">Qty Onhold (g)</Data></Cell>
@@ -22,7 +22,7 @@
       </Row>
       <Row>
       </Row>
-
+      <% @used_full_names = [] %>
       <% @deposits.each do |deposit| %>
 
           <% if @current_collector && @current_collector != deposit.collector_id %>
@@ -33,17 +33,25 @@
           <% @current_collector = deposit.collector_id %>
 
           <Row>
-            <Cell><Data ss:Type="String"><%= deposit.collector.full_name %></Data></Cell>
-            <Cell><Data ss:Type="String"><%= format_date deposit.date %></Data></Cell>
+            <% if @used_full_names.include?(deposit.collector.full_name) %>
+                <Cell><Data ss:Type="String"></Data></Cell>
+            <% else %>
+              <% @used_full_names << deposit.collector.full_name %>
+              <Cell><Data ss:Type="String"><%= deposit.collector.full_name %></Data></Cell>
+            <% end %>
             <Cell><Data ss:Type="String"><%= deposit.display %></Data></Cell>
             <Cell><Data ss:Type="String"><%= deposit.plant.species %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= format_date deposit.date %></Data></Cell>
             <Cell><Data ss:Type="Number"></Data></Cell>
             <Cell><Data ss:Type="Number"><%= deposit.qty_consigned %></Data></Cell>
             <Cell><Data ss:Type="Number"><%= %></Data></Cell>
             <Cell><Data ss:Type="String"><%= deposit.comments %></Data></Cell>
           </Row>
-          <% deposit.deposit_adjustments.each do |adj| %>
+          <% adjustments = deposit.deposit_adjustments.order(:created_at) %>
+          <% adjustments.each do |adj| %>
                 <Row>
+                <Cell><Data ss:Type="String"></Data></Cell>
+                <Cell><Data ss:Type="String"></Data></Cell>
                 <Cell><Data ss:Type="String"></Data></Cell>
                 <Cell><Data ss:Type="String"><%= format_date adj.created_at %></Data></Cell>
                 <Cell><Data ss:Type="String"></Data></Cell>
@@ -54,6 +62,16 @@
                 <Cell><Data ss:Type="String"><%= adj.comment %></Data></Cell>
                 </Row>
           <% end %>
+          <Row>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="Number"><%=adjustments.sum(:qty_bank)%></Data></Cell>
+            <Cell><Data ss:Type="Number"><%=adjustments.sum(:qty_consigned)%></Data></Cell>
+            <Cell><Data ss:Type="Number"><%=adjustments.sum(:qty_onhold)%></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+          </Row>
       <% end %>
     </Table>
 
