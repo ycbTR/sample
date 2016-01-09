@@ -37,7 +37,6 @@ class OrderForm < ActiveRecord::Base
                   :officer_name, :officer_number, :payer, :pon, :property_address, :sb_no, :type, :telephone,
                   :order_form_items_attributes, :customer_id
 
-
   has_one :order
   belongs_to :user
   belongs_to :customer, class_name: "Person::Customer"
@@ -48,6 +47,8 @@ class OrderForm < ActiveRecord::Base
 
   accepts_nested_attributes_for :order_form_items
   validates :order_form_items, presence: true
+
+  after_save :change_customer
 
   state_machine :initial => :empty do
     event :complete do
@@ -96,6 +97,12 @@ class OrderForm < ActiveRecord::Base
       (li.price = (item.plant.price_for(item.grams))) if self.nursery?
     end
     _order.save
+  end
+
+  def change_customer
+    if self.customer_id_changed? && self.order.present?
+      self.order.update_column(:customer_id, customer_id)
+    end
   end
 
 end

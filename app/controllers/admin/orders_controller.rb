@@ -7,6 +7,7 @@ class Admin::OrdersController < Admin::ResourceController
     invoke_callbacks(:create, :before)
     if @object.customer.save
       # @object.new
+      @object.customer_id = @object.customer.id
       invoke_callbacks(:create, :after)
       respond_with(@object) do |format|
         format.js { render_default_modal_form("SELECT ORDER FORM TYPE") }
