@@ -31,7 +31,7 @@
         <td><%= deposit.lot_number.location %></td>
         <td><%= deposit.lot_number.region %></td>
         <% if deposit.reference %>
-          <td><%= deposit.try(:reference) %></td>
+          <td><%= deposit.reference %></td>
         <% end %>
         <td><%= deposit.plant_population %></td>
         <td><%= [deposit.total_quantity, 0].max %></td>
