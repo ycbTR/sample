@@ -1,8 +1,12 @@
 class Customer::OrdersController < Customer::BaseController
+  skip_before_filter :authenticate_user!,:person_required, only: :index
+  before_filter :custom_authenticate_user
+  before_filter :person_required
+
   def index
     if current_user.admin?
       redirect_to admin_orders_path(n: params[:n]) and return
-    end
+      end
     @orders = Order.where(:order_form_id => @current_user.order_form_ids)
   end
 
@@ -21,5 +25,9 @@ class Customer::OrdersController < Customer::BaseController
 
   def load_order
     @order = Order.where(:order_form_id => @current_user.order_form_ids, number: params[:id]).first
+  end
+
+  def custom_authenticate_user
+    redirect_to new_user_registration_path unless current_user.present?
   end
 end

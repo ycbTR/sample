@@ -4,6 +4,7 @@
                 :class => 'btn btn-primary pull-right', remote: true %>
 <% end %>
 <%= content_for :page_title, "Plants" %>
+<%= content_for :page_title, "#{export_to_excel_link}".html_safe %>
 
 <%= render partial: "shared/advanced_search", locals: {name: "species_or_common_name_cont", html_options: {placeholder: "Species or Common Name Conts"}} %>
 <%= render partial: "shared/errors", locals: {target: @object} %>
