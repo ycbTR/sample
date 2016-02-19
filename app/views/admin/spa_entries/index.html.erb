@@ -1,0 +1,8 @@
+<%= form_tag admin_spa_entries_path, method: :post, multipart: true do |f| %>
+  <label for="file">
+    File to Upload
+  </label> 
+  <%= file_field_tag "file", accept: 'xls,xlsx' %>
+  </br>
+  <%= submit_tag "Import sheet" %>
+<% end %>

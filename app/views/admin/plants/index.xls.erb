@@ -4,7 +4,7 @@
   xmlns:x="urn:schemas-microsoft-com:office:excel"
   xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
   xmlns:html="http://www.w3.org/TR/REC-html40">
-  <Worksheet ss:Name="Sheet1">
+  <Worksheet ss:Name="Plants">
     <Table>
       <Row>
         <Cell><Data ss:Type="String">ID</Data></Cell>
@@ -16,7 +16,7 @@
         <Cell><Data ss:Type="String">50-499g</Data></Cell>
         <Cell><Data ss:Type="String">>500g</Data></Cell>
       </Row>
-    <% Plant.order(:species).each do |plant| %>
+    <% Plant.order(:id).each do |plant| %>
       <Row>
         <Cell><Data ss:Type="Number"><%= plant.id %></Data></Cell>
         <Cell><Data ss:Type="String"><%= plant.species %></Data></Cell>
@@ -26,6 +26,50 @@
         <Cell><Data ss:Type="String"><%= number_to_currency plant.level_1_price.to_f %></Data></Cell>
         <Cell><Data ss:Type="String"><%= number_to_currency plant.level_2_price.to_f %></Data></Cell>
         <Cell><Data ss:Type="String"><%= number_to_currency plant.level_3_price.to_f %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="Common Name wise">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Common Name</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Species</Data></Cell>
+      </Row>
+    <% Plant.order(:common_name).each do |plant| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= plant.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= plant.common_name %></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= plant.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= plant.species %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="Species wise">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Species</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Common Name</Data></Cell>
+      </Row>
+    <% Plant.order(:species).each do |plant| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= plant.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= plant.species %></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= plant.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= plant.common_name %></Data></Cell>
       </Row>
     <% end %>
     </Table>
