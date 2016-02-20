@@ -33,21 +33,13 @@
   <Worksheet ss:Name="Common Name wise">
     <Table>
       <Row>
-        <Cell><Data ss:Type="String">ID</Data></Cell>
         <Cell><Data ss:Type="String">Common Name</Data></Cell>
-        <Cell><Data ss:Type="String"></Data></Cell>
-        <Cell><Data ss:Type="String"></Data></Cell>
         <Cell><Data ss:Type="String">ID</Data></Cell>
-        <Cell><Data ss:Type="String">Species</Data></Cell>
       </Row>
     <% Plant.order(:common_name).each do |plant| %>
       <Row>
-        <Cell><Data ss:Type="Number"><%= plant.id %></Data></Cell>
         <Cell><Data ss:Type="String"><%= plant.common_name %></Data></Cell>
-        <Cell><Data ss:Type="String"></Data></Cell>
-        <Cell><Data ss:Type="String"></Data></Cell>
         <Cell><Data ss:Type="Number"><%= plant.id %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= plant.species %></Data></Cell>
       </Row>
     <% end %>
     </Table>
@@ -57,19 +49,11 @@
       <Row>
         <Cell><Data ss:Type="String">ID</Data></Cell>
         <Cell><Data ss:Type="String">Species</Data></Cell>
-        <Cell><Data ss:Type="String"></Data></Cell>
-        <Cell><Data ss:Type="String"></Data></Cell>
-        <Cell><Data ss:Type="String">ID</Data></Cell>
-        <Cell><Data ss:Type="String">Common Name</Data></Cell>
       </Row>
     <% Plant.order(:species).each do |plant| %>
       <Row>
-        <Cell><Data ss:Type="Number"><%= plant.id %></Data></Cell>
         <Cell><Data ss:Type="String"><%= plant.species %></Data></Cell>
-        <Cell><Data ss:Type="String"></Data></Cell>
-        <Cell><Data ss:Type="String"></Data></Cell>
         <Cell><Data ss:Type="Number"><%= plant.id %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= plant.common_name %></Data></Cell>
       </Row>
     <% end %>
     </Table>

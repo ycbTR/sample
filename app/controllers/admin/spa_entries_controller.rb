@@ -7,19 +7,14 @@ class Admin::SpaEntriesController < Admin::ResourceController
 
   def create
     file_type = params[:file].original_filename.split(".").last
-    p file_type
     if params[:file].present? && (file_type == "xls" || file_type == "xlsx")
       file_type == "xlsx" ? file = Roo::Spreadsheet.open(params[:file].path, :extension => :xlsx) : file = Roo::Spreadsheet.open(params[:file].path, :extension => :xls)
+      LotNumber.mass_assign(file)
+      flash[:success] = "Data imported successfully!!!"
+      redirect_to :back
     else  
       flash[:error] = "Empty File. Please Upload an xls or xlsx file."
       redirect_to :back
     end
-    # p 1111111111111111111
-    # p file
-    # p file.sheets.first
-    # file.each_row_streaming(offset: 1) do |row| # Will exclude first (inevitably header) row
-    #   p "---------------------row"
-    #   puts row.inspect # Array of Excelx::Cell objects
-    # end
   end
 end
