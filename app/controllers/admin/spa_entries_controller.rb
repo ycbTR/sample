@@ -3,6 +3,7 @@ class Admin::SpaEntriesController < Admin::ResourceController
   skip_before_filter :load_resource
 
   def index
+    @lot_numbers = LotNumber.where('mass_num IS NOT NULL')
   end
 
   def create

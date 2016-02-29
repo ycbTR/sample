@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151218000647) do
+ActiveRecord::Schema.define(:version => 20160229142514) do
 
   create_table "assets", :force => true do |t|
     t.string   "attachment_file_name"
@@ -222,6 +222,7 @@ ActiveRecord::Schema.define(:version => 20151218000647) do
     t.string   "spa_name"
     t.boolean  "spa_specific",  :default => false
     t.boolean  "self_heritage", :default => false
+    t.integer  "mass_num"
   end
 
   add_index "lot_numbers", ["id", "spa_specific"], :name => "id_spa_spec"

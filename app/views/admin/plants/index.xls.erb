@@ -16,7 +16,7 @@
         <Cell><Data ss:Type="String">50-499g</Data></Cell>
         <Cell><Data ss:Type="String">>500g</Data></Cell>
       </Row>
-    <% Plant.order(:id).each do |plant| %>
+    <% Plant.order(:species).each do |plant| %>
       <Row>
         <Cell><Data ss:Type="Number"><%= plant.id %></Data></Cell>
         <Cell><Data ss:Type="String"><%= plant.species %></Data></Cell>
