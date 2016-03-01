@@ -4,7 +4,11 @@ class Admin::SpaEntriesController < Admin::ResourceController
 
   def index
     max_mass_num = LotNumber.maximum("mass_num")
-    @lot_numbers = LotNumber.where(mass_num: max_mass_num)
+    if max_mass_num == nil
+      @lot_numbers = []
+    else
+      @lot_numbers = LotNumber.where(mass_num: max_mass_num)
+    end
   end
 
   def create
