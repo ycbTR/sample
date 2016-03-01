@@ -3,12 +3,13 @@ class Admin::SpaEntriesController < Admin::ResourceController
   skip_before_filter :load_resource
 
   def index
-    @lot_numbers = LotNumber.where('mass_num IS NOT NULL')
+    max_mass_num = LotNumber.maximum("mass_num")
+    @lot_numbers = LotNumber.where(mass_num: max_mass_num)
   end
 
   def create
-    file_type = params[:file].original_filename.split(".").last
     if params[:file].present? && (file_type == "xls" || file_type == "xlsx")
+    file_type = params[:file].original_filename.split(".").last
       file_type == "xlsx" ? file = Roo::Spreadsheet.open(params[:file].path, :extension => :xlsx) : file = Roo::Spreadsheet.open(params[:file].path, :extension => :xls)
       LotNumber.mass_assign(file)
       flash[:success] = "Data imported successfully!!!"

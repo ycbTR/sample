@@ -13,25 +13,35 @@
       </Row>
 
       <Row>
-        <Cell><Data ss:Type="String">ID</Data></Cell>
-        <Cell><Data ss:Type="String">Number</Data></Cell>
-        <Cell><Data ss:Type="String">SPA Name</Data></Cell>
-        <Cell><Data ss:Type="String">Heritage</Data></Cell>
+        <Cell><Data ss:Type="String">Created Date</Data></Cell>
+        <Cell><Data ss:Type="String">Collector</Data></Cell>
+        <Cell><Data ss:Type="String">Lot Number</Data></Cell>
+        <Cell><Data ss:Type="String">Date Collected</Data></Cell>
+        <Cell><Data ss:Type="String">Botanical name</Data></Cell>
+        <Cell><Data ss:Type="String">Common name</Data></Cell>
         <Cell><Data ss:Type="String">Region</Data></Cell>
         <Cell><Data ss:Type="String">Provenance</Data></Cell>
         <Cell><Data ss:Type="String">Location</Data></Cell>
-        <Cell><Data ss:Type="String">SPA entry number</Data></Cell>
+        <Cell><Data ss:Type="String">Reference</Data></Cell>
+        <Cell><Data ss:Type="String">Quantity</Data></Cell>
+        <Cell><Data ss:Type="String">Population size/collection</Data></Cell>
+        <Cell><Data ss:Type="String">Comments</Data></Cell>
       </Row>
       <% @lot_numbers.each_with_index do |lot_number, index| %>
           <Row>
-           <Cell><Data ss:Type="Number"><%= lot_number.id %></Data></Cell>
-           <Cell><Data ss:Type="Number"><%= lot_number.number %></Data></Cell>
-           <Cell><Data ss:Type="String"><%= (lot_number.spa_name.blank? ? "NA" : lot_number.spa_name) %></Data></Cell>
-           <Cell><Data ss:Type="String"><%= lot_number.heritage_lot_numbers %></Data></Cell>
-           <Cell><Data ss:Type="String"><%= lot_number.region %></Data></Cell>
-           <Cell><Data ss:Type="String"><%= lot_number.provenance %></Data></Cell>
-           <Cell><Data ss:Type="String"><%= lot_number.location %></Data></Cell>
-           <Cell><Data ss:Type="Number"><%= lot_number.mass_num %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.created_at.strftime("%m-%d-%Y, %H:%M") %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= Person.find(LotNumber.last.deposits.first.collector_id).full_name %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.number %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= LotNumber.last.deposits.first.date.strftime("%m-%d-%Y") %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.deposits.first.plant.species %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.deposits.first.plant.common_name %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.region %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.provenance %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.location %></Data></Cell>  
+            <Cell><Data ss:Type="String"><%= lot_number.reference %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.deposits.first.qty_bank %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.deposits.first.plant_population %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.deposits.first.comments %></Data></Cell>
           </Row>
       <% end %>
     </Table>

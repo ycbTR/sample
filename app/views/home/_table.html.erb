@@ -1,4 +1,4 @@
-<table class="table-bordered" id="table-1">
+<table class="table-bordered table-striped" id="table-1">
   <thead>
   <tr class="bold-black">
     <th>SEED CATALOGUE</th>
@@ -7,7 +7,9 @@
     <th>1-49g</th>
     <th>50-499g</th>
     <th> >500</th>
-    <th>Qty Consigned</th>
+    <% if current_user && current_user.staff? %>
+      <th>Qty Consigned</th>
+    <% end %>
   </tr>
 
   <tr class="bold-black">
@@ -21,7 +23,7 @@
     <th>$/kg</th>
     <th>$/kg</th>
     <th>$/kg</th>
-    <th>Qty Consigned</th>
+    <th></th>
   </tr>
   </thead>
 
@@ -38,9 +40,11 @@
         <td><%= number_to_currency deposit.plant.level_1_price %></td>
         <td><%= number_to_currency deposit.plant.level_2_price %></td>
         <td><%= number_to_currency deposit.plant.level_3_price %></td>
-        <td><%= number_to_currency deposit.qty_consigned %></td>
+        <% if current_user && current_user.staff? %>
+          <td><%= deposit.qty_consigned %></td>
+        <% end %>
       </tr>
   <% end %>
   </tbody>
 </table>
-<table class="table-striped col-md-12" id="header-fixed"></table>
+<table class="table-bordered table-striped col-md-12" id="header-fixed"></table>
