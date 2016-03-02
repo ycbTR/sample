@@ -7,38 +7,50 @@
   <%= submit_tag "Import sheet" %>
 <% end %>
 
-<%= content_for :page_title, "SPA entry ss  #{export_to_excel_link}".html_safe %>
+<%= content_for :page_title, "SPA entry ss #{Date.today} #{export_to_excel_link}".html_safe %>
 
 <% if @lot_numbers.count == 0 %>
 <br>
 <br>
 No lot numbers are added using SPA entry SS.
 <% else %>
-  <table class="table table-striped marT30" id="table-1">
+  <table class="table-striped table-bordered marT30" id="table-1">
     <thead>
     <tr>
-      <th> Id </th>
-      <th> Nunmber </th>
-      <th><%= "SPA Name" %></th>
-      <th><%= "Heritage Lot Numbers" %></th>
+      <th>Created Date</th>
+      <th>Collector</th>
+      <th>Lot Number</th>
+      <th>Date Collected</th>
+      <th>Botanical Name</th>
+      <th>Common Name</th>
       <th>Region</th>
       <th>Provenance</th>
       <th>Location</th>
+      <th>Reference</th>
+      <th>Quantity</th>
+      <th>Population size/collection</th>
+      <th>Comments</th>
     </tr>
     </thead>
     <tbody>
     <% @lot_numbers.each do |lot_number| %>
         <tr>
-          <td><%= lot_number.id %></td>
+          <td><%= lot_number.created_at.strftime("%m-%d-%Y, %H:%M") %></td>
+          <td><%= Person.find(lot_number.deposits.first.collector_id).full_name %></td>
           <td><%= lot_number.number %></td>
-          <td><%= (lot_number.spa_name.blank? ? "NA" : lot_number.spa_name) %></td>
-          <td><%= lot_number.heritage_lot_numbers %></td>
+          <td><%= lot_number.deposits.first.date.strftime("%m-%d-%Y") %></td>
+          <td><%= lot_number.deposits.first.plant.species %></td>
+          <td><%= lot_number.deposits.first.plant.common_name %></td>
           <td><%= lot_number.region %></td>
           <td><%= lot_number.provenance %></td>
           <td><%= lot_number.location %></td>
+          <td><%= lot_number.deposits.first.reference %></td>
+          <td><%= lot_number.deposits.first.qty_bank %></td>
+          <td><%= lot_number.deposits.first.plant_population %></td>
+          <td><%= lot_number.deposits.first.comments %></td>
         </tr>
     <% end %>
     </tbody>
   </table>
-  <table class="table table-striped col-md-12" id="header-fixed"></table>
+  <table class="table-striped table-bordered col-md-12" id="header-fixed"></table>
 <% end %>

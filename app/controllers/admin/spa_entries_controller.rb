@@ -12,13 +12,18 @@ class Admin::SpaEntriesController < Admin::ResourceController
   end
 
   def create
-    if params[:file].present? && (file_type == "xls" || file_type == "xlsx")
-    file_type = params[:file].original_filename.split(".").last
-      file_type == "xlsx" ? file = Roo::Spreadsheet.open(params[:file].path, :extension => :xlsx) : file = Roo::Spreadsheet.open(params[:file].path, :extension => :xls)
-      LotNumber.mass_assign(file)
-      flash[:success] = "Data imported successfully!!!"
-      redirect_to :back
-    else  
+    if params[:file].present?
+      file_type = params[:file].original_filename.split(".").last
+      if params[:file].present? && (file_type == "xls" || file_type == "xlsx")
+        file_type == "xlsx" ? file = Roo::Spreadsheet.open(params[:file].path, :extension => :xlsx) : file = Roo::Spreadsheet.open(params[:file].path, :extension => :xls)
+        LotNumber.mass_assign(file)
+        flash[:success] = "Data imported successfully!!!"
+        redirect_to :back
+      else  
+        flash[:error] = "Invalid File. Please Upload an xls or xlsx file."
+        redirect_to :back
+      end
+    else
       flash[:error] = "Empty File. Please Upload an xls or xlsx file."
       redirect_to :back
     end

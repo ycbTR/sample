@@ -30,15 +30,15 @@
       <% @lot_numbers.each_with_index do |lot_number, index| %>
           <Row>
             <Cell><Data ss:Type="String"><%= lot_number.created_at.strftime("%m-%d-%Y, %H:%M") %></Data></Cell>
-            <Cell><Data ss:Type="String"><%= Person.find(LotNumber.last.deposits.first.collector_id).full_name %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= Person.find(lot_number.deposits.first.collector_id).full_name %></Data></Cell>
             <Cell><Data ss:Type="String"><%= lot_number.number %></Data></Cell>
-            <Cell><Data ss:Type="String"><%= LotNumber.last.deposits.first.date.strftime("%m-%d-%Y") %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.deposits.first.date.strftime("%m-%d-%Y") %></Data></Cell>
             <Cell><Data ss:Type="String"><%= lot_number.deposits.first.plant.species %></Data></Cell>
             <Cell><Data ss:Type="String"><%= lot_number.deposits.first.plant.common_name %></Data></Cell>
             <Cell><Data ss:Type="String"><%= lot_number.region %></Data></Cell>
             <Cell><Data ss:Type="String"><%= lot_number.provenance %></Data></Cell>
-            <Cell><Data ss:Type="String"><%= lot_number.location %></Data></Cell>  
-            <Cell><Data ss:Type="String"><%= lot_number.reference %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.location %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.deposits.first.reference %></Data></Cell>
             <Cell><Data ss:Type="String"><%= lot_number.deposits.first.qty_bank %></Data></Cell>
             <Cell><Data ss:Type="String"><%= lot_number.deposits.first.plant_population %></Data></Cell>
             <Cell><Data ss:Type="String"><%= lot_number.deposits.first.comments %></Data></Cell>
