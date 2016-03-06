@@ -16,7 +16,7 @@
   <%= submit_tag "Search", class: "btn" %>
   <%= submit_tag "Delete", class: "btn", data: { confirm: 'Are you sure you want to delete?' } %>
 <% end %>
-<% if @lot_numbers || @lot_numbers == nil %>
+<% unless @lot_numbers %>
   <br>
   <br>
   No data for the selected date.
