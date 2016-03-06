@@ -7,7 +7,7 @@
   <%= submit_tag "Import sheet" %>
 <% end %>
 
-<%= content_for :page_title, "SPA entry ss #{export_to_excel_link}".html_safe %>
+<%= content_for :page_title, "SPA Entry SS #{export_to_excel_link}".html_safe %>
 <br>
 <br>
 <%= form_tag current_url, method: :get do %>
@@ -16,8 +16,7 @@
   <%= submit_tag "Search", class: "btn" %>
   <%= submit_tag "Delete", class: "btn", data: { confirm: 'Are you sure you want to delete?' } %>
 <% end %>
-
-<% unless @lot_numbers %>
+<% if @lot_numbers || @lot_numbers == nil %>
   <br>
   <br>
   No data for the selected date.
@@ -42,21 +41,21 @@
     </thead>
     <tbody>
     <% @lot_numbers.each do |lot_number| %>
-        <tr>
-          <td><%= lot_number.created_at.strftime("%m-%d-%Y, %H:%M") rescue nil %></td>
-          <td><%= Person.find(lot_number.deposits.first.collector_id).full_name rescue nil %></td>
-          <td><%= lot_number.number %></td>
-          <td><%= lot_number.deposits.first.date.strftime("%m-%d-%Y") rescue nil %></td>
-          <td><%= lot_number.deposits.first.plant.species rescue nil %></td>
-          <td><%= lot_number.deposits.first.plant.common_name rescue nil %></td>
-          <td><%= lot_number.region %></td>
-          <td><%= lot_number.provenance %></td>
-          <td><%= lot_number.location %></td>
-          <td><%= lot_number.deposits.first.reference rescue nil %></td>
-          <td><%= lot_number.deposits.first.qty_bank rescue nil %></td>
-          <td><%= lot_number.deposits.first.plant_population rescue nil %></td>
-          <td><%= lot_number.deposits.first.comments rescue nil %></td>
-        </tr>
+      <tr>
+        <td><%= lot_number.created_at.strftime("%m-%d-%Y, %H:%M") rescue nil %></td>
+        <td><%= Person.find(lot_number.deposits.first.collector_id).full_name rescue nil %></td>
+        <td><%= lot_number.number %></td>
+        <td><%= lot_number.deposits.first.date.strftime("%m-%d-%Y") rescue nil %></td>
+        <td><%= lot_number.deposits.first.plant.species rescue nil %></td>
+        <td><%= lot_number.deposits.first.plant.common_name rescue nil %></td>
+        <td><%= lot_number.region %></td>
+        <td><%= lot_number.provenance %></td>
+        <td><%= lot_number.location %></td>
+        <td><%= lot_number.deposits.first.reference rescue nil %></td>
+        <td><%= lot_number.deposits.first.qty_bank rescue nil %></td>
+        <td><%= lot_number.deposits.first.plant_population rescue nil %></td>
+        <td><%= lot_number.deposits.first.comments rescue nil %></td>
+      </tr>
     <% end %>
     </tbody>
   </table>

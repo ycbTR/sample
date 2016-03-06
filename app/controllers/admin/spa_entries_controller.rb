@@ -8,6 +8,8 @@ class Admin::SpaEntriesController < Admin::ResourceController
     if @start_date.present? && @end_date.present? && params[:commit] == "Search"
       set_dates
       @lot_numbers = LotNumber.where(created_at: (@start_date)..(@end_date))
+      p 111111111111111111111
+      p @lot_numbers.count
     elsif @start_date.present? && @end_date.present? && params[:commit] == "Delete"
       set_dates
       LotNumber.destroy_all(created_at: (@start_date)..(@end_date))
