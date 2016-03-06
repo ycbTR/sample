@@ -66,7 +66,6 @@ Seedbank::Application.routes.draw do
   get "catalogue/general", to: "home#catalogue_general", as: "catalogue_general"
   get "catalogue/nursery", to: "home#catalogue_nursery", as: "catalogue_nursery"
   get "catalogue/seeding", to: "home#catalogue_seeding", as: "catalogue_seeding"
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

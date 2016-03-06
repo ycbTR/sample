@@ -3,11 +3,14 @@ class Admin::SpaEntriesController < Admin::ResourceController
   skip_before_filter :load_resource
 
   def index
-    max_mass_num = LotNumber.maximum("mass_num")
-    if max_mass_num == nil
-      @lot_numbers = []
-    else
-      @lot_numbers = LotNumber.where(mass_num: max_mass_num)
+    @start_date = params[:start_date]
+    @end_date = params[:end_date]
+    if @start_date.present? && @end_date.present? && params[:commit] == "Search"
+      set_dates
+      @lot_numbers = LotNumber.where(created_at: (@start_date)..(@end_date))
+    elsif @start_date.present? && @end_date.present? && params[:commit] == "Delete"
+      set_dates
+      LotNumber.destroy_all(created_at: (@start_date)..(@end_date))
     end
   end
 
@@ -28,4 +31,10 @@ class Admin::SpaEntriesController < Admin::ResourceController
       redirect_to :back
     end
   end
+
+  def set_dates
+    @start_date = ActiveSupport::TimeZone.new("Australia/Sydney").local_to_utc(@start_date.to_time.beginning_of_day)
+    @end_date = ActiveSupport::TimeZone.new("Australia/Sydney").local_to_utc(@end_date.to_time.end_of_day)
+  end
+
 end

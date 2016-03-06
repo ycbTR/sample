@@ -7,12 +7,20 @@
   <%= submit_tag "Import sheet" %>
 <% end %>
 
-<%= content_for :page_title, "SPA entry ss #{Date.today} #{export_to_excel_link}".html_safe %>
+<%= content_for :page_title, "SPA entry ss #{export_to_excel_link}".html_safe %>
+<br>
+<br>
+<%= form_tag current_url, method: :get do %>
+  <%= text_field_tag :start_date, params[:start_date], class: "datepicker", placeholder: "Start date" %>  to
+  <%= text_field_tag :end_date, params[:end_date], class: "datepicker", placeholder: "End date" %>
+  <%= submit_tag "Search", class: "btn" %>
+  <%= submit_tag "Delete", class: "btn", data: { confirm: 'Are you sure you want to delete?' } %>
+<% end %>
 
-<% if @lot_numbers.count == 0 %>
-<br>
-<br>
-No lot numbers are added using SPA entry SS.
+<% unless @lot_numbers %>
+  <br>
+  <br>
+  No data for the selected date.
 <% else %>
   <table class="table-striped table-bordered marT30" id="table-1">
     <thead>
@@ -35,19 +43,19 @@ No lot numbers are added using SPA entry SS.
     <tbody>
     <% @lot_numbers.each do |lot_number| %>
         <tr>
-          <td><%= lot_number.created_at.strftime("%m-%d-%Y, %H:%M") %></td>
-          <td><%= Person.find(lot_number.deposits.first.collector_id).full_name %></td>
+          <td><%= lot_number.created_at.strftime("%m-%d-%Y, %H:%M") rescue nil %></td>
+          <td><%= Person.find(lot_number.deposits.first.collector_id).full_name rescue nil %></td>
           <td><%= lot_number.number %></td>
-          <td><%= lot_number.deposits.first.date.strftime("%m-%d-%Y") %></td>
-          <td><%= lot_number.deposits.first.plant.species %></td>
-          <td><%= lot_number.deposits.first.plant.common_name %></td>
+          <td><%= lot_number.deposits.first.date.strftime("%m-%d-%Y") rescue nil %></td>
+          <td><%= lot_number.deposits.first.plant.species rescue nil %></td>
+          <td><%= lot_number.deposits.first.plant.common_name rescue nil %></td>
           <td><%= lot_number.region %></td>
           <td><%= lot_number.provenance %></td>
           <td><%= lot_number.location %></td>
-          <td><%= lot_number.deposits.first.reference %></td>
-          <td><%= lot_number.deposits.first.qty_bank %></td>
-          <td><%= lot_number.deposits.first.plant_population %></td>
-          <td><%= lot_number.deposits.first.comments %></td>
+          <td><%= lot_number.deposits.first.reference rescue nil %></td>
+          <td><%= lot_number.deposits.first.qty_bank rescue nil %></td>
+          <td><%= lot_number.deposits.first.plant_population rescue nil %></td>
+          <td><%= lot_number.deposits.first.comments rescue nil %></td>
         </tr>
     <% end %>
     </tbody>
