@@ -5,14 +5,17 @@ class Admin::SpaEntriesController < Admin::ResourceController
   def index
     @start_date = params[:start_date]
     @end_date = params[:end_date]
-    if @start_date.present? && @end_date.present? && params[:commit] == "Search"
-      set_dates
-      @lot_numbers = LotNumber.where(created_at: (@start_date)..(@end_date))
-      p 111111111111111111111
-      p @lot_numbers.count
-    elsif @start_date.present? && @end_date.present? && params[:commit] == "Delete"
-      set_dates
-      LotNumber.destroy_all(created_at: (@start_date)..(@end_date))
+    if params[:commit] == "Search"
+      if @start_date.present? && @end_date.present? 
+        set_dates
+        @lot_numbers = LotNumber.where(created_at: (@start_date)..(@end_date), mass_num: !nil)
+      end
+    elsif params[:commit] == "Delete"
+      if @start_date.present? && @end_date.present? 
+        set_dates
+        LotNumber.destroy_all(created_at: (@start_date)..(@end_date))
+        redirect_to admin_spa_entries_path
+      end
     end
   end
 
