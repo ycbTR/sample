@@ -9,6 +9,14 @@ class Admin::SpaEntriesController < Admin::ResourceController
       if @start_date.present? && @end_date.present? 
         set_dates
         @lot_numbers = LotNumber.where(created_at: (@start_date)..(@end_date), mass_num: !nil)
+        respond_to do |format|
+          format.js {}
+          format.html {}
+          format.xls do
+            filename = "spa_entries_from_#{@start_date.strftime('%m-%d-%Y')}_to_#{@end_date.strftime('%m-%d-%Y')}"
+            response.headers['Content-Disposition'] = 'attachment; filename="' + filename + '.xls"'
+          end
+        end
       end
     elsif params[:commit] == "Delete"
       if @start_date.present? && @end_date.present? 
@@ -41,5 +49,4 @@ class Admin::SpaEntriesController < Admin::ResourceController
     @start_date = ActiveSupport::TimeZone.new("Australia/Sydney").local_to_utc(@start_date.to_time.beginning_of_day)
     @end_date = ActiveSupport::TimeZone.new("Australia/Sydney").local_to_utc(@end_date.to_time.end_of_day)
   end
-
 end
