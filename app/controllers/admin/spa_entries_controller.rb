@@ -13,7 +13,7 @@ class Admin::SpaEntriesController < Admin::ResourceController
           format.js {}
           format.html {}
           format.xls do
-            filename = "SS_Spa_Entries_from_#{@start_date.strftime('%m-%d-%Y')}_to_#{@end_date.strftime('%m-%d-%Y')}"
+            filename = "SS_Spa_Entries_from_#{(@start_date+1.days).strftime('%m-%d-%Y')}_to_#{@end_date.strftime('%m-%d-%Y')}"
             response.headers['Content-Disposition'] = 'attachment; filename="' + filename + '.xls"'
           end
         end
