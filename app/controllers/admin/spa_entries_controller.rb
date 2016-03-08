@@ -8,7 +8,8 @@ class Admin::SpaEntriesController < Admin::ResourceController
     if params[:commit] == "Search"
       if @start_date.present? && @end_date.present? 
         set_dates
-        @lot_numbers = LotNumber.where(created_at: (@start_date)..(@end_date), mass_num: !nil)
+        @lot = LotNumber.where(created_at: (@start_date)..(@end_date))
+        @lot_numbers = @lot.where("mass_num > ?", 0).order(:created_at)
         respond_to do |format|
           format.js {}
           format.html {}
