@@ -33,12 +33,26 @@ class Admin::SpaEntriesController < Admin::ResourceController
       file_type = params[:file].original_filename.split(".").last
       if params[:file].present? && (file_type == "xls" || file_type == "xlsx")
         file_type == "xlsx" ? file = Roo::Spreadsheet.open(params[:file].path, :extension => :xlsx) : file = Roo::Spreadsheet.open(params[:file].path, :extension => :xls)
+        row = 1
+        errors = []
+        plant_ids = Plant.pluck(:id)
+        collector_ids = Person::Collector.pluck(:id)
+        loop do
+          row += 1
+          current_row = file.row(row)
+          break if current_row[3] == nil
+          errors << row unless collector_ids.include? current_row[1].to_i
+          errors << row unless plant_ids.include? current_row[3].to_i
+          current_row[2].to_date rescue errors << row
+          Integer(current_row[0]) rescue errors << row unless current_row[0].nil?
+          Float(current_row[8]) rescue errors << row
+        end
         if errors.count == nil
           LotNumber.mass_assign(file)
           flash[:success] = "Data imported successfully!!!"
           redirect_to :back
         else
-          flash[:error] = "Please correct #{errors.uniq.to_sentence} line(s) in the xlsx file."
+          flash[:error] = "Please correct #{errors.uniq.to_sentence} line(s)."
           redirect_to :back
         end
       else  
@@ -57,19 +71,6 @@ class Admin::SpaEntriesController < Admin::ResourceController
   end
 
   def validate_ss
-    row = 1
-    errors = []
-    plant_ids = Plant.pluck(:id)
-    collector_ids = Person::Collector.pluck(:id)
-    loop do
-      row += 1
-      current_row = file.row(row)
-      break if current_row[3] == nil
-      errors << row unless collector_ids.include? current_row[1].to_i
-      errors << row unless plant_ids.include? current_row[3].to_i
-      current_row[2].to_date rescue errors << row
-      Integer(current_row[0]) rescue errors << row unless current_row[0].nil?
-      Float(current_row[8]) rescue errors << row
-    end
+
   end
 end
