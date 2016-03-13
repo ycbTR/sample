@@ -35,30 +35,32 @@ class Admin::SpaEntriesController < Admin::ResourceController
         file_type == "xlsx" ? file = Roo::Spreadsheet.open(params[:file].path, :extension => :xlsx) : file = Roo::Spreadsheet.open(params[:file].path, :extension => :xls)
         row = 1
         errors = []
+        lot_numbers = []
         plant_ids = Plant.pluck(:id)
         collector_ids = Person::Collector.pluck(:id)
+        lot_number_ids = LotNumber.pluck(:id) - Deposit.pluck(:lot_number_id)
         loop do
           row += 1
           current_row = file.row(row)
           break if current_row[3] == nil
+          lot_numbers << current_row[0] unless lot_number_ids.include? current_row[0].to_i
           errors << row unless collector_ids.include? current_row[1].to_i
           errors << row unless plant_ids.include? current_row[3].to_i
           current_row[2].to_date rescue errors << row
           Integer(current_row[0]) rescue errors << row unless current_row[0].nil?
           Float(current_row[8]) rescue errors << row
         end
-        p 11111111111111111111
-        p errors
-        if errors.count == 0
+        if errors.count == 0 || lot_numbers.count == 0
           LotNumber.mass_assign(file)
           flash[:success] = "Data imported successfully!!!"
           redirect_to :back
         else
-          flash[:error] = "Please correct #{errors.uniq.to_sentence} line(s)."
+          flash[:error] = "Please correct #{errors.uniq.to_sentence} line(s)." + lot_numbers.count == 0 ? "" : "Lot Number(s) #{lot_numbers.uniq
+          .to_sentence} exists with deposits"
           redirect_to :back
         end
       else  
-        flash[:error] = "Invalid File. Please Upload an xls or xlsx file."
+        flash[:error] = "Invalid File. Please Upload an xlsx file."
         redirect_to :back
       end
     else
