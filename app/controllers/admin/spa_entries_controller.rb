@@ -47,7 +47,9 @@ class Admin::SpaEntriesController < Admin::ResourceController
           Integer(current_row[0]) rescue errors << row unless current_row[0].nil?
           Float(current_row[8]) rescue errors << row
         end
-        if errors.count == nil
+        p 11111111111111111111
+        p errors
+        if errors.count == 0
           LotNumber.mass_assign(file)
           flash[:success] = "Data imported successfully!!!"
           redirect_to :back
