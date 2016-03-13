@@ -50,13 +50,12 @@ class Admin::SpaEntriesController < Admin::ResourceController
           Integer(current_row[0]) rescue errors << row unless current_row[0].nil?
           Float(current_row[8]) rescue errors << row
         end
-        if errors.count == 0 || lot_numbers.count == 0
+        if errors.count == 0 && lot_numbers.count == 0
           LotNumber.mass_assign(file)
           flash[:success] = "Data imported successfully!!!"
           redirect_to :back
         else
-          flash[:error] = "Please correct #{errors.uniq.to_sentence} line(s)." + lot_numbers.count == 0 ? "" : "Lot Number(s) #{lot_numbers.uniq
-          .to_sentence} exists with deposits"
+          flash[:error] = "Please correct #{errors.uniq.to_sentence} line(s).Lot Number(s) #{lot_numbers.uniq.to_sentence} exists with deposits or doesn't exists at all.(in case you need to create a new lot then let the system assign a number for it.)"
           redirect_to :back
         end
       else  
