@@ -66,12 +66,7 @@ class LotNumber < ActiveRecord::Base
       if current_row[0].nil?
         current_lot = LotNumber.create(number: LotNumber.maximum("number") + 1, region: current_row[4], provenance: current_row[5], location: current_row[6], spa_name: nil, spa_specific: "Yes", self_heritage: "No", mass_num: mass_number)
       else
-        current_lot = LotNumber.find_by_number(current_row[0].to_i)
-        if current_lot.nil?
-          current_lot = LotNumber.create(number: current_row[0], region: current_row[4], provenance: current_row[5], location: current_row[6], spa_name: nil, spa_specific: "Yes", self_heritage: "No", mass_num: mass_number)
-        else
-          current_lot.update_attributes(region: current_row[4], provenance: current_row[5], location: current_row[6], spa_name: nil, spa_specific: "Yes", self_heritage: "No", mass_num: mass_number)
-        end
+        current_lot = LotNumber.create(number: current_row[0], region: current_row[4], provenance: current_row[5], location: current_row[6], spa_name: nil, spa_specific: "Yes", self_heritage: "No", mass_num: mass_number)
       end
       deposit = current_lot.deposits.build(plant_id: current_row[3], date: current_row[2], qty_bank: current_row[8], qty_consigned: 0, collector_id: current_row[1], qty_onhold: 0, comments: current_row[10], plant_population: current_row[9], reference: current_row[7])
       deposit.save

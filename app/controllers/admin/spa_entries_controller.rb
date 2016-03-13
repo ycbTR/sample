@@ -36,26 +36,27 @@ class Admin::SpaEntriesController < Admin::ResourceController
         row = 1
         errors = []
         lot_numbers = []
+        lot_number_exist = []
         plant_ids = Plant.pluck(:id)
         collector_ids = Person::Collector.pluck(:id)
-        lot_number_ids = LotNumber.pluck(:id) - Deposit.pluck(:lot_number_id)
+        lot_number_num = LotNumber.pluck(:number)
         loop do
           row += 1
           current_row = file.row(row)
           break if current_row[3] == nil
-          lot_numbers << current_row[0] unless lot_number_ids.include? current_row[0].to_i
+          lot_number_exist << current_row[0] if lot_number_num.include? current_row[0].to_i
           errors << row unless collector_ids.include? current_row[1].to_i
           errors << row unless plant_ids.include? current_row[3].to_i
           current_row[2].to_date rescue errors << row
           Integer(current_row[0]) rescue errors << row unless current_row[0].nil?
           Float(current_row[8]) rescue errors << row
         end
-        if errors.count == 0 && lot_numbers.count == 0
+        if errors.count == 0 && lot_number_exist.count == 0
           LotNumber.mass_assign(file)
           flash[:success] = "Data imported successfully!!!"
           redirect_to :back
         else
-          flash[:error] = "Please correct #{errors.uniq.to_sentence} line(s).Lot Number(s) #{lot_numbers.uniq.to_sentence} exists with deposits or doesn't exists at all.(in case you need to create a new lot then let the system assign a number for it.)"
+          flash[:error] = "Please correct #{errors.uniq.to_sentence} line(s).Lot Number(s) #{lot_number_exist.uniq.to_sentence} already exists."
           redirect_to :back
         end
       else  
