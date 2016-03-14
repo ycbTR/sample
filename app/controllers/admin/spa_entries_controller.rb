@@ -45,18 +45,12 @@ class Admin::SpaEntriesController < Admin::ResourceController
           current_row = file.row(row)
           break if current_row[3] == nil
           lot_number_exist << current_row[0] if current_row[0].present? && lot_number_num.include?(current_row[0].to_i)
-          puts "==============================="
-          puts "===#{current_row[0]}============#{lot_number_exist.inspect}================"
-          puts "==============================="
           errors << row unless collector_ids.include? current_row[1].to_i
           errors << row unless plant_ids.include? current_row[3].to_i
           current_row[2].to_date rescue errors << row
           Integer(current_row[0]) rescue errors << row unless current_row[0].nil?
           Float(current_row[8]) rescue errors << row
         end
-        puts "==============================="
-        puts "===============#{lot_number_exist.inspect}================"
-        puts "==============================="
         if errors.count == 0 && lot_number_exist.count == 0
           LotNumber.mass_assign(file)
           flash[:success] = "Data imported successfully!!!"
