@@ -15,7 +15,7 @@
 
 class LotNumber < ActiveRecord::Base
   attr_accessible :location, :number, :provenance, :region, :heritage_ids,
-                  :spa_name, :spa_specific, :self_heritage, :plant_population, :reference
+                  :spa_name, :spa_specific, :self_heritage, :plant_population, :reference, :mass_num
 
   has_many :deposits, dependent: :destroy
   has_many :lot_heritages, class_name: "LotHeritage", dependent: :destroy
@@ -58,12 +58,18 @@ class LotNumber < ActiveRecord::Base
 
   def self.mass_assign(file)
     row = 1
+    mass_number = LotNumber.maximum("mass_num").nil? ? 1 : LotNumber.maximum("mass_num") + 1
     loop do
       row += 1
       current_row = file.row(row)
       break if current_row[3] == nil
-      current_lot = LotNumber.create(number: current_row[0].nil? ? LotNumber.last.number + 1 : current_row[0], region: current_row[4], provenance: current_row[5], location: current_row[6], spa_name: nil, spa_specific: "Yes", self_heritage: "No")
-      current_lot.deposits.build(plant_id: current_row[3], date: current_row[2], qty_bank: current_row[8], qty_consigned: 0, collector_id: current_row[1], qty_onhold: 0, comments: current_row[10], plant_population: current_row[9], reference: current_row[7])
+      if current_row[0].nil?
+        current_lot = LotNumber.create(number: LotNumber.maximum("number") + 1, region: current_row[4], provenance: current_row[5], location: current_row[6], spa_name: nil, spa_specific: "Yes", self_heritage: "No", mass_num: mass_number)
+      else
+        current_lot = LotNumber.create(number: current_row[0], region: current_row[4], provenance: current_row[5], location: current_row[6], spa_name: nil, spa_specific: "Yes", self_heritage: "No", mass_num: mass_number)
+      end
+      deposit = current_lot.deposits.build(plant_id: current_row[3], date: current_row[2], qty_bank: current_row[8], qty_consigned: 0, collector_id: current_row[1], qty_onhold: 0, comments: current_row[10], plant_population: current_row[9], reference: current_row[7])
+      deposit.save
     end
   end
 end

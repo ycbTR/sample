@@ -39,9 +39,7 @@ class HomeController < ApplicationController
       filename = params[:action].to_s.titleize
       filename += "-#{Time.now.to_s.parameterize}"
       filename += ".xls"
-      headers["Content-Disposition"] = "attachment\; filename=\"#{filename }\""
+      response.headers["Content-Disposition"] = "attachment\; filename=\"#{filename }\""
     end
   end
-
-
 end

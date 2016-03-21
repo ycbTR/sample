@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Lot Numbers from SPA entry SS</Data></Cell>
+      </Row>
+      <Row>
+      </Row>
+
+      <Row>
+        <Cell><Data ss:Type="String">Created Date</Data></Cell>
+        <Cell><Data ss:Type="String">Collector</Data></Cell>
+        <Cell><Data ss:Type="String">Lot Number</Data></Cell>
+        <Cell><Data ss:Type="String">Date Collected</Data></Cell>
+        <Cell><Data ss:Type="String">Botanical name</Data></Cell>
+        <Cell><Data ss:Type="String">Common name</Data></Cell>
+        <Cell><Data ss:Type="String">Region</Data></Cell>
+        <Cell><Data ss:Type="String">Provenance</Data></Cell>
+        <Cell><Data ss:Type="String">Location</Data></Cell>
+        <Cell><Data ss:Type="String">Reference</Data></Cell>
+        <Cell><Data ss:Type="String">Quantity</Data></Cell>
+        <Cell><Data ss:Type="String">Population size/collection</Data></Cell>
+        <Cell><Data ss:Type="String">Comments</Data></Cell>
+      </Row>
+      <% @lot_numbers.each_with_index do |lot_number, index| %>
+          <Row>
+            <Cell><Data ss:Type="String"><%= lot_number.created_at.strftime("%m-%d-%Y, %H:%M") rescue nil %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= Person.find(lot_number.deposits.first.collector_id).full_name rescue nil %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.number %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.deposits.first.date.strftime("%m-%d-%Y") rescue nil %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.deposits.first.plant.species rescue nil %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.deposits.first.plant.common_name rescue nil %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.region %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.provenance %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.location %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.deposits.first.reference rescue nil %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.deposits.first.qty_bank rescue nil %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.deposits.first.plant_population rescue nil %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= lot_number.deposits.first.comments rescue nil %></Data></Cell>
+          </Row>
+      <% end %>
+    </Table>
+
+  </Worksheet>
+</Workbook>
