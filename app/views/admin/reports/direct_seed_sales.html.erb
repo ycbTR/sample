@@ -37,7 +37,7 @@
               <td><%= order_form.landholder_name %></td>
               <td><%= order_form.business_name %></td>
               <td><%= order_form.abn %></td>
-              <td><%= order_form.property_address %></td>
+              <td><%= order_form.landholder_address %></td>
               <td><%= order_form.customer.try(:email)  %></td>
               <td><%= order_form.customer.try(:phone)  %></td>
               <td><%= order.line_items.sum(:qty).to_f / 1000 %></td>
