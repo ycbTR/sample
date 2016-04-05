@@ -25,6 +25,7 @@ class Person < ActiveRecord::Base
   has_many :deposits, foreign_key: "collector_id"
   before_destroy :check_destroy_validations
   after_update :send_email, :if => :email_changed?
+  before_update :check_user
   validates :first_name, :last_name, presence: true
   class DestroyWithOrdersError < StandardError;
   end
@@ -58,7 +59,7 @@ class Person < ActiveRecord::Base
 
   def send_email
     unless self.user_id
-      u = User.create(email: self.email, password: "12345678", password_confirmation: "12345678", role: "Collector")
+      u = User.create(email: self.email, password: "12345678", password_confirmation: "12345678", role: self.type.split("::").last)
       self.user_id = u.id
       self.save
     end
@@ -66,5 +67,15 @@ class Person < ActiveRecord::Base
     u.email = self.email
     u.save!
     u.send_reset_password_instructions
+  end
+
+  def check_user
+    if self.email == ""
+      if self.user_id
+        u = User.find(self.user_id)
+        u.destroy
+        self.user_id == nil
+      end
+    end
   end
 end

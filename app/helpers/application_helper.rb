@@ -33,14 +33,13 @@ module ApplicationHelper
   end
 
 
-  def export_to_excel_link(format = 'xls')
-    if @current_user && @current_user.staff?
+  def export_to_excel_link(format = 'xls', without_current_user = false)
+    if (@current_user && @current_user.staff?) || without_current_user
       link_to current_url(format: format.to_s) do
         "<i class='fa fa-file-excel-o'></i>".html_safe
       end.html_safe
     end
   end
-
 
   def current_url(new_params = {})
     url_for params.merge(new_params)
