@@ -18,7 +18,7 @@
         <Cell><Data ss:Type="String">Email</Data></Cell>
         <Cell><Data ss:Type="String">Phone</Data></Cell>
       </Row>
-    <% Person::Customer.order(:last_name).each do |person| %>
+    <% Person.where("type = ? OR is_customer = ?","Person::Customer", true).order(:last_name).each do |person| %>
       <Row>
         <Cell><Data ss:Type="Number"><%= person.id %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= person.user_id %></Data></Cell>
@@ -30,6 +30,7 @@
         <Cell><Data ss:Type="String"><%= person.postcode %></Data></Cell>
         <Cell><Data ss:Type="String"><%= person.email %></Data></Cell>
         <Cell><Data ss:Type="String"><%= person.phone %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= person.is_customer ? "Also a collector" : "" %></Data></Cell>
       </Row>
     <% end %>
     </Table>
@@ -47,6 +48,7 @@
         <Cell><Data ss:Type="String">Post Code</Data></Cell>
         <Cell><Data ss:Type="String">Email</Data></Cell>
         <Cell><Data ss:Type="String">Phone</Data></Cell>
+        <Cell><Data ss:Type="String">Is Customer</Data></Cell>
       </Row>
     <% Person::Collector.order(:last_name).each do |person| %>
       <Row>
@@ -60,6 +62,7 @@
         <Cell><Data ss:Type="String"><%= person.postcode %></Data></Cell>
         <Cell><Data ss:Type="String"><%= person.email %></Data></Cell>
         <Cell><Data ss:Type="String"><%= person.phone %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= person.is_customer ? "Yes" : "No" %></Data></Cell>
       </Row>
     <% end %>
     </Table>
