@@ -107,8 +107,9 @@ class Order < ActiveRecord::Base
   def change_customer
     if self.customer_id_changed? && self.order_form.present?
       self.order_form.update_column(:customer_id, customer_id)
-      if Person.find(customer_id).type == "Person::Collector"
-        Person.find(customer_id).update_column(is_customer: true)
+      person = Person.find(customer_id)
+      if person.type == "Person::Collector"
+        person.update_column(:is_customer, true)
       end
     end
   end
