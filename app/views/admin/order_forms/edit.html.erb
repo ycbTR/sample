@@ -4,7 +4,7 @@
       <div class="form-group">
         <%= f.label :customer_id, class: "col-sm-2" %>
         <div class="col-sm-8">
-          <%= f.select :customer_id, Person::Customer.all.collect { |c| [c.full_name, c.id] }, {prompt: t(:please_select)}, class: "select2" %>
+          <%= f.select :customer_id, Person.all.collect { |c| [c.full_name, c.id] }, {prompt: t(:please_select)}, class: "select2" %>
         </div>
       </div>
 

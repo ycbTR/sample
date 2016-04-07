@@ -39,7 +39,7 @@
   <div class="control-group">
     <%= f.label :email, :class => 'control-label' %>
     <div class="controls">
-      <% if @object.email == "" %>
+      <% if @object.email == "" || @object.email == nil %>
         <%= f.email_field :email, :class => 'text_field', placeholder: "can be empty" %>
       <% else %>
         <%= f.email_field :email, :class => 'text_field', placeholder: "can be empty",:readonly => true %>

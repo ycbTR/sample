@@ -39,7 +39,7 @@ class OrderForm < ActiveRecord::Base
 
   has_one :order
   belongs_to :user
-  belongs_to :customer, class_name: "Person::Customer"
+  belongs_to :customer, class_name: "Person"
 
   has_many :order_form_items, dependent: :destroy
   alias_method :items, :order_form_items
@@ -102,6 +102,9 @@ class OrderForm < ActiveRecord::Base
   def change_customer
     if self.customer_id_changed? && self.order.present?
       self.order.update_column(:customer_id, customer_id)
+      if Person.find(customer_id).type == "Person::Collector"
+        Person.find(customer_id).update_column(is_customer: true)
+      end
     end
   end
 
