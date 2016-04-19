@@ -56,7 +56,7 @@ class Admin::ResourceController < Admin::BaseController
         format.html { redirect_to location_after_save }
         format.js { js_response }
       end
-      if @object.class == "Person::Collector" || "Person::Customer"
+      if (@object.class == "Person::Collector" || @object.class == "Person::Customer")
         if (@object.type == "Person::Collector" || @object.type == "Person::Customer") && @object.email != ""
           u = User.create(email: @object.email, password: "12345678", password_confirmation: "12345678", role: @object.type.split("::").last)
           u.send_reset_password_instructions
