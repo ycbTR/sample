@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   before_create :set_role
 
-  has_one :customer, :class_name => "Person::Customer"
+  has_one :customer, :class_name => "Person"
   alias_method :person, :customer
 
   has_many :transfers

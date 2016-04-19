@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160229142514) do
+ActiveRecord::Schema.define(:version => 20160406041612) do
 
   create_table "assets", :force => true do |t|
     t.string   "attachment_file_name"
@@ -287,9 +287,10 @@ ActiveRecord::Schema.define(:version => 20160229142514) do
     t.string   "email"
     t.string   "phone"
     t.string   "type"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "user_id"
+    t.boolean  "is_customer"
   end
 
   add_index "people", ["id", "type"], :name => "p1"

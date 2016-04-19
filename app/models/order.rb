@@ -26,7 +26,7 @@ class Order < ActiveRecord::Base
 
 
   has_many :line_items
-  belongs_to :customer, class_name: "Person::Customer"
+  belongs_to :customer, class_name: "Person"
   belongs_to :order_form
 
   accepts_nested_attributes_for :line_items, allow_destroy: true
@@ -107,6 +107,10 @@ class Order < ActiveRecord::Base
   def change_customer
     if self.customer_id_changed? && self.order_form.present?
       self.order_form.update_column(:customer_id, customer_id)
+      person = Person.find(customer_id)
+      if person.type == "Person::Collector"
+        person.update_column(:is_customer, true)
+      end
     end
   end
 

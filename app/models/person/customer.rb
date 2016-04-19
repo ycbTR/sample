@@ -18,7 +18,6 @@
 #
 
 class Person::Customer < Person
-  has_many :order_forms, :foreign_key => :customer_id
   validate :full_name_uniqueness
 
   def full_name_uniqueness

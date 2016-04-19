@@ -23,6 +23,7 @@ class Person < ActiveRecord::Base
   belongs_to :user
   has_many :orders, foreign_key: "customer_id"
   has_many :deposits, foreign_key: "collector_id"
+  has_many :order_forms, :foreign_key => :customer_id
   before_destroy :check_destroy_validations
   after_update :send_email, :if => :email_changed?
   before_update :check_user

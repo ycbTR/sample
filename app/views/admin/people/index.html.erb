@@ -19,6 +19,9 @@
     <th><%= model_class.human_attribute_name(:postcode) %></th>
     <th><%= model_class.human_attribute_name(:email) %></th>
     <th><%= model_class.human_attribute_name(:phone) %></th>
+    <% if @people.first && @people.first.type == "Person::Collector" %>
+      <th><%= model_class.human_attribute_name(:is_customer) %></th>
+    <% end %>
     <th><%= t '.actions', :default => t("helpers.actions") %></th>
   </tr>
   </thead>
@@ -34,6 +37,9 @@
         <td><%= person.postcode %></td>
         <td><%= person.email %></td>
         <td><%= person.phone %></td>
+        <% if @people.first.type == "Person::Collector" %>
+          <td><%= person.is_customer ? "Yes" : "No" %></td>
+        <% end %>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_admin_person_path(person, q: {type_cont: (params[:q][:type_cont] rescue "")}), remote: true, :class => 'btn btn-xs btn-primary' %>
