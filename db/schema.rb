@@ -171,12 +171,12 @@ ActiveRecord::Schema.define(:version => 20160406041612) do
   create_table "deposits", :force => true do |t|
     t.integer  "lot_number_id"
     t.integer  "plant_id"
+    t.integer  "collector_id"
     t.date     "date"
     t.decimal  "qty_bank",             :precision => 8, :scale => 2
     t.decimal  "qty_consigned",        :precision => 8, :scale => 2
     t.datetime "created_at",                                         :null => false
     t.datetime "updated_at",                                         :null => false
-    t.integer  "collector_id"
     t.decimal  "qty_onhold",           :precision => 8, :scale => 2
     t.text     "comments"
     t.decimal  "qty_allocated",        :precision => 8, :scale => 2
@@ -195,13 +195,11 @@ ActiveRecord::Schema.define(:version => 20160406041612) do
 
   create_table "line_items", :force => true do |t|
     t.integer  "order_id"
-    t.integer  "lot_number_id"
-    t.integer  "plant_id"
+    t.integer  "deposit_id"
     t.string   "seedmix_or_individual"
     t.integer  "qty"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
-    t.integer  "deposit_id"
     t.decimal  "price"
   end
 
@@ -213,13 +211,13 @@ ActiveRecord::Schema.define(:version => 20160406041612) do
   end
 
   create_table "lot_numbers", :force => true do |t|
-    t.integer  "number"
     t.string   "region"
     t.string   "provenance"
     t.string   "location"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
     t.string   "spa_name"
+    t.integer  "number"
     t.boolean  "spa_specific",  :default => false
     t.boolean  "self_heritage", :default => false
     t.integer  "mass_num"
@@ -319,17 +317,6 @@ ActiveRecord::Schema.define(:version => 20160406041612) do
   end
 
   add_index "settings", ["thing_type", "thing_id", "var"], :name => "index_settings_on_thing_type_and_thing_id_and_var", :unique => true
-
-  create_table "snippets", :force => true do |t|
-    t.string   "label",                     :null => false
-    t.string   "slug",                      :null => false
-    t.string   "identifier",                :null => false
-    t.text     "excerpt"
-    t.text     "content"
-    t.integer  "position",   :default => 0, :null => false
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-  end
 
   create_table "transactions", :force => true do |t|
     t.integer  "deposit_id"
