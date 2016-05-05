@@ -1,7 +1,8 @@
 class Customer::OrderFormsController < Customer::BaseController
-  skip_before_filter :person_required, only: :profile
+  skip_before_filter :person_required, only: [:profile, :new]
 
   def new
+    person_required unless @current_user.admin?
     build_order
     OrderForm.accessible_attributes
     if @current_order.customer
@@ -29,8 +30,8 @@ class Customer::OrderFormsController < Customer::BaseController
     @person = @current_user.customer
     @person ||= @current_user.build_customer
     unless request.get?
-      params[:person_customer][:type] = "Person::Customer"
-      @person.update_attributes(params[:person_customer])
+      p params[:person][:type] = "Person::Customer"
+      @person.update_attributes(params[:person])
       flash[:success] = "Profile Saved Successfully"
       redirect_to (params[:return_to] || customer_profile_path)
     end
