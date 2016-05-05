@@ -74,7 +74,7 @@
           <tr>
             <td><%= deposit.display %></td>
             <td><%= deposit.plant.species %></td>
-            <td><%= deposit.lot_number.provenance %></td>
+            <td><%= deposit.lot_number.provenance rescue "" %></td>
             <td><%= item.grams || "-" %></td>
           </tr>
       <% end %>
