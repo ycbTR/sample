@@ -18,6 +18,6 @@
 .idea
 /.idea/**/*
 /.idea/**/*.xml
-
+/public/assets
 # Ignore database.yml
 /config/database.yml
