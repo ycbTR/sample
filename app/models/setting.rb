@@ -35,11 +35,19 @@ class Setting < RailsSettings::CachedSettings
 
 
     ActionMailer::Base.smtp_settings = {
-        :address => Setting.smtp_host,
-        :port => Setting.smtp_port,
-        :user_name => Setting.smtp_username,
-        :password => Setting.smtp_password,
-        :authentication => :plain,
+        # :address => Setting.smtp_host,
+        # :port => Setting.smtp_port,
+        # :user_name => Setting.smtp_username,
+        # :password => Setting.smtp_password,
+        # :authentication => :plain,
+        # :enable_starttls_auto => true
+
+        :address              => "smtp.gmail.com",
+        :port                 => 587,
+        :domain               => "gmail.com",
+        :user_name            => "dookieseedbank@gmail.com",
+        :password             => "r9t6b6c3y",
+        :authentication       => :plain,
         :enable_starttls_auto => true
     }
   end
