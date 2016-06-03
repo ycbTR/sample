@@ -21,7 +21,7 @@ Seedbank::Application.configure do
   config.assets.digest = true
 
 
-  config.action_mailer.default_url_options = { host: 'www.gbiseedbank.com.au' }
+  config.action_mailer.default_url_options = { host: 'staging.gbiseedbank.com.au' }
 
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
