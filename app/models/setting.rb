@@ -16,7 +16,7 @@ class Setting < RailsSettings::CachedSettings
   Setting.smtp_host ||= "smtp.sendgrid.net"
   Setting.smtp_port ||= 587
   Setting.smtp_domain ||= "gmail.com"
-  Setting.smtp_username ||= "dookieseedbank@gmail.com"
+  Setting.smtp_username ||= "dookieseedbank"
   Setting.smtp_password ||= "r9t6b6c3y"
 
   after_save :set_email_settings
