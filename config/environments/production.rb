@@ -21,7 +21,7 @@ Seedbank::Application.configure do
   config.assets.digest = true
 
 
-  config.action_mailer.default_url_options = { host: 'gbis-dookie.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'www.gbiseedbank.com.au' }
 
   # Defaults to nil and saved in location specified by config.assets.prefix
   # config.assets.manifest = YOUR_PATH
