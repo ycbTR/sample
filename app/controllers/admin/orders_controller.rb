@@ -46,17 +46,24 @@ class Admin::OrdersController < Admin::ResourceController
   def load_deposits
     if seeding?
       @type = "seeding"
-      @deposits = Deposit.seeding.active
+      @deposits = Deposit.seeding.where(lot_numbers: {spa_specific: false}).active
+    elsif spa?
+      @type = "spa"
+      @deposits = Deposit.seeding.spa.active
     else
       @type = "nursery"
       @deposits = Deposit.nursery.active
     end
-
   end
 
   def seeding?
-    return false if @order.form_type.eql?("Nursery")
-    @order.form_type.eql?('seeding') || params[:type].blank? || params[:type].eql?('seeding')
+    return false if @order.form_type.eql?("Nursery") || @order.form_type.eql?("Spa")
+    @order.form_type.eql?('Seeding') || params[:type].blank? || params[:type].eql?('seeding')
+  end
+
+  def spa?
+    return false if @order.form_type.eql?("Nursery") || @order.form_type.eql?("Seeding")
+    @order.form_type.eql?('Spa') || params[:type].blank? || params[:type].eql?('spa')
   end
 
   def failed_update

@@ -13,7 +13,7 @@
           <th>Landholder name</th>
           <th>Business Name</th>
           <th>ABN</th>
-          <th>Postal Address</th>
+          <th>Payee Address</th>
           <th>Email Address</th>
           <th>Phone</th>
           <th>Total Quantity (kg)</th>
@@ -37,7 +37,7 @@
               <td><%= order_form.landholder_name %></td>
               <td><%= order_form.business_name %></td>
               <td><%= order_form.abn %></td>
-              <td><%= order_form.landholder_address %></td>
+              <td><%= order_form.payee_address %></td>
               <td><%= order_form.customer.try(:email)  %></td>
               <td><%= order_form.customer.try(:phone)  %></td>
               <td><%= order.line_items.sum(:qty).to_f / 1000 %></td>
