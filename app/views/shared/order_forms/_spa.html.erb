@@ -1,0 +1,83 @@
+<table class="table table-bordered">
+  <tr>
+    <th colspan="6">Details</th>
+  </tr>
+
+  <tr>
+    <th colspan="2">Extension officer's name</th>
+    <td colspan="2"><%= order_form.officer_name %></td>
+    <th>Contact No</th>
+    <td><%= order_form.officer_number %></td>
+  </tr>
+
+
+  <tr>
+    <th colspan="2">Officer Address</th>
+    <td colspan="4"><%= order_form.officer_address %></td>
+  </tr>
+
+  <tr>
+    <th colspan="2">Landholders Name</th>
+    <td colspan="2"><%= order_form.landholder_name %></td>
+    <th>Contact No</th>
+    <td><%= order_form.landholder_number %></td>
+  </tr>
+
+  <tr>
+    <th colspan="2">Landholder Postal Address</th>
+    <td colspan="4"><%= order_form.landholder_address %></td>
+  </tr>
+
+
+  <tr>
+    <th colspan="2">Property Address/Location</th>
+    <td colspan="4"><%= order_form.property_address %></td>
+  </tr>
+
+
+  <tr>
+    <th>Hectares</th>
+    <td><%= order_form.hectare %></td>
+    <th>Kilometers</th>
+    <td><%= order_form.kilometer %></td>
+    <th>Grams per km</th>
+    <td><%= order_form.grams_per_km %></td>
+  </tr>
+
+  <tr>
+    <th colspan="2">PON</th>
+    <td colspan="4"><%= order_form.pon %></td>
+  </tr>
+
+  <tr>
+    <th colspan="2">Comments</th>
+    <td colspan="4"><%= order_form.comments %></td>
+  </tr>
+
+</table>
+<% unless (hide_items rescue false) %>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th colspan="4">Item(s)</th>
+      </tr>
+      <tr>
+        <th>Lot No</th>
+        <th>Botanical Name</th>
+        <th>Provenance</th>
+        <th>Grams</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% order_form.items.each do |item| %>
+          <% deposit = item.deposit %>
+          <tr>
+            <td><%= deposit.display %></td>
+            <td><%= deposit.plant.species %></td>
+            <td><%= deposit.lot_number.provenance rescue "" %></td>
+            <td><%= item.grams || "-" %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% end %>

@@ -5,21 +5,32 @@
   <tr>
     <th>Botanical Name</th>
     <th>Common Name</th>
+    <th>Lot Number</th>
+    <th>Region</th>
+    <th>Provenance</th>
+    <th>Qty</th>
+    <th>Direct Seeding</th>
+    <th>Qty Con</th>
     <th>Select</th>
   </tr>
   </thead>
 
   <tbody>
-  <% @plants.each do |plant| %>
+  <% @deposits.each do |deposit| %>
       <tr>
-        <td><%= plant.species %></td>
-        <td><%= plant.common_name %></td>
+        <td><%= deposit.plant.species %></td>
+        <td><%= deposit.plant.common_name %></td>
+        <td><%= deposit.lot_number.number %></td>
+        <td><%= deposit.lot_number.region %></td>
+        <td><%= deposit.lot_number.provenance %></td>
+        <td><%= deposit.qty_bank %></td>
+        <td><%= deposit.plant.direct_seedable ? 'Yes' : 'No' %></td>
+        <td><%= deposit.qty_consigned %></td>
         <td class="col-sm-5">
           <div class="col-sm-2">
             <%= check_box_tag "select", "", false, class: "order_item_check" %>
           </div>
           <div class="col-sm-10" style="display: none;">
-            <% deposit = Deposit.where(plant_id: plant.id).first %>
             <%= hidden_field_tag "order_form[order_form_items_attributes][#{deposit}][deposit_id]", deposit.id, disabled: true %>
           </div>
         </td>

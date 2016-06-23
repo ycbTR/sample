@@ -35,7 +35,7 @@ class OrderForm < ActiveRecord::Base
   attr_accessible :abn, :business_name, :comments, :email, :grams_per_km, :hectare, :kilometer,
                   :landholder_address, :landholder_name, :landholder_number, :mobile, :officer_address,
                   :officer_name, :officer_number, :payer, :pon, :property_address, :sb_no, :type, :telephone,
-                  :order_form_items_attributes, :customer_id
+                  :order_form_items_attributes, :customer_id, :payee_name, :payee_number, :payee_address
 
   has_one :order
   belongs_to :user

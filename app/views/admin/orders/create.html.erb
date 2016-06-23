@@ -2,6 +2,8 @@
 
   <p class='loading'><%= link_to "Direct Seeding", new_customer_order_form_path(:type => "seeding", cid: @object.customer_id), class: "btn btn-primary" %>
 
+  <p class='loading'><%= link_to "Spa", new_customer_order_form_path(:type => "spa", cid: @object.customer_id), class: "btn btn-primary" %>
+
   <p class='loading'><%= link_to "Nursery", new_customer_order_form_path(:type => "nursery", cid: @object.customer_id), class: "btn btn-primary" %>
   </p>
 </div>
