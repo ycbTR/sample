@@ -25,7 +25,6 @@ class LotNumber < ActiveRecord::Base
 
 
   before_destroy :check_deposit
-  after_initialize :set_default_lot_number
 
   def check_deposit
     if Deposit.where(lot_number_id: self.id).any? { |d| d.line_items.present? || d.order_form_items.present? }
@@ -74,7 +73,4 @@ class LotNumber < ActiveRecord::Base
     end
   end
 
-  def set_default_lot_number
-    self.number = LotNumber.maximum(:number) + 1
-  end
 end
