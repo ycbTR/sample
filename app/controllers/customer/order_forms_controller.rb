@@ -50,6 +50,7 @@ class Customer::OrderFormsController < Customer::BaseController
         # @plants = Plant.where(id: plant_ids).order("plants.species asc")
         ids = Deposit.active.with_eager_load.available.where("#{Plant.table_name}.direct_seedable = ?",true).select("DISTINCT ON(deposits.plant_id) *").pluck(:id)
         @deposits = Deposit.where(id: ids).joins(:lot_number,:plant).where(lot_numbers: {spa_specific: false}).order('plants.species asc')
+        
       # else
       #   @deposits = Deposit.seeding.active.group(:plant_id).uniq
       # end
