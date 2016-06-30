@@ -11,11 +11,9 @@
           <th>SB No</th>
           <th>PON</th>
           <th>Landholder name</th>
-          <th>Business Name</th>
-          <th>ABN</th>
+          <th>Payee Name</th>
           <th>Payee Address</th>
-          <th>Email Address</th>
-          <th>Phone</th>
+          <th>Payee Contact</th>
           <th>Total Quantity (kg)</th>
           <th>Total ($)</th>
         </tr>
@@ -35,11 +33,9 @@
               <td><%= order.number %></td>
               <td><%= order_form.pon %></td>
               <td><%= order_form.landholder_name %></td>
-              <td><%= order_form.business_name %></td>
-              <td><%= order_form.abn %></td>
+              <td><%= order_form.payee_name %></td>
               <td><%= order_form.payee_address %></td>
-              <td><%= order_form.customer.try(:email)  %></td>
-              <td><%= order_form.customer.try(:phone)  %></td>
+              <td><%= order_form.payee_number  %></td>
               <td><%= order.line_items.sum(:qty).to_f / 1000 %></td>
               <td><%= order.total %></td>
             </tr>

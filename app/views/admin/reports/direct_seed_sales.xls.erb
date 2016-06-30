@@ -21,11 +21,9 @@
         <Cell><Data ss:Type="String">SB No</Data></Cell>
         <Cell><Data ss:Type="String">PON</Data></Cell>
         <Cell><Data ss:Type="String">Landholder Name</Data></Cell>
-        <Cell><Data ss:Type="String">Business Name</Data></Cell>
-        <Cell><Data ss:Type="String">ABN</Data></Cell>
+        <Cell><Data ss:Type="String">Payee Name</Data></Cell>
         <Cell><Data ss:Type="String">Postal Address</Data></Cell>
-        <Cell><Data ss:Type="String">Email Address</Data></Cell>
-        <Cell><Data ss:Type="String">Phone</Data></Cell>
+        <Cell><Data ss:Type="String">Payee Contact</Data></Cell>
         <Cell><Data ss:Type="String">Total Quantity (kg)</Data></Cell>
         <Cell><Data ss:Type="String">Total ($)</Data></Cell>
       </Row>
@@ -43,11 +41,9 @@
             <Cell><Data ss:Type="String"><%= order.number %></Data></Cell>
             <Cell><Data ss:Type="String"><%= order_form.pon %></Data></Cell>
             <Cell><Data ss:Type="String"><%= order_form.landholder_name %></Data></Cell>
-            <Cell><Data ss:Type="String"><%= order_form.business_name %></Data></Cell>
-            <Cell><Data ss:Type="String"><%= order_form.abn %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= order_form.payee_name %></Data></Cell>
             <Cell><Data ss:Type="String"><%= order_form.property_address %></Data></Cell>
-            <Cell><Data ss:Type="String"><%= order_form.customer.try(:email)  %></Data></Cell>
-            <Cell><Data ss:Type="String"><%= order_form.customer.try(:phone)  %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= order_form.payee_number  %></Data></Cell>
             <Cell><Data ss:Type="Number"><%= order.line_items.sum(:qty).to_f / 1000 %></Data></Cell>
             <Cell><Data ss:Type="Number"><%= order.total %></Data></Cell>
             </Row>
