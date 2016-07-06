@@ -42,6 +42,11 @@
 
 <div class="form-group">
   <%= f.label :payee_name, class: "col-sm-2" %>
+  <input type="checkbox" id="same_as_officer" name="same_as_officer"/>
+  <label>Same as Officer</label>
+  <input type="checkbox" id="same_as_landholer" name="same_as_landholer"/>
+  <label>Same as Landholder</label>
+
   <div class="col-sm-3">
     <%= f.text_field :payee_name, class: "form-control" %>
   </div>
@@ -62,6 +67,11 @@
 
 <div class="form-group">
   <%= f.label :property_address, class: "col-sm-2" %>
+  <input type="checkbox" id="address_as_payee" name="same_as_officer"/>
+  <label>Same as Payee</label>
+  <input type="checkbox" id="address_as_landholer" name="same_as_landholer"/>
+  <label>Same as Landholder</label>
+
   <div class="col-sm-8">
     <%= f.text_area :property_address, class: "form-control", rows: 3 %>
   </div>
