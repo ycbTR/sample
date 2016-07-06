@@ -116,10 +116,47 @@
 
 
 <script>
-function sync(textbox)
-{
-  document.getElementById('order_form_payee_name').value = order_form_officer_name.value;
-  document.getElementById('order_form_payee_number').value = order_form_officer_number.value;
-  document.getElementById('order_form_payee_address').value = order_form_officer_address.value;
-}
+$("#same_as_officer").change(function(){
+  if ($(this).is(':checked')) {
+    $("#order_form_payee_name").val($("#order_form_officer_name").val());
+    $("#order_form_payee_number").val($("#order_form_officer_number").val());
+    $("#order_form_payee_address").text($("#order_form_officer_address").text());
+    $('#same_as_landholer').attr('checked', false);
+  } else {
+    $("#order_form_payee_name").val("");
+    $("#order_form_payee_number").val("");
+    $("#order_form_payee_address").text("");    
+  }
+})
+
+$("#same_as_landholer").change(function(){
+  if ($(this).is(':checked')) {
+    $("#order_form_payee_name").val($("#order_form_landholder_name").val());
+    $("#order_form_payee_number").val($("#order_form_landholder_number").val());
+    $("#order_form_payee_address").text($("#order_form_landholder_address").text());
+    $('#same_as_officer').attr('checked', false);
+  } else {
+    $("#order_form_payee_name").val("");
+    $("#order_form_payee_number").val("");
+    $("#order_form_payee_address").text("");
+  }
+})
+
+$("#address_as_landholer").change(function(){
+  if ($(this).is(':checked')) {
+    $("#order_form_property_address").val($("#order_form_landholder_address").val());
+    $('#address_as_payee').attr('checked', false);
+  } else {
+    $("#order_form_property_address").val("");
+  }
+})
+
+$("#address_as_payee").change(function(){
+  if ($(this).is(':checked')) {
+    $("#order_form_property_address").val($("#order_form_payee_address").val());
+    $('#address_as_landholer').attr('checked', false);
+  } else {
+    $("#order_form_property_address").val("");
+  }
+})
 </script>
