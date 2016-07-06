@@ -19,7 +19,7 @@
          else
            level_1_price, level_2_price, level_3_price = plant.level_1_price, plant.level_2_price, plant.level_3_price
          end
-         ["#{l.display} - #{plant.species} - #{plant.common_name} - #{l.lot_number.region} - #{l.lot_number.provenance} - #{l.qty_bank} - #{plant.direct_seedable ? 'Yes' : 'No'} - #{l.qty_consigned ? l.qty_consigned : 0} - #{}", l.id, {total_quantity: l.total_quantity, level_1_price: level_1_price, level_2_price: level_2_price, level_3_price: level_3_price}]
+         ["#{l.display} - #{plant.species} - #{plant.common_name} - #{l.lot_number.region} - #{l.lot_number.provenance} - #{l.qty_bank} - #{plant.direct_seedable ? 'Yes' : 'No'} - #{l.qty_consigned ? l.qty_consigned : 0} - #{}", l.id, {total_quantity: l.total_quantity_on_order, level_1_price: level_1_price, level_2_price: level_2_price, level_3_price: level_3_price}]
        }
     %>
     <%= f.fields_for :line_items, f.object.line_items.blank? ? f.object.line_items.new : f.object.reload.line_items, wrapper: false do |li_form| %>

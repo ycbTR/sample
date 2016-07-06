@@ -74,6 +74,11 @@ class Deposit < ActiveRecord::Base
     cached_qty_bank.to_f + cached_qty_consigned.to_f
   end
 
+  #To show on order
+  def total_quantity_on_order
+    qty_bank.to_f + qty_consigned.to_f
+  end
+
   [:qty_bank, :qty_consigned, :qty_onhold, :qty_allocated].each do |q|
     define_method("#{q}_with_adjustments".to_sym) do
       self.deposit_adjustments.sum(q).to_f
