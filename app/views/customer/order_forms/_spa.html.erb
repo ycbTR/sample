@@ -127,12 +127,12 @@ $("#same_as_officer").change(function(){
   if ($(this).is(':checked')) {
     $("#order_form_payee_name").val($("#order_form_officer_name").val());
     $("#order_form_payee_number").val($("#order_form_officer_number").val());
-    $("#order_form_payee_address").text($("#order_form_officer_address").text());
+    $("#order_form_payee_address").val($("#order_form_officer_address").val());
     $('#same_as_landholer').attr('checked', false);
   } else {
     $("#order_form_payee_name").val("");
     $("#order_form_payee_number").val("");
-    $("#order_form_payee_address").text("");    
+    $("#order_form_payee_address").val("");    
   }
 })
 
@@ -140,12 +140,12 @@ $("#same_as_landholer").change(function(){
   if ($(this).is(':checked')) {
     $("#order_form_payee_name").val($("#order_form_landholder_name").val());
     $("#order_form_payee_number").val($("#order_form_landholder_number").val());
-    $("#order_form_payee_address").text($("#order_form_landholder_address").text());
+    $("#order_form_payee_address").val($("#order_form_landholder_address").val());
     $('#same_as_officer').attr('checked', false);
   } else {
     $("#order_form_payee_name").val("");
     $("#order_form_payee_number").val("");
-    $("#order_form_payee_address").text("");
+    $("#order_form_payee_address").val("");
   }
 })
 
