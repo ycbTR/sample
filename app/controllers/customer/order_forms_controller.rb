@@ -50,13 +50,13 @@ class Customer::OrderFormsController < Customer::BaseController
         # @plants = Plant.where(id: plant_ids).order("plants.species asc")
         # ids = Deposit.active.with_eager_load.available.where("#{Plant.table_name}.direct_seedable = ?",true).select("DISTINCT ON(deposits.plant_id) *").pluck(:id)
         # @deposits = Deposit.where(id: ids).joins(:lot_number,:plant).where(lot_numbers: {spa_specific: false}).order('plants.species asc')
-        @deposits = Deposit.active.seeding.where(lot_numbers: {spa_specific: false}).where("((qty_consigned + qty_bank) > 0) OR (qty_consigned is null and qty_bank > 0) OR (qty_consigned > 0 and qty_bank is null)").order('plants.species asc')
+        @deposits = Deposit.active.seeding.where(lot_numbers: {spa_specific: false}).where("((cached_qty_consigned + cached_qty_bank) > 0) OR (cached_qty_consigned is null and cached_qty_bank > 0) OR (cached_qty_consigned > 0 and cached_qty_bank is null)").order('plants.species asc')
         
       # else
       #   @deposits = Deposit.seeding.active.group(:plant_id).uniq
       # end
     elsif @current_order.type == "OrderForm::Spa"
-      @deposits = Deposit.active.seeding.where(lot_numbers: {spa_specific: true}).order('plants.species asc')
+      @deposits = Deposit.active.seeding.where(lot_numbers: {spa_specific: true})..where("((cached_qty_consigned + cached_qty_bank) > 0) OR (cached_qty_consigned is null and cached_qty_bank > 0) OR (cached_qty_consigned > 0 and cached_qty_bank is null)").order('plants.species asc')
       # ids = Deposit.active.with_eager_load.available.where("#{Plant.table_name}.direct_seedable = ?",true).select("DISTINCT ON(deposits.plant_id) *").pluck(:id)
       # @deposits = Deposit.where(id: ids).joins(:lot_number,:plant).where(lot_numbers: {spa_specific: true}).order('plants.species asc')
     else
