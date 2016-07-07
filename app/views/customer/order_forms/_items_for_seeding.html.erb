@@ -25,9 +25,9 @@
         <td><%= deposit.lot_number.spa_name %></td>
         <td><%= deposit.lot_number.provenance %></td>
         <td><%= deposit.lot_number.region %></td>
-        <td><%= deposit.qty_bank %></td>
+        <td><%= deposit.cached_qty_bank %></td>
         <td><%= deposit.plant.direct_seedable ? 'Yes' : 'No' %></td>
-        <td><%= deposit.qty_consigned %></td>
+        <td><%= deposit.cached_qty_consigned %></td>
         <td class="col-sm-5">
           <div class="col-sm-2">
             <%= check_box_tag "select", "", false, class: "order_item_check" %>

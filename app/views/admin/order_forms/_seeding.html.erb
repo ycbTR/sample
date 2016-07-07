@@ -42,6 +42,10 @@
 
 <div class="form-group">
   <%= f.label :payee_name, class: "col-sm-2" %>
+  <input type="checkbox" id="same_as_officer" name="same_as_officer"/>
+  <label>Same as Officer</label>
+  <input type="checkbox" id="same_as_landholer" name="same_as_landholer"/>
+  <label>Same as Landholder</label>
   <div class="col-sm-3">
     <%= f.text_field :payee_name, class: "form-control" %>
   </div>
@@ -62,6 +66,10 @@
 
 <div class="form-group">
   <%= f.label :property_address, class: "col-sm-2" %>
+  <input type="checkbox" id="address_as_payee" name="same_as_officer"/>
+  <label>Same as Payee</label>
+  <input type="checkbox" id="address_as_landholer" name="same_as_landholer"/>
+  <label>Same as Landholder</label>
   <div class="col-sm-8">
     <%= f.text_area :property_address, class: "form-control", rows: 3 %>
   </div>
@@ -99,3 +107,49 @@
     <%= f.text_area :comments, class: "form-control", rows: 3 %>
   </div>
 </div>
+
+<script>
+$("#same_as_officer").change(function(){
+  if ($(this).is(':checked')) {
+    $("#order_form_payee_name").val($("#order_form_officer_name").val());
+    $("#order_form_payee_number").val($("#order_form_officer_number").val());
+    $("#order_form_payee_address").val($("#order_form_officer_address").val());
+    $('#same_as_landholer').attr('checked', false);
+  } else {
+    $("#order_form_payee_name").val("");
+    $("#order_form_payee_number").val("");
+    $("#order_form_payee_address").val("");
+  }
+})
+
+$("#same_as_landholer").change(function(){
+  if ($(this).is(':checked')) {
+    $("#order_form_payee_name").val($("#order_form_landholder_name").val());
+    $("#order_form_payee_number").val($("#order_form_landholder_number").val());
+    $("#order_form_payee_address").val($("#order_form_landholder_address").val());
+    $('#same_as_officer').attr('checked', false);
+  } else {
+    $("#order_form_payee_name").val("");
+    $("#order_form_payee_number").val("");
+    $("#order_form_payee_address").val("");
+  }
+})
+
+$("#address_as_landholer").change(function(){
+  if ($(this).is(':checked')) {
+    $("#order_form_property_address").val($("#order_form_landholder_address").val());
+    $('#address_as_payee').attr('checked', false);
+  } else {
+    $("#order_form_property_address").val("");
+  }
+})
+
+$("#address_as_payee").change(function(){
+  if ($(this).is(':checked')) {
+    $("#order_form_property_address").val($("#order_form_payee_address").val());
+    $('#address_as_landholer').attr('checked', false);
+  } else {
+    $("#order_form_property_address").val("");
+  }
+})
+</script>
