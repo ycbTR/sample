@@ -102,10 +102,18 @@ class Admin::ReportsController < Admin::BaseController
 
     if @start_date.present? && @end_date.present?
       set_dates
-      @order_forms = OrderForm.joins(:order).includes(:order => :line_items).
-          where("order_forms.type" => @type).
-          where("orders.completed_at" => (@start_date)..(@end_date)).
-          where("orders.state = ?", 'completed').order(:business_name, "orders.completed_at")
+      if @type == OrderForm::Nursery
+        @order_forms = OrderForm.joins(:order).includes(:order => :line_items).
+            where("order_forms.type" => @type).
+            where("orders.completed_at" => (@start_date)..(@end_date)).
+            where("orders.state = ?", 'completed').order(:business_name, "orders.completed_at")
+      else
+        types = ["OrderForm::Seeding", "OrderForm::Spa"]
+        @order_forms = OrderForm.joins(:order).includes(:order => :line_items).
+            where("order_forms.type" => types).
+            where("orders.completed_at" => (@start_date)..(@end_date)).
+            where("orders.state = ?", 'completed').order(:business_name, "orders.completed_at")
+      end
 
       unless params[:format] == "xls"
         @order_forms = @order_forms.page(params[:page])
