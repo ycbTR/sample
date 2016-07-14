@@ -3807,3 +3807,7 @@ ul.portfolio-filter > li.active > a {
     max-height: 250px;
     overflow: auto;
 }
+
+.box-shadow-none {
+    box-shadow: none;
+}

@@ -65,6 +65,9 @@
             <%= link_to "About GBIS", "#{root_path}#about-gbis" %>
           </li>
           <li>
+            <%= link_to "Legal", "#{root_path}#seed-collection" %>
+          </li>
+          <li>
             <%= link_to "Placing Orders", "#{root_path}#placing-orders" %>
           </li>
           <% unless (@current_user.role.downcase == "admin" || "collector" rescue false) %>
