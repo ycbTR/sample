@@ -61,6 +61,12 @@
             </ul>
         <% end %>
         <ul class="nav navbar-nav navbar-right">
+          <li>
+            <%= link_to "About GBIS", "#{root_path}#about-gbis" %>
+          </li>
+          <li>
+            <%= link_to "Placing Orders", "#{root_path}#placing-orders" %>
+          </li>
           <% unless (@current_user.role.downcase == "admin" || "collector" rescue false) %>
               <li><%= link_to "Catalogue", catalogue_general_path %></li>
           <% end %>
