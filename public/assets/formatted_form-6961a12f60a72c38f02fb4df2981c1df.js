@@ -1,1 +1,0 @@
-$(document).ready(function(){$("body").on("submit","form",function(e){$("input[type=submit][data-loading-text]",e.target).button("loading")}),$("body").on("reset","form",function(e){$("input[type=submit][data-loading-text]",e.target).button("reset")})});
