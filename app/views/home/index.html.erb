@@ -1,20 +1,126 @@
 <%= content_for :content_block do %>
     <!-- Content Block
     ================================================== -->
-    <section class="intro-block page-bg pic-bg-5">
+    <!-- <section class="intro-block page-bg pic-bg-5"> -->
       <!-- Overlay -->
-      <div class="overlay">
+      <!-- <div class="overlay"> -->
         <!-- Container -->
-        <div class="container">
+        <!-- <div class="container"> -->
           <!-- Text Slider -->
-          <div class="text-slider no-js">
-            <%= Cms::Snippet.for_category(:who_we_are).first.content.to_s.html_safe rescue "" %>
-          </div>
+          <!-- <div class="text-slider no-js"> -->
+            <%#= Cms::Snippet.for_category(:who_we_are).first.content.to_s.html_safe rescue "" %>
+          <!-- </div> -->
           <!-- /Text Slider -->
-        </div>
+        <!-- </div> -->
         <!-- /Container -->
-      </div>
+      <!-- </div> -->
       <!-- /Overlay -->
-    </section>
+    <!-- </section> -->
     <!-- /Content Block -->
+  <section>
+    <div class="container">
+      <div class="col-sm-12">
+        <div class="home-banner"> <img src="/assets/gbis.png"  alt="gbis"> </div>
+      </div>
+    </div>
+  </section>
 <% end %>
+<div class="row" id="about-gbis">
+  <div class="col-sm-12 gbis-about">
+    <h1>About Us</h1>
+    <p>The Goulburn Broken Indigenous Seedbank plays a leading role in providing genetically healthy seed to support landscape restoration activities, striving for, and improving resilience of biodiversity.</p>
+    <div class="gbis-content">
+      <h6>Establishment of native vegetation by hand planting and direct seeding methods can benefit:</h6>
+      <ul>
+        <li>The condition of our soils eg salinity and erosion management</li>
+        <li>Remnant populations</li>
+        <li>Biodiversity</li>
+        <li>Agriculture production</li>
+        <li>Agriculture production</li>
+        <li>Water quality/ stream bank stability</li>
+      </ul>
+    </div>
+    <div class="gbis-content ">
+      <h6>The use of local indigenous seed ensures;</h6>
+      <ul>
+        <li>The genetic integrity of the local vegetation is enhanced</li>
+        <li>Plants are adapted to the local conditions</li>
+        <li>Suitable habitat for local fauna</li>
+      </ul>
+    </div>
+    <div class="gbis-content">
+      <h6>The Goulburn Broken Indigenous Seedbank;</h6>
+      <ul>
+        <li>Operates to best practice techniques by following the flora bank guidelines</li>
+        <li>Testing is carried out to determine the quality of the seed</li>
+        <li>Seed is provided to specialised order</li>
+        <li>Aim to provide a diverse range of indigenous species in the catchment</li>
+      </ul>
+    </div>
+    <div class="gbis-content">
+      <h6>Serving the needs of:</h6>
+      <ul>
+        <li>Landcare groups</li>
+        <li>Local conservation interest groups</li>
+        <li>Government organisation</li>
+        <li>Plant nurseries</li>
+        <li>Individual landholders</li>
+        <li>Carbon farming investors</li>
+      </ul>
+    </div>
+    <h2>Seed Collection</h2>
+    <p>All seed is collected under a permit provided through the Flora and Fauna Guarantee Act of 1988.</p>
+    <p>Seed is collected from both public and private land from remnant stands and Seed Production Area’s (SPA’s) throughout the catchment.</p>
+    <p>SPAs are created using collections of healthy seed from multiple remnant populations. These collections are planted together to create reliable quantities of high quality, genetically diverse indigenous seed for revegetation.</p>
+    <div class="gbis-content">
+      <h6>Ethical Advantages of Seed Production</h6>
+      <ul>
+        <li>Reduce seed collection pressures on remnant vegetation.</li>
+        <li>Improve the biodiversityof seed being used for revegetation.</li>
+        <li>Improve genetic diversity of seed.</li>
+        <li>Introduce the use of vulnerable, rare or threatened species into revegetation.</li>
+        <li>Quality control with regard to origin of seed.</li>
+      </ul>
+    </div>
+    <div class="gbis-content">
+      <h6>Ordering</h6>
+      <ul>
+        <li>Minimum of $25 per order</li>
+        <li>Postage and handling charges are applicable</li>
+        <li>Once seed is dispatched from the seedbank, ownership and responsibility passes to the purchaser</li>
+        <li>No Grass lot is guaranteed to be pure</li>
+        <li>Minimum of 5 grams per seed lot.</li>
+      </ul>
+    </div>
+    <div class="gbis-content">
+      <h6>Nursery Orders</h6>
+      <ul>
+        <li>No treatments are applied to seed for Nursery orders.</li>
+        <li>Nursery prices as listed</li>
+      </ul>
+    </div>
+    <div class="gbis-content">
+      <h6>Direct Seeding orders</h6>
+      <ul>
+        <li>Direct Seeding $715/kg</li>
+        <li>All direct seeding orders have seed treatments applied accordingly. Our seed treatment are designed to break natural dormancy and improve germination rates. Opting out of seed treatments does not change the price of the seed.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="row" id="placing-orders">
+  <div class="col-sm-12">
+    <h1 class="about-heading">Placing Orders</h1>
+    <div class="gbis-content">
+      <ul>
+        <li>Orders can be placed directly from the online catalogue <br>-a customer needs to be registered with a unique email address. For first time user – Sign up and thereafter sign in. After placing the order, it will be emailed to the Seedbank and they will process the order and contact you as necessary.
+        </li>
+        <li>You can phone the Seedbank on 0428 770 030</li>
+        <li>You can email your order to the Seedbank at seedbank@gvce.com.au </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<%#= content_for :bottom_sections do %>
+  
+<%# end %>
