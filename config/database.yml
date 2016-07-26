@@ -4,8 +4,6 @@ development:
   database: seedbank_development
   pool: 5
   host: localhost
-  username: postgres
-  password: seedbank
   port: 5432
 production:
   adapter: postgresql
@@ -13,16 +11,12 @@ production:
   database: seedbank_development
   pool: 5
   host: localhost
-  username: postgres
-  password: seedbank
   port: 5432
-production:
+test:
   adapter: postgresql
   encoding: unicode
-  database: seedbank_development
+  database: seedbank_test
   pool: 5
   host: localhost
-  username: postgres
-  password: seedbank
   port: 5432
 

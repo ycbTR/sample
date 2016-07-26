@@ -1,0 +1,28 @@
+<%= link_to t('.new', :default => t("helpers.links.new")),
+                new_admin_download_path, id: 'new_order',
+                :class => 'btn btn-primary pull-right' %>
+<br>
+<table class="table table-striped marT30" id="table-1">
+  <thead>
+  <tr>
+    <th><%= "Display Name" %></th>
+    <th><%= "Comments" %></th>
+    <th><%= t '.actions', :default => t("helpers.actions") %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @downloads.each do |download| %>
+      <tr>
+        <td><%= link_to download.file_name, url: download.file.url(:original, false) %></td>
+        <td><%= download.comments %></td>
+        <td>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      admin_download_path(download),
+                      :method => :delete,
+                      :data => {:confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?'))},
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -4,6 +4,7 @@ Seedbank::Application.routes.draw do
 
   namespace :admin do
     resources :transactions
+    resources :downloads
     resources :reports do
       collection do
         get :spa_populations
@@ -30,6 +31,7 @@ Seedbank::Application.routes.draw do
     resources :orders do
       member do
         get :print
+        get :order_xls
       end
     end
     resources :users

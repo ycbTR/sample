@@ -102,7 +102,7 @@ class Admin::ReportsController < Admin::BaseController
 
     if @start_date.present? && @end_date.present?
       set_dates
-      if @type == OrderForm::Nursery
+      if @type == "OrderForm::Nursery"
         @order_forms = OrderForm.joins(:order).includes(:order => :line_items).
             where("order_forms.type" => @type).
             where("orders.completed_at" => (@start_date)..(@end_date)).

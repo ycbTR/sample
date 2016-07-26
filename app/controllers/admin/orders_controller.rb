@@ -27,6 +27,12 @@ class Admin::OrdersController < Admin::ResourceController
     end
   end
 
+  def order_xls
+    respond_to do |format|
+      format.xls { headers["Content-Disposition"] = "attachment; filename=\"#{@order.number}.xls\"" }
+    end
+  end
+
   private
 
   def set_q
