@@ -53,6 +53,8 @@
           <Cell><Data ss:Type="String">Comments</Data></Cell>
         </Row>
         <Row>
+          <Cell><Data ss:Type="Number"><%= @order.id %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.type %></Data></Cell>
           <Cell><Data ss:Type="String"><%= format_date @order.order_form.created_at %></Data></Cell>
           <Cell><Data ss:Type="String"><%= @order.order_form.business_name %></Data></Cell>
           <Cell><Data ss:Type="String"><%= @order.order_form.property_address %></Data></Cell>
@@ -88,6 +90,8 @@
 
         </Row>
         <Row>
+          <Cell><Data ss:Type="Number"><%= @order.id %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.type %></Data></Cell>
           <Cell><Data ss:Type="String"><%= @order.order_form.officer_name %></Data></Cell>
           <Cell><Data ss:Type="String"><%= @order.order_form.officer_number %></Data></Cell>
           <Cell><Data ss:Type="String"><%= @order.order_form.officer_address %></Data></Cell>
@@ -97,7 +101,7 @@
           <Cell><Data ss:Type="String"><%= @order.order_form.payee_name %></Data></Cell>
           <Cell><Data ss:Type="String"><%= @order.order_form.payee_number %></Data></Cell>
           <Cell><Data ss:Type="String"><%= @order.order_form.payee_address %></Data></Cell>
-          <Cell><Data ss:Type="String"><%= @order.order_form.hactere %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.hactare %></Data></Cell>
           <Cell><Data ss:Type="String"><%= @order.order_form.kilometer %></Data></Cell>
           <Cell><Data ss:Type="String"><%= @order.order_form.grams_per_kilometer %></Data></Cell>
           <Cell><Data ss:Type="String"><%= @order.order_form.pon %></Data></Cell>
