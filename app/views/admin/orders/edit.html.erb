@@ -6,6 +6,12 @@
         end
     %>)
     </small>
+    <small>(<%=
+        link_to order_xls_admin_order_path(@order, format: "xls"), target: "blank" do
+          "<i class='fa fa-file-excel-o'></i>".html_safe
+        end
+    %>)
+    </small>
 <% end %>
 <% if @order.order_form.present? %>
     <%= render partial: "shared/order_form_modal", locals: {order_form: @order.order_form} %>
