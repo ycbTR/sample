@@ -3811,3 +3811,9 @@ ul.portfolio-filter > li.active > a {
 .box-shadow-none {
     box-shadow: none;
 }
+
+.tag-line{
+  display: inline-block;
+  padding: 27px 15px 15px 0px;
+  text-align: center;
+}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160406041612) do
+ActiveRecord::Schema.define(:version => 20160725234734) do
 
   create_table "assets", :force => true do |t|
     t.string   "attachment_file_name"
@@ -171,12 +171,12 @@ ActiveRecord::Schema.define(:version => 20160406041612) do
   create_table "deposits", :force => true do |t|
     t.integer  "lot_number_id"
     t.integer  "plant_id"
-    t.integer  "collector_id"
     t.date     "date"
     t.decimal  "qty_bank",             :precision => 8, :scale => 2
     t.decimal  "qty_consigned",        :precision => 8, :scale => 2
     t.datetime "created_at",                                         :null => false
     t.datetime "updated_at",                                         :null => false
+    t.integer  "collector_id"
     t.decimal  "qty_onhold",           :precision => 8, :scale => 2
     t.text     "comments"
     t.decimal  "qty_allocated",        :precision => 8, :scale => 2
@@ -193,13 +193,26 @@ ActiveRecord::Schema.define(:version => 20160406041612) do
   add_index "deposits", ["deleted_at", "lot_number_id", "plant_id"], :name => "d2"
   add_index "deposits", ["deleted_at"], :name => "d3"
 
+  create_table "downloads", :force => true do |t|
+    t.string   "file_name"
+    t.text     "comments"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
   create_table "line_items", :force => true do |t|
     t.integer  "order_id"
-    t.integer  "deposit_id"
+    t.integer  "lot_number_id"
+    t.integer  "plant_id"
     t.string   "seedmix_or_individual"
     t.integer  "qty"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+    t.integer  "deposit_id"
     t.decimal  "price"
   end
 
@@ -211,13 +224,13 @@ ActiveRecord::Schema.define(:version => 20160406041612) do
   end
 
   create_table "lot_numbers", :force => true do |t|
+    t.integer  "number"
     t.string   "region"
     t.string   "provenance"
     t.string   "location"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
     t.string   "spa_name"
-    t.integer  "number"
     t.boolean  "spa_specific",  :default => false
     t.boolean  "self_heritage", :default => false
     t.integer  "mass_num"
@@ -262,6 +275,9 @@ ActiveRecord::Schema.define(:version => 20160406041612) do
     t.string   "state"
     t.string   "telephone"
     t.integer  "customer_id"
+    t.string   "payee_name"
+    t.text     "payee_address"
+    t.string   "payee_number"
   end
 
   create_table "orders", :force => true do |t|
@@ -317,6 +333,17 @@ ActiveRecord::Schema.define(:version => 20160406041612) do
   end
 
   add_index "settings", ["thing_type", "thing_id", "var"], :name => "index_settings_on_thing_type_and_thing_id_and_var", :unique => true
+
+  create_table "snippets", :force => true do |t|
+    t.string   "label",                     :null => false
+    t.string   "slug",                      :null => false
+    t.string   "identifier",                :null => false
+    t.text     "excerpt"
+    t.text     "content"
+    t.integer  "position",   :default => 0, :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
 
   create_table "transactions", :force => true do |t|
     t.integer  "deposit_id"

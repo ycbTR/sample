@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Order and Customer Details">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Order Number</Data></Cell>
+        <Cell><Data ss:Type="String">Order Type</Data></Cell>
+        <Cell><Data ss:Type="String">Name</Data></Cell>
+        <Cell><Data ss:Type="String">Phone</Data></Cell>
+        <Cell><Data ss:Type="String">Email</Data></Cell>
+        <Cell><Data ss:Type="String">Address</Data></Cell>
+        <Cell><Data ss:Type="String">Town</Data></Cell>
+        <Cell><Data ss:Type="String">Postcode</Data></Cell>
+        <Cell><Data ss:Type="String">Order State</Data></Cell>
+        <Cell><Data ss:Type="String">Total Qty</Data></Cell>
+        <Cell><Data ss:Type="String">Total Price</Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= @order.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= @order.number %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= @order.order_form.type %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= @order.customer.full_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= @order.customer.email %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= @order.customer.phone %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= @order.customer.address_1 + @order.customer.address_2 %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= @order.customer.town %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= @order.customer.postcode %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= @order.state %></Data></Cell>
+      </Row>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="Order Form Details">
+    <% if @order.order_form.type == "OrderForm::Nursery"%>
+      <Table>
+        <Row>
+          <Cell><Data ss:Type="String">ID</Data></Cell>
+          <Cell><Data ss:Type="String">Type</Data></Cell>
+          <Cell><Data ss:Type="String">Date</Data></Cell>
+          <Cell><Data ss:Type="String">Business Name</Data></Cell>
+          <Cell><Data ss:Type="String">Postal Address</Data></Cell>
+          <Cell><Data ss:Type="String">Payee Name</Data></Cell>
+          <Cell><Data ss:Type="String">Payee Contact</Data></Cell>
+          <Cell><Data ss:Type="String">Payee Address</Data></Cell>
+          <Cell><Data ss:Type="String">Contact Person</Data></Cell>
+          <Cell><Data ss:Type="String">Telephone</Data></Cell>
+          <Cell><Data ss:Type="String">Mobile</Data></Cell>
+          <Cell><Data ss:Type="String">PON</Data></Cell>
+          <Cell><Data ss:Type="String">Comments</Data></Cell>
+        </Row>
+        <Row>
+          <Cell><Data ss:Type="String"><%= format_date @order.order_form.created_at %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.business_name %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.property_address %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.payee_name %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.payee_number %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.officer_name %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.telephone %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.mobile %></Data></Cell>          
+          <Cell><Data ss:Type="String"><%= @order.order_form.pon %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.comments %></Data></Cell>
+        </Row>
+      </Table>
+    <% else %>
+      <Table>
+        <Row>
+          <Cell><Data ss:Type="String">ID</Data></Cell>
+          <Cell><Data ss:Type="String">Type</Data></Cell>
+          <Cell><Data ss:Type="String">Officer Name</Data></Cell>
+          <Cell><Data ss:Type="String">Officer Number</Data></Cell>
+          <Cell><Data ss:Type="String">Officer Address</Data></Cell>
+          <Cell><Data ss:Type="String">Land holder Name</Data></Cell>
+          <Cell><Data ss:Type="String">Land holder Number</Data></Cell>
+          <Cell><Data ss:Type="String">Land holder Address</Data></Cell>
+          <Cell><Data ss:Type="String">Payee Name</Data></Cell>
+          <Cell><Data ss:Type="String">Payee Number</Data></Cell>
+          <Cell><Data ss:Type="String">Payee Address</Data></Cell>
+          <Cell><Data ss:Type="String">Property Address</Data></Cell>
+          <Cell><Data ss:Type="String">Hactere</Data></Cell>
+          <Cell><Data ss:Type="String">Kilometer</Data></Cell>
+          <Cell><Data ss:Type="String">Grams per Kilometer</Data></Cell>
+          <Cell><Data ss:Type="String">PON</Data></Cell>
+          <Cell><Data ss:Type="String">Comments</Data></Cell>
+
+        </Row>
+        <Row>
+          <Cell><Data ss:Type="String"><%= @order.order_form.officer_name %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.officer_number %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.officer_address %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.landholder_name %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.landholder_number %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.landholder_address %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.payee_name %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.payee_number %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.payee_address %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.hactere %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.kilometer %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.grams_per_kilometer %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.pon %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= @order.order_form.comments %></Data></Cell>
+        </Row>
+      </Table>
+    <% end %>
+  </Worksheet>
+  <Worksheet ss:Name="Order Items Details">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Lot No</Data></Cell>
+        <Cell><Data ss:Type="String">Botanical Name</Data></Cell>
+        <Cell><Data ss:Type="String">Region</Data></Cell>
+        <Cell><Data ss:Type="String">Grams</Data></Cell>
+        <Cell><Data ss:Type="String">Price</Data></Cell>
+      </Row>
+    <% @order.line_items.each do |item| %>
+      <% deposit = item.deposit %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= deposit.display %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= deposit.plant.species %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= deposit.lot_number.region %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= item.qty || '-' %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= number_to_currency(item.price) || "-" %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
