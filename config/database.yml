@@ -8,15 +8,7 @@ development:
 production:
   adapter: postgresql
   encoding: unicode
-  database: seedbank_development
+  database: seedbank_staging
   pool: 5
   host: localhost
   port: 5432
-test:
-  adapter: postgresql
-  encoding: unicode
-  database: seedbank_test
-  pool: 5
-  host: localhost
-  port: 5432
-
