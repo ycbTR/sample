@@ -8,7 +8,9 @@ development:
 production:
   adapter: postgresql
   encoding: unicode
-  database: seedbank_staging
+  database: seedbank_development
   pool: 5
   host: localhost
+  username: postgres
+  password: seedbank
   port: 5432
