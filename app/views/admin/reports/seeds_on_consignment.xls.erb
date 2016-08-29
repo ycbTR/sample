@@ -17,7 +17,8 @@
         <Cell><Data ss:Type="String">Date</Data></Cell>
         <Cell><Data ss:Type="String">Qty Bank (g)</Data></Cell>
         <Cell><Data ss:Type="String">Qty Consignment (g)</Data></Cell>
-        <Cell><Data ss:Type="String">Qty Onhold (g)</Data></Cell>
+        <Cell><Data ss:Type="String">Transactions from Orders</Data></Cell>
+        <Cell><Data ss:Type="String">Ajustment transactions</Data></Cell>
         <Cell><Data ss:Type="String">Comments</Data></Cell>
       </Row>
       <Row>
@@ -58,14 +59,13 @@
                 <Cell><Data ss:Type="String"></Data></Cell>
                 <Cell><Data ss:Type="Number"><%= adj.qty_bank %></Data></Cell>
                 <Cell><Data ss:Type="Number"><%= adj.qty_consigned %></Data></Cell>
-                <Cell><Data ss:Type="Number"><%= adj.qty_onhold %></Data></Cell>
                 <Cell><Data ss:Type="String"><%= adj.comment %></Data></Cell>
                 </Row>
           <% end %>
           <Row>
             <Cell><Data ss:Type="String"></Data></Cell>
             <Cell><Data ss:Type="String"></Data></Cell>
-            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String">SubTotal for Lot Number</Data></Cell>
             <Cell><Data ss:Type="String"></Data></Cell>
             <Cell><Data ss:Type="Number"><%=adjustments.sum(:qty_bank)%></Data></Cell>
             <Cell><Data ss:Type="Number"><%=adjustments.sum(:qty_consigned)%></Data></Cell>

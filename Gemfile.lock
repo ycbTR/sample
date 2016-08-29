@@ -250,3 +250,9 @@ DEPENDENCIES
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
   unicode_utils
+
+RUBY VERSION
+   ruby 1.9.3p551
+
+BUNDLED WITH
+   1.12.5
