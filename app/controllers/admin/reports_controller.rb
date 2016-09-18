@@ -77,6 +77,16 @@ class Admin::ReportsController < Admin::BaseController
     unless params[:format] == "xls"
       @deposits = @deposits.page(params[:page])
     end
+    respond_to do |format|
+      format.html {}
+      format.xls {
+        if params[:invoice] == 'true'
+          render 'seeds_on_consignment_invoice'
+        else
+          render 'seeds_on_consignment'
+        end
+      }
+    end
   end
 
   def seeds_on_hold

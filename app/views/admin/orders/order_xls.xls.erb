@@ -35,8 +35,9 @@
     </Table>
   </Worksheet>
   <Worksheet ss:Name="Order Form Details">
-    <% if @order.order_form.type == "OrderForm::Nursery"%>
-      <Table>
+    <Table>
+      <% if @order.order_form.type == "OrderForm::Nursery"%>
+      
         <Row>
           <Cell><Data ss:Type="String">ID</Data></Cell>
           <Cell><Data ss:Type="String">Type</Data></Cell>
@@ -66,9 +67,7 @@
           <Cell><Data ss:Type="String"><%= @order.order_form.pon %></Data></Cell>
           <Cell><Data ss:Type="String"><%= @order.order_form.comments %></Data></Cell>
         </Row>
-      </Table>
-    <% else %>
-      <Table>
+      <% else %>
         <Row>
           <Cell><Data ss:Type="String">ID</Data></Cell>
           <Cell><Data ss:Type="String">Type</Data></Cell>
@@ -107,8 +106,8 @@
           <Cell><Data ss:Type="String"><%= @order.order_form.pon %></Data></Cell>
           <Cell><Data ss:Type="String"><%= @order.order_form.comments %></Data></Cell>
         </Row>
-      </Table>
-    <% end %>
+      <% end %>
+    </Table>
   </Worksheet>
   <Worksheet ss:Name="Order Items Details">
     <Table>
@@ -119,16 +118,16 @@
         <Cell><Data ss:Type="String">Grams</Data></Cell>
         <Cell><Data ss:Type="String">Price</Data></Cell>
       </Row>
-    <% @order.line_items.each do |item| %>
-      <% deposit = item.deposit %>
-      <Row>
-        <Cell><Data ss:Type="String"><%= deposit.display %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= deposit.plant.species %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= deposit.lot_number.region %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= item.qty || '-' %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= number_to_currency(item.price) || "-" %></Data></Cell>
-      </Row>
-    <% end %>
+      <% @order.line_items.each do |item| %>
+        <% deposit = item.deposit %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= deposit.display %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= deposit.plant.species %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= deposit.lot_number.region %></Data></Cell>
+          <Cell><Data ss:Type="Number"><%= item.qty || '-' %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= number_to_currency(item.price) || "-" %></Data></Cell>
+        </Row>
+      <% end %>
     </Table>
   </Worksheet>
 </Workbook>

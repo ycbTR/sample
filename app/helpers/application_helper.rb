@@ -33,9 +33,9 @@ module ApplicationHelper
   end
 
 
-  def export_to_excel_link(format = 'xls', without_current_user = false)
+  def export_to_excel_link(format = 'xls', without_current_user = false, invoice = false)
     if (@current_user && @current_user.staff?) || without_current_user
-      link_to current_url(format: format.to_s) do
+      link_to current_url(format: format.to_s, invoice: invoice) do
         "<i class='fa fa-file-excel-o'></i>".html_safe
       end.html_safe
     end
