@@ -79,13 +79,15 @@ class Admin::ReportsController < Admin::BaseController
     end
     respond_to do |format|
       format.html {}
-      format.xls {
+      format.xls do
         if params[:invoice] == 'true'
+          filename = "seeds_on_consignment_invoice"
+          response.headers['Content-Disposition'] = 'attachment; filename="' + filename + '.xls"'
           render 'seeds_on_consignment_invoice'
         else
           render 'seeds_on_consignment'
         end
-      }
+      end
     end
   end
 

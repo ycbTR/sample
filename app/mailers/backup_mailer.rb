@@ -6,6 +6,6 @@ class BackupMailer < ActionMailer::Base
     filename = filename_with_path.split("/").last
     subject = "SeedBank Backup #{filename.split("_").first}"
     attachments["#{filename}"] = File.read("#{filename_with_path}")
-    mail(:body => 'Please find dump file in attachment', :to => "satyakaam.parikh@gmail.com", :subject => subject)
+    mail(:body => 'Please find dump file in attachment', :to => Setting.default_mail_to, :subject => subject)
   end
 end
