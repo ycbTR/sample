@@ -4,7 +4,9 @@ Seedbank::Application.routes.draw do
 
   namespace :admin do
     resources :transactions
-    resources :downloads
+    resources :downloads do 
+      get :backup, on: :collection
+    end
     resources :reports do
       collection do
         get :spa_populations

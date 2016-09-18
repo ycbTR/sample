@@ -32,7 +32,6 @@ end
 gem 'jquery-rails', '< 3.0.0'
 gem 'jquery-ui-rails'
 
-gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
 
@@ -90,3 +89,4 @@ gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
 
 gem 'axlsx'
 gem 'rails_12factor'
+gem 'sucker_punch'

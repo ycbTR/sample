@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Seeds on Consignment invoice</Data></Cell>
+      </Row>
+
+      <Row>
+        <Cell><Data ss:Type="String">Collector</Data></Cell>
+        <Cell><Data ss:Type="String">Lot Number</Data></Cell>
+        <Cell><Data ss:Type="String">Species</Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String">Qty Sold (g)</Data></Cell>
+        <Cell><Data ss:Type="String">Original Qty Consignment (g)</Data></Cell>
+        <Cell><Data ss:Type="String">Qty Remaining (g)</Data></Cell>
+        <Cell><Data ss:Type="String">Price/kg</Data></Cell>
+        <Cell><Data ss:Type="String">Price Paid</Data></Cell>
+      </Row>
+      <Row>
+      </Row>
+      <% @used_full_names = [] %>
+      <% @deposits.each do |deposit| %>
+
+          <% if @current_collector && @current_collector != deposit.collector_id %>
+              <Row>
+                <Cell><Data ss:Type="String"></Data></Cell>
+              </Row>
+          <% end %>
+          <% @current_collector = deposit.collector_id %>
+
+          <Row>
+            <% if @used_full_names.include?(deposit.collector.full_name) %>
+                <Cell><Data ss:Type="String"></Data></Cell>
+            <% else %>
+              <% @used_full_names << deposit.collector.full_name %>
+              <Cell><Data ss:Type="String"><%= deposit.collector.full_name %></Data></Cell>
+            <% end %>
+            <Cell><Data ss:Type="String"><%= deposit.display %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= deposit.plant.species %></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+          </Row>
+          <Row>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="String">SubTotal for Lot Number</Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="Number"></Data></Cell>
+            <Cell><Data ss:Type="String"><%= deposit.qty_consigned %></Data></Cell>
+            <Cell><Data ss:Type="Number"></Data></Cell>
+            <Cell><Data ss:Type="String"><%= deposit.plant.price_paid %></Data></Cell>
+            <Cell><Data ss:Type="String"></Data></Cell>
+          </Row>
+      <% end %>
+    </Table>
+
+  </Worksheet>
+</Workbook>
