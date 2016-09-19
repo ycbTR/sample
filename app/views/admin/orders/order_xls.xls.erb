@@ -116,7 +116,7 @@
         <Cell><Data ss:Type="String">Botanical Name</Data></Cell>
         <Cell><Data ss:Type="String">Region</Data></Cell>
         <Cell><Data ss:Type="String">Grams</Data></Cell>
-        <Cell><Data ss:Type="String">Price</Data></Cell>
+        <Cell><Data ss:Type="String">Price($)</Data></Cell>
       </Row>
       <% @order.line_items.each do |item| %>
         <% deposit = item.deposit %>
@@ -125,7 +125,7 @@
           <Cell><Data ss:Type="String"><%= deposit.plant.species %></Data></Cell>
           <Cell><Data ss:Type="String"><%= deposit.lot_number.region %></Data></Cell>
           <Cell><Data ss:Type="Number"><%= item.qty || '-' %></Data></Cell>
-          <Cell><Data ss:Type="String"><%= number_to_currency(item.price) || "-" %></Data></Cell>
+          <Cell><Data ss:Type="Number"><%= item.price %></Data></Cell>
         </Row>
       <% end %>
     </Table>

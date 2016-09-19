@@ -19,7 +19,7 @@
         <Cell><Data ss:Type="String">Original Qty Consignment (g)</Data></Cell>
         <Cell><Data ss:Type="String">Qty Remaining (g)</Data></Cell>
         <Cell><Data ss:Type="String">Price/kg</Data></Cell>
-        <Cell><Data ss:Type="String">Price Paid</Data></Cell>
+        <Cell><Data ss:Type="String">Price Paid($)</Data></Cell>
       </Row>
       <Row>
       </Row>
@@ -49,16 +49,19 @@
             <Cell><Data ss:Type="String"></Data></Cell>
             <Cell><Data ss:Type="String"></Data></Cell>
           </Row>
+          <% adjustments = deposit.deposit_adjustments.order(:created_at) %>
+          <% qty_sold = adjustments.sum(:qty_bank) %>
+          <% original_qty_consignment = adjustments.sum(:qty_consigned) %>
           <Row>
             <Cell><Data ss:Type="String"></Data></Cell>
             <Cell><Data ss:Type="String"></Data></Cell>
             <Cell><Data ss:Type="String">SubTotal for Lot Number</Data></Cell>
             <Cell><Data ss:Type="String"></Data></Cell>
-            <Cell><Data ss:Type="Number"></Data></Cell>
-            <Cell><Data ss:Type="String"><%= deposit.qty_consigned %></Data></Cell>
-            <Cell><Data ss:Type="Number"></Data></Cell>
-            <Cell><Data ss:Type="String"><%= deposit.plant.price_paid %></Data></Cell>
-            <Cell><Data ss:Type="String"></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= qty_sold %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= original_qty_consignment %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= qty_sold + original_qty_consignment %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= deposit.plant.price_paid %></Data></Cell>
+            <Cell><Data ss:Type="Number"><%= (deposit.plant.price_paid * qty_sold.abs) %></Data></Cell>
           </Row>
       <% end %>
     </Table>
