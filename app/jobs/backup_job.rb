@@ -5,7 +5,7 @@ class BackupJob
     exportdb = nil
     filename = nil
     with_config do |app, host, db, user, password|
-      filename = "#{Rails.root}/db/backups/#{Time.current.strftime("%d/%m/%Y_%H:%M")}_#{app}.dump"
+      filename = "#{Rails.root}/db/backups/#{Time.current.strftime("%d-%m-%Y_%H:%M")}_#{app}.dump"
       exportdb = "PGPASSWORD='#{password}' pg_dump --host #{host} --username #{user} --verbose --clean --no-owner --no-acl --format=c #{db} > #{filename}"
     end
     puts filename
