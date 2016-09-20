@@ -1,0 +1,18 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: seedbank_development
+  pool: 5
+  host: localhost
+  username:
+  password:
+  port: 5432
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: seedbank_production
+  pool: 5
+  host: localhost
+  username:
+  password:
+  port: 5432
